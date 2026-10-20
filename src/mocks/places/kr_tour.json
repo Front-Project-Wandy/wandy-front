@@ -1,0 +1,104 @@
+{
+  "seoul": [
+    {
+      "contentid": "126508",
+      "contenttypeid": "12",
+      "cat1": "A02",
+      "title": "경복궁",
+      "addr1": "서울특별시 종로구 사직로 161",
+      "mapx": "126.977",
+      "mapy": "37.5796",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900001",
+      "contenttypeid": "12",
+      "cat1": "A02",
+      "title": "창덕궁",
+      "addr1": "서울특별시 종로구 율곡로 99",
+      "mapx": "126.991",
+      "mapy": "37.5794",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900002",
+      "contenttypeid": "12",
+      "cat1": "A02",
+      "title": "덕수궁",
+      "addr1": "서울특별시 중구 세종대로 99",
+      "mapx": "126.9752",
+      "mapy": "37.5658",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900003",
+      "contenttypeid": "14",
+      "cat1": "A02",
+      "title": "국립중앙박물관",
+      "addr1": "서울특별시 용산구 서빙고로 137",
+      "mapx": "126.9803",
+      "mapy": "37.524",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900004",
+      "contenttypeid": "12",
+      "cat1": "A02",
+      "title": "남산서울타워",
+      "addr1": "서울특별시 용산구 남산공원길 105",
+      "mapx": "126.9882",
+      "mapy": "37.5512",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900005",
+      "contenttypeid": "12",
+      "cat1": "A01",
+      "title": "북한산국립공원",
+      "addr1": "서울특별시 강북구 삼양로181길 294",
+      "mapx": "126.978",
+      "mapy": "37.6588",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900006",
+      "contenttypeid": "12",
+      "cat1": "A01",
+      "title": "낙산공원",
+      "addr1": "서울특별시 종로구 낙산길 41",
+      "mapx": "127.0074",
+      "mapy": "37.5806",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900007",
+      "contenttypeid": "38",
+      "cat1": "A04",
+      "title": "광장시장",
+      "addr1": "서울특별시 종로구 창경궁로 88",
+      "mapx": "126.9996",
+      "mapy": "37.5701",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900008",
+      "contenttypeid": "38",
+      "cat1": "A04",
+      "title": "통인시장",
+      "addr1": "서울특별시 종로구 자하문로15길 18",
+      "mapx": "126.9701",
+      "mapy": "37.5809",
+      "firstimage": ""
+    },
+    {
+      "contentid": "900009",
+      "contenttypeid": "12",
+      "cat1": "A02",
+      "title": "익선동 한옥거리",
+      "addr1": "서울특별시 종로구 익선동",
+      "mapx": "126.9897",
+      "mapy": "37.574",
+      "firstimage": ""
+    }
+  ]
+}

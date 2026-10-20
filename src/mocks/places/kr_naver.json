@@ -1,0 +1,279 @@
+{
+  "seoul": [
+    {
+      "title": "<b>경복궁</b>",
+      "link": "",
+      "category": "여행,명소>궁궐",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 세종로 1-1",
+      "roadAddress": "서울특별시 종로구 사직로 161",
+      "mapx": "1269770000",
+      "mapy": "375796000"
+    },
+    {
+      "title": "북촌한옥마을",
+      "link": "",
+      "category": "여행,명소>한옥마을",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 계동 105",
+      "roadAddress": "서울특별시 종로구 계동길 37",
+      "mapx": "1269831000",
+      "mapy": "375826000"
+    },
+    {
+      "title": "인사동 쌈지길",
+      "link": "",
+      "category": "쇼핑,유통>복합쇼핑몰",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 관훈동 38",
+      "roadAddress": "서울특별시 종로구 인사동길 44",
+      "mapx": "1269853000",
+      "mapy": "375743000"
+    },
+    {
+      "title": "광장시장",
+      "link": "",
+      "category": "음식점>시장음식",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 예지동 2-1",
+      "roadAddress": "서울특별시 종로구 창경궁로 88",
+      "mapx": "1269996000",
+      "mapy": "375701000"
+    },
+    {
+      "title": "토속촌 삼계탕",
+      "link": "",
+      "category": "음식점>한식>삼계탕",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 체부동 85-1",
+      "roadAddress": "서울특별시 종로구 자하문로5길 5",
+      "mapx": "1269711000",
+      "mapy": "375781000"
+    },
+    {
+      "title": "삼청동수제비",
+      "link": "",
+      "category": "음식점>한식>수제비",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 삼청동 102",
+      "roadAddress": "서울특별시 종로구 삼청로 101-1",
+      "mapx": "1269819000",
+      "mapy": "375848000"
+    },
+    {
+      "title": "어니언 안국",
+      "link": "",
+      "category": "카페,디저트>카페",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 계동 146-1",
+      "roadAddress": "서울특별시 종로구 계동길 5",
+      "mapx": "1269862000",
+      "mapy": "375772000"
+    },
+    {
+      "title": "청계천",
+      "link": "",
+      "category": "여행,명소>하천",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 종로구 서린동 14",
+      "roadAddress": "서울특별시 종로구 서린동",
+      "mapx": "1269784000",
+      "mapy": "375690000"
+    },
+    {
+      "title": "명동거리",
+      "link": "",
+      "category": "쇼핑,유통>쇼핑거리",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 중구 명동2가",
+      "roadAddress": "서울특별시 중구 명동8길",
+      "mapx": "1269850000",
+      "mapy": "375636000"
+    },
+    {
+      "title": "명동교자 본점",
+      "link": "",
+      "category": "음식점>한식>칼국수",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 중구 명동2가 25-2",
+      "roadAddress": "서울특별시 중구 명동10길 29",
+      "mapx": "1269856000",
+      "mapy": "375626000"
+    },
+    {
+      "title": "남산돈까스",
+      "link": "",
+      "category": "음식점>돈가스",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 중구 회현동1가",
+      "roadAddress": "서울특별시 중구 소파로 101",
+      "mapx": "1269835000",
+      "mapy": "375565000"
+    },
+    {
+      "title": "<b>남산서울타워</b>",
+      "link": "",
+      "category": "여행,명소>전망대",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 용산구 용산동2가 山1-3",
+      "roadAddress": "서울특별시 용산구 남산공원길 105",
+      "mapx": "1269882000",
+      "mapy": "375512000"
+    },
+    {
+      "title": "동대문디자인플라자",
+      "link": "",
+      "category": "여행,명소>복합문화공간",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 중구 을지로7가 2-1",
+      "roadAddress": "서울특별시 중구 을지로 281",
+      "mapx": "1270092000",
+      "mapy": "375665000"
+    },
+    {
+      "title": "을지로 노가리골목",
+      "link": "",
+      "category": "술집>호프,요리주점",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 중구 을지로3가",
+      "roadAddress": "서울특별시 중구 을지로13길",
+      "mapx": "1269921000",
+      "mapy": "375662000"
+    },
+    {
+      "title": "홍대 걷고싶은거리",
+      "link": "",
+      "category": "여행,명소>거리",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 마포구 서교동",
+      "roadAddress": "서울특별시 마포구 어울마당로",
+      "mapx": "1269236000",
+      "mapy": "375563000"
+    },
+    {
+      "title": "경의선숲길 연남동 구간",
+      "link": "",
+      "category": "여행,명소>공원",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 마포구 연남동 239-49",
+      "roadAddress": "서울특별시 마포구 연남동",
+      "mapx": "1269246000",
+      "mapy": "375622000"
+    },
+    {
+      "title": "툭툭누들타이",
+      "link": "",
+      "category": "음식점>태국음식",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 마포구 연남동 227-37",
+      "roadAddress": "서울특별시 마포구 연희로1길 15",
+      "mapx": "1269255000",
+      "mapy": "375627000"
+    },
+    {
+      "title": "서울숲",
+      "link": "",
+      "category": "여행,명소>공원",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 성동구 성수동1가 678-1",
+      "roadAddress": "서울특별시 성동구 뚝섬로 273",
+      "mapx": "1270374000",
+      "mapy": "375444000"
+    },
+    {
+      "title": "어니언 성수",
+      "link": "",
+      "category": "카페,디저트>카페",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 성동구 성수동2가 277-135",
+      "roadAddress": "서울특별시 성동구 아차산로9길 8",
+      "mapx": "1270581000",
+      "mapy": "375447000"
+    },
+    {
+      "title": "소문난성수감자탕",
+      "link": "",
+      "category": "음식점>한식>감자탕",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 성동구 성수동2가 315-131",
+      "roadAddress": "서울특별시 성동구 연무장길 45",
+      "mapx": "1270560000",
+      "mapy": "375430000"
+    },
+    {
+      "title": "롯데월드타워 서울스카이",
+      "link": "",
+      "category": "여행,명소>전망대",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 송파구 신천동 29",
+      "roadAddress": "서울특별시 송파구 올림픽로 300",
+      "mapx": "1271025000",
+      "mapy": "375126000"
+    },
+    {
+      "title": "석촌호수",
+      "link": "",
+      "category": "여행,명소>호수",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 송파구 잠실동 47",
+      "roadAddress": "서울특별시 송파구 잠실동",
+      "mapx": "1271031000",
+      "mapy": "375097000"
+    },
+    {
+      "title": "더현대 서울",
+      "link": "",
+      "category": "쇼핑,유통>백화점",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 영등포구 여의도동 22",
+      "roadAddress": "서울특별시 영등포구 여의대로 108",
+      "mapx": "1269284000",
+      "mapy": "375259000"
+    },
+    {
+      "title": "반포한강공원 달빛무지개분수",
+      "link": "",
+      "category": "여행,명소>야경명소",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 서초구 반포동 115-5",
+      "roadAddress": "서울특별시 서초구 신반포로11길 40",
+      "mapx": "1269958000",
+      "mapy": "375101000"
+    },
+    {
+      "title": "드래곤힐스파",
+      "link": "",
+      "category": "생활,편의>찜질방",
+      "description": "",
+      "telephone": "",
+      "address": "서울특별시 용산구 한강로3가 40-713",
+      "roadAddress": "서울특별시 용산구 한강대로21나길 40",
+      "mapx": "1269645000",
+      "mapy": "375297000"
+    }
+  ]
+}
