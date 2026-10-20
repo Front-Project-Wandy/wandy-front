@@ -1,0 +1,71 @@
+{
+  "common": {
+    "state": {
+      "loading": "불러오는 중이에요",
+      "error": "문제가 생겼어요. 잠시 후 다시 시도해 주세요.",
+      "comingSoon": "준비 중인 화면이에요"
+    },
+    "action": {
+      "retry": "다시 시도",
+      "close": "닫기",
+      "back": "뒤로"
+    },
+    "category": {
+      "sight": "관광",
+      "food": "맛집",
+      "cafe": "카페",
+      "shop": "쇼핑",
+      "nature": "자연",
+      "night": "야경",
+      "onsen": "온천"
+    },
+    "country": {
+      "KR": "한국",
+      "JP": "일본"
+    },
+    "city": {
+      "seoul": "서울",
+      "tokyo": "도쿄"
+    }
+  },
+  "home": {
+    "page": {
+      "title": "홈"
+    }
+  },
+  "wizard": {
+    "page": {
+      "title": "플랜 만들기"
+    }
+  },
+  "planner": {
+    "page": {
+      "title": "플래너"
+    }
+  },
+  "place": {
+    "page": {
+      "title": "장소 상세"
+    }
+  },
+  "product": {
+    "page": {
+      "title": "투어 상품"
+    }
+  },
+  "login": {
+    "page": {
+      "title": "로그인"
+    }
+  },
+  "my": {
+    "page": {
+      "title": "마이페이지"
+    }
+  },
+  "notFound": {
+    "page": {
+      "title": "페이지를 찾을 수 없어요"
+    }
+  }
+}

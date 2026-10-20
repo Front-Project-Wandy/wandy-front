@@ -1,0 +1,43 @@
+/* 디자인 토큰 테마 (A파트 담당, WBS 3.1 값).
+   기본 색·글자 크기를 지워서 디자인 토큰에 없는 값은 클래스가 생성되지 않게 했다. */
+@import 'tailwindcss';
+
+@theme {
+  --color-*: initial;
+  --color-brand: #38bdf8;
+  --color-primary: #0284c7;
+  --color-link: #0369a1;
+  --color-point: #ff7a59;
+  --color-background: #ffffff;
+  --color-bg-soft: #f0f9ff;
+  --color-text: #1e293b;
+  --color-error: #ef4444;
+  --color-white: #ffffff;
+  --color-day-1: #f97316;
+  --color-day-2: #22c55e;
+  --color-day-3: #a855f7;
+  --color-day-4: #ec4899;
+  --color-day-5: #eab308;
+
+  --text-*: initial;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-subtitle: 20px;
+  --text-subtitle--line-height: 28px;
+  --text-title: 24px;
+  --text-title--line-height: 32px;
+  --text-display: 32px;
+  --text-display--line-height: 40px;
+
+  --font-sans: 'Pretendard Variable', Pretendard, 'Noto Sans JP', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-body text-text antialiased;
+  }
+}
