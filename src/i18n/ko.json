@@ -67,5 +67,31 @@
     "page": {
       "title": "페이지를 찾을 수 없어요"
     }
+  },
+  "search": {
+    "field": {
+      "label": "장소 검색",
+      "placeholder": "장소 이름이나 주소 (예: 경복궁, 라멘)"
+    },
+    "category": {
+      "label": "카테고리",
+      "all": "전체"
+    },
+    "result": {
+      "recommendTitle": "{{city}} 추천 장소",
+      "searchTitle": "검색 결과",
+      "count": "{{count}}곳",
+      "updating": "찾는 중이에요"
+    },
+    "empty": {
+      "title": "찾는 장소가 없어요",
+      "description": "다른 이름이나 카테고리로 찾아보세요"
+    },
+    "card": {
+      "rating": "평점 {{rating}}점"
+    },
+    "attribution": {
+      "google": "Google 제공 정보"
+    }
   }
 }
