@@ -112,7 +112,48 @@
   },
   "product": {
     "page": {
-      "title": "투어 상품"
+      "title": "투어 상품",
+      "description": "여행지에서 바로 쓰는 투어·입장권·교통패스를 모았어요"
+    },
+    "category": {
+      "label": "상품 종류",
+      "all": "전체",
+      "tour": "투어",
+      "ticket": "입장권",
+      "pass": "교통패스",
+      "activity": "액티비티",
+      "snap": "스냅"
+    },
+    "country": {
+      "label": "나라",
+      "all": "전체"
+    },
+    "list": {
+      "count": "{{count}}개"
+    },
+    "empty": {
+      "title": "조건에 맞는 상품이 없어요",
+      "description": "다른 나라나 종류를 골라 보세요"
+    },
+    "card": {
+      "rating": "평점 {{rating}}점, 후기 {{count}}개"
+    },
+    "price": {
+      "KRW": "{{value}}원",
+      "JPY": "{{value}}엔"
+    },
+    "detail": {
+      "duration": "소요 시간",
+      "tags": "특징",
+      "book": "예약 사이트에서 보기",
+      "notice": "예약과 결제는 외부 사이트에서 진행돼요"
+    },
+    "error": {
+      "notFound": "상품을 찾을 수 없어요"
+    },
+    "section": {
+      "title": "여행 상품",
+      "more": "전체 보기"
     }
   },
   "login": {
