@@ -1,13 +1,24 @@
-import { useTranslation } from 'react-i18next';
+import Card from '../../components/common/Card';
+import Header from '../../components/common/Header';
+import ContinueDraftCard from './ContinueDraftCard';
+import HomeHero from './HomeHero';
+import TripStartForm from './TripStartForm';
 
-// H01 홈 (A파트) — 라우팅 뼈대용 자리 화면. 담당 파트가 내용을 채운다.
+// H01 홈 (A파트). 필수: 시작 영역(23) · 이어서 만들기(31).
+// 헤더는 App.jsx 공통 배치가 정해지기 전까지 여기서 직접 붙인다.
 export default function HomePage() {
-  const { t } = useTranslation();
-
   return (
-    <main className="mx-auto max-w-5xl px-4 py-6 lg:px-6">
-      <h1 className="text-title font-bold">{t('home.page.title')}</h1>
-      <p className="mt-2 text-body-sm text-text/70">{t('common.state.comingSoon')}</p>
-    </main>
+    <>
+      <Header />
+      <main className="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-6 lg:px-6 lg:py-10">
+        <section className="grid gap-6 rounded-2xl bg-bg-soft p-4 sm:p-6 lg:grid-cols-2 lg:items-center lg:gap-10 lg:p-10">
+          <HomeHero />
+          <Card className="p-4 sm:p-6">
+            <TripStartForm />
+          </Card>
+        </section>
+        <ContinueDraftCard />
+      </main>
+    </>
   );
 }

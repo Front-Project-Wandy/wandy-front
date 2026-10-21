@@ -3,6 +3,8 @@ import { useId } from 'react';
 // label·error가 있으면 입력창과 id로 묶어서, 라벨을 눌러도 입력창에 커서가 가고
 // 화면 낭독기가 에러 문구까지 같이 읽게 한다.
 // onChange는 기본 input과 똑같이 이벤트를 넘긴다 (값은 event.target.value).
+// 칸 여러 개가 에러 문구 하나를 같이 쓸 때(가는 날·오는 날)는 error 대신
+// aria-invalid·aria-describedby를 직접 넘기면 되고, 그 값도 빨간 테두리·연결에 반영된다.
 export default function Input({
   label,
   value,
@@ -11,10 +13,14 @@ export default function Input({
   error,
   type = 'text',
   className = '',
+  'aria-invalid': ariaInvalid,
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }) {
   const inputId = useId();
   const errorId = `${inputId}-error`;
+  const isInvalid = Boolean(error) || ariaInvalid === true;
+  const describedBy = [ariaDescribedBy, error && errorId].filter(Boolean).join(' ') || undefined;
 
   return (
     <div className={`flex flex-col gap-1 ${className}`}>
@@ -30,16 +36,17 @@ export default function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        aria-invalid={Boolean(error)}
-        aria-describedby={error ? errorId : undefined}
+        aria-invalid={isInvalid}
+        aria-describedby={describedBy}
         className={`h-11 rounded-xl border bg-background px-4 text-body outline-none transition-colors placeholder:text-text/40 focus:ring-2 disabled:bg-bg-soft disabled:text-text/50 ${
-          error
+          isInvalid
             ? 'border-error focus:ring-error/20'
             : 'border-text/20 focus:border-primary focus:ring-primary/20'
         }`}
       />
+      {/* role="alert": 제출 순간 새로 나타난 에러를 화면 낭독기가 바로 읽는다 */}
       {error && (
-        <p id={errorId} className="text-body-sm text-error">
+        <p id={errorId} role="alert" className="text-body-sm text-error">
           {error}
         </p>
       )}
