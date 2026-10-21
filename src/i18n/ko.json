@@ -57,6 +57,18 @@
   "place": {
     "page": {
       "title": "장소 상세"
+    },
+    "info": {
+      "address": "주소",
+      "hours": "영업시간"
+    },
+    "link": {
+      "naver": "네이버 지도에서 보기",
+      "google": "Google 지도에서 보기"
+    },
+    "error": {
+      "notFound": "장소를 찾을 수 없어요",
+      "notFoundDescription": "주소가 바뀌었거나 없는 장소예요"
     }
   },
   "product": {
@@ -77,6 +89,46 @@
   "notFound": {
     "page": {
       "title": "페이지를 찾을 수 없어요"
+    }
+  },
+  "search": {
+    "field": {
+      "label": "장소 검색",
+      "placeholder": "장소 이름이나 주소 (예: 경복궁, 라멘)"
+    },
+    "category": {
+      "label": "카테고리",
+      "all": "전체"
+    },
+    "result": {
+      "recommendTitle": "{{city}} 추천 장소",
+      "searchTitle": "검색 결과",
+      "count": "{{count}}곳",
+      "updating": "찾는 중이에요"
+    },
+    "empty": {
+      "title": "찾는 장소가 없어요",
+      "description": "다른 이름이나 카테고리로 찾아보세요"
+    },
+    "card": {
+      "rating": "평점 {{rating}}점"
+    },
+    "attribution": {
+      "google": "Google 제공 정보"
+    }
+  },
+  "restaurant": {
+    "section": {
+      "title": "주변 맛집",
+      "subtitle": "{{radius}} 안, 가까운 순"
+    },
+    "empty": {
+      "title": "근처에 맛집이 없어요",
+      "description": "반경 {{radius}} 안에서 찾지 못했어요"
+    },
+    "distance": {
+      "m": "{{value}}m",
+      "km": "{{value}}km"
     }
   }
 }
