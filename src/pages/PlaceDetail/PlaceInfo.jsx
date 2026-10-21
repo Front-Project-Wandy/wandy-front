@@ -8,7 +8,7 @@ export default function PlaceInfo({ place }) {
   const isGoogle = place.source === 'google';
 
   return (
-    <article className="space-y-4">
+    <article className="min-w-0 space-y-4">
       {place.imageUrl ? (
         <img
           src={place.imageUrl}
