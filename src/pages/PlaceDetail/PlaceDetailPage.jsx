@@ -40,7 +40,7 @@ export default function PlaceDetailPage() {
     return (
       <div className="grid gap-8 lg:grid-cols-2">
         <PlaceInfo place={place} />
-        <NearbyRestaurants place={place} onSelectPlace={handleSelectPlace} />
+        <NearbyRestaurants key={place.id} place={place} onSelectPlace={handleSelectPlace} />
       </div>
     );
   };

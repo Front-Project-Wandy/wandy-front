@@ -3,8 +3,8 @@
 // 1단계: src/mocks 더미를 돌려준다. 2단계: 함수 안만 Spring Boot API 호출로 바꾼다 (키는 서버에만).
 import { getDistanceMeters } from '../features/search/utils/geo';
 import { mockRequest } from './api/mockRequest';
-import { findJpPlace, recommendJpPlaces, searchJpPlaces } from './jpPlaceService';
-import { findKrPlace, recommendKrPlaces, searchKrPlaces } from './krPlaceService';
+import { findJpPlace, listJpEatEntries, recommendJpPlaces, searchJpPlaces } from './jpPlaceService';
+import { findKrPlace, listKrEatEntries, recommendKrPlaces, searchKrPlaces } from './krPlaceService';
 
 export const NEARBY_RADIUS_M = 1000;
 
@@ -35,23 +35,17 @@ export function getPlace(id) {
   });
 }
 
-// 기준 좌표 반경 안의 식당 → [{ place, distance }] 가까운 순 (distance 단위 m)
-export function getNearbyRestaurants({
-  country,
-  city,
-  lat,
-  lng,
-  radius = NEARBY_RADIUS_M,
-  categories = ['food'],
-}) {
+// 기준 좌표 반경 안의 먹고 마시는 곳 → [{ place, distance, foodType }] 가까운 순 (distance 단위 m)
+// foodType (44): 'korean' | 'ramen' | 'sushi' | 'cafe' | 'dessert' | 'bar' | 'other'
+export function getNearbyRestaurants({ country, city, lat, lng, radius = NEARBY_RADIUS_M }) {
   return mockRequest(() => {
-    const places =
-      country === 'KR'
-        ? searchKrPlaces({ city, keyword: '' })
-        : searchJpPlaces({ city, keyword: '' });
-    return places
-      .filter((place) => categories.includes(place.category))
-      .map((place) => ({ place, distance: getDistanceMeters({ lat, lng }, place) }))
+    const entries = country === 'KR' ? listKrEatEntries(city) : listJpEatEntries(city);
+    return entries
+      .map(({ place, foodType }) => ({
+        place,
+        foodType,
+        distance: getDistanceMeters({ lat, lng }, place),
+      }))
       .filter(({ distance }) => distance <= radius)
       .sort((a, b) => a.distance - b.distance);
   });

@@ -24,6 +24,23 @@ export function getNaverCategory(categoryText = '') {
   return rule ? rule[0] : 'sight';
 }
 
+// 음식 종류 (44): 먹고 마시는 곳이 아니면 null, 세부 종류를 모르면 'other'.
+// 「카페,디저트>디저트」처럼 앞부분에 카페·디저트가 같이 있어서, 카페·디저트는 마지막 칸으로 가른다.
+const NAVER_EAT_WORDS = ['음식점', '카페', '술집', '디저트', '베이커리'];
+const includesAny = (text, words) => words.some((word) => text.includes(word));
+
+export function getNaverFoodType(categoryText = '') {
+  if (!includesAny(categoryText, NAVER_EAT_WORDS)) return null;
+  const last = categoryText.split('>').at(-1);
+  if (includesAny(categoryText, ['술집', '호프', '이자카야', '포차'])) return 'bar';
+  if (includesAny(last, ['디저트', '베이커리', '제과', '빙수', '케이크'])) return 'dessert';
+  if (includesAny(categoryText, ['카페'])) return 'cafe';
+  if (includesAny(categoryText, ['초밥', '스시'])) return 'sushi';
+  if (includesAny(categoryText, ['라멘', '라면'])) return 'ramen';
+  if (includesAny(categoryText, ['한식'])) return 'korean';
+  return 'other';
+}
+
 export function getNaverMapUrl(name) {
   return `https://map.naver.com/p/search/${encodeURIComponent(name)}`;
 }
@@ -76,6 +93,16 @@ const getNaverEntries = (city) =>
 
 const getTourEntries = (city) =>
   (tourData[city] ?? []).map((item) => ({ place: toPlaceFromTour(item, city) }));
+
+// 주변 맛집용: 먹고 마시는 곳만 [{ place, foodType }]. 검색과 같은 네이버 목록을 써서 TourAPI와 겹치지 않게 한다.
+export function listKrEatEntries(city) {
+  return (naverData[city] ?? [])
+    .map((item) => ({
+      place: toPlaceFromNaver(item, city),
+      foodType: getNaverFoodType(item.category),
+    }))
+    .filter(({ foodType }) => foodType !== null);
+}
 
 export function searchKrPlaces({ city, keyword, category }) {
   return filterPlaces(getNaverEntries(city), { keyword, category });

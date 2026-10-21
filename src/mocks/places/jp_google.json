@@ -697,6 +697,62 @@
         ]
       },
       "photos": []
+    },
+    {
+      "id": "mock-sushizanmai-tsukiji",
+      "displayName": {
+        "text": "스시잔마이 쓰키지 본점",
+        "languageCode": "ko"
+      },
+      "formattedAddress": "일본 도쿄도 주오구 쓰키지 4-11-9",
+      "location": {
+        "latitude": 35.6655,
+        "longitude": 139.7703
+      },
+      "primaryType": "sushi_restaurant",
+      "types": ["sushi_restaurant", "point_of_interest", "establishment"],
+      "rating": 4.2,
+      "userRatingCount": 9800,
+      "regularOpeningHours": {
+        "weekdayDescriptions": [
+          "월요일: 24시간 영업",
+          "화요일: 24시간 영업",
+          "수요일: 24시간 영업",
+          "목요일: 24시간 영업",
+          "금요일: 24시간 영업",
+          "토요일: 24시간 영업",
+          "일요일: 24시간 영업"
+        ]
+      },
+      "photos": []
+    },
+    {
+      "id": "mock-uobei-shibuya",
+      "displayName": {
+        "text": "우오베이 시부야 도겐자카점",
+        "languageCode": "ko"
+      },
+      "formattedAddress": "일본 도쿄도 시부야구 도겐자카 2-29-11",
+      "location": {
+        "latitude": 35.6585,
+        "longitude": 139.6977
+      },
+      "primaryType": "sushi_restaurant",
+      "types": ["sushi_restaurant", "point_of_interest", "establishment"],
+      "rating": 4.1,
+      "userRatingCount": 7600,
+      "regularOpeningHours": {
+        "weekdayDescriptions": [
+          "월요일: 11:00~24:00",
+          "화요일: 11:00~24:00",
+          "수요일: 11:00~24:00",
+          "목요일: 11:00~24:00",
+          "금요일: 11:00~24:00",
+          "토요일: 11:00~24:00",
+          "일요일: 11:00~24:00"
+        ]
+      },
+      "photos": []
     }
   ]
 }

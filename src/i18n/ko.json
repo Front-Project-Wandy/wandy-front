@@ -177,11 +177,26 @@
     },
     "empty": {
       "title": "근처에 맛집이 없어요",
-      "description": "반경 {{radius}} 안에서 찾지 못했어요"
+      "description": "반경 {{radius}} 안에서 찾지 못했어요",
+      "filteredTitle": "이 종류의 가게가 근처에 없어요",
+      "filteredDescription": "다른 종류를 골라 보세요"
     },
     "distance": {
       "m": "{{value}}m",
       "km": "{{value}}km"
+    },
+    "foodType": {
+      "label": "음식 종류",
+      "all": "전체",
+      "korean": "한식",
+      "ramen": "라멘",
+      "sushi": "스시",
+      "cafe": "카페",
+      "dessert": "디저트",
+      "bar": "술집"
+    },
+    "list": {
+      "count": "{{count}}곳"
     }
   }
 }
