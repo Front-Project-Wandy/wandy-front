@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import IntroGate from './features/intro/components/IntroGate';
 import HomePage from './pages/Home/HomePage';
 import LoginPage from './pages/Login/LoginPage';
 import MyPage from './pages/MyPage/MyPage';
@@ -12,7 +13,14 @@ import WizardPage from './pages/Wizard/WizardPage';
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/"
+        element={
+          <IntroGate>
+            <HomePage />
+          </IntroGate>
+        }
+      />
       <Route path="/plan/new" element={<WizardPage />} />
       <Route path="/trip/:id" element={<PlannerPage />} />
       <Route path="/place/:id" element={<PlaceDetailPage />} />

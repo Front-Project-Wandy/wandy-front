@@ -33,6 +33,17 @@
       "title": "홈"
     }
   },
+  "intro": {
+    "video": {
+      "label": "노을 속 비행기에 다가가 창문을 지나 기내로 들어가, 노트북으로 Wandy를 보는 승객에게 다가가는 인트로 영상"
+    },
+    "action": {
+      "skip": "인트로 건너뛰기"
+    },
+    "state": {
+      "loading": "인트로 불러오는 중 {{loaded}}/{{total}}"
+    }
+  },
   "wizard": {
     "page": {
       "title": "플랜 만들기"
