@@ -23,11 +23,21 @@ const getDateRange = (startDate, endDate) => {
   return dates;
 };
 
-// 날짜를 바꿔도 같은 날짜의 일정은 남기려고, date로 기존 DAY를 찾아 재사용한다
-const buildDays = (startDate, endDate, prevDays = []) =>
-  getDateRange(startDate, endDate).map(
-    (date) => prevDays.find((day) => day.date === date) ?? { date, items: [] },
-  );
+// 날짜를 밀어도 일정이 DAY 번호에 붙어 있도록, 날짜가 아니라 순서로 기존 DAY를 이어 붙인다.
+// 시작일이 종료일보다 늦는 등 날짜가 아직 맞지 않으면 기존 일정을 지우지 않으려고 그대로 둔다.
+const buildDays = (startDate, endDate, prevDays = []) => {
+  const dates = getDateRange(startDate, endDate);
+  if (dates.length === 0) return prevDays;
+
+  const days = dates.map((date, i) => ({ date, items: prevDays[i]?.items ?? [] }));
+
+  const overflow = prevDays.slice(dates.length).flatMap((day) => day.items);
+  if (overflow.length > 0) {
+    const last = days[days.length - 1];
+    last.items = [...last.items, ...overflow];
+  }
+  return days;
+};
 
 const withUpdatedAt = (trip) => ({ ...trip, updatedAt: new Date().toISOString() });
 
