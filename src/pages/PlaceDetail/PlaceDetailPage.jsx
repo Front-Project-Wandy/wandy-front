@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
+import EmptyState from '../../components/common/EmptyState';
+import ErrorState from '../../components/common/ErrorState';
+import Loading from '../../components/common/Loading';
 import NearbyRestaurants from '../../features/restaurant/components/NearbyRestaurants';
-import StateMessage from '../../features/search/components/StateMessage';
 import { usePlace } from '../../features/search/hooks/usePlace';
 import { getPlacePath } from '../../features/search/place';
 import PlaceInfo from './PlaceInfo';
@@ -27,16 +29,15 @@ export default function PlaceDetailPage() {
   const handleSelectPlace = (next) => navigate(getPlacePath(next));
 
   const renderBody = () => {
-    if (isPending) return <StateMessage variant="loading" />;
+    if (isPending) return <Loading />;
     if (isError && error.message === 'PLACE_NOT_FOUND')
       return (
-        <StateMessage
-          variant="empty"
+        <EmptyState
           title={t('place.error.notFound')}
           description={t('place.error.notFoundDescription')}
         />
       );
-    if (isError) return <StateMessage variant="error" onRetry={() => refetch()} />;
+    if (isError) return <ErrorState onRetry={() => refetch()} />;
     return (
       <div className="grid gap-8 lg:grid-cols-2">
         <PlaceInfo place={place} />

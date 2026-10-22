@@ -1,12 +1,14 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import EmptyState from '../../../components/common/EmptyState';
+import ErrorState from '../../../components/common/ErrorState';
+import Loading from '../../../components/common/Loading';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { usePlaceSearch } from '../hooks/usePlaceSearch';
 import CategoryChips from './CategoryChips';
 import GoogleAttribution from './GoogleAttribution';
 import PlaceCard from './PlaceCard';
 import PlaceSearchField from './PlaceSearchField';
-import StateMessage from './StateMessage';
 
 // S01 장소 검색 (7 키워드 검색 · 8 카테고리 · 9 도시별 추천).
 // 마법사 STEP5(A) 같은 화면에 넣어 쓰고, 장소를 고르면 onSelectPlace(place)를 부른다.
@@ -27,15 +29,11 @@ export default function PlaceSearchPanel({ country, city, onSelectPlace }) {
       : t('search.result.recommendTitle', { city: t(`common.city.${city}`) });
 
   const renderResult = () => {
-    if (isPending) return <StateMessage variant="loading" />;
-    if (isError) return <StateMessage variant="error" onRetry={() => refetch()} />;
+    if (isPending) return <Loading />;
+    if (isError) return <ErrorState onRetry={() => refetch()} />;
     if (places.length === 0)
       return (
-        <StateMessage
-          variant="empty"
-          title={t('search.empty.title')}
-          description={t('search.empty.description')}
-        />
+        <EmptyState title={t('search.empty.title')} description={t('search.empty.description')} />
       );
     return (
       <div className={`space-y-2 transition-opacity ${isPlaceholderData ? 'opacity-60' : ''}`}>

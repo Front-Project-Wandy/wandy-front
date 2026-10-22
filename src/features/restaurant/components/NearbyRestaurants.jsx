@@ -1,8 +1,10 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import EmptyState from '../../../components/common/EmptyState';
+import ErrorState from '../../../components/common/ErrorState';
+import Loading from '../../../components/common/Loading';
 import { NEARBY_RADIUS_M } from '../../../services/placeService';
 import GoogleAttribution from '../../search/components/GoogleAttribution';
-import StateMessage from '../../search/components/StateMessage';
 import { useNearbyRestaurants } from '../hooks/useNearbyRestaurants';
 import { formatDistance } from '../utils/formatDistance';
 import FoodTypeChips from './FoodTypeChips';
@@ -22,12 +24,11 @@ export default function NearbyRestaurants({ place, onSelectPlace }) {
   const radiusText = t(`restaurant.distance.${radius.unit}`, { value: radius.value });
 
   const renderList = () => {
-    if (isPending) return <StateMessage variant="loading" />;
-    if (isError) return <StateMessage variant="error" onRetry={() => refetch()} />;
+    if (isPending) return <Loading />;
+    if (isError) return <ErrorState onRetry={() => refetch()} />;
     if (items.length === 0)
       return (
-        <StateMessage
-          variant="empty"
+        <EmptyState
           title={t('restaurant.empty.title')}
           description={t('restaurant.empty.description', { radius: radiusText })}
         />
@@ -39,8 +40,7 @@ export default function NearbyRestaurants({ place, onSelectPlace }) {
           {t('restaurant.list.count', { count: visibleItems.length })}
         </p>
         {visibleItems.length === 0 ? (
-          <StateMessage
-            variant="empty"
+          <EmptyState
             title={t('restaurant.empty.filteredTitle')}
             description={t('restaurant.empty.filteredDescription')}
           />

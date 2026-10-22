@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import EmptyState from '../../components/common/EmptyState';
+import ErrorState from '../../components/common/ErrorState';
+import Loading from '../../components/common/Loading';
 import ProductCard from '../../features/product/components/ProductCard';
 import ProductCategoryChips from '../../features/product/components/ProductCategoryChips';
 import ProductDetail from '../../features/product/components/ProductDetail';
 import { PRODUCT_CATEGORIES } from '../../features/product/constants';
 import { useProducts } from '../../features/product/hooks/useProducts';
-import StateMessage from '../../features/search/components/StateMessage';
 import { COUNTRIES } from '../../features/search/place';
 import CountryChips from './CountryChips';
 
@@ -62,15 +64,11 @@ export default function ProductsPage() {
     );
 
   const renderList = () => {
-    if (isPending) return <StateMessage variant="loading" />;
-    if (isError) return <StateMessage variant="error" onRetry={() => refetch()} />;
+    if (isPending) return <Loading />;
+    if (isError) return <ErrorState onRetry={() => refetch()} />;
     if (products.length === 0)
       return (
-        <StateMessage
-          variant="empty"
-          title={t('product.empty.title')}
-          description={t('product.empty.description')}
-        />
+        <EmptyState title={t('product.empty.title')} description={t('product.empty.description')} />
       );
     return (
       <ul
