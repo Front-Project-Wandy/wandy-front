@@ -19,7 +19,10 @@ export default function Input({
 }) {
   const inputId = useId();
   const errorId = `${inputId}-error`;
-  const isInvalid = Boolean(error) || ariaInvalid === true;
+  // aria-invalid는 불리언(true)뿐 아니라 HTML처럼 글자('true', 'grammar', 'spelling')로도 올 수 있어서,
+  // 값이 없거나 false·'false'일 때만 정상으로 본다.
+  const isInvalid =
+    Boolean(error) || (ariaInvalid != null && ariaInvalid !== false && ariaInvalid !== 'false');
   const describedBy = [ariaDescribedBy, error && errorId].filter(Boolean).join(' ') || undefined;
 
   return (
