@@ -172,7 +172,17 @@
   "my": {
     "page": {
       "title": "마이페이지"
+    },
+    "favorites": {
+      "title": "찜한 장소",
+      "count": "{{count}}곳",
+      "emptyTitle": "아직 찜한 장소가 없어요",
+      "emptyDescription": "장소 카드의 ♡를 눌러 가고 싶은 곳을 모아 보세요",
+      "explore": "장소 탐색하러 가기"
     }
+  },
+  "favorite": {
+    "toggle": "{{name}} 찜하기"
   },
   "notFound": {
     "page": {
