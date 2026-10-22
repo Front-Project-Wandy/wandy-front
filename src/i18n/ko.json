@@ -148,6 +148,16 @@
       "notFoundDescription": "주소가 바뀌었거나 없는 장소예요"
     }
   },
+  "places": {
+    "page": {
+      "title": "장소 탐색",
+      "description": "도시를 골라 가고 싶은 장소를 찾아보세요"
+    },
+    "destination": {
+      "country": "나라",
+      "city": "도시"
+    }
+  },
   "product": {
     "page": {
       "title": "투어 상품",
