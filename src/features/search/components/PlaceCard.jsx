@@ -1,16 +1,18 @@
 import { useTranslation } from 'react-i18next';
+import FavoriteButton from '../../member/components/FavoriteButton';
 
 // 검색·추천 결과 카드. 사진이 없으면(구글 사진은 1단계에서 비움) 카테고리 이름 칸을 대신 보여준다.
+// 버튼 안에 버튼을 넣을 수 없어서, 찜 버튼은 카드 버튼 옆에 두고 오른쪽 위에 겹쳐 놓는다.
 export default function PlaceCard({ place, onSelect }) {
   const { t } = useTranslation();
   const categoryLabel = t(`common.category.${place.category}`);
 
   return (
-    <li>
+    <li className="relative">
       <button
         type="button"
         onClick={() => onSelect(place)}
-        className="relative flex w-full items-center gap-3 rounded-2xl border border-text/10 bg-background p-3 text-left transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary"
+        className="relative flex w-full items-center gap-3 rounded-2xl border border-text/10 bg-background p-3 pr-14 text-left transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary"
       >
         {place.imageUrl ? (
           <img
@@ -51,6 +53,7 @@ export default function PlaceCard({ place, onSelect }) {
           )}
         </span>
       </button>
+      <FavoriteButton place={place} className="absolute top-1.5 right-1.5" />
     </li>
   );
 }
