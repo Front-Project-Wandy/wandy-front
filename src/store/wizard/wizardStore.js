@@ -9,6 +9,8 @@ const INITIAL_DRAFT = {
   startDate: '',
   endDate: '',
   people: 2,
+  // STEP4 현지 교통 방식: 'transit' | 'taxi' | 'car' | 'mixed'. 건너뛰면 null로 두고, 계산할 때 혼합으로 본다.
+  transportMode: null,
 };
 
 export const useWizardStore = create(
