@@ -21,6 +21,9 @@ export const useWizardStore = create(
       // 홈 시작 영역에서 새 여행을 시작할 때. 이전에 작성하던 값은 새 값으로 바뀐다.
       startDraft: (basicInfo) =>
         set({ draft: { ...INITIAL_DRAFT, ...basicInfo }, step: 1, updatedAt: Date.now() }),
+      // 마법사 안에서 칸 하나를 바꿀 때마다 부른다. 바로 저장돼서 나갔다 와도 그대로 남는다 (30).
+      updateDraft: (patch) =>
+        set((state) => ({ draft: { ...state.draft, ...patch }, updatedAt: Date.now() })),
       setStep: (step) => set({ step, updatedAt: Date.now() }),
       resetWizard: () => set({ draft: INITIAL_DRAFT, step: 1, updatedAt: null }),
     }),
