@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import FavoriteButton from '../../features/member/components/FavoriteButton';
 import GoogleAttribution from '../../features/search/components/GoogleAttribution';
 
 // 장소 상세 정보 (10) + 지도 앱에서 보기 링크 (11, 한국은 평점이 없어서 네이버 지도로 보완).
@@ -25,7 +26,10 @@ export default function PlaceInfo({ place }) {
       )}
 
       <header className="space-y-2">
-        <h1 className="text-title font-bold">{place.name}</h1>
+        <div className="flex items-start justify-between gap-2">
+          <h1 className="text-title font-bold">{place.name}</h1>
+          <FavoriteButton place={place} />
+        </div>
         <p className="flex items-center gap-2 text-body-sm">
           <span className="rounded-full bg-bg-soft px-3 py-1">{categoryLabel}</span>
           {place.rating !== null ? (
