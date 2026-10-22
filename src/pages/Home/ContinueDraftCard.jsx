@@ -23,11 +23,16 @@ export default function ContinueDraftCard() {
       </h2>
       <Card className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col gap-1">
+          {/* 마법사 STEP1에서 한 칸만 바꿔도 저장되므로 도시·날짜가 비어 있을 수 있다. */}
           <p className="text-body font-bold">
-            {t('home.continue.tripTitle', { city: t(`common.city.${draft.city}`) })}
-            <span className="ml-2 font-normal text-text/70">
-              {formatDateRange(draft.startDate, draft.endDate)}
-            </span>
+            {draft.city
+              ? t('home.continue.tripTitle', { city: t(`common.city.${draft.city}`) })
+              : t('home.continue.noCity')}
+            {draft.startDate && draft.endDate && (
+              <span className="ml-2 font-normal text-text/70">
+                {formatDateRange(draft.startDate, draft.endDate)}
+              </span>
+            )}
           </p>
           <p className="text-body-sm text-text/70">
             {t('home.continue.progress', { step })} ·{' '}
