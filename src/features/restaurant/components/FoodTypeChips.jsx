@@ -10,11 +10,12 @@ export default function FoodTypeChips({ value, onChange }) {
 
   // 가로 스크롤 줄은 칩 바깥에 그려지는 포커스 테두리를 잘라 버린다.
   // 안쪽 여백(p-1)으로 테두리 자리를 두고, 음수 여백으로 칩 위치는 그대로 둔다.
+  // 회색 스크롤바는 칩 아래를 가려서 숨긴다 (손가락·트랙패드로 밀면 되고, lg부터는 줄바꿈이라 스크롤이 없다).
   return (
     <div
       role="group"
       aria-label={t('restaurant.foodType.label')}
-      className="-mx-1 -mt-1 flex gap-2 overflow-x-auto p-1 lg:flex-wrap"
+      className="-mx-1 -mt-1 flex gap-2 overflow-x-auto p-1 [scrollbar-width:none] lg:flex-wrap"
     >
       {CHIP_VALUES.map((foodType) => (
         <Chip
