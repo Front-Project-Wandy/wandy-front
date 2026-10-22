@@ -41,6 +41,30 @@ const buildDays = (startDate, endDate, prevDays = []) => {
 
 const withUpdatedAt = (trip) => ({ ...trip, updatedAt: new Date().toISOString() });
 
+// transportToNext는 "다음 장소까지"의 값이라, 다음 장소가 바뀐 항목은 옛 값이 맞지 않는다
+const getNextIdMap = (days) => {
+  const nextIds = new Map();
+  days.forEach((day) => {
+    day.items.forEach((item, i) => nextIds.set(item.id, day.items[i + 1]?.id ?? null));
+  });
+  return nextIds;
+};
+
+const clearStaleTransport = (prevDays, nextDays) => {
+  const prevNextIds = getNextIdMap(prevDays);
+  return nextDays.map((day) => ({
+    ...day,
+    items: day.items.map((item, i) => {
+      const isNextChanged =
+        prevNextIds.has(item.id) && prevNextIds.get(item.id) !== (day.items[i + 1]?.id ?? null);
+      return isNextChanged ? { ...item, transportToNext: null } : item;
+    }),
+  }));
+};
+
+const withDays = (trip, days) =>
+  withUpdatedAt({ ...trip, days: clearStaleTransport(trip.days, days) });
+
 const createTrip = () => ({
   id: crypto.randomUUID(),
   title: '',
@@ -68,10 +92,10 @@ const createItem = (place) => ({
 });
 
 const updateDayItems = (trip, dayIndex, updater) =>
-  withUpdatedAt({
-    ...trip,
-    days: trip.days.map((day, i) => (i === dayIndex ? { ...day, items: updater(day.items) } : day)),
-  });
+  withDays(
+    trip,
+    trip.days.map((day, i) => (i === dayIndex ? { ...day, items: updater(day.items) } : day)),
+  );
 
 export const usePlanStore = create(
   persist(
@@ -82,7 +106,10 @@ export const usePlanStore = create(
         set((state) => {
           const base = state.trip ?? createTrip();
           const next = { ...base, ...info };
-          next.days = buildDays(next.startDate, next.endDate, base.days);
+          next.days = clearStaleTransport(
+            base.days,
+            buildDays(next.startDate, next.endDate, base.days),
+          );
           return { trip: withUpdatedAt(next) };
         }),
 
@@ -137,7 +164,7 @@ export const usePlanStore = create(
           const [moved] = days[from.dayIndex].items.splice(from.index, 1);
           if (!moved) return state;
           days[to.dayIndex].items.splice(to.index, 0, moved);
-          return { trip: withUpdatedAt({ ...state.trip, days }) };
+          return { trip: withDays(state.trip, days) };
         }),
 
       resetTrip: () => set({ trip: null }),
