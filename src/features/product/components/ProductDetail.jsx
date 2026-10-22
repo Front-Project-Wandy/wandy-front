@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import StateMessage from '../../search/components/StateMessage';
+import EmptyState from '../../../components/common/EmptyState';
+import ErrorState from '../../../components/common/ErrorState';
+import Loading from '../../../components/common/Loading';
 import { useProduct } from '../hooks/useProducts';
 import { formatPrice } from '../utils/formatPrice';
 
@@ -8,10 +10,10 @@ export default function ProductDetail({ id }) {
   const { t } = useTranslation();
   const { data: product, isPending, isError, error, refetch } = useProduct(id);
 
-  if (isPending) return <StateMessage variant="loading" />;
+  if (isPending) return <Loading />;
   if (isError && error.message === 'PRODUCT_NOT_FOUND')
-    return <StateMessage variant="empty" title={t('product.error.notFound')} />;
-  if (isError) return <StateMessage variant="error" onRetry={() => refetch()} />;
+    return <EmptyState title={t('product.error.notFound')} />;
+  if (isError) return <ErrorState onRetry={() => refetch()} />;
 
   const categoryLabel = t(`product.category.${product.category}`);
 

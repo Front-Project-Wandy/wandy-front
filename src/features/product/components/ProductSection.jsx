@@ -1,7 +1,9 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import StateMessage from '../../search/components/StateMessage';
+import EmptyState from '../../../components/common/EmptyState';
+import ErrorState from '../../../components/common/ErrorState';
+import Loading from '../../../components/common/Loading';
 import { PRODUCT_SECTION_LIMIT } from '../constants';
 import { useProducts } from '../hooks/useProducts';
 import ProductCard from './ProductCard';
@@ -23,10 +25,15 @@ export default function ProductSection({ country = null, city = null }) {
   const listPath = `/products${listParams.size ? `?${listParams}` : ''}`;
 
   const renderItems = () => {
-    if (isPending) return <StateMessage variant="loading" />;
-    if (isError) return <StateMessage variant="error" onRetry={() => refetch()} />;
+    if (isPending) return <Loading />;
+    if (isError) return <ErrorState onRetry={() => refetch()} />;
+    // 이 섹션에는 개수 안내가 없어서, 종류를 바꿔 목록이 비면 화면 낭독기가 알 수 있게 status로 감싼다.
     if (items.length === 0)
-      return <StateMessage variant="empty" title={t('product.empty.title')} />;
+      return (
+        <div role="status">
+          <EmptyState title={t('product.empty.title')} />
+        </div>
+      );
     return (
       <ul className="relative flex snap-x gap-3 overflow-x-auto pb-2">
         {items.map((product) => (
