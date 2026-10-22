@@ -5,6 +5,7 @@ import LoginPage from './pages/Login/LoginPage';
 import MyPage from './pages/MyPage/MyPage';
 import NotFoundPage from './pages/NotFound/NotFoundPage';
 import PlaceDetailPage from './pages/PlaceDetail/PlaceDetailPage';
+import PlacesPage from './pages/Places/PlacesPage';
 import PlannerPage from './pages/Planner/PlannerPage';
 import ProductsPage from './pages/Products/ProductsPage';
 import WizardPage from './pages/Wizard/WizardPage';
@@ -23,6 +24,7 @@ export default function App() {
       />
       <Route path="/plan/new" element={<WizardPage />} />
       <Route path="/trip/:id" element={<PlannerPage />} />
+      <Route path="/places" element={<PlacesPage />} />
       <Route path="/place/:id" element={<PlaceDetailPage />} />
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/login" element={<LoginPage />} />
