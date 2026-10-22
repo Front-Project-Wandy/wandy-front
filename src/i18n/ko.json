@@ -52,6 +52,7 @@
     "continue": {
       "title": "작성 중인 여행을 이어서 만들어요",
       "tripTitle": "{{city}} 여행",
+      "noCity": "여행지 미정",
       "progress": "STEP {{step}}까지 작성",
       "savedAt": "마지막 저장 {{time}}",
       "action": "이어서 만들기"

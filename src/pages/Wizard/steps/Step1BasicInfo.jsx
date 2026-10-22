@@ -19,7 +19,12 @@ export default function Step1BasicInfo({ onNext }) {
   const handleNext = () => {
     const nextErrors = validateBasicInfo(draft);
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length === 0) onNext();
+    if (Object.keys(nextErrors).length > 0) return;
+
+    // 입력 중에는 칸을 비울 수 있게 인원을 글자로 두지만, 다음 단계로 넘길 때는 숫자로 맞춘다.
+    // (홈에서 넘어온 값은 숫자라, 나중에 플랜 store로 넘길 때 섞이지 않게)
+    updateDraft({ people: Number(draft.people) });
+    onNext();
   };
 
   return (
