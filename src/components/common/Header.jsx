@@ -2,10 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 
 // 와이어프레임 v3 공통 헤더 메뉴. to가 null이면 아직 경로가 없는 메뉴다.
-// 장소 탐색은 검색 페이지 경로가 정해지면(B파트) to만 채우면 된다.
 const NAV_ITEMS = [
   { key: 'start', to: '/plan/new' },
-  { key: 'explore', to: null },
+  { key: 'explore', to: '/places' },
   { key: 'products', to: '/products' },
   { key: 'my', to: '/my' },
 ];
