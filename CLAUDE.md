@@ -150,7 +150,10 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
 - 커밋: `타입: 한국어 설명 (#요구사항NO)` — 예: `feat: 플래너 드래그 순서 변경 (#16)`
   - 타입: `feat` 기능 / `fix` 버그 / `style` 화면만 / `refactor` 구조 / `docs` 문서 / `chore` 설정
 - `main`·`develop`에 직접 푸시 금지 (GitHub 규칙으로 막혀 있음). `feat/*` → `develop` PR.
+- 작업 시작 전: `develop`을 최신으로 받고(`git switch develop && git pull --ff-only`) 거기서 새 브랜치를 만든다.
+- push·PR 전: `develop` 최신을 내 브랜치에 합치고(`git fetch && git merge origin/develop`) lint·build를 다시 확인한다. 충돌은 이때 푼다.
 - 모든 PR은 범수(@pbs3839-afk)가 최종 검수·승인한다 (`.github/CODEOWNERS`). 승인되면 올린 사람이 Squash merge.
+- 승인받은 뒤에는 꼭 필요할 때만 push한다 (새 커밋이 올라가면 승인이 자동으로 취소된다).
 - 하루 끝에 동작 확인 후 `develop` → `main` PR을 Merge commit으로 올린다 (Squash로 합치면 두 브랜치 기록이 갈라져서 다음 날 충돌이 난다).
 - 충돌: 공유 파일은 그 파일 담당 파트가, 나머지는 PR 올린 사람이 `develop`을 받아서 해결.
 
