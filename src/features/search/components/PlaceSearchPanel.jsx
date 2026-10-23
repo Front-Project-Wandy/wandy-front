@@ -12,14 +12,15 @@ import PlaceSearchField from './PlaceSearchField';
 
 // S01 장소 검색 (7 키워드 검색 · 8 카테고리 · 9 도시별 추천).
 // 마법사 STEP5(A) 같은 화면에 넣어 쓰고, 장소를 고르면 onSelectPlace(place)를 부른다.
-export default function PlaceSearchPanel({ country, city, onSelectPlace }) {
+// preferredCategories(65)는 이번 여행 초안의 선호 카테고리. 생략하면 기존 추천 순서다.
+export default function PlaceSearchPanel({ country, city, onSelectPlace, preferredCategories }) {
   const { t } = useTranslation();
   const titleId = useId();
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState(null);
   const debouncedKeyword = useDebouncedValue(keyword);
   const { data, isPending, isError, isFetching, isPlaceholderData, refetch, mode } = usePlaceSearch(
-    { country, city, keyword: debouncedKeyword, category },
+    { country, city, keyword: debouncedKeyword, category, preferredCategories },
   );
   const places = data ?? [];
 
