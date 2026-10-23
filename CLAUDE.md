@@ -70,12 +70,20 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
       days: [], updatedAt }
     // day
     { date: '2026-10-26', items: [] }
-    // item
-    { id, place, startTime: '10:00', stayMinutes: 90, memo: '',
-      transportToNext: null } // { mode: 'walk'|'transit'|'taxi'|'car', minutes, cost }
+    // item — 약관 때문에 Place 전체를 저장하지 않는다
+    { id,
+      placeId: 'google:ChIJxxx', // Place.id
+      source: 'google',          // Place.source
+      name: null,                // JP(구글)는 저장하지 않고(null) 화면에서 placeId로 다시 불러온다
+      lat, lng,
+      coordsCachedAt,            // 좌표 저장 시각. 30일이 지나면 다시 불러온다
+      myCategory: 'sight',       // 우리가 정한 카테고리
+      startTime: '10:00', stayMinutes: 90, memo: '',
+      transportToNext: null }    // { mode: 'walk'|'transit'|'taxi'|'car', minutes, cost }
 
 - 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip`
 - 다른 파트는 store 함수로만 값을 바꾼다. 마법사 진행 단계는 `store/wizard`(A)에 따로 둔다.
+- `addItem`은 Place를 받아서 위 item 모양으로 바꿔 저장한다 (구글 장소의 이름·주소·사진·평점은 버린다)
 
 ### 공통 컴포넌트 — A, `src/components/common`
 - `Button` (variant: primary·secondary·ghost / size: sm·md·lg / disabled / loading / onClick)
