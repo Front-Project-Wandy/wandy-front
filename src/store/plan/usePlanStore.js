@@ -81,10 +81,17 @@ const createTrip = () => ({
   updatedAt: new Date().toISOString(),
 });
 
-// 같은 장소를 여러 날 넣을 수 있어서 place.id가 아니라 새 id를 만든다
+// 구글 장소는 약관상 place_id와 좌표(캐시 30일)만 저장할 수 있어서 이름·주소·사진·평점은 버린다.
+// 화면은 placeId로 장소를 다시 불러와 보여준다.
 const createItem = (place) => ({
   id: crypto.randomUUID(),
-  place,
+  placeId: place.id,
+  source: place.source,
+  name: place.source === 'google' ? null : place.name,
+  lat: place.lat,
+  lng: place.lng,
+  coordsCachedAt: new Date().toISOString(),
+  myCategory: place.category,
   startTime: '10:00',
   stayMinutes: 90,
   memo: '',
@@ -171,6 +178,9 @@ export const usePlanStore = create(
     }),
     {
       name: 'wandy-plan',
+      version: 1,
+      // 1단계 개발 중 데이터라 옛 모양(item.place)은 이관하지 않고 비운다
+      migrate: () => ({ trip: null }),
       partialize: (state) => ({ trip: state.trip }),
     },
   ),
