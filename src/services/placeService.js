@@ -2,6 +2,7 @@
 // 나라별 차이(KR 네이버·TourAPI / JP Google Places)는 krPlaceService·jpPlaceService가 숨긴다.
 // 1단계: src/mocks 더미를 돌려준다. 2단계: 함수 안만 Spring Boot API 호출로 바꾼다 (키는 서버에만).
 import { getDistanceMeters } from '../features/search/utils/geo';
+import { isSamePlace } from '../features/search/utils/samePlace';
 import { mockRequest } from './api/mockRequest';
 import { findJpPlace, listJpEatEntries, recommendJpPlaces, searchJpPlaces } from './jpPlaceService';
 import { findKrPlace, listKrEatEntries, recommendKrPlaces, searchKrPlaces } from './krPlaceService';
@@ -24,6 +25,24 @@ export function getRecommendedPlaces({ country, city, category = null }) {
       ? recommendKrPlaces({ city, category })
       : recommendJpPlaces({ city, category }),
   );
+}
+
+// 도시의 장소 전체 (추천 + 검색 목록) → Place[]. AI 일정 채우기(55)의 후보이자 검증 기준이다.
+// 한국은 TourAPI 추천과 네이버 검색에 같은 곳이 다른 id로 있을 수 있어서 같은 곳은 하나만 남긴다.
+export function getCityPlaces({ country, city }) {
+  return mockRequest(() => {
+    const lists =
+      country === 'KR'
+        ? [recommendKrPlaces({ city }), searchKrPlaces({ city })]
+        : [recommendJpPlaces({ city }), searchJpPlaces({ city })];
+    return lists
+      .flat()
+      .reduce(
+        (places, place) =>
+          places.some((item) => isSamePlace(item, place)) ? places : [...places, place],
+        [],
+      );
+  });
 }
 
 // Place.id로 장소 하나 → Place (없으면 PLACE_NOT_FOUND 에러)
