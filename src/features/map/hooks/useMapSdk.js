@@ -7,7 +7,11 @@ export function useMapSdk(provider) {
   const hasKey = Boolean(getMapKey(provider));
   const { isPending, isError, refetch } = useQuery({
     queryKey: ['map-sdk', provider],
-    queryFn: () => loadMapSdk(provider),
+    // Query는 undefined를 데이터로 받지 않아서 로드가 끝나면 true를 돌려준다
+    queryFn: async () => {
+      await loadMapSdk(provider);
+      return true;
+    },
     enabled: hasKey,
     staleTime: Infinity,
     retry: false,
