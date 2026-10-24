@@ -130,6 +130,24 @@
   "planner": {
     "page": {
       "title": "플래너"
+    },
+    "empty": {
+      "title": "아직 만든 여행이 없어요",
+      "description": "여행지와 날짜를 정하면 일정을 짤 수 있어요",
+      "action": "여행 만들기"
+    },
+    "notFound": {
+      "title": "여행을 찾을 수 없어요",
+      "description": "주소가 바뀌었거나 저장된 여행이 아니에요"
+    },
+    "day": {
+      "title": "DAY {{number}}",
+      "empty": "아직 장소가 없어요"
+    },
+    "item": {
+      "stay": "체류 {{minutes}}분",
+      "nameLoading": "장소 이름을 불러오는 중이에요",
+      "nameError": "장소 이름을 불러오지 못했어요"
     }
   },
   "place": {
