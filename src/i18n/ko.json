@@ -139,6 +139,35 @@
         }
       }
     },
+    "spots": {
+      "error": "장소를 하나 이상 담아 주세요.",
+      "basket": {
+        "title": "담은 장소 ({{count}})",
+        "emptyTitle": "아직 담은 장소가 없어요",
+        "emptyDescription": "검색·추천이나 찜한 장소에서 골라 담아 보세요.",
+        "day": "DAY {{day}} · {{date}}",
+        "change": "날짜 바꾸기",
+        "remove": "{{name}} 빼기",
+        "loadingName": "불러오는 중…",
+        "missing": "찾을 수 없는 장소"
+      },
+      "tab": {
+        "search": "검색·추천",
+        "favorites": "찜한 장소 ({{count}})"
+      },
+      "favorites": {
+        "emptyTitle": "{{city}}에서 찜한 장소가 없어요",
+        "emptyDescription": "장소의 하트를 누르면 여기에 모여요."
+      },
+      "modal": {
+        "question": "어느 날 갈까요?",
+        "dayOption": "DAY {{day}} · {{date}}",
+        "added": "DAY {{day}}에 담겨 있어요",
+        "add": "담기",
+        "move": "이 날로 옮기기",
+        "remove": "빼기"
+      }
+    },
     "nav": {
       "prev": "이전",
       "skip": "건너뛰기",
