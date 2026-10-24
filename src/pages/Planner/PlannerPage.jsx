@@ -2,10 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import EmptyState from '../../components/common/EmptyState';
+import MapView from '../../features/map/components/MapView';
 import DayList from '../../features/trip/components/DayList';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12)과 국가별 지도(6)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -33,7 +34,13 @@ export default function PlannerPage() {
           action={createAction}
         />
       );
-    return <DayList days={trip.days} />;
+    // lg부터 목록과 지도를 좌우로 나눈다 (디자인 기준). 지도는 목록을 내려도 따라온다.
+    return (
+      <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <DayList days={trip.days} />
+        <MapView country={trip.country} city={trip.city} className="lg:sticky lg:top-6" />
+      </div>
+    );
   };
 
   return (
