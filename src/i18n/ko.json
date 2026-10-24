@@ -180,6 +180,21 @@
       "removeLabel": "{{name}} 삭제"
     }
   },
+  "map": {
+    "label": "지도",
+    "state": {
+      "loading": "지도를 불러오는 중이에요",
+      "error": "지도를 불러오지 못했어요",
+      "noKey": {
+        "title": "지도를 잠시 볼 수 없어요",
+        "description": "잠시 후 다시 확인해 주세요"
+      },
+      "unsupported": {
+        "title": "아직 지원하지 않는 도시예요",
+        "description": "서울·도쿄 지도만 볼 수 있어요"
+      }
+    }
+  },
   "place": {
     "page": {
       "title": "장소 상세"
