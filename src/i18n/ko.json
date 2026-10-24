@@ -165,12 +165,19 @@
     },
     "day": {
       "title": "DAY {{number}}",
-      "empty": "아직 장소가 없어요"
+      "empty": "아직 장소가 없어요",
+      "addPlace": "장소 추가",
+      "addPlaceLabel": "DAY {{number}}에 장소 추가"
+    },
+    "addPlace": {
+      "title": "DAY {{number}}에 넣을 장소"
     },
     "item": {
       "stay": "체류 {{minutes}}분",
       "nameLoading": "장소 이름을 불러오는 중이에요",
-      "nameError": "장소 이름을 불러오지 못했어요"
+      "nameError": "장소 이름을 불러오지 못했어요",
+      "remove": "삭제",
+      "removeLabel": "{{name}} 삭제"
     }
   },
   "map": {
