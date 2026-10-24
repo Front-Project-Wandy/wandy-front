@@ -2,9 +2,17 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useWizardStore } from '../../store/wizard/wizardStore';
 import Step1BasicInfo from './steps/Step1BasicInfo';
+import Step4Transport from './steps/Step4Transport';
 import StepPlaceholder from './steps/StepPlaceholder';
 import { getNextStep, getPrevStep, getStepInfo, LAST_STEP } from './wizardSteps';
 import WizardProgress from './WizardProgress';
+
+// 다 만든 단계의 화면. 여기 없는 단계는 "준비 중" 자리 화면을 보여준다.
+// 단계를 하나 만들 때마다 여기에 한 줄씩 추가한다.
+const STEP_SCREENS = {
+  1: Step1BasicInfo,
+  4: Step4Transport,
+};
 
 // W01~W07 플랜 마법사 (A파트). 지금 단계는 wizardStore.step에 있어서, 나갔다 와도 그 단계부터 다시 보인다 (30·31).
 // 와이어프레임에 사이트 헤더가 없어서 App.jsx 레이아웃 밖에 있고, 나가는 길로 로고만 둔다.
@@ -13,6 +21,7 @@ export default function WizardPage() {
   const step = useWizardStore((state) => state.step);
   const setStep = useWizardStore((state) => state.setStep);
   const { step: current, key } = getStepInfo(step);
+  const StepScreen = STEP_SCREENS[current];
 
   // 단계를 바꾸면 화면 맨 위(진행 표시줄)부터 보이게 한다.
   const goTo = (target) => {
@@ -44,8 +53,8 @@ export default function WizardPage() {
         <h1 className="text-title font-bold">
           {t('wizard.step.heading', { step: current, title: t(`wizard.step.${key}.title`) })}
         </h1>
-        {current === 1 ? (
-          <Step1BasicInfo onNext={handleNext} />
+        {StepScreen ? (
+          <StepScreen onPrev={handlePrev} onNext={handleNext} />
         ) : (
           <StepPlaceholder
             stepKey={key}
