@@ -4,10 +4,11 @@ import { formatDayDate } from '../utils/formatDay';
 import DayItem from './DayItem';
 
 // 한 DAY의 제목(DAY 1 · 10월 26일 (월))과 그날의 장소 목록, 장소 추가 버튼.
-export default function DaySection({ day, dayIndex, onAddPlace, onRemoveItem }) {
+export default function DaySection({ day, dayIndex, onAddPlace, onUpdateItem, onRemoveItem }) {
   const { t, i18n } = useTranslation();
   const titleId = `day-title-${dayIndex}`;
   const handleAddPlace = () => onAddPlace(dayIndex);
+  const handleUpdateItem = (itemId, patch) => onUpdateItem(dayIndex, itemId, patch);
   const handleRemoveItem = (itemId) => onRemoveItem(dayIndex, itemId);
 
   return (
@@ -35,7 +36,14 @@ export default function DaySection({ day, dayIndex, onAddPlace, onRemoveItem }) 
       ) : (
         <ol className="space-y-2">
           {day.items.map((item, index) => (
-            <DayItem key={item.id} item={item} number={index + 1} onRemove={handleRemoveItem} />
+            <DayItem
+              key={item.id}
+              item={item}
+              number={index + 1}
+              isTimeOutOfOrder={index > 0 && item.startTime < day.items[index - 1].startTime}
+              onUpdate={handleUpdateItem}
+              onRemove={handleRemoveItem}
+            />
           ))}
         </ol>
       )}
