@@ -29,6 +29,15 @@ export const useWizardStore = create(
       setStep: (step) => set({ step, updatedAt: Date.now() }),
       resetWizard: () => set({ draft: INITIAL_DRAFT, step: 1, updatedAt: null }),
     }),
-    { name: 'wandy.wizard' },
+    {
+      name: 'wandy.wizard',
+      // 저장된 draft를 기본값 위에 덮어서 불러온다. 기본 동작은 draft를 통째로 바꿔서,
+      // 단계를 새로 만들며 draft에 칸이 늘면(예: STEP4 transportMode) 예전 데이터에는 그 칸이 아예 없다(undefined).
+      merge: (persisted, current) => ({
+        ...current,
+        ...persisted,
+        draft: { ...current.draft, ...persisted?.draft },
+      }),
+    },
   ),
 );

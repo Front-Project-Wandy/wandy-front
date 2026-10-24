@@ -22,6 +22,14 @@ export default function Step4Transport({ onPrev, onNext }) {
     setHasError(false);
   };
 
+  // 건너뛰기 = "정하지 않음". 앞에서 골라 둔 값이 있어도 지워야 null(계산할 때 혼합)로 돌아간다.
+  // 라디오는 선택을 해제할 방법이 없어서, 여기서 지우지 않으면 고른 값이 계속 남는다.
+  const handleSkip = () => {
+    updateDraft({ transportMode: null });
+    setHasError(false);
+    onNext();
+  };
+
   const handleNext = () => {
     if (!transportMode) {
       setHasError(true);
@@ -72,7 +80,7 @@ export default function Step4Transport({ onPrev, onNext }) {
       </fieldset>
 
       <p className="text-body-sm text-text/70">{t('wizard.transport.hint')}</p>
-      <WizardNav onPrev={onPrev} onSkip={onNext} onNext={handleNext} />
+      <WizardNav onPrev={onPrev} onSkip={handleSkip} onNext={handleNext} />
     </div>
   );
 }
