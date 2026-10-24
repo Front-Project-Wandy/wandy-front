@@ -14,7 +14,7 @@ import PlaceSearchField from './PlaceSearchField';
 // 마법사 STEP5(A) 같은 화면에 넣어 쓰고, 장소를 고르면 onSelectPlace(place)를 부른다.
 // preferredCategories(65)는 이번 여행 초안의 선호 카테고리. 생략하면 기존 추천 순서다.
 export default function PlaceSearchPanel({ country, city, onSelectPlace, preferredCategories }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const titleId = useId();
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState(null);
@@ -24,10 +24,13 @@ export default function PlaceSearchPanel({ country, city, onSelectPlace, preferr
   );
   const places = data ?? [];
 
-  const title =
-    mode === 'search'
-      ? t('search.result.searchTitle')
-      : t('search.result.recommendTitle', { city: t(`common.city.${city}`) });
+  // 도시가 없거나(city: null) 번역이 없는 도시면 'common.city.null' 같은 키가 그대로 보여서 도시 없는 제목을 쓴다.
+  const cityKey = `common.city.${city}`;
+  const recommendTitle =
+    city && i18n.exists(cityKey)
+      ? t('search.result.recommendTitle', { city: t(cityKey) })
+      : t('search.result.recommendTitleNoCity');
+  const title = mode === 'search' ? t('search.result.searchTitle') : recommendTitle;
 
   const renderResult = () => {
     if (isPending) return <Loading />;
