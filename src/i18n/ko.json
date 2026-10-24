@@ -25,7 +25,11 @@
     },
     "city": {
       "seoul": "서울",
-      "tokyo": "도쿄"
+      "busan": "부산",
+      "jeju": "제주",
+      "tokyo": "도쿄",
+      "osaka": "오사카",
+      "fukuoka": "후쿠오카"
     },
     "header": {
       "logo": "WANDY",
@@ -56,6 +60,16 @@
       "progress": "STEP {{step}}까지 작성",
       "savedAt": "마지막 저장 {{time}}",
       "action": "이어서 만들기"
+    },
+    "cities": {
+      "title": "지금 떠나고 싶은 도시",
+      "comingSoon": "준비 중",
+      "startLabel": "{{city}} 여행 시작하기"
+    },
+    "confirm": {
+      "title": "작성 중인 여행이 있어요",
+      "description": "새로 시작하면 지금 작성 중인 내용은 사라져요. 이어서 만들까요?",
+      "newTrip": "새로 시작"
     }
   },
   "intro": {
