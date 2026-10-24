@@ -232,6 +232,20 @@
     "page": {
       "title": "마이페이지"
     },
+    "trips": {
+      "title": "내 여행",
+      "upcoming": "예정된 여행",
+      "past": "지난 여행",
+      "cityTrip": "{{city}} 여행",
+      "untitled": "이름 없는 여행",
+      "people": "{{count}}명",
+      "dday": "D-{{count}}",
+      "ongoing": "여행 중",
+      "noDates": "날짜 미정",
+      "emptyTitle": "아직 만든 여행이 없어요",
+      "emptyDescription": "여행지와 날짜를 정하면 일정을 짤 수 있어요",
+      "create": "여행 만들기"
+    },
     "preferences": {
       "title": "나의 여행 취향",
       "notice": "여행 스타일과 좋아하는 장소를 설정해 보세요. 설정은 이 브라우저에만 저장돼요.",
