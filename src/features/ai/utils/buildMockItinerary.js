@@ -51,13 +51,14 @@ export function buildMockItinerary(conditions, places) {
   );
   const foodPool = places.filter((place) => place.category === 'food');
 
-  // 야경 장소는 저녁 이후에 넣는다. 저녁에는 야경을 먼저, 낮에는 야경 말고 남은 곳이 없을 때만 쓴다.
+  // 야경 장소는 저녁 이후에만 넣는다. 저녁에는 야경을 먼저 쓰고, 야경이 없으면 낮 장소를 쓴다.
+  const isNight = (place) => place.category === 'night';
+  const hasFreeNight = () => spotPool.some((place) => isFree(place) && isNight(place));
   const takeSpot = (from, time) => {
     const free = spotPool.filter(isFree);
-    const night = free.filter((place) => place.category === 'night');
-    const daytime = free.filter((place) => place.category !== 'night');
-    const preferred = time >= DINNER_FROM ? night : daytime;
-    const candidates = preferred.length > 0 ? preferred : free;
+    const night = free.filter(isNight);
+    const daytime = free.filter((place) => !isNight(place));
+    const candidates = time >= DINNER_FROM && night.length > 0 ? night : daytime;
     if (candidates.length === 0) return null;
     const place = pickNearest(from ? candidates.slice(0, NEXT_SPOT_CHOICES) : candidates, from);
     used.add(place.id);
@@ -81,6 +82,7 @@ export function buildMockItinerary(conditions, places) {
     let hadDinner = false;
 
     const addMeal = () => {
+      if (time + MEAL_MINUTES > DAY_END) return;
       const meal = takeMeal(last);
       if (!meal) return;
       items.push({ name: meal.name, startTime: toTime(time), stayMinutes: MEAL_MINUTES });
@@ -98,7 +100,19 @@ export function buildMockItinerary(conditions, places) {
         addMeal();
       }
       if (time + rule.stayMinutes > DAY_END) break;
-      const spot = takeSpot(last, time);
+      let spot = takeSpot(last, time);
+      // 낮에 갈 곳이 다 떨어졌어도 야경이 남아 있으면, 낮에 넣지 않고 저녁으로 건너뛰어 넣는다.
+      if (!spot && time < DINNER_FROM && hasFreeNight()) {
+        time = DINNER_FROM;
+        // 건너뛴 사이에 점심 시간이 지났다. 표시하지 않으면 저녁 뒤에 점심이 들어간다.
+        hadLunch = true;
+        if (!hadDinner) {
+          hadDinner = true;
+          addMeal();
+        }
+        if (time + rule.stayMinutes > DAY_END) break;
+        spot = takeSpot(last, time);
+      }
       if (!spot) break;
       items.push({ name: spot.name, startTime: toTime(time), stayMinutes: rule.stayMinutes });
       time += rule.stayMinutes + MOVE_MINUTES;
