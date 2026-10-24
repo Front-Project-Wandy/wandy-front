@@ -153,6 +153,24 @@
   "planner": {
     "page": {
       "title": "플래너"
+    },
+    "empty": {
+      "title": "아직 만든 여행이 없어요",
+      "description": "여행지와 날짜를 정하면 일정을 짤 수 있어요",
+      "action": "여행 만들기"
+    },
+    "notFound": {
+      "title": "여행을 찾을 수 없어요",
+      "description": "주소가 바뀌었거나 저장된 여행이 아니에요"
+    },
+    "day": {
+      "title": "DAY {{number}}",
+      "empty": "아직 장소가 없어요"
+    },
+    "item": {
+      "stay": "체류 {{minutes}}분",
+      "nameLoading": "장소 이름을 불러오는 중이에요",
+      "nameError": "장소 이름을 불러오지 못했어요"
     }
   },
   "place": {
@@ -236,6 +254,32 @@
   "my": {
     "page": {
       "title": "마이페이지"
+    },
+    "preferences": {
+      "title": "나의 여행 취향",
+      "notice": "여행 스타일과 좋아하는 장소를 설정해 보세요. 설정은 이 브라우저에만 저장돼요.",
+      "styleLabel": "여행 스타일",
+      "styles": {
+        "relaxed": {
+          "label": "여유롭게",
+          "description": "쉬어 가며 느긋하게 둘러봐요"
+        },
+        "normal": {
+          "label": "보통",
+          "description": "관광과 휴식을 고르게 즐겨요"
+        },
+        "packed": {
+          "label": "빡빡하게",
+          "description": "다양한 장소를 알차게 돌아봐요"
+        }
+      },
+      "categoriesLabel": "선호 카테고리",
+      "categoriesHelp": "여러 개를 고를 수 있어요. 고르지 않으면 선호 없음으로 저장돼요.",
+      "save": "설정 저장",
+      "cancel": "변경 취소",
+      "saved": "여행 취향을 저장했어요.",
+      "unsaved": "아직 저장하지 않은 변경 사항이 있어요.",
+      "error": "설정을 저장하지 못했어요. 브라우저의 저장 공간과 사이트 데이터 설정을 확인하고 다시 저장해 주세요."
     },
     "favorites": {
       "title": "찜한 장소",
