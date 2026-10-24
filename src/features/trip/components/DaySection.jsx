@@ -3,9 +3,10 @@ import { formatDayDate } from '../utils/formatDay';
 import DayItem from './DayItem';
 
 // 한 DAY의 제목(DAY 1 · 10월 26일 (월))과 그날의 장소 목록.
-export default function DaySection({ day, dayIndex }) {
+export default function DaySection({ day, dayIndex, onUpdateItem }) {
   const { t, i18n } = useTranslation();
   const titleId = `day-title-${dayIndex}`;
+  const handleUpdateItem = (itemId, patch) => onUpdateItem(dayIndex, itemId, patch);
 
   return (
     <section aria-labelledby={titleId} className="space-y-3">
@@ -22,7 +23,7 @@ export default function DaySection({ day, dayIndex }) {
       ) : (
         <ol className="space-y-2">
           {day.items.map((item, index) => (
-            <DayItem key={item.id} item={item} number={index + 1} />
+            <DayItem key={item.id} item={item} number={index + 1} onUpdate={handleUpdateItem} />
           ))}
         </ol>
       )}

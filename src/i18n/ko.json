@@ -147,7 +147,21 @@
     "item": {
       "stay": "체류 {{minutes}}분",
       "nameLoading": "장소 이름을 불러오는 중이에요",
-      "nameError": "장소 이름을 불러오지 못했어요"
+      "nameError": "장소 이름을 불러오지 못했어요",
+      "edit": "편집",
+      "editLabel": "{{name}} 편집"
+    },
+    "edit": {
+      "startTime": "시작 시간",
+      "stayMinutes": "체류 시간(분)",
+      "memo": "메모",
+      "memoPlaceholder": "예: 오픈 전에 줄 서기",
+      "save": "저장",
+      "cancel": "취소",
+      "error": {
+        "startTime": "시작 시간을 골라 주세요.",
+        "stayMinutes": "체류 시간은 {{min}}~{{max}}분으로 입력해 주세요."
+      }
     }
   },
   "place": {
