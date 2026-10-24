@@ -322,6 +322,7 @@
     },
     "result": {
       "recommendTitle": "{{city}} 추천 장소",
+      "recommendTitleNoCity": "추천 장소",
       "searchTitle": "검색 결과",
       "count": "{{count}}곳",
       "updating": "찾는 중이에요"

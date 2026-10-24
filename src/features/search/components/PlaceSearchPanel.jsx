@@ -23,7 +23,7 @@ export default function PlaceSearchPanel({
   preferredCategories,
   origin = null,
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const titleId = useId();
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState(null);
@@ -39,10 +39,13 @@ export default function PlaceSearchPanel({
     ? sortByDistance(places, origin)
     : places.map((place) => ({ place, distance: null }));
 
-  const title =
-    mode === 'search'
-      ? t('search.result.searchTitle')
-      : t('search.result.recommendTitle', { city: t(`common.city.${city}`) });
+  // 도시가 없거나(city: null) 번역이 없는 도시면 'common.city.null' 같은 키가 그대로 보여서 도시 없는 제목을 쓴다.
+  const cityKey = `common.city.${city}`;
+  const recommendTitle =
+    city && i18n.exists(cityKey)
+      ? t('search.result.recommendTitle', { city: t(cityKey) })
+      : t('search.result.recommendTitleNoCity');
+  const title = mode === 'search' ? t('search.result.searchTitle') : recommendTitle;
 
   const renderResult = () => {
     if (isPending) return <Loading />;
