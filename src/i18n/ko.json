@@ -296,6 +296,12 @@
     "card": {
       "rating": "평점 {{rating}}점"
     },
+    "sort": {
+      "label": "정렬",
+      "default": "기본순",
+      "distance": "가까운 순",
+      "from": "{{name}}에서 가까운 순이에요"
+    },
     "attribution": {
       "google": "Google 제공 정보"
     }
