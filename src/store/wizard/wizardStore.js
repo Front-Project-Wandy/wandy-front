@@ -11,6 +11,8 @@ const INITIAL_DRAFT = {
   people: 2,
   // STEP4 현지 교통 방식: 'transit' | 'taxi' | 'car' | 'mixed'. 건너뛰면 null로 두고, 계산할 때 혼합으로 본다.
   transportMode: null,
+  // STEP5 담은 장소: [{ placeId, dayIndex }]. 약관 때문에 장소 내용은 저장하지 않고, 보여줄 때 placeId로 다시 불러온다.
+  spots: [],
 };
 
 export const useWizardStore = create(
