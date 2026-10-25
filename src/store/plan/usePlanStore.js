@@ -74,6 +74,7 @@ const createTrip = () => ({
   endDate: null,
   people: 1,
   style: 'normal',
+  transportMode: null,
   budget: null,
   flight: null,
   stay: null,
