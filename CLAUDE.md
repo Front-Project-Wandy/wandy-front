@@ -64,6 +64,7 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
     // trip
     { id, title, country, city, startDate, endDate, people,
       style: 'normal',        // 'relaxed' | 'normal' | 'packed'
+      transportMode: null,    // 'transit' | 'taxi' | 'car' | 'mixed' | null (마법사 STEP4, null = 건너뜀 → 계산할 때 혼합)
       budget: null,
       flight: null,           // { flightNo, arriveAt, departAt, link }
       stay: null,             // { name, lat, lng, checkIn, checkOut, link }
