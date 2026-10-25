@@ -153,7 +153,8 @@
       },
       "tab": {
         "search": "검색·추천",
-        "favorites": "찜한 장소 ({{count}})"
+        "favorites": "찜한 장소 ({{count}})",
+        "favoritesPending": "찜한 장소"
       },
       "favorites": {
         "emptyTitle": "{{city}}에서 찜한 장소가 없어요",

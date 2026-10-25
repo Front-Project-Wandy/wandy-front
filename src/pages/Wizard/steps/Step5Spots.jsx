@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import TabBar from '../../../components/common/TabBar';
-import { useFavoriteStore } from '../../../features/member/hooks/useFavoriteStore';
+import { useFavoritePlaces } from '../../../features/member/hooks/useFavoritePlaces';
 import PlaceSearchPanel from '../../../features/search/components/PlaceSearchPanel';
 import { useWizardStore } from '../../../store/wizard/wizardStore';
 import AddSpotModal from '../spots/AddSpotModal';
 import FavoriteSpots from '../spots/FavoriteSpots';
 import SelectedSpots from '../spots/SelectedSpots';
-import { findSpot, putSpot, removeSpot } from '../spots/spotList';
+import { findSpot, fitSpotsToDays, putSpot, removeSpot } from '../spots/spotList';
 import { useSpotPlaces } from '../spots/useSpotPlaces';
 import { getTripDays } from '../tripDays';
 import WizardNav from '../WizardNav';
@@ -19,9 +19,12 @@ export default function Step5Spots({ onPrev, onNext }) {
   const { t } = useTranslation();
   const draft = useWizardStore((state) => state.draft);
   const updateDraft = useWizardStore((state) => state.updateDraft);
-  const favoriteCount = useFavoriteStore((state) => state.ids.length);
-  const spots = draft.spots;
+  const favorites = useFavoritePlaces();
   const days = getTripDays(draft.startDate, draft.endDate);
+  // STEP1에서 날짜를 줄였다면 없어진 DAY의 장소를 마지막 DAY로 보여 주고, 바꿔 저장할 때도 이 값을 쓴다.
+  const spots = fitSpotsToDays(draft.spots, days.length);
+  // 찜은 여러 도시가 섞여 있어서, 탭 숫자와 목록 모두 이번 여행 도시의 찜만 센다.
+  const cityFavorites = favorites.places.filter((place) => place.city === draft.city);
   const placesById = useSpotPlaces(spots.map((spot) => spot.placeId));
 
   const [tab, setTab] = useState('search');
@@ -67,7 +70,13 @@ export default function Step5Spots({ onPrev, onNext }) {
         <TabBar
           tabs={[
             { key: 'search', label: t('wizard.spots.tab.search') },
-            { key: 'favorites', label: t('wizard.spots.tab.favorites', { count: favoriteCount }) },
+            {
+              key: 'favorites',
+              // 불러오는 동안에는 숫자가 틀릴 수 있어서 숫자 없이 보여준다.
+              label: favorites.isPending
+                ? t('wizard.spots.tab.favoritesPending')
+                : t('wizard.spots.tab.favorites', { count: cityFavorites.length }),
+            },
           ]}
           activeKey={tab}
           onChange={setTab}
@@ -79,7 +88,14 @@ export default function Step5Spots({ onPrev, onNext }) {
             onSelectPlace={setTargetPlace}
           />
         ) : (
-          <FavoriteSpots city={draft.city} onSelectPlace={setTargetPlace} />
+          <FavoriteSpots
+            city={draft.city}
+            places={cityFavorites}
+            isPending={favorites.isPending}
+            isError={favorites.isError}
+            onRetry={favorites.refetch}
+            onSelectPlace={setTargetPlace}
+          />
         )}
       </div>
 

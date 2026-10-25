@@ -11,4 +11,15 @@ export function putSpot(spots, placeId, dayIndex) {
 
 export const removeSpot = (spots, placeId) => spots.filter((spot) => spot.placeId !== placeId);
 
+// 여행 날짜를 줄여 없어진 DAY에 담긴 장소는 마지막 DAY로 옮긴다.
+// 플랜 store(C)도 날짜를 줄이면 넘친 장소를 마지막 DAY에 붙여서(buildDays) 같은 규칙으로 맞췄다.
+// 날짜가 아직 맞지 않아 DAY가 0개면 건드리지 않는다.
+export function fitSpotsToDays(spots, dayCount) {
+  if (dayCount === 0) return spots;
+  const lastDayIndex = dayCount - 1;
+  return spots.map((spot) =>
+    spot.dayIndex > lastDayIndex ? { ...spot, dayIndex: lastDayIndex } : spot,
+  );
+}
+
 export const findSpot = (spots, placeId) => spots.find((spot) => spot.placeId === placeId) ?? null;
