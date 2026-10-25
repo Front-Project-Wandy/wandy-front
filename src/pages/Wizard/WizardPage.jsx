@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useWizardStore } from '../../store/wizard/wizardStore';
 import Step1BasicInfo from './steps/Step1BasicInfo';
 import Step4Transport from './steps/Step4Transport';
+import Step5Spots from './steps/Step5Spots';
 import StepPlaceholder from './steps/StepPlaceholder';
 import { getNextStep, getPrevStep, getStepInfo, LAST_STEP } from './wizardSteps';
 import WizardProgress from './WizardProgress';
@@ -12,6 +13,7 @@ import WizardProgress from './WizardProgress';
 const STEP_SCREENS = {
   1: Step1BasicInfo,
   4: Step4Transport,
+  5: Step5Spots,
 };
 
 // W01~W07 플랜 마법사 (A파트). 지금 단계는 wizardStore.step에 있어서, 나갔다 와도 그 단계부터 다시 보인다 (30·31).

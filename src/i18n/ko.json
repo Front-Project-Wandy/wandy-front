@@ -25,7 +25,11 @@
     },
     "city": {
       "seoul": "서울",
-      "tokyo": "도쿄"
+      "busan": "부산",
+      "jeju": "제주",
+      "tokyo": "도쿄",
+      "osaka": "오사카",
+      "fukuoka": "후쿠오카"
     },
     "header": {
       "logo": "WANDY",
@@ -56,6 +60,16 @@
       "progress": "STEP {{step}}까지 작성",
       "savedAt": "마지막 저장 {{time}}",
       "action": "이어서 만들기"
+    },
+    "cities": {
+      "title": "지금 떠나고 싶은 도시",
+      "comingSoon": "준비 중",
+      "startLabel": "{{city}} 여행 시작하기"
+    },
+    "confirm": {
+      "title": "작성 중인 여행이 있어요",
+      "description": "새로 시작하면 지금 작성 중인 내용은 사라져요. 이어서 만들까요?",
+      "newTrip": "새로 시작"
     }
   },
   "intro": {
@@ -139,6 +153,36 @@
         }
       }
     },
+    "spots": {
+      "error": "장소를 하나 이상 담아 주세요.",
+      "basket": {
+        "title": "담은 장소 ({{count}})",
+        "emptyTitle": "아직 담은 장소가 없어요",
+        "emptyDescription": "검색·추천이나 찜한 장소에서 골라 담아 보세요.",
+        "day": "DAY {{day}} · {{date}}",
+        "change": "날짜 바꾸기",
+        "remove": "{{name}} 빼기",
+        "loadingName": "불러오는 중…",
+        "missing": "찾을 수 없는 장소"
+      },
+      "tab": {
+        "search": "검색·추천",
+        "favorites": "찜한 장소 ({{count}})",
+        "favoritesPending": "찜한 장소"
+      },
+      "favorites": {
+        "emptyTitle": "{{city}}에서 찜한 장소가 없어요",
+        "emptyDescription": "장소의 하트를 누르면 여기에 모여요."
+      },
+      "modal": {
+        "question": "어느 날 갈까요?",
+        "dayOption": "DAY {{day}} · {{date}}",
+        "added": "DAY {{day}}에 담겨 있어요",
+        "add": "담기",
+        "move": "이 날로 옮기기",
+        "remove": "빼기"
+      }
+    },
     "nav": {
       "prev": "이전",
       "skip": "건너뛰기",
@@ -193,6 +237,21 @@
     },
     "addPlace": {
       "title": "DAY {{number}}에 넣을 장소"
+    }
+  },
+  "map": {
+    "label": "지도",
+    "state": {
+      "loading": "지도를 불러오는 중이에요",
+      "error": "지도를 불러오지 못했어요",
+      "noKey": {
+        "title": "지도를 잠시 볼 수 없어요",
+        "description": "잠시 후 다시 확인해 주세요"
+      },
+      "unsupported": {
+        "title": "아직 지원하지 않는 도시예요",
+        "description": "서울·도쿄 지도만 볼 수 있어요"
+      }
     }
   },
   "place": {
