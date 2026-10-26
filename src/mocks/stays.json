@@ -1,0 +1,112 @@
+{
+  "areas": {
+    "tokyo": [
+      { "key": "shinjuku", "lat": 35.69, "lng": 139.7005, "searchName": "Shinjuku, Tokyo" },
+      { "key": "shibuya", "lat": 35.6595, "lng": 139.7005, "searchName": "Shibuya, Tokyo" },
+      { "key": "asakusa", "lat": 35.7118, "lng": 139.7966, "searchName": "Asakusa, Tokyo" },
+      { "key": "ginza", "lat": 35.6717, "lng": 139.765, "searchName": "Ginza, Tokyo" }
+    ],
+    "seoul": [
+      { "key": "myeongdong", "lat": 37.5636, "lng": 126.9827, "searchName": "Myeongdong, Seoul" },
+      { "key": "hongdae", "lat": 37.5563, "lng": 126.922, "searchName": "Hongdae, Seoul" },
+      { "key": "gangnam", "lat": 37.4979, "lng": 127.0276, "searchName": "Gangnam, Seoul" },
+      { "key": "jongno", "lat": 37.5704, "lng": 126.9921, "searchName": "Jongno, Seoul" }
+    ]
+  },
+  "stays": {
+    "tokyo": [
+      {
+        "id": "tyo-shinjuku-sky",
+        "name": "신주쿠 스카이 호텔",
+        "area": "shinjuku",
+        "lat": 35.6912,
+        "lng": 139.6985,
+        "pricePerNightKrw": 182000,
+        "checkIn": "15:00",
+        "checkOut": "11:00"
+      },
+      {
+        "id": "tyo-shinjuku-inn",
+        "name": "신주쿠 가든 인",
+        "area": "shinjuku",
+        "lat": 35.6889,
+        "lng": 139.7031,
+        "pricePerNightKrw": 118000,
+        "checkIn": "16:00",
+        "checkOut": "10:00"
+      },
+      {
+        "id": "tyo-shibuya-cross",
+        "name": "시부야 크로스 스테이",
+        "area": "shibuya",
+        "lat": 35.6588,
+        "lng": 139.7019,
+        "pricePerNightKrw": 156000,
+        "checkIn": "15:00",
+        "checkOut": "11:00"
+      },
+      {
+        "id": "tyo-asakusa-river",
+        "name": "아사쿠사 리버 료칸",
+        "area": "asakusa",
+        "lat": 35.7105,
+        "lng": 139.7988,
+        "pricePerNightKrw": 204000,
+        "checkIn": "15:00",
+        "checkOut": "10:00"
+      },
+      {
+        "id": "tyo-ginza-bloom",
+        "name": "긴자 블룸 호텔",
+        "area": "ginza",
+        "lat": 35.6724,
+        "lng": 139.7641,
+        "pricePerNightKrw": 238000,
+        "checkIn": "15:00",
+        "checkOut": "12:00"
+      }
+    ],
+    "seoul": [
+      {
+        "id": "sel-myeongdong-city",
+        "name": "명동 시티 호텔",
+        "area": "myeongdong",
+        "lat": 37.5629,
+        "lng": 126.9841,
+        "pricePerNightKrw": 132000,
+        "checkIn": "15:00",
+        "checkOut": "11:00"
+      },
+      {
+        "id": "sel-hongdae-art",
+        "name": "홍대 아트 스테이",
+        "area": "hongdae",
+        "lat": 37.5571,
+        "lng": 126.9238,
+        "pricePerNightKrw": 89000,
+        "checkIn": "16:00",
+        "checkOut": "11:00"
+      },
+      {
+        "id": "sel-gangnam-biz",
+        "name": "강남 비즈니스 호텔",
+        "area": "gangnam",
+        "lat": 37.4988,
+        "lng": 127.0262,
+        "pricePerNightKrw": 147000,
+        "checkIn": "15:00",
+        "checkOut": "12:00"
+      },
+      {
+        "id": "sel-jongno-hanok",
+        "name": "종로 한옥 스테이",
+        "area": "jongno",
+        "lat": 37.5795,
+        "lng": 126.9852,
+        "pricePerNightKrw": 168000,
+        "checkIn": "15:00",
+        "checkOut": "11:00"
+      }
+    ]
+  }
+}

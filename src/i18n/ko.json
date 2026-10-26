@@ -170,8 +170,7 @@
         "link": {
           "skyscanner": "스카이스캐너에서 찾기",
           "naver": "네이버 항공권에서 찾기"
-        },
-        "newTab": "(새 창)"
+        }
       },
       "airport": {
         "ICN": "인천",
@@ -182,6 +181,59 @@
         "CJJ": "청주",
         "NRT": "나리타",
         "HND": "하네다"
+      }
+    },
+    "stay": {
+      "question": "숙소를 예약하셨나요?",
+      "status": {
+        "booked": {
+          "title": "이미 예약했어요",
+          "description": "예약한 숙소 정보를 직접 넣어요"
+        },
+        "searching": {
+          "title": "아직 안 했어요",
+          "description": "지역별 숙소를 둘러보고 예약 사이트로 가요"
+        }
+      },
+      "hint": "고른 숙소는 매일 동선의 출발점이 되고, 체크인·체크아웃 시간은 첫날·마지막 날 일정에 써요.",
+      "areaLegend": "지역",
+      "error": {
+        "choose": "숙소 예약 여부를 골라 주세요.",
+        "pick": "숙소를 하나 골라 주세요.",
+        "name": "숙소 이름을 넣어 주세요.",
+        "area": "숙소가 있는 지역을 골라 주세요.",
+        "times": "체크인·체크아웃 시각을 넣어 주세요."
+      },
+      "booked": {
+        "name": "숙소 이름",
+        "namePlaceholder": "예: 신주쿠 OO호텔",
+        "areaHint": "동선의 출발점으로 쓸 대략적인 위치예요.",
+        "address": "주소 (선택)",
+        "addressPlaceholder": "예약 확인 메일의 주소를 적어 두세요",
+        "checkIn": "체크인 시각 ({{date}})",
+        "checkOut": "체크아웃 시각 ({{date}})"
+      },
+      "search": {
+        "pickArea": "지역을 먼저 골라 주세요.",
+        "listLegend": "숙소 고르기",
+        "detail": "1박 {{price}}원 · 체크인 {{checkIn}} · 체크아웃 {{checkOut}}",
+        "emptyTitle": "이 지역에는 숙소가 없어요",
+        "emptyDescription": "다른 지역을 고르거나 아래 예약 사이트에서 찾아보세요.",
+        "mockNotice": "보이는 숙소와 가격은 예시예요. 실제 예약은 아래 사이트에서 해 주세요.",
+        "link": {
+          "booking": "Booking.com에서 찾기",
+          "airbnb": "에어비앤비에서 찾기"
+        }
+      },
+      "area": {
+        "shinjuku": "신주쿠",
+        "shibuya": "시부야",
+        "asakusa": "아사쿠사",
+        "ginza": "긴자",
+        "myeongdong": "명동",
+        "hongdae": "홍대",
+        "gangnam": "강남",
+        "jongno": "종로"
       }
     },
     "transport": {
@@ -253,7 +305,8 @@
         "cancel": "취소"
       },
       "flight": "항공 · 도착 {{arrive}} · 귀국 출발 {{depart}} ({{flightNo}})",
-      "flightNoUnknown": "편명 없음"
+      "flightNoUnknown": "편명 없음",
+      "stay": "숙소 · {{name}} · 체크인 {{checkIn}} · 체크아웃 {{checkOut}}"
     },
     "nav": {
       "prev": "이전",
@@ -264,6 +317,9 @@
     },
     "placeholder": {
       "description": "이 단계는 준비 중이에요. [다음]을 눌러 넘어갈 수 있어요."
+    },
+    "common": {
+      "newTab": "(새 창)"
     }
   },
   "planner": {
@@ -534,21 +590,6 @@
     "mealTime": {
       "lunch": "점심시간이에요. 근처 맛집에서 식사해 보세요",
       "dinner": "저녁시간이에요. 근처 맛집에서 식사해 보세요"
-    }
-  },
-  "map": {
-    "label": "지도",
-    "state": {
-      "loading": "지도를 불러오는 중이에요",
-      "error": "지도를 불러오지 못했어요",
-      "noKey": {
-        "title": "지도를 잠시 볼 수 없어요",
-        "description": "잠시 후 다시 확인해 주세요"
-      },
-      "unsupported": {
-        "title": "아직 지원하지 않는 도시예요",
-        "description": "서울·도쿄 지도만 볼 수 있어요"
-      }
     }
   }
 }
