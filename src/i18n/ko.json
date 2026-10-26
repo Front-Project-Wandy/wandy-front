@@ -70,6 +70,14 @@
       "title": "작성 중인 여행이 있어요",
       "description": "새로 시작하면 지금 작성 중인 내용은 사라져요. 이어서 만들까요?",
       "newTrip": "새로 시작"
+    },
+    "recent": {
+      "title": "최근 본 장소와 상품",
+      "clear": "기록 지우기",
+      "type": {
+        "place": "장소",
+        "product": "상품"
+      }
     }
   },
   "intro": {
@@ -291,6 +299,18 @@
         "remove": "빼기"
       }
     },
+    "nearby": {
+      "hint": "담은 장소 사이를 어떻게 이동하는지 보고, 장소마다 근처 식당을 더할 수 있어요.",
+      "dayTab": "DAY {{day}}",
+      "stayMark": "숙",
+      "fromStay": "{{name}}에서 출발",
+      "openRestaurants": "근처 식당",
+      "modalTitle": "{{name}} 근처 식당",
+      "emptyDay": "이 날은 담은 장소가 없어요.",
+      "emptyTitle": "아직 담은 장소가 없어요",
+      "emptyDescription": "[이전]을 눌러 STEP 5에서 가고 싶은 장소를 담아 주세요.",
+      "estimateNotice": "이동 시간과 요금은 거리로 계산한 예상값이에요."
+    },
     "summary": {
       "titleLabel": "여행 제목",
       "defaultTitle": "{{city}} 여행",
@@ -316,9 +336,6 @@
       "next": "다음",
       "save": "저장",
       "saved": "중간 저장됨 · 나가도 이어서 작성할 수 있어요"
-    },
-    "placeholder": {
-      "description": "이 단계는 준비 중이에요. [다음]을 눌러 넘어갈 수 있어요."
     },
     "common": {
       "newTab": "(새 창)"
