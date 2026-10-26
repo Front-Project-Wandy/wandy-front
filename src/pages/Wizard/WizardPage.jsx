@@ -6,19 +6,19 @@ import Step2Flight from './steps/Step2Flight';
 import Step3Stay from './steps/Step3Stay';
 import Step4Transport from './steps/Step4Transport';
 import Step5Spots from './steps/Step5Spots';
+import Step6Nearby from './steps/Step6Nearby';
 import Step7Summary from './steps/Step7Summary';
-import StepPlaceholder from './steps/StepPlaceholder';
 import { getNextStep, getPrevStep, getStepInfo } from './wizardSteps';
 import WizardProgress from './WizardProgress';
 
-// 다 만든 단계의 화면. 여기 없는 단계는 "준비 중" 자리 화면을 보여준다.
-// 단계를 하나 만들 때마다 여기에 한 줄씩 추가한다.
+// 단계별 화면. 단계 번호(wizardSteps.js)로 고른다.
 const STEP_SCREENS = {
   1: Step1BasicInfo,
   2: Step2Flight,
   3: Step3Stay,
   4: Step4Transport,
   5: Step5Spots,
+  6: Step6Nearby,
   7: Step7Summary,
 };
 
@@ -61,11 +61,7 @@ export default function WizardPage() {
         <h1 className="text-title font-bold">
           {t('wizard.step.heading', { step: current, title: t(`wizard.step.${key}.title`) })}
         </h1>
-        {StepScreen ? (
-          <StepScreen onPrev={handlePrev} onNext={handleNext} />
-        ) : (
-          <StepPlaceholder stepKey={key} onPrev={handlePrev} onNext={handleNext} />
-        )}
+        <StepScreen onPrev={handlePrev} onNext={handleNext} />
       </main>
     </>
   );
