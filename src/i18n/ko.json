@@ -1,5 +1,20 @@
 {
   "common": {
+    "a11y": {
+      "skipToContent": "본문으로 바로가기"
+    },
+    "pageTitle": {
+      "format": "{{page}} · Wandy",
+      "home": "Wandy",
+      "places": "장소 탐색",
+      "place": "장소 상세",
+      "products": "투어·상품",
+      "login": "로그인",
+      "my": "마이페이지",
+      "trip": "플래너",
+      "notFound": "페이지를 찾을 수 없어요",
+      "wizard": "{{step}} · 플랜 만들기"
+    },
     "state": {
       "loading": "불러오는 중이에요",
       "error": "문제가 생겼어요. 잠시 후 다시 시도해 주세요.",
