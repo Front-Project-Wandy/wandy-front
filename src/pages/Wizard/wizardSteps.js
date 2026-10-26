@@ -13,8 +13,6 @@ export const WIZARD_STEPS = [
 
 const ENABLED_STEPS = WIZARD_STEPS.filter((item) => item.enabled).map((item) => item.step);
 
-export const LAST_STEP = ENABLED_STEPS[ENABLED_STEPS.length - 1];
-
 // 지금 단계 다음/이전의 '쓸 수 있는' 단계. 없으면 null.
 export const getNextStep = (step) => ENABLED_STEPS.find((item) => item > step) ?? null;
 export const getPrevStep = (step) => ENABLED_STEPS.findLast((item) => item < step) ?? null;

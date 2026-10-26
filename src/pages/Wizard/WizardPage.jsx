@@ -4,8 +4,9 @@ import { useWizardStore } from '../../store/wizard/wizardStore';
 import Step1BasicInfo from './steps/Step1BasicInfo';
 import Step4Transport from './steps/Step4Transport';
 import Step5Spots from './steps/Step5Spots';
+import Step7Summary from './steps/Step7Summary';
 import StepPlaceholder from './steps/StepPlaceholder';
-import { getNextStep, getPrevStep, getStepInfo, LAST_STEP } from './wizardSteps';
+import { getNextStep, getPrevStep, getStepInfo } from './wizardSteps';
 import WizardProgress from './WizardProgress';
 
 // 다 만든 단계의 화면. 여기 없는 단계는 "준비 중" 자리 화면을 보여준다.
@@ -14,6 +15,7 @@ const STEP_SCREENS = {
   1: Step1BasicInfo,
   4: Step4Transport,
   5: Step5Spots,
+  7: Step7Summary,
 };
 
 // W01~W07 플랜 마법사 (A파트). 지금 단계는 wizardStore.step에 있어서, 나갔다 와도 그 단계부터 다시 보인다 (30·31).
@@ -58,12 +60,7 @@ export default function WizardPage() {
         {StepScreen ? (
           <StepScreen onPrev={handlePrev} onNext={handleNext} />
         ) : (
-          <StepPlaceholder
-            stepKey={key}
-            onPrev={handlePrev}
-            onNext={handleNext}
-            nextLabel={current === LAST_STEP ? t('wizard.nav.save') : undefined}
-          />
+          <StepPlaceholder stepKey={key} onPrev={handlePrev} onNext={handleNext} />
         )}
       </main>
     </>

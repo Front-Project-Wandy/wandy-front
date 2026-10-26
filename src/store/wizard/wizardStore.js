@@ -13,6 +13,8 @@ const INITIAL_DRAFT = {
   transportMode: null,
   // STEP5 담은 장소: [{ placeId, dayIndex }]. 약관 때문에 장소 내용은 저장하지 않고, 보여줄 때 placeId로 다시 불러온다.
   spots: [],
+  // STEP7 여행 제목. 비워 두면 저장할 때 "{도시} 여행"을 쓴다.
+  title: '',
 };
 
 export const useWizardStore = create(
