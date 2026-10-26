@@ -18,6 +18,9 @@ export default function Step3Stay({ onPrev, onNext }) {
   const updateDraft = useWizardStore((state) => state.updateDraft);
   const [errorKey, setErrorKey] = useState(null);
   const stay = draft.stay;
+  // 당일 여행은 보통 숙소가 필요 없고, 목업 숙소(체크인 오후·체크아웃 오전)는 검사를 통과할 수 없어서
+  // 건너뛰기를 안내한다.
+  const isSameDay = draft.startDate === draft.endDate;
 
   const saveStay = (nextStay) => {
     updateDraft({ stay: nextStay });
@@ -31,7 +34,7 @@ export default function Step3Stay({ onPrev, onNext }) {
   };
 
   const handleNext = () => {
-    const nextError = validateStay(stay);
+    const nextError = validateStay(stay, { isSameDay });
     if (nextError) {
       setErrorKey(nextError);
       return;
@@ -48,6 +51,11 @@ export default function Step3Stay({ onPrev, onNext }) {
 
   return (
     <div className="flex flex-col gap-5">
+      {isSameDay && (
+        <p className="rounded-2xl bg-bg-soft p-4 text-body-sm break-keep">
+          {t('wizard.stay.sameDayNotice')}
+        </p>
+      )}
       <RadioCardGroup
         legend={t('wizard.stay.question')}
         options={STAY_STATUSES.map((status) => ({

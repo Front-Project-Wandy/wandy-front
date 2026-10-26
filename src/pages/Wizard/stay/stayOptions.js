@@ -25,12 +25,16 @@ export const EMPTY_STAY = {
 };
 
 // [다음]을 눌렀을 때 검사. 문제가 있으면 번역 키, 없으면 null.
-export function validateStay(stay) {
+// 당일 여행은 체크인·체크아웃이 같은 날이라, 체크아웃이 체크인보다 늦어야 한다 (직접 입력·목업 모두).
+export function validateStay(stay, { isSameDay }) {
   if (!stay?.status) return 'wizard.stay.error.choose';
-  if (stay.status === 'searching') return stay.mockId ? null : 'wizard.stay.error.pick';
-  if (!stay.name.trim()) return 'wizard.stay.error.name';
-  if (!stay.area) return 'wizard.stay.error.area';
-  if (!stay.checkInTime || !stay.checkOutTime) return 'wizard.stay.error.times';
+  if (stay.status === 'searching' && !stay.mockId) return 'wizard.stay.error.pick';
+  if (stay.status === 'booked') {
+    if (!stay.name.trim()) return 'wizard.stay.error.name';
+    if (!stay.area) return 'wizard.stay.error.area';
+    if (!stay.checkInTime || !stay.checkOutTime) return 'wizard.stay.error.times';
+  }
+  if (isSameDay && stay.checkOutTime <= stay.checkInTime) return 'wizard.stay.error.sameDay';
   return null;
 }
 
