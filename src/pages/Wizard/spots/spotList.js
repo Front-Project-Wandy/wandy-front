@@ -22,6 +22,18 @@ export function insertSpotAfter(spots, afterPlaceId, placeId, dayIndex) {
 
 export const removeSpot = (spots, placeId) => spots.filter((spot) => spot.placeId !== placeId);
 
+// AI 빈 일정 채우기(54) 결과를 담은 장소 뒤에 붙인다. aiDays: [{ dayIndex, items: [{ place }] }]
+// AI가 한 DAY 안에서 시각 순서로 돌려줘서 그대로 붙이면 그날 순서가 된다.
+// AI는 이미 담은 장소를 빼고 고르지만, 혹시 겹쳐도 한 장소가 두 번 담기지 않게 putSpot으로 넣는다.
+// 정한 시각(startTime·stayMinutes)은 아직 저장하지 않는다 — 회의 안건 3-1에서 저장 방법을 정한 뒤 붙인다.
+export function addAiSpots(spots, aiDays) {
+  return aiDays.reduce(
+    (result, { dayIndex, items }) =>
+      items.reduce((next, { place }) => putSpot(next, place.id, dayIndex), result),
+    spots,
+  );
+}
+
 // 여행 날짜를 줄여 없어진 DAY에 담긴 장소는 마지막 DAY로 옮긴다.
 // 플랜 store(C)도 날짜를 줄이면 넘친 장소를 마지막 DAY에 붙여서(buildDays) 같은 규칙으로 맞췄다.
 // 날짜가 아직 맞지 않아 DAY가 0개면 건드리지 않는다.
