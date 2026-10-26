@@ -2,6 +2,7 @@
 // 나라별 차이(KR 네이버·TourAPI / JP Google Places)는 krPlaceService·jpPlaceService가 숨긴다.
 // 1단계: src/mocks 더미를 돌려준다. 2단계: 함수 안만 Spring Boot API 호출로 바꾼다 (키는 서버에만).
 import { getDistanceMeters } from '../features/search/utils/geo';
+import { rankSuggestions } from '../features/search/utils/rankSuggestions';
 import { isSamePlace } from '../features/search/utils/samePlace';
 import { mockRequest } from './api/mockRequest';
 import { findJpPlace, listJpEatEntries, recommendJpPlaces, searchJpPlaces } from './jpPlaceService';
@@ -43,6 +44,24 @@ export function getCityPlaces({ country, city }) {
         [],
       );
   });
+}
+
+// 검색 자동완성(43) { country, city, keyword, sessionToken } → [{ placeId, name, category }] 최대 5개
+// 2단계: JP는 Google Places Autocomplete에 sessionToken을 넘긴다 (입력~선택을 한 번으로 계산해 요금을 줄인다).
+//        KR은 네이버에 자동완성 API가 없어서 서버가 지역검색을 적은 개수로 불러 후보를 만든다.
+//        1단계 목업은 sessionToken을 쓰지 않는다.
+export function autocompletePlaces({ country, city, keyword }) {
+  return mockRequest(() =>
+    // 후보를 고르면 그 이름으로 키워드 검색을 하므로, 키워드 검색과 같은 목록에서만 후보를 고른다
+    rankSuggestions(
+      country === 'KR' ? searchKrPlaces({ city }) : searchJpPlaces({ city }),
+      keyword,
+    ).map((place) => ({
+      placeId: place.id,
+      name: place.name,
+      category: place.category,
+    })),
+  );
 }
 
 // Place.id로 장소 하나 → Place (없으면 PLACE_NOT_FOUND 에러)
