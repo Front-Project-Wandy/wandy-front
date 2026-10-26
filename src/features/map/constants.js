@@ -33,3 +33,8 @@ export const ROUTE_STROKE_OPACITY = 0.9;
 // 장소가 하나뿐이면 영역을 맞출 수 없어서 그 자리를 이 확대 수준으로 보여 준다
 export const SINGLE_POINT_ZOOM = 15;
 export const FIT_PADDING = 48;
+
+// 목록에서 장소를 고르면 지도가 이 확대 수준 이상으로 그 장소를 보여 준다 (15)
+export const SELECTED_MIN_ZOOM = 14;
+export const GOOGLE_MARKER_SCALE_SELECTED = 18;
+export const SELECTED_Z_INDEX = 100;

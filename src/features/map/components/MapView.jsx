@@ -8,9 +8,16 @@ import { useRoutes } from '../hooks/useRoutes';
 import GoogleMap from './GoogleMap';
 import NaverMap from './NaverMap';
 
-// 나라에 맞는 지도(KR 네이버 / JP 구글)를 보여주고, days의 장소를 DAY별 번호 마커·동선 선으로 그린다 (6, 14).
+// 나라에 맞는 지도(KR 네이버 / JP 구글)를 보여주고, days의 장소를 DAY별 번호 마커·동선 선으로 그린다 (6, 14), 선택한 장소를 강조한다 (15).
 // 지도가 아닌 상태(키 없음·불러오는 중·실패)는 같은 상자 안에 가운데 정렬로 보여준다.
-export default function MapView({ country, city, days = [], className = '' }) {
+export default function MapView({
+  country,
+  city,
+  days = [],
+  selectedId = null,
+  onSelectMarker,
+  className = '',
+}) {
   const { t } = useTranslation();
   const provider = MAP_PROVIDERS[country];
   const center = CITY_CENTERS[city];
@@ -48,7 +55,13 @@ export default function MapView({ country, city, days = [], className = '' }) {
       {state ? (
         <div className="flex h-full items-center justify-center">{state}</div>
       ) : (
-        <MapComponent center={center} zoom={DEFAULT_ZOOM} routes={routes} />
+        <MapComponent
+          center={center}
+          zoom={DEFAULT_ZOOM}
+          routes={routes}
+          selectedId={selectedId}
+          onSelectMarker={onSelectMarker}
+        />
       )}
     </section>
   );

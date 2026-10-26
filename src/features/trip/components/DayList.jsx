@@ -7,6 +7,8 @@ export default function DayList({
   country,
   transportMode,
   flight,
+  selectedItemId,
+  onSelectItem,
   onAddPlace,
   onUpdateItem,
   onRemoveItem,
@@ -24,6 +26,8 @@ export default function DayList({
           country={country}
           transportMode={transportMode}
           flight={flight}
+          selectedItemId={selectedItemId}
+          onSelectItem={onSelectItem}
           onAddPlace={onAddPlace}
           onUpdateItem={onUpdateItem}
           onRemoveItem={onRemoveItem}
