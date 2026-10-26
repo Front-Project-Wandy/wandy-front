@@ -9,6 +9,17 @@ export function putSpot(spots, placeId, dayIndex) {
   return [...spots, { placeId, dayIndex }];
 }
 
+// STEP6에서 고른 식당을 기준 장소(afterPlaceId) 바로 다음, 같은 DAY에 끼워 넣는다.
+// 한 DAY 안의 순서는 배열 순서라, 기준 장소 바로 뒤 자리에 넣으면 그날 일정에서도 바로 다음이 된다.
+// 이미 담은 장소면 원래 자리에서 빼고 옮긴다 (한 장소는 한 번만).
+export function insertSpotAfter(spots, afterPlaceId, placeId, dayIndex) {
+  const rest = spots.filter((spot) => spot.placeId !== placeId);
+  const anchorIndex = rest.findIndex((spot) => spot.placeId === afterPlaceId);
+  const nextSpot = { placeId, dayIndex };
+  if (anchorIndex === -1) return [...rest, nextSpot];
+  return [...rest.slice(0, anchorIndex + 1), nextSpot, ...rest.slice(anchorIndex + 1)];
+}
+
 export const removeSpot = (spots, placeId) => spots.filter((spot) => spot.placeId !== placeId);
 
 // 여행 날짜를 줄여 없어진 DAY에 담긴 장소는 마지막 DAY로 옮긴다.
