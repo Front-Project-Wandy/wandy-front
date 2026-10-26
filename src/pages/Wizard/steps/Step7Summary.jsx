@@ -5,6 +5,7 @@ import Input from '../../../components/common/Input';
 import { formatShortDate } from '../../../features/member/utils/tripDates';
 import { usePlanStore } from '../../../store/plan/usePlanStore';
 import { useWizardStore } from '../../../store/wizard/wizardStore';
+import { toPlanFlight } from '../flight/flightOptions';
 import { fitSpotsToDays } from '../spots/spotList';
 import { useSpotPlaces } from '../spots/useSpotPlaces';
 import ReplaceTripModal from '../summary/ReplaceTripModal';
@@ -31,6 +32,8 @@ export default function Step7Summary({ onPrev }) {
 
   const cityName = t(`common.city.${draft.city}`);
   const defaultTitle = t('wizard.summary.defaultTitle', { city: cityName });
+  // 항공(STEP2)은 시각이 다 있을 때만 저장·표시한다.
+  const planFlight = toPlanFlight(draft.flight, draft);
   const transportLabel = draft.transportMode
     ? t(`wizard.transport.mode.${draft.transportMode}.title`)
     : t('wizard.summary.transportNone');
@@ -62,15 +65,26 @@ export default function Step7Summary({ onPrev }) {
         onChange={(event) => updateDraft({ title: event.target.value })}
       />
 
-      <p className="rounded-2xl bg-bg-soft p-4 text-body-sm">
-        {t('wizard.summary.info', {
-          city: cityName,
-          start: formatShortDate(draft.startDate, i18n.language),
-          end: formatShortDate(draft.endDate, i18n.language),
-          people: draft.people,
-          transport: transportLabel,
-        })}
-      </p>
+      <div className="flex flex-col gap-1 rounded-2xl bg-bg-soft p-4 text-body-sm">
+        <p>
+          {t('wizard.summary.info', {
+            city: cityName,
+            start: formatShortDate(draft.startDate, i18n.language),
+            end: formatShortDate(draft.endDate, i18n.language),
+            people: draft.people,
+            transport: transportLabel,
+          })}
+        </p>
+        {planFlight && (
+          <p>
+            {t('wizard.summary.flight', {
+              arrive: draft.flight.arriveTime,
+              depart: draft.flight.departTime,
+              flightNo: planFlight.flightNo ?? t('wizard.summary.flightNoUnknown'),
+            })}
+          </p>
+        )}
+      </div>
 
       <SummaryDays
         days={days}
