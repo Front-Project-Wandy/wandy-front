@@ -28,5 +28,5 @@ export default function TransportLeg({ from, to, country, transportMode }) {
         })
       : t('planner.transport.leg', { mode, duration });
 
-  return <li className="pl-11 text-body-sm text-text/70">{text}</li>;
+  return <p className="pl-11 text-body-sm text-text/70">{text}</p>;
 }

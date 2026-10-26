@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
 import TransportLeg from '../../transport/components/TransportLeg';
@@ -50,10 +49,12 @@ export default function DaySection({
       ) : (
         <ol className="space-y-2">
           {day.items.map((item, index) => (
-            <Fragment key={item.id}>
+            // 구간 교통은 카드 아래에 같은 묶음으로 둬서, 카드를 옮기면 함께 움직인다 (드래그 준비)
+            <li key={item.id} className="space-y-2">
               <DayItem
                 item={item}
                 number={index + 1}
+                dayIndex={dayIndex}
                 isTimeOutOfOrder={index > 0 && item.startTime < day.items[index - 1].startTime}
                 flightWarnings={getFlightTimeWarnings({ flight, date: day.date, item })}
                 isSelected={item.id === selectedItemId}
@@ -69,7 +70,7 @@ export default function DaySection({
                   transportMode={transportMode}
                 />
               ) : null}
-            </Fragment>
+            </li>
           ))}
         </ol>
       )}
