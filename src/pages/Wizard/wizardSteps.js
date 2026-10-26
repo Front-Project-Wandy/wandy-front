@@ -1,10 +1,9 @@
-// 마법사 7단계. enabled가 false인 단계(항공·숙소, 추가 기능 47·50)는 진행 표시줄에 흐리게만 보이고
-// 이전/다음 이동에서 건너뛴다 — 와이어프레임 메모 "기본 기능만 구현하면 1→4→5→6→7".
-// 항공·숙소를 만들면 enabled만 true로 바꾸면 된다.
+// 마법사 7단계. enabled가 false인 단계는 진행 표시줄에 흐리게만 보이고 이전/다음 이동에서 건너뛴다.
+// 와이어프레임 메모 "기본 기능만 구현하면 1→4→5→6→7" — 추가 기능인 항공(47)·숙소(50)도 만들어서 켰다.
 export const WIZARD_STEPS = [
   { step: 1, key: 'basic', enabled: true },
-  { step: 2, key: 'flight', enabled: false },
-  { step: 3, key: 'stay', enabled: false },
+  { step: 2, key: 'flight', enabled: true },
+  { step: 3, key: 'stay', enabled: true },
   { step: 4, key: 'transport', enabled: true },
   { step: 5, key: 'spots', enabled: true },
   { step: 6, key: 'nearby', enabled: true },

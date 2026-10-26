@@ -15,6 +15,10 @@ const INITIAL_DRAFT = {
   spots: [],
   // STEP7 여행 제목. 비워 두면 저장할 때 "{도시} 여행"을 쓴다.
   title: '',
+  // STEP2 항공: null(아직·건너뜀) 또는 flight/flightOptions.js의 EMPTY_FLIGHT 모양.
+  flight: null,
+  // STEP3 숙소: null(아직·건너뜀) 또는 stay/stayOptions.js의 EMPTY_STAY 모양.
+  stay: null,
 };
 
 export const useWizardStore = create(
