@@ -9,6 +9,14 @@ const INITIAL_DRAFT = {
   startDate: '',
   endDate: '',
   people: 2,
+  // STEP1 여행 스타일 (46). 새 여행을 시작할 때 프로필 값으로 채워진다 (65, useStartTrip).
+  // style: 'relaxed' | 'normal' | 'packed'. 플랜 store 계약의 trip.style과 같은 값.
+  style: 'normal',
+  // 동행·예산은 고르지 않아도 된다(null). 값 목록은 pages/Wizard/tripStyleOptions.js.
+  companion: null,
+  budget: null,
+  // 이번 여행에서 좋아하는 카테고리. STEP5 추천에서 이 카테고리를 앞으로 올린다.
+  preferredCategories: [],
   // STEP4 현지 교통 방식: 'transit' | 'taxi' | 'car' | 'mixed'. 건너뛰면 null로 두고, 계산할 때 혼합으로 본다.
   transportMode: null,
   // STEP5 담은 장소: [{ placeId, dayIndex }]. 약관 때문에 장소 내용은 저장하지 않고, 보여줄 때 placeId로 다시 불러온다.
