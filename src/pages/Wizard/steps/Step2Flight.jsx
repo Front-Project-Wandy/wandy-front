@@ -18,8 +18,12 @@ export default function Step2Flight({ onPrev, onNext }) {
   const updateDraft = useWizardStore((state) => state.updateDraft);
   const [errorKey, setErrorKey] = useState(null);
   const isDomestic = draft.country === 'KR';
-  // 한국 여행은 고르는 칸 없이 바로 직접 입력이라, 아직 아무것도 없으면 '직접 입력' 빈 값으로 본다.
-  const flight = draft.flight ?? (isDomestic ? { ...EMPTY_FLIGHT, status: 'booked' } : null);
+  // 한국 여행은 고르는 칸 없이 항상 직접 입력이다. 직접 입력 값이 아니면(없거나, 예전 검색 값이 남았으면)
+  // 빈 직접 입력으로 본다 — 국내 화면에는 검색으로 바꿀 방법이 없어서 검색 값이 남으면 고칠 수 없다.
+  const flight =
+    isDomestic && draft.flight?.status !== 'booked'
+      ? { ...EMPTY_FLIGHT, status: 'booked' }
+      : draft.flight;
 
   const saveFlight = (nextFlight) => {
     updateDraft({ flight: nextFlight });
