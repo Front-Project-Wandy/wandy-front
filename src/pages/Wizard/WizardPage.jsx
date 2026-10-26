@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useWizardStore } from '../../store/wizard/wizardStore';
 import Step1BasicInfo from './steps/Step1BasicInfo';
 import Step2Flight from './steps/Step2Flight';
+import Step3Stay from './steps/Step3Stay';
 import Step4Transport from './steps/Step4Transport';
 import Step5Spots from './steps/Step5Spots';
 import Step7Summary from './steps/Step7Summary';
@@ -15,6 +16,7 @@ import WizardProgress from './WizardProgress';
 const STEP_SCREENS = {
   1: Step1BasicInfo,
   2: Step2Flight,
+  3: Step3Stay,
   4: Step4Transport,
   5: Step5Spots,
   7: Step7Summary,

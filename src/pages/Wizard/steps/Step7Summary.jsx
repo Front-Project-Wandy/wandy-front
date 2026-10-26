@@ -7,6 +7,7 @@ import { usePlanStore } from '../../../store/plan/usePlanStore';
 import { useWizardStore } from '../../../store/wizard/wizardStore';
 import { toPlanFlight } from '../flight/flightOptions';
 import { fitSpotsToDays } from '../spots/spotList';
+import { toPlanStay } from '../stay/stayOptions';
 import { useSpotPlaces } from '../spots/useSpotPlaces';
 import ReplaceTripModal from '../summary/ReplaceTripModal';
 import { saveWizardTrip } from '../summary/saveWizardTrip';
@@ -34,6 +35,7 @@ export default function Step7Summary({ onPrev }) {
   const defaultTitle = t('wizard.summary.defaultTitle', { city: cityName });
   // 항공(STEP2)은 시각이 다 있을 때만 저장·표시한다.
   const planFlight = toPlanFlight(draft.flight, draft);
+  const planStay = toPlanStay(draft.stay, draft);
   const transportLabel = draft.transportMode
     ? t(`wizard.transport.mode.${draft.transportMode}.title`)
     : t('wizard.summary.transportNone');
@@ -81,6 +83,15 @@ export default function Step7Summary({ onPrev }) {
               arrive: draft.flight.arriveTime,
               depart: draft.flight.departTime,
               flightNo: planFlight.flightNo ?? t('wizard.summary.flightNoUnknown'),
+            })}
+          </p>
+        )}
+        {planStay && (
+          <p>
+            {t('wizard.summary.stay', {
+              name: planStay.name,
+              checkIn: draft.stay.checkInTime,
+              checkOut: draft.stay.checkOutTime,
             })}
           </p>
         )}

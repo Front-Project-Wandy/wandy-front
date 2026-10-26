@@ -8,6 +8,7 @@ import AddSpotModal from '../spots/AddSpotModal';
 import FavoriteSpots from '../spots/FavoriteSpots';
 import SelectedSpots from '../spots/SelectedSpots';
 import { findSpot, fitSpotsToDays, putSpot, removeSpot } from '../spots/spotList';
+import { toStayOrigin } from '../stay/stayOptions';
 import { useSpotPlaces } from '../spots/useSpotPlaces';
 import { getTripDays } from '../tripDays';
 import WizardNav from '../WizardNav';
@@ -86,6 +87,8 @@ export default function Step5Spots({ onPrev, onNext }) {
             country={draft.country}
             city={draft.city}
             onSelectPlace={setTargetPlace}
+            // 숙소(STEP3)가 있으면 "가까운 순" 정렬의 기준점이 된다 (43, 범수 님 검색 패널 기능).
+            origin={toStayOrigin(draft.stay)}
           />
         ) : (
           <FavoriteSpots

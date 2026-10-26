@@ -4,13 +4,11 @@ import EmptyState from '../../../components/common/EmptyState';
 import ErrorState from '../../../components/common/ErrorState';
 import Loading from '../../../components/common/Loading';
 import { formatPrice } from '../../../features/product/utils/formatPrice';
+import ExternalSearchLinks from '../ExternalSearchLinks';
 import RadioCardGroup from '../RadioCardGroup';
 import { getFlightSearchLinks } from './flightLinks';
 import { EMPTY_FLIGHT, flightFromMock, KR_AIRPORTS } from './flightOptions';
 import { useMockFlights } from './useMockFlights';
-
-const EXTERNAL_LINK_CLASS =
-  'inline-flex h-11 items-center justify-center gap-1 rounded-xl border border-primary px-4 text-body font-bold text-primary transition-colors hover:bg-bg-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
 
 // "아직 안 했어요" — 출발 공항을 고르면 목업 항공편(B01)을 보여주고, 고르면 시각이 자동으로 채워진다.
 // 출발 공항은 처음에 비워 둔다(사용자가 고름). 실제 예약은 외부 사이트 검색 링크로 보낸다 (49).
@@ -88,23 +86,7 @@ export default function FlightSearch({ flight, trip, onSelect }) {
       {renderFlights()}
       <p className="text-caption text-text/70">{t('wizard.flight.search.mockNotice')}</p>
 
-      {links.length > 0 && (
-        <div className="flex flex-col gap-2 sm:flex-row">
-          {links.map((link) => (
-            <a
-              key={link.key}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={EXTERNAL_LINK_CLASS}
-            >
-              {t(`wizard.flight.search.link.${link.key}`)}
-              <span aria-hidden="true">↗</span>
-              <span className="sr-only">{t('wizard.flight.search.newTab')}</span>
-            </a>
-          ))}
-        </div>
-      )}
+      <ExternalSearchLinks links={links} labelKey={(key) => `wizard.flight.search.link.${key}`} />
     </div>
   );
 }
