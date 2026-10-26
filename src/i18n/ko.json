@@ -478,6 +478,24 @@
   "favorite": {
     "toggle": "{{name}} 찜하기"
   },
+  "ai": {
+    "fill": {
+      "button": "AI로 빈 날 채우기",
+      "title": "AI 일정 채우기",
+      "description": "장소가 없는 날에 여행 스타일과 선호 카테고리에 맞춰 장소를 골라 드려요.",
+      "generate": "일정 만들기",
+      "regenerate": "다시 만들기",
+      "apply": "일정에 넣기",
+      "noEmptyDaysTitle": "채울 빈 날이 없어요",
+      "noEmptyDaysDescription": "장소가 하나도 없는 날만 채워요. 장소를 빼서 날을 비우면 다시 쓸 수 있어요.",
+      "emptyResultTitle": "넣을 장소를 찾지 못했어요",
+      "emptyResultDescription": "이미 이 도시의 장소를 대부분 넣었어요.",
+      "dropped": "확인되지 않은 장소 {{count}}곳은 뺐어요.",
+      "mockNotice": "지금은 예시 장소 데이터로 만든 일정이에요.",
+      "day": "DAY {{day}}",
+      "stay": "{{minutes}}분"
+    }
+  },
   "notFound": {
     "page": {
       "code": "404",
