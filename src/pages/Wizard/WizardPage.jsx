@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useWizardStore } from '../../store/wizard/wizardStore';
 import Step1BasicInfo from './steps/Step1BasicInfo';
+import Step2Flight from './steps/Step2Flight';
 import Step4Transport from './steps/Step4Transport';
 import Step5Spots from './steps/Step5Spots';
 import Step7Summary from './steps/Step7Summary';
@@ -13,6 +14,7 @@ import WizardProgress from './WizardProgress';
 // 단계를 하나 만들 때마다 여기에 한 줄씩 추가한다.
 const STEP_SCREENS = {
   1: Step1BasicInfo,
+  2: Step2Flight,
   4: Step4Transport,
   5: Step5Spots,
   7: Step7Summary,

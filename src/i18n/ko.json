@@ -130,6 +130,60 @@
         "people": "인원은 1~{{max}}명으로 입력해 주세요."
       }
     },
+    "flight": {
+      "question": "항공권을 예약하셨나요?",
+      "status": {
+        "booked": {
+          "title": "이미 예약했어요",
+          "description": "예약한 항공편 시간을 직접 넣어요"
+        },
+        "searching": {
+          "title": "아직 안 했어요",
+          "description": "항공편을 둘러보고 예약 사이트로 가요"
+        }
+      },
+      "domesticNotice": "국내 여행이라 비행기를 타지 않으면 [건너뛰기]를 눌러 주세요. 비행기를 탄다면 예약한 시간을 넣어 주세요.",
+      "hint": "첫날은 도착 시간 이후부터, 마지막 날은 출발 시간 전까지 일정을 짜는 데 써요.",
+      "error": {
+        "choose": "항공권 예약 여부를 골라 주세요.",
+        "pick": "항공편을 하나 골라 주세요.",
+        "times": "가는 편 도착 시각과 오는 편 출발 시각을 넣어 주세요.",
+        "order": "당일 여행은 도착 시각이 출발 시각보다 빨라야 해요."
+      },
+      "booked": {
+        "flightNo": "가는 편 편명",
+        "flightNoPlaceholder": "예: KE703",
+        "returnFlightNo": "오는 편 편명",
+        "returnFlightNoPlaceholder": "예: KE704",
+        "arriveTime": "가는 편 도착 시각 ({{date}})",
+        "departTime": "오는 편 출발 시각 ({{date}})"
+      },
+      "search": {
+        "airportLegend": "출발 공항",
+        "pickAirport": "출발 공항을 먼저 골라 주세요.",
+        "listLegend": "항공편 고르기",
+        "outbound": "{{airline}} {{flightNo}} · {{depart}} → {{arrive}} {{to}} 도착",
+        "inbound": "오는 편 {{flightNo}} {{depart}} 출발 · 1인 {{price}}원",
+        "emptyTitle": "{{airport}}에서 출발하는 항공편이 없어요",
+        "emptyDescription": "다른 공항을 고르거나 아래 예약 사이트에서 찾아보세요.",
+        "mockNotice": "보이는 항공편과 가격은 예시예요. 실제 예약은 아래 사이트에서 해 주세요.",
+        "link": {
+          "skyscanner": "스카이스캐너에서 찾기",
+          "naver": "네이버 항공권에서 찾기"
+        },
+        "newTab": "(새 창)"
+      },
+      "airport": {
+        "ICN": "인천",
+        "GMP": "김포",
+        "PUS": "김해",
+        "CJU": "제주",
+        "TAE": "대구",
+        "CJJ": "청주",
+        "NRT": "나리타",
+        "HND": "하네다"
+      }
+    },
     "transport": {
       "question": "여행지에서 주로 어떻게 이동하세요?",
       "hint": "고른 방식이 장소 사이 이동 시간·요금 계산의 기본값이 돼요.",
@@ -197,7 +251,9 @@
         "description": "지금은 여행을 하나만 저장할 수 있어요. 저장하면 「{{title}}」이 지금 만든 여행으로 바뀌어요.",
         "confirm": "바꿔서 저장",
         "cancel": "취소"
-      }
+      },
+      "flight": "항공 · 도착 {{arrive}} · 귀국 출발 {{depart}} ({{flightNo}})",
+      "flightNoUnknown": "편명 없음"
     },
     "nav": {
       "prev": "이전",
