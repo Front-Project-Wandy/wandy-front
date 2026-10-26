@@ -7,7 +7,15 @@ import ItemEditForm from './ItemEditForm';
 // DAY 목록의 장소 한 줄. 구글 장소는 약관 때문에 이름을 저장하지 않아서(name: null)
 // placeId로 다시 불러와 보여준다. 네이버·TourAPI 장소는 저장된 이름을 바로 쓴다.
 // isTimeOutOfOrder: 앞 장소보다 시작 시간이 빠를 때 알려 주기만 하고 순서는 바꾸지 않는다.
-export default function DayItem({ item, number, isTimeOutOfOrder, onUpdate, onRemove }) {
+// flightWarnings: 비행기 도착·출발 시각과 어긋날 때의 경고 목록 (이것도 알려 주기만 한다).
+export default function DayItem({
+  item,
+  number,
+  isTimeOutOfOrder,
+  flightWarnings = [],
+  onUpdate,
+  onRemove,
+}) {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const editButtonRef = useRef(null);
@@ -61,6 +69,11 @@ export default function DayItem({ item, number, isTimeOutOfOrder, onUpdate, onRe
               {t('planner.item.timeOrderWarning')}
             </span>
           ) : null}
+          {flightWarnings.map(({ type, time }) => (
+            <span key={type} className="block text-body-sm font-bold text-text">
+              {t(`planner.item.${type}Warning`, { time })}
+            </span>
+          ))}
           {item.memo ? (
             <span className="block break-words text-body-sm text-text/70">{item.memo}</span>
           ) : null}

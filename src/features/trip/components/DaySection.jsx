@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
 import TransportLeg from '../../transport/components/TransportLeg';
+import { getFlightTimeWarnings } from '../utils/checkFlightTime';
 import { formatDayDate } from '../utils/formatDay';
 import DayItem from './DayItem';
 
@@ -11,6 +12,7 @@ export default function DaySection({
   dayIndex,
   country,
   transportMode,
+  flight,
   onAddPlace,
   onUpdateItem,
   onRemoveItem,
@@ -51,6 +53,7 @@ export default function DaySection({
                 item={item}
                 number={index + 1}
                 isTimeOutOfOrder={index > 0 && item.startTime < day.items[index - 1].startTime}
+                flightWarnings={getFlightTimeWarnings({ flight, date: day.date, item })}
                 onUpdate={handleUpdateItem}
                 onRemove={handleRemoveItem}
               />
