@@ -18,7 +18,8 @@ export default function RecentViews() {
   const clear = useRecentStore((state) => state.clear);
   const { count, isPending, entries } = useRecentItems(SHOW_LIMIT);
 
-  if (count === 0) return null;
+  // 기록이 없거나, 다 불러왔는데 남은 게 모두 없어진 장소·상품이면 빈 섹션 대신 아예 숨긴다.
+  if (count === 0 || (!isPending && entries.length === 0)) return null;
 
   const toCardContent = ({ type, data }) =>
     type === 'place'
@@ -44,7 +45,8 @@ export default function RecentViews() {
         </Button>
       </div>
 
-      {isPending && entries.length === 0 ? (
+      {/* 다 불러올 때까지 기다린다. 먼저 온 뒤쪽 기록부터 보여 주면, 앞쪽이 늦게 오면서 카드 순서가 밀린다. */}
+      {isPending ? (
         <Loading />
       ) : (
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
