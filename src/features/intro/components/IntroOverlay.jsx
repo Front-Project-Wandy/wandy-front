@@ -91,9 +91,10 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
     return () => clearTimeout(timer);
   }, [leaving, onLeft]);
 
+  // 영상이 뜨기 전 배경. 테마와 상관없이 어둡게 (ink) — text는 다크모드에서 밝아진다 (#89).
   return (
     <div
-      className={`fixed inset-0 z-50 overflow-hidden bg-text transition-opacity duration-500 ${leaving ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
+      className={`fixed inset-0 z-50 overflow-hidden bg-ink transition-opacity duration-500 ${leaving ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
     >
       <div ref={stageRef} className="absolute inset-0">
         <canvas

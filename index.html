@@ -15,6 +15,19 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
     />
     <title>Wandy</title>
+    <!-- 다크모드(89): React가 뜨기 전에 테마를 정해서 새로고침 때 흰 화면이 번쩍이지 않게 한다.
+         저장 키는 src/components/common/useTheme.js의 THEME_STORAGE_KEY와 같아야 한다. -->
+    <script>
+      try {
+        const saved = localStorage.getItem('wandy.theme');
+        const isDark = saved
+          ? saved === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
