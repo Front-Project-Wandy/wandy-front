@@ -5,9 +5,10 @@ import HomeHero from './HomeHero';
 import PopularCities from './PopularCities';
 import RecentViews from './RecentViews';
 import TripStartForm from './TripStartForm';
+import UpcomingTripCard from './UpcomingTripCard';
 
 // H01 홈 (A파트). 필수: 시작 영역(23) · 이어서 만들기(31)
-// 추가: 인기 도시(61) · 투어 상품 섹션(62) / 여유: 최근 본 장소·상품(83)
+// 추가: 인기 도시(61) · 투어 상품 섹션(62) / 여유: 최근 본 장소·상품(83) · 출발 D-day(91)
 // 헤더는 App.jsx의 AppLayout이 붙인다.
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
           <TripStartForm />
         </Card>
       </section>
+      <UpcomingTripCard />
       <ContinueDraftCard />
       <PopularCities />
       {/* 투어 상품 섹션(62)은 B파트 컴포넌트. 나라를 넘기지 않아 한국·일본 상품을 모두 보여준다. */}

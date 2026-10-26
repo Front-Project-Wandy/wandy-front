@@ -4,28 +4,26 @@ import EmptyState from '../../../components/common/EmptyState';
 import ErrorState from '../../../components/common/ErrorState';
 import Loading from '../../../components/common/Loading';
 import Modal from '../../../components/common/Modal';
-import { usePreferenceStore } from '../../member/hooks/usePreferenceStore';
 import { useFillItinerary } from '../hooks/useFillItinerary';
-import { buildFillConditions, hasEmptyDay } from '../utils/buildFillConditions';
+import { hasEmptyDay } from '../utils/buildFillConditions';
 import AiFillPreview from './AiFillPreview';
 
-// AI 빈 일정 채우기 창 (55). [일정 만들기] → 미리보기 → [일정에 넣기]면 onApply(days)로 결과만 넘긴다.
-// 플랜 store(C)에 넣는 방법은 부르는 쪽이 정한다 (addItem에 시각을 넘기는 방법은 회의 필요 15번).
+// AI 빈 일정 채우기 창 (55 플래너, 54 마법사). [일정 만들기] → 미리보기 → [일정에 넣기]면 onApply(days)로 결과만 넘긴다.
+// conditions: buildFillConditions(플래너) 또는 buildWizardFillConditions(마법사)로 만든 요청 조건.
+// 결과를 어디에 넣을지(플랜 store, 마법사 spots)는 부르는 쪽이 정한다.
 // 열 때마다 처음부터 시작하도록, 부르는 쪽(AiFillButton)이 열려 있을 때만 그린다.
-// 선호 카테고리는 trip에 없어서(회의 필요 9번) 마이페이지 프로필 값을 쓴다.
-export default function AiFillDialog({ trip, onApply, onClose }) {
+export default function AiFillDialog({ conditions, onApply, onClose }) {
   const { t } = useTranslation();
-  const preferredCategories = usePreferenceStore((state) => state.preferences.categories);
   const { mutate, data, isPending, isError } = useFillItinerary();
 
-  const handleGenerate = () => mutate(buildFillConditions(trip, preferredCategories));
+  const handleGenerate = () => mutate(conditions);
   const handleApply = () => {
     onApply(data.days);
     onClose();
   };
 
   const renderBody = () => {
-    if (!hasEmptyDay(trip))
+    if (!hasEmptyDay(conditions))
       return (
         <EmptyState
           title={t('ai.fill.noEmptyDaysTitle')}

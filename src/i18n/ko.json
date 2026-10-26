@@ -57,6 +57,14 @@
       "title": "내 여행 만들기",
       "submit": "플래너 시작"
     },
+    "upcoming": {
+      "title": "다가오는 여행",
+      "titleOngoing": "지금 여행 중이에요",
+      "cityTrip": "{{city}} 여행",
+      "dday": "D-{{count}}",
+      "ongoing": "여행 중",
+      "action": "일정 보기"
+    },
     "continue": {
       "title": "작성 중인 여행을 이어서 만들어요",
       "tripTitle": "{{city}} 여행",
