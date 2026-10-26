@@ -1,15 +1,12 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/common/Input';
 import { formatShortDate } from '../../../features/member/utils/tripDates';
-import { usePlanStore } from '../../../store/plan/usePlanStore';
 import { useWizardStore } from '../../../store/wizard/wizardStore';
 import { toPlanFlight } from '../flight/flightOptions';
 import { fitSpotsToDays } from '../spots/spotList';
 import { toPlanStay } from '../stay/stayOptions';
 import { useSpotPlaces } from '../spots/useSpotPlaces';
-import ReplaceTripModal from '../summary/ReplaceTripModal';
 import { saveWizardTrip } from '../summary/saveWizardTrip';
 import SummaryDays from '../summary/SummaryDays';
 import { getTripDays } from '../tripDays';
@@ -23,8 +20,6 @@ export default function Step7Summary({ onPrev }) {
   const draft = useWizardStore((state) => state.draft);
   const updateDraft = useWizardStore((state) => state.updateDraft);
   const resetWizard = useWizardStore((state) => state.resetWizard);
-  const previousTrip = usePlanStore((state) => state.trip);
-  const [isReplaceOpen, setIsReplaceOpen] = useState(false);
 
   const days = getTripDays(draft.startDate, draft.endDate);
   const spots = fitSpotsToDays(draft.spots, days.length);
@@ -40,7 +35,8 @@ export default function Step7Summary({ onPrev }) {
     ? t(`wizard.transport.mode.${draft.transportMode}.title`)
     : t('wizard.summary.transportNone');
 
-  const save = () => {
+  // 이전 여행은 보관함에 남아서(#59) "바꿔서 저장" 확인 없이 바로 저장한다.
+  const handleSave = () => {
     const tripId = saveWizardTrip({
       draft,
       spots,
@@ -50,11 +46,6 @@ export default function Step7Summary({ onPrev }) {
     navigate(`/trip/${tripId}`);
     // 저장이 끝난 마법사는 비워서 홈의 "이어서 만들기"에 남지 않게 한다.
     resetWizard();
-  };
-
-  const handleSave = () => {
-    if (previousTrip) setIsReplaceOpen(true);
-    else save();
   };
 
   return (
@@ -109,13 +100,6 @@ export default function Step7Summary({ onPrev }) {
         onNext={handleSave}
         nextLabel={t('wizard.nav.save')}
         nextLoading={isLoadingPlaces}
-      />
-
-      <ReplaceTripModal
-        open={isReplaceOpen}
-        previousTitle={previousTrip?.title || t('wizard.summary.untitled')}
-        onConfirm={save}
-        onClose={() => setIsReplaceOpen(false)}
       />
     </div>
   );

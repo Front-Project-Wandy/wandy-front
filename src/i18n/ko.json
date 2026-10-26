@@ -363,18 +363,11 @@
     "summary": {
       "titleLabel": "여행 제목",
       "defaultTitle": "{{city}} 여행",
-      "untitled": "이름 없는 여행",
       "info": "{{city}} · {{start}}~{{end}} · {{people}}명 · 이동: {{transport}}",
       "transportNone": "정하지 않음",
       "daysTitle": "DAY별 일정",
       "emptyDay": "담은 장소가 없어요",
       "missing": "찾을 수 없는 장소 (저장할 때 빠져요)",
-      "replace": {
-        "title": "이미 만든 여행이 있어요",
-        "description": "지금은 여행을 하나만 저장할 수 있어요. 저장하면 「{{title}}」이 지금 만든 여행으로 바뀌어요.",
-        "confirm": "바꿔서 저장",
-        "cancel": "취소"
-      },
       "flight": "항공 · 도착 {{arrive}} · 귀국 출발 {{depart}} ({{flightNo}})",
       "flightNoUnknown": "편명 없음",
       "stay": "숙소 · {{name}} · 체크인 {{checkIn}} · 체크아웃 {{checkOut}}"
