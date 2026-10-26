@@ -13,6 +13,8 @@ export default function DaySection({
   country,
   transportMode,
   flight,
+  selectedItemId,
+  onSelectItem,
   onAddPlace,
   onUpdateItem,
   onRemoveItem,
@@ -54,6 +56,8 @@ export default function DaySection({
                 number={index + 1}
                 isTimeOutOfOrder={index > 0 && item.startTime < day.items[index - 1].startTime}
                 flightWarnings={getFlightTimeWarnings({ flight, date: day.date, item })}
+                isSelected={item.id === selectedItemId}
+                onSelect={onSelectItem}
                 onUpdate={handleUpdateItem}
                 onRemove={handleRemoveItem}
               />

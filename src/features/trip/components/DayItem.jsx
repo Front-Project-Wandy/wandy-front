@@ -8,17 +8,21 @@ import ItemEditForm from './ItemEditForm';
 // placeId로 다시 불러와 보여준다. 네이버·TourAPI 장소는 저장된 이름을 바로 쓴다.
 // isTimeOutOfOrder: 앞 장소보다 시작 시간이 빠를 때 알려 주기만 하고 순서는 바꾸지 않는다.
 // flightWarnings: 비행기 도착·출발 시각과 어긋날 때의 경고 목록 (이것도 알려 주기만 한다).
+// isSelected·onSelect: 지도 마커와 연동된 선택 상태 (15). 지도에서 고르면 이 카드가 화면에 보이게 한다.
 export default function DayItem({
   item,
   number,
   isTimeOutOfOrder,
   flightWarnings = [],
+  isSelected = false,
+  onSelect,
   onUpdate,
   onRemove,
 }) {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const editButtonRef = useRef(null);
+  const itemRef = useRef(null);
   // 폼이 닫히면 편집 버튼이 새로 그려져서, 키보드 포커스를 그 버튼으로 돌려줘야 한다
   const shouldRestoreFocus = useRef(false);
   const needsLookup = item.name === null;
@@ -30,6 +34,17 @@ export default function DayItem({
     shouldRestoreFocus.current = false;
     editButtonRef.current?.focus();
   }, [isEditing]);
+
+  // 지도에서 마커를 눌렀을 때 목록에서 그 장소를 찾을 수 있게 보이는 곳으로 가져온다.
+  // 이미 보이면 움직이지 않고, 움직임을 줄여 달라고 한 사용자에게는 부드럽게 스크롤하지 않는다.
+  useEffect(() => {
+    if (!isSelected) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    itemRef.current?.scrollIntoView({
+      block: 'nearest',
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  }, [isSelected]);
 
   const renderName = () => {
     if (!needsLookup) return item.name;
@@ -49,35 +64,47 @@ export default function DayItem({
     handleCloseEdit();
   };
   const handleRemove = () => onRemove(item.id);
+  const handleSelect = () => onSelect?.(item.id);
 
   return (
-    <li className="rounded-2xl border border-text/10 bg-background p-3">
+    <li
+      ref={itemRef}
+      className={`rounded-2xl border p-3 ${isSelected ? 'border-primary bg-bg-soft' : 'border-text/10 bg-background'}`}
+    >
       <div className="flex items-center gap-3">
-        <span
-          aria-hidden="true"
-          className="grid size-8 shrink-0 place-items-center rounded-full bg-primary text-body font-bold text-white"
+        {/* 누르면 지도에서 이 장소를 보여 준다. 편집·삭제 버튼과 겹치지 않게 왼쪽 영역만 버튼이다 */}
+        <button
+          type="button"
+          aria-pressed={isSelected}
+          onClick={handleSelect}
+          className="flex min-w-0 flex-1 items-center gap-3 rounded-xl text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          {number}
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-body font-bold">{name}</span>
-          <span className="block text-body-sm text-text/70">
-            {item.startTime} · {t('planner.item.stay', { minutes: item.stayMinutes })}
+          <span
+            aria-hidden="true"
+            className="grid size-8 shrink-0 place-items-center rounded-full bg-primary text-body font-bold text-white"
+          >
+            {number}
           </span>
-          {isTimeOutOfOrder ? (
-            <span className="block text-body-sm font-bold text-text">
-              {t('planner.item.timeOrderWarning')}
+          <span className="min-w-0 flex-1">
+            <span className="block truncate text-body font-bold">{name}</span>
+            <span className="block text-body-sm text-text/70">
+              {item.startTime} · {t('planner.item.stay', { minutes: item.stayMinutes })}
             </span>
-          ) : null}
-          {flightWarnings.map(({ type, time }) => (
-            <span key={type} className="block text-body-sm font-bold text-text">
-              {t(`planner.item.${type}Warning`, { time })}
-            </span>
-          ))}
-          {item.memo ? (
-            <span className="block break-words text-body-sm text-text/70">{item.memo}</span>
-          ) : null}
-        </span>
+            {isTimeOutOfOrder ? (
+              <span className="block text-body-sm font-bold text-text">
+                {t('planner.item.timeOrderWarning')}
+              </span>
+            ) : null}
+            {flightWarnings.map(({ type, time }) => (
+              <span key={type} className="block text-body-sm font-bold text-text">
+                {t(`planner.item.${type}Warning`, { time })}
+              </span>
+            ))}
+            {item.memo ? (
+              <span className="block break-words text-body-sm text-text/70">{item.memo}</span>
+            ) : null}
+          </span>
+        </button>
         {/* 화면에는 "편집"·"삭제"만 보여서, 낭독기가 어느 장소인지 알 수 있게 이름을 붙인다 */}
         {isEditing ? null : (
           <span className="flex shrink-0 items-center">
