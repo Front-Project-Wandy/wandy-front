@@ -119,7 +119,11 @@ const updateDayItems = (trip, dayIndex, updater) =>
 export const usePlanStore = create(
   persist(
     (set) => ({
+      // 지금 여는 여행. 다른 코드는 모두 이 값을 쓰고, 여러 여행을 지원하기 전과 같다.
       trip: null,
+      // 지금 여는 여행(trip)을 뺀 나머지 여행 보관함 (최근에 보관한 순서).
+      // 같은 여행을 trip과 trips에 두 곳에 두지 않아서, 둘을 맞춰 줄 코드가 필요 없다.
+      trips: [],
 
       setTripInfo: (info) =>
         set((state) => {
@@ -186,14 +190,43 @@ export const usePlanStore = create(
           return { trip: withDays(state.trip, days) };
         }),
 
+      // 지금 여는 여행을 지운다 (보관함은 그대로).
       resetTrip: () => set({ trip: null }),
+
+      // 새 여행을 만들기 전에 부른다: 지금 여행을 보관함으로 보내고 비운다. 뒤이어 setTripInfo가 새 여행을 만든다.
+      startNewTrip: () =>
+        set((state) => ({
+          trip: null,
+          trips: state.trip ? [state.trip, ...state.trips] : state.trips,
+        })),
+
+      // 보관함의 여행을 지금 여는 여행으로 바꾼다. 원래 열려 있던 여행은 보관함으로 간다.
+      selectTrip: (id) =>
+        set((state) => {
+          const target = state.trips.find((item) => item.id === id);
+          if (!target) return state;
+          const rest = state.trips.filter((item) => item.id !== id);
+          return { trip: target, trips: state.trip ? [state.trip, ...rest] : rest };
+        }),
+
+      // 지금 여는 여행이면 비우고, 보관함의 여행이면 보관함에서 뺀다.
+      deleteTrip: (id) =>
+        set((state) =>
+          state.trip?.id === id
+            ? { trip: null }
+            : { trips: state.trips.filter((item) => item.id !== id) },
+        ),
     }),
     {
       name: 'wandy-plan',
-      version: 1,
-      // 1단계 개발 중 데이터라 옛 모양(item.place)은 이관하지 않고 비운다
-      migrate: () => ({ trip: null }),
-      partialize: (state) => ({ trip: state.trip }),
+      version: 2,
+      // v1(여행 하나)은 모양이 같아서 그대로 살리고 보관함만 비워 둔다.
+      // 그보다 옛 모양(item.place)은 1단계 개발 중 데이터라 이관하지 않고 비운다.
+      migrate: (persisted, version) => ({
+        trip: version === 1 ? (persisted?.trip ?? null) : null,
+        trips: [],
+      }),
+      partialize: (state) => ({ trip: state.trip, trips: state.trips }),
     },
   ),
 );

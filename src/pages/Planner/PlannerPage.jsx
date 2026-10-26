@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import EmptyState from '../../components/common/EmptyState';
+import Loading from '../../components/common/Loading';
 import AiFillButton from '../../features/ai/components/AiFillButton';
 import MapView from '../../features/map/components/MapView';
 import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   // 필요한 값만 골라 구독해야 다른 값이 바뀔 때 다시 그려지지 않는다
   const trip = usePlanStore((state) => state.trip);
+  const trips = usePlanStore((state) => state.trips);
+  const selectTrip = usePlanStore((state) => state.selectTrip);
   const addItem = usePlanStore((state) => state.addItem);
   const updateItem = usePlanStore((state) => state.updateItem);
   const removeItem = usePlanStore((state) => state.removeItem);
@@ -23,6 +26,12 @@ export default function PlannerPage() {
   const [addingDayIndex, setAddingDayIndex] = useState(null);
   // 목록과 지도 마커가 같이 쓰는 선택된 장소 id (15). 없으면 null.
   const [selectedItemId, setSelectedItemId] = useState(null);
+
+  // 주소의 여행이 보관함에 있으면 지금 여는 여행으로 바꾼다 (여러 여행). 바뀌는 동안은 로딩을 보여 준다.
+  const isArchivedTrip = trip?.id !== id && trips.some((item) => item.id === id);
+  useEffect(() => {
+    if (isArchivedTrip) selectTrip(id);
+  }, [isArchivedTrip, id, selectTrip]);
 
   // 지운 장소가 선택된 채로 남지 않게, 지금 일정에 있는 장소일 때만 선택으로 본다
   const activeItemId = trip?.days.some((day) =>
@@ -53,6 +62,7 @@ export default function PlannerPage() {
   const createAction = <Button onClick={handleCreate}>{t('planner.empty.action')}</Button>;
 
   const renderBody = () => {
+    if (isArchivedTrip) return <Loading />;
     if (!trip || trip.days.length === 0)
       return (
         <EmptyState
