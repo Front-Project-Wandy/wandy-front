@@ -82,9 +82,20 @@ const createTrip = () => ({
   updatedAt: new Date().toISOString(),
 });
 
+const DEFAULT_START_TIME = '10:00';
+const DEFAULT_STAY_MINUTES = 90;
+const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+// 시작 시각·체류 시간은 AI 채우기처럼 미리 정해진 값을 넣을 때만 받는다. 형식이 틀리면 기본값을 쓴다.
+// 값의 범위(10~720분)는 입력하는 쪽에서 검사하고, 여기서는 깨진 값이 저장되지 않게만 막는다.
+const pickStartTime = (startTime) =>
+  TIME_PATTERN.test(startTime) ? startTime : DEFAULT_START_TIME;
+const pickStayMinutes = (stayMinutes) =>
+  Number.isInteger(stayMinutes) && stayMinutes > 0 ? stayMinutes : DEFAULT_STAY_MINUTES;
+
 // 구글 장소는 약관상 place_id와 좌표(캐시 30일)만 저장할 수 있어서 이름·주소·사진·평점은 버린다.
 // 화면은 placeId로 장소를 다시 불러와 보여준다.
-const createItem = (place) => ({
+const createItem = (place, options = {}) => ({
   id: crypto.randomUUID(),
   placeId: place.id,
   source: place.source,
@@ -93,8 +104,8 @@ const createItem = (place) => ({
   lng: place.lng,
   coordsCachedAt: new Date().toISOString(),
   myCategory: place.category,
-  startTime: '10:00',
-  stayMinutes: 90,
+  startTime: pickStartTime(options.startTime),
+  stayMinutes: pickStayMinutes(options.stayMinutes),
   memo: '',
   transportToNext: null,
 });
@@ -127,13 +138,13 @@ export const usePlanStore = create(
       setStay: (stay) =>
         set((state) => (state.trip ? { trip: withUpdatedAt({ ...state.trip, stay }) } : state)),
 
-      addItem: (dayIndex, place) =>
+      addItem: (dayIndex, place, options) =>
         set((state) =>
           state.trip
             ? {
                 trip: updateDayItems(state.trip, dayIndex, (items) => [
                   ...items,
-                  createItem(place),
+                  createItem(place, options),
                 ]),
               }
             : state,
