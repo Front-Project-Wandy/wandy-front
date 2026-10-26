@@ -6,15 +6,24 @@ import { loadScript } from './loadScript';
 const GOOGLE_READY_CALLBACK = '__wandyGoogleMapsReady';
 let googleReady = null;
 
+const isGoogleReady = () => typeof window.google?.maps?.importLibrary === 'function';
+
+// 이미 준비된 뒤에 다시 부르면 구글은 callback을 다시 보내지 않아서(스크립트도 다시 붙지 않는다),
+// 기다리지 않고 바로 넘어가야 다시 시도가 멈추지 않는다.
+const waitForGoogle = (key) =>
+  isGoogleReady()
+    ? Promise.resolve()
+    : new Promise((resolve, reject) => {
+        window[GOOGLE_READY_CALLBACK] = resolve;
+        loadScript(
+          // loading=async로 불러오면 라이브러리를 따로 받아야 google.maps.Map을 쓸 수 있다
+          `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(key)}&loading=async&callback=${GOOGLE_READY_CALLBACK}`,
+        ).catch(reject);
+      });
+
 const loadGoogleMaps = (key) => {
   if (!googleReady) {
-    googleReady = new Promise((resolve, reject) => {
-      window[GOOGLE_READY_CALLBACK] = resolve;
-      loadScript(
-        // loading=async로 불러오면 라이브러리를 따로 받아야 google.maps.Map을 쓸 수 있다
-        `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(key)}&loading=async&callback=${GOOGLE_READY_CALLBACK}`,
-      ).catch(reject);
-    })
+    googleReady = waitForGoogle(key)
       .then(() => window.google.maps.importLibrary('maps'))
       // 실패한 기록을 남기면 다시 시도해도 같은 실패만 돌려주므로 지운다
       .catch((error) => {
