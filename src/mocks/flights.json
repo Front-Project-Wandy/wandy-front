@@ -1,0 +1,94 @@
+{
+  "tokyo": [
+    {
+      "id": "icn-nrt-ke",
+      "airline": "대한항공",
+      "from": "ICN",
+      "to": "NRT",
+      "outbound": { "flightNo": "KE703", "departTime": "09:00", "arriveTime": "11:20" },
+      "inbound": { "flightNo": "KE704", "departTime": "13:00", "arriveTime": "15:40" },
+      "priceKrw": 452000
+    },
+    {
+      "id": "icn-nrt-7c",
+      "airline": "제주항공",
+      "from": "ICN",
+      "to": "NRT",
+      "outbound": { "flightNo": "7C1102", "departTime": "07:30", "arriveTime": "09:55" },
+      "inbound": { "flightNo": "7C1103", "departTime": "18:20", "arriveTime": "21:00" },
+      "priceKrw": 298000
+    },
+    {
+      "id": "icn-hnd-oz",
+      "airline": "아시아나항공",
+      "from": "ICN",
+      "to": "HND",
+      "outbound": { "flightNo": "OZ178", "departTime": "10:20", "arriveTime": "12:40" },
+      "inbound": { "flightNo": "OZ177", "departTime": "16:10", "arriveTime": "18:50" },
+      "priceKrw": 418000
+    },
+    {
+      "id": "gmp-hnd-ke",
+      "airline": "대한항공",
+      "from": "GMP",
+      "to": "HND",
+      "outbound": { "flightNo": "KE2101", "departTime": "08:10", "arriveTime": "10:20" },
+      "inbound": { "flightNo": "KE2104", "departTime": "19:30", "arriveTime": "22:00" },
+      "priceKrw": 486000
+    },
+    {
+      "id": "gmp-hnd-oz",
+      "airline": "아시아나항공",
+      "from": "GMP",
+      "to": "HND",
+      "outbound": { "flightNo": "OZ1045", "departTime": "11:00", "arriveTime": "13:10" },
+      "inbound": { "flightNo": "OZ1065", "departTime": "15:20", "arriveTime": "17:50" },
+      "priceKrw": 441000
+    },
+    {
+      "id": "pus-nrt-lj",
+      "airline": "진에어",
+      "from": "PUS",
+      "to": "NRT",
+      "outbound": { "flightNo": "LJ201", "departTime": "09:40", "arriveTime": "11:50" },
+      "inbound": { "flightNo": "LJ202", "departTime": "12:50", "arriveTime": "15:10" },
+      "priceKrw": 276000
+    },
+    {
+      "id": "pus-hnd-ke",
+      "airline": "대한항공",
+      "from": "PUS",
+      "to": "HND",
+      "outbound": { "flightNo": "KE2131", "departTime": "10:00", "arriveTime": "12:05" },
+      "inbound": { "flightNo": "KE2132", "departTime": "17:40", "arriveTime": "20:00" },
+      "priceKrw": 398000
+    },
+    {
+      "id": "cju-nrt-7c",
+      "airline": "제주항공",
+      "from": "CJU",
+      "to": "NRT",
+      "outbound": { "flightNo": "7C1402", "departTime": "12:30", "arriveTime": "14:40" },
+      "inbound": { "flightNo": "7C1401", "departTime": "15:40", "arriveTime": "18:10" },
+      "priceKrw": 312000
+    },
+    {
+      "id": "tae-nrt-tw",
+      "airline": "티웨이항공",
+      "from": "TAE",
+      "to": "NRT",
+      "outbound": { "flightNo": "TW281", "departTime": "08:50", "arriveTime": "11:00" },
+      "inbound": { "flightNo": "TW282", "departTime": "12:00", "arriveTime": "14:30" },
+      "priceKrw": 289000
+    },
+    {
+      "id": "cjj-nrt-lj",
+      "airline": "진에어",
+      "from": "CJJ",
+      "to": "NRT",
+      "outbound": { "flightNo": "LJ761", "departTime": "10:10", "arriveTime": "12:30" },
+      "inbound": { "flightNo": "LJ762", "departTime": "13:30", "arriveTime": "16:00" },
+      "priceKrw": 301000
+    }
+  ]
+}
