@@ -625,6 +625,10 @@
       "label": "장소 검색",
       "placeholder": "장소 이름이나 주소 (예: 경복궁, 라멘)"
     },
+    "suggest": {
+      "listLabel": "추천 검색어",
+      "count": "추천 검색어 {{count}}개가 있어요. 위아래 화살표로 고를 수 있어요."
+    },
     "category": {
       "label": "카테고리",
       "all": "전체"
