@@ -8,7 +8,7 @@ import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 국가별 지도(6)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -16,6 +16,7 @@ export default function PlannerPage() {
   // 필요한 값만 골라 구독해야 다른 값이 바뀔 때 다시 그려지지 않는다
   const trip = usePlanStore((state) => state.trip);
   const addItem = usePlanStore((state) => state.addItem);
+  const updateItem = usePlanStore((state) => state.updateItem);
   const removeItem = usePlanStore((state) => state.removeItem);
   // 장소를 넣을 DAY 번호. null이면 장소 추가 창이 닫혀 있다.
   const [addingDayIndex, setAddingDayIndex] = useState(null);
@@ -49,7 +50,12 @@ export default function PlannerPage() {
     return (
       <>
         <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
-          <DayList days={trip.days} onAddPlace={setAddingDayIndex} onRemoveItem={removeItem} />
+          <DayList
+            days={trip.days}
+            onAddPlace={setAddingDayIndex}
+            onUpdateItem={updateItem}
+            onRemoveItem={removeItem}
+          />
           <MapView country={trip.country} city={trip.city} className="lg:sticky lg:top-6" />
         </div>
         <AddPlaceModal
