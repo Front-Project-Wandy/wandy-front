@@ -89,6 +89,8 @@ export default function Step5Spots({ onPrev, onNext }) {
             onSelectPlace={setTargetPlace}
             // 숙소(STEP3)가 있으면 "가까운 순" 정렬의 기준점이 된다 (43, 범수 님 검색 패널 기능).
             origin={toStayOrigin(draft.stay)}
+            // STEP1에서 고른(처음엔 프로필) 카테고리를 추천 목록 앞으로 올린다 (65).
+            preferredCategories={draft.preferredCategories}
           />
         ) : (
           <FavoriteSpots

@@ -130,6 +130,42 @@
         "people": "인원은 1~{{max}}명으로 입력해 주세요."
       }
     },
+    "style": {
+      "title": "여행 스타일 (선택)",
+      "hint": "고르지 않아도 다음으로 넘어갈 수 있어요. 마이페이지에 저장한 취향이 미리 골라져 있어요.",
+      "styleLegend": "하루 일정은 어떻게 짤까요?",
+      "style": {
+        "relaxed": {
+          "title": "느긋하게",
+          "description": "하루에 갈 곳을 적게 잡고 여유 있게 다녀요"
+        },
+        "normal": {
+          "title": "보통",
+          "description": "구경과 쉬는 시간을 적당히 섞어요"
+        },
+        "packed": {
+          "title": "빡빡하게",
+          "description": "하루에 최대한 많은 곳을 둘러봐요"
+        }
+      },
+      "companionLegend": "누구와 가나요?",
+      "companion": {
+        "solo": "혼자",
+        "couple": "연인·부부",
+        "friends": "친구",
+        "family": "가족",
+        "kids": "아이와 함께"
+      },
+      "budgetLegend": "1인 예산 (항공·숙소 포함)",
+      "budget": {
+        "under50": "50만 원 이하",
+        "50to100": "50~100만 원",
+        "100to200": "100~200만 원",
+        "over200": "200만 원 이상"
+      },
+      "categoryLegend": "이번 여행에서 좋아하는 것",
+      "categoryHint": "고른 종류의 장소를 장소 추천 목록 앞쪽에 보여 줘요."
+    },
     "flight": {
       "question": "항공권을 예약하셨나요?",
       "status": {
