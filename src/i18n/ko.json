@@ -237,7 +237,9 @@
       "editLabel": "{{name}} 편집",
       "remove": "삭제",
       "removeLabel": "{{name}} 삭제",
-      "timeOrderWarning": "앞 장소보다 시작 시간이 빨라요"
+      "timeOrderWarning": "앞 장소보다 시작 시간이 빨라요",
+      "beforeArrivalWarning": "비행기 도착({{time}}) 전에 시작해요",
+      "afterDepartureWarning": "비행기 출발({{time}})까지 끝나지 않아요"
     },
     "edit": {
       "startTime": "시작 시간",

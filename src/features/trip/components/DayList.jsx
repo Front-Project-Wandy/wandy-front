@@ -6,6 +6,7 @@ export default function DayList({
   days,
   country,
   transportMode,
+  flight,
   onAddPlace,
   onUpdateItem,
   onRemoveItem,
@@ -22,6 +23,7 @@ export default function DayList({
           dayIndex={index}
           country={country}
           transportMode={transportMode}
+          flight={flight}
           onAddPlace={onAddPlace}
           onUpdateItem={onUpdateItem}
           onRemoveItem={onRemoveItem}
