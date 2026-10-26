@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePreferenceStore } from '../../features/member/hooks/usePreferenceStore';
+import { createPreferredTripDraft } from '../../features/member/utils/createPreferredTripDraft';
 import { useWizardStore } from '../../store/wizard/wizardStore';
 
 // 홈에서 새 여행을 시작할 때 쓰는 훅 ([플래너 시작], 인기 도시 카드).
@@ -8,11 +10,13 @@ import { useWizardStore } from '../../store/wizard/wizardStore';
 export function useStartTrip() {
   const navigate = useNavigate();
   const startDraft = useWizardStore((state) => state.startDraft);
+  const preferences = usePreferenceStore((state) => state.preferences);
   const hasDraft = useWizardStore((state) => state.updatedAt !== null);
   const [pendingValues, setPendingValues] = useState(null);
 
   const start = (values) => {
-    startDraft(values);
+    // 프로필의 스타일·카테고리를 새 여행 기본값으로 넣는다 (65). 이어서 만들기에는 적용하지 않는다.
+    startDraft(createPreferredTripDraft(values, preferences));
     navigate('/plan/new');
   };
 

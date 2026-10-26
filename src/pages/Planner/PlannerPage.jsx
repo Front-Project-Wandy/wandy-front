@@ -9,7 +9,7 @@ import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -21,6 +21,18 @@ export default function PlannerPage() {
   const removeItem = usePlanStore((state) => state.removeItem);
   // 장소를 넣을 DAY 번호. null이면 장소 추가 창이 닫혀 있다.
   const [addingDayIndex, setAddingDayIndex] = useState(null);
+  // 목록과 지도 마커가 같이 쓰는 선택된 장소 id (15). 없으면 null.
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+  // 지운 장소가 선택된 채로 남지 않게, 지금 일정에 있는 장소일 때만 선택으로 본다
+  const activeItemId = trip?.days.some((day) =>
+    day.items.some((item) => item.id === selectedItemId),
+  )
+    ? selectedItemId
+    : null;
+  // 목록에서는 같은 장소를 다시 누르면 선택이 풀리고, 마커는 누르면 항상 선택한다
+  const handleToggleItem = (itemId) =>
+    setSelectedItemId((prev) => (prev === itemId ? null : itemId));
 
   const handleCreate = () => navigate('/plan/new');
   const handleCloseModal = () => setAddingDayIndex(null);
@@ -66,6 +78,8 @@ export default function PlannerPage() {
             country={trip.country}
             transportMode={trip.transportMode}
             flight={trip.flight}
+            selectedItemId={activeItemId}
+            onSelectItem={handleToggleItem}
             onAddPlace={setAddingDayIndex}
             onUpdateItem={updateItem}
             onRemoveItem={removeItem}
@@ -74,6 +88,8 @@ export default function PlannerPage() {
             country={trip.country}
             city={trip.city}
             days={trip.days}
+            selectedId={activeItemId}
+            onSelectMarker={setSelectedItemId}
             className="lg:sticky lg:top-6"
           />
         </div>
