@@ -365,6 +365,25 @@
     },
     "addPlace": {
       "title": "DAY {{number}}에 넣을 장소"
+    },
+    "transport": {
+      "mode": {
+        "walk": "도보",
+        "transit": "대중교통",
+        "taxi": "택시",
+        "car": "자차"
+      },
+      "duration": {
+        "minutes": "{{minutes}}분",
+        "hours": "{{hours}}시간",
+        "hoursMinutes": "{{hours}}시간 {{minutes}}분"
+      },
+      "leg": "{{mode}} {{duration}}",
+      "legWithCost": "{{mode}} {{duration}} · 약 {{cost}}",
+      "currency": {
+        "KR": "{{amount}}원",
+        "JP": "{{amount}}엔"
+      }
     }
   },
   "map": {

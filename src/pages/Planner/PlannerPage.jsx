@@ -8,7 +8,7 @@ import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -52,6 +52,8 @@ export default function PlannerPage() {
         <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
           <DayList
             days={trip.days}
+            country={trip.country}
+            transportMode={trip.transportMode}
             onAddPlace={setAddingDayIndex}
             onUpdateItem={updateItem}
             onRemoveItem={removeItem}
