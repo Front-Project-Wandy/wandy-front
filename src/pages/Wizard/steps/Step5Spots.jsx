@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import TabBar from '../../../components/common/TabBar';
+import AiFillButton from '../../../features/ai/components/AiFillButton';
+import { buildWizardFillConditions } from '../../../features/ai/utils/buildWizardFillConditions';
 import { useFavoritePlaces } from '../../../features/member/hooks/useFavoritePlaces';
 import PlaceSearchPanel from '../../../features/search/components/PlaceSearchPanel';
 import { useWizardStore } from '../../../store/wizard/wizardStore';
 import AddSpotModal from '../spots/AddSpotModal';
 import FavoriteSpots from '../spots/FavoriteSpots';
 import SelectedSpots from '../spots/SelectedSpots';
-import { findSpot, fitSpotsToDays, putSpot, removeSpot } from '../spots/spotList';
+import { addAiSpots, findSpot, fitSpotsToDays, putSpot, removeSpot } from '../spots/spotList';
+import { toPlanFlight } from '../flight/flightOptions';
 import { toStayOrigin } from '../stay/stayOptions';
 import { useSpotPlaces } from '../spots/useSpotPlaces';
 import { getTripDays } from '../tripDays';
@@ -58,6 +61,23 @@ export default function Step5Spots({ onPrev, onNext }) {
 
   return (
     <div className="flex flex-col gap-5">
+      {/* AI 빈 일정 채우기 (54, 회의 안건 3-2). 결과가 바로 아래 담은 장소 목록에 보이고,
+          항공(STEP2)을 지난 뒤라 도착·출발 시각을 피해서 채운다. DAY가 없으면(날짜 미정) 숨긴다. */}
+      {days.length > 0 && (
+        <div className="flex flex-col gap-3 rounded-2xl bg-bg-soft p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-body-sm text-text/70">{t('wizard.spots.aiHint')}</p>
+          <AiFillButton
+            className="w-full shrink-0 sm:w-auto"
+            conditions={buildWizardFillConditions({
+              draft,
+              days,
+              flight: toPlanFlight(draft.flight, draft),
+            })}
+            onApply={(aiDays) => saveSpots(addAiSpots(spots, aiDays))}
+          />
+        </div>
+      )}
+
       <SelectedSpots
         spots={spots}
         days={days}
