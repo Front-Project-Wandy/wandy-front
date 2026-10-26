@@ -1,10 +1,20 @@
+import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
+import TransportLeg from '../../transport/components/TransportLeg';
 import { formatDayDate } from '../utils/formatDay';
 import DayItem from './DayItem';
 
 // 한 DAY의 제목(DAY 1 · 10월 26일 (월))과 그날의 장소 목록, 장소 추가 버튼.
-export default function DaySection({ day, dayIndex, onAddPlace, onUpdateItem, onRemoveItem }) {
+export default function DaySection({
+  day,
+  dayIndex,
+  country,
+  transportMode,
+  onAddPlace,
+  onUpdateItem,
+  onRemoveItem,
+}) {
   const { t, i18n } = useTranslation();
   const titleId = `day-title-${dayIndex}`;
   const handleAddPlace = () => onAddPlace(dayIndex);
@@ -36,14 +46,23 @@ export default function DaySection({ day, dayIndex, onAddPlace, onUpdateItem, on
       ) : (
         <ol className="space-y-2">
           {day.items.map((item, index) => (
-            <DayItem
-              key={item.id}
-              item={item}
-              number={index + 1}
-              isTimeOutOfOrder={index > 0 && item.startTime < day.items[index - 1].startTime}
-              onUpdate={handleUpdateItem}
-              onRemove={handleRemoveItem}
-            />
+            <Fragment key={item.id}>
+              <DayItem
+                item={item}
+                number={index + 1}
+                isTimeOutOfOrder={index > 0 && item.startTime < day.items[index - 1].startTime}
+                onUpdate={handleUpdateItem}
+                onRemove={handleRemoveItem}
+              />
+              {index < day.items.length - 1 ? (
+                <TransportLeg
+                  from={item}
+                  to={day.items[index + 1]}
+                  country={country}
+                  transportMode={transportMode}
+                />
+              ) : null}
+            </Fragment>
           ))}
         </ol>
       )}
