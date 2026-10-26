@@ -18,6 +18,8 @@ export function saveWizardTrip({ draft, spots, title, placesById }) {
     startDate: draft.startDate,
     endDate: draft.endDate,
     people: Number(draft.people),
+    // 동행·예산은 플랜 계약에 모양이 정해지면 넘긴다 (지금은 마법사 draft에만 있다).
+    style: draft.style,
     // null(건너뜀)은 그대로 넘긴다. 교통 계산(C)에서 혼합으로 보기로 했다.
     transportMode: draft.transportMode ?? null,
   });
