@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
 import Chip from '../../../components/common/Chip';
@@ -35,9 +35,16 @@ export default function OneLineTripForm({ onStart }) {
   const [endDate, setEndDate] = useState('');
   const [shouldFillSpots, setShouldFillSpots] = useState(true);
   const [dateError, setDateError] = useState(null);
+  // [이걸로 시작] 뒤 AI가 장소를 고르는 동안 문장·날짜·옵션을 바꾸면, 늦게 온 결과로 바뀌기 전 여행을 열지 않게
+  // 입력이 바뀔 때마다 번호를 올리고, 결과가 왔을 때 번호가 같을 때만 시작한다.
+  const inputVersion = useRef(0);
+  const markInputChanged = () => {
+    inputVersion.current += 1;
+  };
   const request = parse.data;
 
   const handleTextChange = (value) => {
+    markInputChanged();
     setText(value);
     // 문장이 바뀌면 이전에 알아들은 내용은 맞지 않아서 지운다
     parse.reset();
@@ -54,6 +61,7 @@ export default function OneLineTripForm({ onStart }) {
   };
 
   const handleStartDateChange = (value) => {
+    markInputChanged();
     setStartDate(value);
     setDateError(null);
     // 기간을 알아들었으면 오는 날을 맞춰 준다 (직접 고칠 수도 있다)
@@ -68,6 +76,7 @@ export default function OneLineTripForm({ onStart }) {
   };
 
   const handleStart = async () => {
+    const version = inputVersion.current;
     const nextError = validateDates();
     setDateError(nextError);
     if (nextError) return;
@@ -98,7 +107,7 @@ export default function OneLineTripForm({ onStart }) {
           }),
         )
         .catch(() => null);
-      if (!result) return;
+      if (!result || inputVersion.current !== version) return;
       values.spots = toWizardSpots(result.days);
     }
     onStart(values);
@@ -183,6 +192,7 @@ export default function OneLineTripForm({ onStart }) {
                 value={endDate}
                 min={startDate || getLocalDateString()}
                 onChange={(event) => {
+                  markInputChanged();
                   setEndDate(event.target.value);
                   setDateError(null);
                 }}
@@ -199,7 +209,10 @@ export default function OneLineTripForm({ onStart }) {
               <input
                 type="checkbox"
                 checked={shouldFillSpots}
-                onChange={(event) => setShouldFillSpots(event.target.checked)}
+                onChange={(event) => {
+                  markInputChanged();
+                  setShouldFillSpots(event.target.checked);
+                }}
                 className="mt-0.5 size-4 shrink-0 accent-primary"
               />
               <span className="flex flex-col gap-0.5">
