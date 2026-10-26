@@ -82,9 +82,10 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
       startTime: '10:00', stayMinutes: 90, memo: '',
       transportToNext: null }    // { mode: 'walk'|'transit'|'taxi'|'car', minutes, cost }
 
-- 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip`
+- 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place, { startTime, stayMinutes }), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip`
 - 다른 파트는 store 함수로만 값을 바꾼다. 마법사 진행 단계는 `store/wizard`(A)에 따로 둔다.
 - `addItem`은 Place를 받아서 위 item 모양으로 바꿔 저장한다 (구글 장소의 이름·주소·사진·평점은 버린다)
+  - 세 번째 인자(`startTime` 'HH:mm', `stayMinutes` 양의 정수)는 선택이다. 없거나 형식이 틀리면 기본값(10:00, 90분)을 쓴다. AI 채우기처럼 시각이 정해진 일정을 한 번에 넣을 때 쓴다.
 
 ### 공통 컴포넌트 — A, `src/components/common`
 - `Button` (variant: primary·secondary·ghost / size: sm·md·lg / disabled / loading / onClick)
