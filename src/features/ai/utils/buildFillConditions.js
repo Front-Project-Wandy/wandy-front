@@ -15,4 +15,5 @@ export function buildFillConditions(trip, preferredCategories = []) {
   };
 }
 
-export const hasEmptyDay = (trip) => trip.days.some((day) => day.items.length === 0);
+// 요청 조건(플래너·마법사 모두 같은 모양)에 장소가 없는 DAY가 있는지 본다
+export const hasEmptyDay = (conditions) => conditions.days.some((day) => day.itemCount === 0);
