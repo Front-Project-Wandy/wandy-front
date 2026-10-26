@@ -16,6 +16,8 @@ export function useFillItinerary() {
       return validateItinerary(raw, candidates, {
         excludePlaceIds: conditions.excludePlaceIds,
         dayCount: conditions.days?.length,
+        dayDates: conditions.days?.map((day) => day.date),
+        flight: conditions.flight,
       });
     },
   });
