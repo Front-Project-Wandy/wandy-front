@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 // 와이어프레임 v3 공통 헤더 메뉴. to가 null이면 아직 경로가 없는 메뉴다.
 const NAV_ITEMS = [
@@ -50,12 +51,16 @@ export default function Header() {
           )}
         </nav>
 
-        <Link
-          to="/login"
-          className="inline-flex h-9 items-center rounded-xl border border-primary px-3 text-body font-bold text-primary transition-colors hover:bg-bg-soft"
-        >
-          {t('common.header.login')}
-        </Link>
+        {/* 모바일 1줄에서 로고 반대편에 테마 버튼과 로그인을 같이 둔다. */}
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Link
+            to="/login"
+            className="inline-flex h-9 items-center rounded-xl border border-primary px-3 text-body font-bold text-primary transition-colors hover:bg-bg-soft"
+          >
+            {t('common.header.login')}
+          </Link>
+        </div>
       </div>
     </header>
   );

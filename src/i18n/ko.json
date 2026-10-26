@@ -36,6 +36,10 @@
       "homeLabel": "Wandy 홈으로",
       "navLabel": "주요 메뉴",
       "login": "로그인",
+      "theme": {
+        "toDark": "어두운 화면으로 바꾸기",
+        "toLight": "밝은 화면으로 바꾸기"
+      },
       "nav": {
         "start": "여행 시작",
         "explore": "장소 탐색",
