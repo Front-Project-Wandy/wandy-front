@@ -2,22 +2,24 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import Card from '../../components/common/Card';
-import { getDaysUntil, getTripStatus } from '../../features/member/utils/tripDates';
-import { usePlanStore } from '../../store/plan/usePlanStore';
+import { getDaysUntil } from '../../features/member/utils/tripDates';
+import { useAllTrips } from '../../store/plan/useAllTrips';
 import { formatDateRange } from './formatDraft';
+import { pickUpcomingTrip } from './pickUpcomingTrip';
 
-// 출발 D-day (91). 저장한 여행이 출발 전이거나 여행 중일 때만 홈에 보여준다.
+// 출발 D-day (91). 저장한 여행 중 여행 중이거나 가장 가까운 예정 여행 하나를 홈에 보여준다.
 // D-day 계산은 마이페이지 내 여행(B)과 같은 함수를 써서 두 화면의 숫자가 어긋나지 않게 하고,
 // 날짜 표기는 바로 아래 이어서 만들기 카드와 같은 formatDateRange로 맞춘다.
 // 브라우저 푸시 알림은 서버가 필요해서(확장) 여기서는 홈 카드로만 알린다.
 export default function UpcomingTripCard() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const trip = usePlanStore((state) => state.trip);
-  const status = getTripStatus(trip);
+  // 지금 열린 여행(trip)만 보면 지난 여행을 열어 본 뒤 카드가 사라져서, 보관함까지 합친 목록에서 고른다 (#59).
+  const picked = pickUpcomingTrip(useAllTrips());
 
-  // 날짜 미정(null)·끝난 여행(past)은 알릴 게 없어서 그리지 않는다.
-  if (status !== 'upcoming' && status !== 'ongoing') return null;
+  // 날짜 미정·끝난 여행만 있으면 알릴 게 없어서 그리지 않는다.
+  if (!picked) return null;
+  const { trip, status } = picked;
 
   const title = trip.title || t('home.upcoming.cityTrip', { city: t(`common.city.${trip.city}`) });
   // 출발 당일부터는 getTripStatus가 'ongoing'이라 D-day는 항상 1 이상이다.

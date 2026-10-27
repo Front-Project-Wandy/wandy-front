@@ -4,13 +4,13 @@ import { toPlanStay } from '../stay/stayOptions';
 
 // 마법사에서 고른 값을 플랜 store(C파트)에 저장하고 새 여행 id를 돌려준다.
 // 다른 파트 store는 정해진 함수로만 바꾼다 (CLAUDE.md 공유 계약):
-//   resetTrip → setTripInfo(날짜로 DAY를 만든다) → setFlight·setStay(있을 때) → 장소마다 addItem
-// 플랜 store는 지금 여행을 하나만 저장해서, 이전 여행은 resetTrip에서 지워진다 (화면에서 미리 확인을 받는다).
+//   startNewTrip → setTripInfo(날짜로 DAY를 만든다) → setFlight·setStay(있을 때) → 장소마다 addItem
+// startNewTrip은 지금 열린 여행을 보관함(trips)으로 보낸다. 이전 여행은 지워지지 않고 내 여행 목록에 남는다 (#59).
 // placesById: 담은 장소를 placeId로 다시 불러온 값. 찾을 수 없는 장소는 넣지 않는다.
 export function saveWizardTrip({ draft, spots, title, placesById }) {
-  const { resetTrip, setTripInfo, setFlight, setStay, addItem } = usePlanStore.getState();
+  const { startNewTrip, setTripInfo, setFlight, setStay, addItem } = usePlanStore.getState();
 
-  resetTrip();
+  startNewTrip();
   setTripInfo({
     title,
     country: draft.country,

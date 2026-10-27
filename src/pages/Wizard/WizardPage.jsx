@@ -1,5 +1,9 @@
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { setPageTitle } from '../../components/common/setPageTitle';
+import SkipLink from '../../components/common/SkipLink';
+import { isRouteChange } from '../../components/common/useRouteFocus';
 import { useWizardStore } from '../../store/wizard/wizardStore';
 import Step1BasicInfo from './steps/Step1BasicInfo';
 import Step2Flight from './steps/Step2Flight';
@@ -30,6 +34,19 @@ export default function WizardPage() {
   const setStep = useWizardStore((state) => state.setStep);
   const { step: current, key } = getStepInfo(step);
   const StepScreen = STEP_SCREENS[current];
+  const heading = t('wizard.step.heading', { step: current, title: t(`wizard.step.${key}.title`) });
+  const headingRef = useRef(null);
+
+  // 단계가 바뀌거나 다른 화면에서 들어오면 탭 제목을 바꾸고 포커스를 단계 제목으로 옮긴다 (90 접근성).
+  // [다음]을 눌러도 포커스가 아래 버튼 자리에 남으면 화면 낭독기가 새 단계를 읽어 주지 않는다.
+  // 단계도 화면 하나로 쳐서 isRouteChange에 기록한다 — 처음 열 때는 옮기지 않고, 홈으로 돌아가면 홈이 알아챈다.
+  // 스크롤은 goTo가 맨 위로 올려 두어서 preventScroll로 그대로 둔다.
+  useEffect(() => {
+    setPageTitle(t, t('common.pageTitle.wizard', { step: heading }));
+    if (isRouteChange(`/plan/new?step=${current}`)) {
+      headingRef.current?.focus({ preventScroll: true });
+    }
+  }, [current, heading, t]);
 
   // 단계를 바꾸면 화면 맨 위(진행 표시줄)부터 보이게 한다.
   const goTo = (target) => {
@@ -43,12 +60,13 @@ export default function WizardPage() {
 
   return (
     <>
+      <SkipLink />
       <div className="border-b border-text/10">
         <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-4 lg:px-6">
           <Link
             to="/"
             aria-label={t('common.header.homeLabel')}
-            className="text-subtitle font-bold text-primary"
+            className="rounded-xl text-subtitle font-bold text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             {t('common.header.logo')}
           </Link>
@@ -58,8 +76,9 @@ export default function WizardPage() {
 
       <main className="mx-auto flex max-w-3xl flex-col gap-6 px-4 py-6 lg:px-6">
         <WizardProgress currentStep={current} />
-        <h1 className="text-title font-bold">
-          {t('wizard.step.heading', { step: current, title: t(`wizard.step.${key}.title`) })}
+        {/* tabIndex -1: 코드로만 포커스를 받는다. 포커스 테두리는 키보드 이동이 아니라서 그리지 않는다. */}
+        <h1 ref={headingRef} tabIndex={-1} className="text-title font-bold outline-none">
+          {heading}
         </h1>
         <StepScreen onPrev={handlePrev} onNext={handleNext} />
       </main>
