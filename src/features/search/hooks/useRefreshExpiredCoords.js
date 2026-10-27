@@ -22,22 +22,26 @@ export function useRefreshExpiredCoords(trip) {
     let cancelled = false;
     // 늦게 온 결과가 다른 여행에 들어가지 않게, 결과가 왔을 때 지금 여는 여행이 같은지 본다
     const isSameTrip = () => !cancelled && usePlanStore.getState().trip?.id === tripId;
+    // 기다리는 동안 장소를 다른 DAY로 옮겼을 수 있어서, 요청할 때의 DAY가 아니라 지금 있는 DAY를 찾아 바꾼다
+    const updateCurrentItem = (itemId, patch) => {
+      if (!isSameTrip()) return;
+      const dayIndex = usePlanStore
+        .getState()
+        .trip.days.findIndex((day) => day.items.some((item) => item.id === itemId));
+      if (dayIndex !== -1) updateItem(dayIndex, itemId, patch);
+    };
 
-    findCoordsToRefresh(usePlanStore.getState().trip).forEach(({ dayIndex, item }) => {
+    findCoordsToRefresh(usePlanStore.getState().trip).forEach(({ item }) => {
       queryClient
         .fetchQuery(placeQuery(item.placeId))
-        .then((place) => {
-          if (!isSameTrip()) return;
-          updateItem(dayIndex, item.id, {
+        .then((place) =>
+          updateCurrentItem(item.id, {
             lat: place.lat,
             lng: place.lng,
             coordsCachedAt: new Date().toISOString(),
-          });
-        })
-        .catch(() => {
-          if (!isSameTrip()) return;
-          updateItem(dayIndex, item.id, { lat: null, lng: null });
-        });
+          }),
+        )
+        .catch(() => updateCurrentItem(item.id, { lat: null, lng: null }));
     });
 
     return () => {
