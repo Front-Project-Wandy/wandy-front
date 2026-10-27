@@ -472,7 +472,8 @@
       "addPlace": "장소 추가",
       "addPlaceLabel": "DAY {{number}}에 장소 추가",
       "transportTotal": "이동 {{duration}}",
-      "transportTotalWithCost": "이동 {{duration}} · 약 {{cost}}"
+      "transportTotalWithCost": "이동 {{duration}} · 약 {{cost}}",
+      "overloadWarning": "이동이 {{limit}} 이상이에요. 가까운 곳끼리 묶으면 덜 힘들어요."
     },
     "item": {
       "stay": "체류 {{minutes}}분",

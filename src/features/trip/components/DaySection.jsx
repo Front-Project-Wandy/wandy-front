@@ -16,6 +16,7 @@ export default function DaySection({
   dayIndex,
   country,
   transportMode,
+  style,
   flight,
   selectedItemId,
   onSelectItem,
@@ -41,7 +42,12 @@ export default function DaySection({
               {formatDayDate(day.date, i18n.language)}
             </span>
           </h2>
-          <DayTransportSummary items={day.items} country={country} transportMode={transportMode} />
+          <DayTransportSummary
+            items={day.items}
+            country={country}
+            transportMode={transportMode}
+            style={style}
+          />
         </div>
         {/* 버튼 글자는 DAY마다 같아서, 낭독기가 어느 DAY인지 알 수 있게 번호를 붙인다 */}
         <Button

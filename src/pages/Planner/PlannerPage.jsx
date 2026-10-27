@@ -88,6 +88,7 @@ export default function PlannerPage() {
             days={trip.days}
             country={trip.country}
             transportMode={trip.transportMode}
+            style={trip.style}
             flight={trip.flight}
             selectedItemId={activeItemId}
             onSelectItem={handleToggleItem}
