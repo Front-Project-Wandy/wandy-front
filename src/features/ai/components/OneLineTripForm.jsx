@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
 import Chip from '../../../components/common/Chip';
@@ -41,6 +41,8 @@ export default function OneLineTripForm({ onStart }) {
   const markInputChanged = () => {
     inputVersion.current += 1;
   };
+  // 홈 탭을 바꾸는 등 폼이 사라진 뒤에 온 결과로도 시작하지 않게, 사라질 때도 번호를 올린다
+  useEffect(() => markInputChanged, []);
   const request = parse.data;
 
   const handleTextChange = (value) => {
