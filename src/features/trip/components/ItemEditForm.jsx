@@ -4,6 +4,7 @@ import Button from '../../../components/common/Button';
 import Input from '../../../components/common/Input';
 import { MAX_MEMO_LENGTH, MAX_STAY_MINUTES, MIN_STAY_MINUTES } from '../constants';
 import { validateItemForm } from '../utils/validateItem';
+import TimeSelect from './TimeSelect';
 
 // 장소 한 곳의 방문 시간·체류 시간·메모를 고치는 폼 (17).
 // 저장을 눌렀을 때만 검사하고, 통과하면 onSave({ startTime, stayMinutes, memo })를 부른다.
@@ -37,11 +38,10 @@ export default function ItemEditForm({ item, onSave, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="mt-3 space-y-3">
-      <Input
+      <TimeSelect
         label={t('planner.edit.startTime')}
-        type="time"
         value={form.startTime}
-        onChange={handleChange('startTime')}
+        onChange={(startTime) => setForm((prev) => ({ ...prev, startTime }))}
         error={getError('startTime')}
       />
       <Input
