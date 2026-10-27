@@ -1,0 +1,566 @@
+{
+  "seoul": [
+    {
+      "id": "amn-seoul-gyeongbok-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 효자로점",
+      "lat": 37.579,
+      "lng": 126.9737
+    },
+    {
+      "id": "amn-seoul-gyeongbok-toilet",
+      "type": "toilet",
+      "name": "경복궁 흥례문 앞 화장실",
+      "lat": 37.5775,
+      "lng": 126.9768
+    },
+    {
+      "id": "amn-seoul-gyeongbok-locker",
+      "type": "locker",
+      "name": "국립고궁박물관 물품보관함",
+      "lat": 37.5767,
+      "lng": 126.9752
+    },
+    {
+      "id": "amn-seoul-bukchon-cvs",
+      "type": "convenience",
+      "name": "CU 북촌한옥마을점",
+      "lat": 37.5815,
+      "lng": 126.9843
+    },
+    {
+      "id": "amn-seoul-bukchon-toilet",
+      "type": "toilet",
+      "name": "북촌문화센터 화장실",
+      "lat": 37.58,
+      "lng": 126.984
+    },
+    {
+      "id": "amn-seoul-insadong-cvs",
+      "type": "convenience",
+      "name": "GS25 인사동점",
+      "lat": 37.5735,
+      "lng": 126.9858
+    },
+    {
+      "id": "amn-seoul-insadong-toilet",
+      "type": "toilet",
+      "name": "인사동 공중화장실",
+      "lat": 37.5738,
+      "lng": 126.9862
+    },
+    {
+      "id": "amn-seoul-anguk-locker",
+      "type": "locker",
+      "name": "안국역 물품보관함",
+      "lat": 37.5765,
+      "lng": 126.9854
+    },
+    {
+      "id": "amn-seoul-ikseon-cvs",
+      "type": "convenience",
+      "name": "GS25 익선동점",
+      "lat": 37.5738,
+      "lng": 126.9892
+    },
+    {
+      "id": "amn-seoul-jongno3-locker",
+      "type": "locker",
+      "name": "종로3가역 물품보관함",
+      "lat": 37.5713,
+      "lng": 126.9917
+    },
+    {
+      "id": "amn-seoul-changdeok-toilet",
+      "type": "toilet",
+      "name": "창덕궁 돈화문 앞 화장실",
+      "lat": 37.5785,
+      "lng": 126.991
+    },
+    {
+      "id": "amn-seoul-gwangjang-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 종로5가점",
+      "lat": 37.5707,
+      "lng": 127.0012
+    },
+    {
+      "id": "amn-seoul-gwangjang-toilet",
+      "type": "toilet",
+      "name": "광장시장 공중화장실",
+      "lat": 37.5698,
+      "lng": 126.9991
+    },
+    {
+      "id": "amn-seoul-jongno5-locker",
+      "type": "locker",
+      "name": "종로5가역 물품보관함",
+      "lat": 37.5709,
+      "lng": 127.0019
+    },
+    {
+      "id": "amn-seoul-cheonggye-cvs",
+      "type": "convenience",
+      "name": "CU 청계광장점",
+      "lat": 37.5695,
+      "lng": 126.9775
+    },
+    {
+      "id": "amn-seoul-cheonggye-toilet",
+      "type": "toilet",
+      "name": "청계광장 공중화장실",
+      "lat": 37.5688,
+      "lng": 126.978
+    },
+    {
+      "id": "amn-seoul-cityhall-locker",
+      "type": "locker",
+      "name": "시청역 물품보관함",
+      "lat": 37.5657,
+      "lng": 126.9769
+    },
+    {
+      "id": "amn-seoul-myeongdong-cvs",
+      "type": "convenience",
+      "name": "GS25 명동중앙점",
+      "lat": 37.5634,
+      "lng": 126.9846
+    },
+    {
+      "id": "amn-seoul-myeongdong-toilet",
+      "type": "toilet",
+      "name": "명동 관광정보센터 화장실",
+      "lat": 37.5641,
+      "lng": 126.9843
+    },
+    {
+      "id": "amn-seoul-myeongdong-locker",
+      "type": "locker",
+      "name": "명동역 물품보관함",
+      "lat": 37.561,
+      "lng": 126.9863
+    },
+    {
+      "id": "amn-seoul-namsan-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 N서울타워점",
+      "lat": 37.5513,
+      "lng": 126.9881
+    },
+    {
+      "id": "amn-seoul-namsan-toilet",
+      "type": "toilet",
+      "name": "남산 팔각정 화장실",
+      "lat": 37.551,
+      "lng": 126.9877
+    },
+    {
+      "id": "amn-seoul-namsan-locker",
+      "type": "locker",
+      "name": "N서울타워 물품보관함",
+      "lat": 37.5511,
+      "lng": 126.9884
+    },
+    {
+      "id": "amn-seoul-ddp-cvs",
+      "type": "convenience",
+      "name": "CU DDP점",
+      "lat": 37.5668,
+      "lng": 127.0088
+    },
+    {
+      "id": "amn-seoul-ddp-toilet",
+      "type": "toilet",
+      "name": "DDP 알림터 화장실",
+      "lat": 37.5663,
+      "lng": 127.0096
+    },
+    {
+      "id": "amn-seoul-ddp-locker",
+      "type": "locker",
+      "name": "동대문역사문화공원역 물품보관함",
+      "lat": 37.5652,
+      "lng": 127.0079
+    },
+    {
+      "id": "amn-seoul-hongdae-cvs",
+      "type": "convenience",
+      "name": "GS25 홍대걷고싶은거리점",
+      "lat": 37.5557,
+      "lng": 126.923
+    },
+    {
+      "id": "amn-seoul-hongdae-toilet",
+      "type": "toilet",
+      "name": "홍대 걷고싶은거리 공중화장실",
+      "lat": 37.556,
+      "lng": 126.9245
+    },
+    {
+      "id": "amn-seoul-hongdae-locker",
+      "type": "locker",
+      "name": "홍대입구역 물품보관함",
+      "lat": 37.5571,
+      "lng": 126.9245
+    },
+    {
+      "id": "amn-seoul-seoulforest-cvs",
+      "type": "convenience",
+      "name": "CU 서울숲점",
+      "lat": 37.545,
+      "lng": 127.041
+    },
+    {
+      "id": "amn-seoul-seoulforest-toilet",
+      "type": "toilet",
+      "name": "서울숲 공원 화장실",
+      "lat": 37.544,
+      "lng": 127.038
+    },
+    {
+      "id": "amn-seoul-lotte-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 롯데월드몰점",
+      "lat": 37.513,
+      "lng": 127.103
+    },
+    {
+      "id": "amn-seoul-lotte-toilet",
+      "type": "toilet",
+      "name": "석촌호수 공중화장실",
+      "lat": 37.5105,
+      "lng": 127.1035
+    },
+    {
+      "id": "amn-seoul-jamsil-locker",
+      "type": "locker",
+      "name": "잠실역 물품보관함",
+      "lat": 37.5133,
+      "lng": 127.1
+    },
+    {
+      "id": "amn-seoul-yeouido-cvs",
+      "type": "convenience",
+      "name": "CU 더현대서울점",
+      "lat": 37.5262,
+      "lng": 126.928
+    },
+    {
+      "id": "amn-seoul-yeouido-toilet",
+      "type": "toilet",
+      "name": "여의도공원 화장실",
+      "lat": 37.5255,
+      "lng": 126.9255
+    },
+    {
+      "id": "amn-seoul-museum-cvs",
+      "type": "convenience",
+      "name": "CU 국립중앙박물관점",
+      "lat": 37.5236,
+      "lng": 126.98
+    },
+    {
+      "id": "amn-seoul-museum-toilet",
+      "type": "toilet",
+      "name": "국립중앙박물관 화장실",
+      "lat": 37.5242,
+      "lng": 126.9808
+    },
+    {
+      "id": "amn-seoul-museum-locker",
+      "type": "locker",
+      "name": "국립중앙박물관 물품보관함",
+      "lat": 37.5238,
+      "lng": 126.9805
+    },
+    {
+      "id": "amn-seoul-banpo-cvs",
+      "type": "convenience",
+      "name": "CU 반포한강공원점",
+      "lat": 37.5103,
+      "lng": 126.995
+    },
+    {
+      "id": "amn-seoul-banpo-toilet",
+      "type": "toilet",
+      "name": "반포한강공원 화장실",
+      "lat": 37.5098,
+      "lng": 126.9965
+    }
+  ],
+  "tokyo": [
+    {
+      "id": "amn-tokyo-asakusa-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 아사쿠사 센소지 앞점",
+      "lat": 35.7128,
+      "lng": 139.7952
+    },
+    {
+      "id": "amn-tokyo-sensoji-toilet",
+      "type": "toilet",
+      "name": "센소지 경내 공중화장실",
+      "lat": 35.7144,
+      "lng": 139.796
+    },
+    {
+      "id": "amn-tokyo-asakusa-locker",
+      "type": "locker",
+      "name": "아사쿠사역 코인로커",
+      "lat": 35.7111,
+      "lng": 139.7977
+    },
+    {
+      "id": "amn-tokyo-skytree-cvs",
+      "type": "convenience",
+      "name": "로손 도쿄 소라마치점",
+      "lat": 35.7103,
+      "lng": 139.8098
+    },
+    {
+      "id": "amn-tokyo-skytree-toilet",
+      "type": "toilet",
+      "name": "도쿄 스카이트리 타운 화장실",
+      "lat": 35.71,
+      "lng": 139.8115
+    },
+    {
+      "id": "amn-tokyo-oshiage-locker",
+      "type": "locker",
+      "name": "오시아게역 코인로커",
+      "lat": 35.7105,
+      "lng": 139.813
+    },
+    {
+      "id": "amn-tokyo-shibuya-cvs",
+      "type": "convenience",
+      "name": "패밀리마트 시부야 도겐자카점",
+      "lat": 35.659,
+      "lng": 139.699
+    },
+    {
+      "id": "amn-tokyo-shibuya-toilet",
+      "type": "toilet",
+      "name": "시부야역 하치코 출구 화장실",
+      "lat": 35.6592,
+      "lng": 139.701
+    },
+    {
+      "id": "amn-tokyo-shibuya-locker",
+      "type": "locker",
+      "name": "시부야역 코인로커",
+      "lat": 35.6585,
+      "lng": 139.7015
+    },
+    {
+      "id": "amn-tokyo-harajuku-cvs",
+      "type": "convenience",
+      "name": "로손 하라주쿠 다케시타도리점",
+      "lat": 35.6712,
+      "lng": 139.704
+    },
+    {
+      "id": "amn-tokyo-meiji-toilet",
+      "type": "toilet",
+      "name": "메이지 신궁 남쪽 입구 화장실",
+      "lat": 35.6745,
+      "lng": 139.7
+    },
+    {
+      "id": "amn-tokyo-harajuku-locker",
+      "type": "locker",
+      "name": "하라주쿠역 코인로커",
+      "lat": 35.6702,
+      "lng": 139.7027
+    },
+    {
+      "id": "amn-tokyo-yoyogi-toilet",
+      "type": "toilet",
+      "name": "요요기 공원 화장실",
+      "lat": 35.672,
+      "lng": 139.696
+    },
+    {
+      "id": "amn-tokyo-gyoen-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 신주쿠 교엔마에점",
+      "lat": 35.688,
+      "lng": 139.711
+    },
+    {
+      "id": "amn-tokyo-gyoen-toilet",
+      "type": "toilet",
+      "name": "신주쿠 교엔 신주쿠문 화장실",
+      "lat": 35.6855,
+      "lng": 139.708
+    },
+    {
+      "id": "amn-tokyo-nishishinjuku-cvs",
+      "type": "convenience",
+      "name": "패밀리마트 니시신주쿠점",
+      "lat": 35.692,
+      "lng": 139.697
+    },
+    {
+      "id": "amn-tokyo-shinjuku-locker",
+      "type": "locker",
+      "name": "신주쿠역 서쪽 출구 코인로커",
+      "lat": 35.6905,
+      "lng": 139.699
+    },
+    {
+      "id": "amn-tokyo-tocho-toilet",
+      "type": "toilet",
+      "name": "도쿄도청 1층 화장실",
+      "lat": 35.6894,
+      "lng": 139.692
+    },
+    {
+      "id": "amn-tokyo-tokyotower-cvs",
+      "type": "convenience",
+      "name": "로손 도쿄타워점",
+      "lat": 35.6588,
+      "lng": 139.745
+    },
+    {
+      "id": "amn-tokyo-shiba-toilet",
+      "type": "toilet",
+      "name": "시바 공원 화장실",
+      "lat": 35.6575,
+      "lng": 139.747
+    },
+    {
+      "id": "amn-tokyo-tokyotower-locker",
+      "type": "locker",
+      "name": "도쿄 타워 코인로커",
+      "lat": 35.6585,
+      "lng": 139.7456
+    },
+    {
+      "id": "amn-tokyo-ginza-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 긴자 6초메점",
+      "lat": 35.67,
+      "lng": 139.763
+    },
+    {
+      "id": "amn-tokyo-ginza-toilet",
+      "type": "toilet",
+      "name": "긴자 식스 화장실",
+      "lat": 35.6697,
+      "lng": 139.7641
+    },
+    {
+      "id": "amn-tokyo-ginza-locker",
+      "type": "locker",
+      "name": "긴자역 코인로커",
+      "lat": 35.6717,
+      "lng": 139.765
+    },
+    {
+      "id": "amn-tokyo-tsukiji-cvs",
+      "type": "convenience",
+      "name": "패밀리마트 쓰키지 4초메점",
+      "lat": 35.666,
+      "lng": 139.77
+    },
+    {
+      "id": "amn-tokyo-tsukiji-toilet",
+      "type": "toilet",
+      "name": "쓰키지 장외시장 공중화장실",
+      "lat": 35.665,
+      "lng": 139.7712
+    },
+    {
+      "id": "amn-tokyo-tsukiji-locker",
+      "type": "locker",
+      "name": "쓰키지역 코인로커",
+      "lat": 35.668,
+      "lng": 139.772
+    },
+    {
+      "id": "amn-tokyo-toyosu-cvs",
+      "type": "convenience",
+      "name": "로손 신토요스역점",
+      "lat": 35.6488,
+      "lng": 139.7895
+    },
+    {
+      "id": "amn-tokyo-teamlab-toilet",
+      "type": "toilet",
+      "name": "팀랩 플래닛 화장실",
+      "lat": 35.649,
+      "lng": 139.7902
+    },
+    {
+      "id": "amn-tokyo-teamlab-locker",
+      "type": "locker",
+      "name": "팀랩 플래닛 코인로커",
+      "lat": 35.6492,
+      "lng": 139.79
+    },
+    {
+      "id": "amn-tokyo-ueno-cvs",
+      "type": "convenience",
+      "name": "세븐일레븐 우에노 공원점",
+      "lat": 35.713,
+      "lng": 139.7735
+    },
+    {
+      "id": "amn-tokyo-ueno-toilet",
+      "type": "toilet",
+      "name": "우에노 공원 공중화장실",
+      "lat": 35.715,
+      "lng": 139.7725
+    },
+    {
+      "id": "amn-tokyo-keiseiueno-locker",
+      "type": "locker",
+      "name": "게이세이 우에노역 코인로커",
+      "lat": 35.7118,
+      "lng": 139.7735
+    },
+    {
+      "id": "amn-tokyo-ueno-locker",
+      "type": "locker",
+      "name": "우에노역 코인로커",
+      "lat": 35.7113,
+      "lng": 139.777
+    },
+    {
+      "id": "amn-tokyo-kiyosumi-cvs",
+      "type": "convenience",
+      "name": "로손 기요스미시라카와역점",
+      "lat": 35.682,
+      "lng": 139.799
+    },
+    {
+      "id": "amn-tokyo-kiyosumi-toilet",
+      "type": "toilet",
+      "name": "기요스미 공원 화장실",
+      "lat": 35.681,
+      "lng": 139.796
+    },
+    {
+      "id": "amn-tokyo-domecity-cvs",
+      "type": "convenience",
+      "name": "패밀리마트 도쿄돔시티점",
+      "lat": 35.707,
+      "lng": 139.753
+    },
+    {
+      "id": "amn-tokyo-domecity-toilet",
+      "type": "toilet",
+      "name": "도쿄돔시티 화장실",
+      "lat": 35.7072,
+      "lng": 139.7522
+    },
+    {
+      "id": "amn-tokyo-korakuen-locker",
+      "type": "locker",
+      "name": "고라쿠엔역 코인로커",
+      "lat": 35.7078,
+      "lng": 139.7518
+    }
+  ]
+}
