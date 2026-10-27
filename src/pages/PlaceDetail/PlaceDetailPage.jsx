@@ -5,6 +5,7 @@ import EmptyState from '../../components/common/EmptyState';
 import ErrorState from '../../components/common/ErrorState';
 import Loading from '../../components/common/Loading';
 import NearbyRestaurants from '../../features/restaurant/components/NearbyRestaurants';
+import NearbyAmenities from '../../features/search/components/NearbyAmenities';
 import { usePlace } from '../../features/search/hooks/usePlace';
 import { getPlacePath } from '../../features/search/place';
 import PlaceInfo from './PlaceInfo';
@@ -57,6 +58,7 @@ export default function PlaceDetailPage() {
         {t('common.action.back')}
       </button>
       {renderBody()}
+      {place && !isError ? <NearbyAmenities key={place.id} place={place} className="pt-4" /> : null}
     </main>
   );
 }
