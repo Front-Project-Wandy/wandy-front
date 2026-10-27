@@ -100,6 +100,7 @@ export default function PlannerPage() {
             country={trip.country}
             city={trip.city}
             days={trip.days}
+            stay={trip.stay}
             selectedId={activeItemId}
             onSelectMarker={setSelectedItemId}
             className="lg:sticky lg:top-6"
