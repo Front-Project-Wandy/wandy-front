@@ -12,6 +12,7 @@ import { getCityPlaces } from './placeService';
 // conditions: { country, city, style, preferredCategories, days: [{ date, itemCount }], excludePlaceIds,
 //   likedPlaceIds, flight: { arriveAt, departAt } | null } — 도착일·출발일은 비행기 시간을 피해서 넣는다.
 //   likedPlaceIds: 다녀와서 좋았다고 평가한 곳(97, 먼저 고름). 별로였던 곳은 excludePlaceIds에 들어 있다.
+//   rainy: true면 비 오는 날 — 실내 장소를 먼저, 바깥 장소는 빼고 고른다 (79).
 // → { days: [{ dayIndex, items: [{ name, startTime, stayMinutes }] }] } — 장소 이름만 있어서 validateItinerary로 확인해서 쓴다.
 export async function fillItinerary(conditions) {
   const places = await getCityPlaces(conditions);
