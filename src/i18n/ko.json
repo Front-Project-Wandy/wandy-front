@@ -723,6 +723,15 @@
       "emptyTitle": "아직 다녀온 여행이 없어요",
       "emptyDescription": "여행이 끝나면 담았던 장소를 평가해서 다음 추천에 반영할 수 있어요."
     },
+    "visitMap": {
+      "title": "다녀온 곳 지도",
+      "cityLabel": "지도로 볼 도시",
+      "summary": "여행 {{trips}}개 · 장소 {{places}}곳",
+      "legendLabel": "여행별 마커 색",
+      "placeCount": "{{count}}곳",
+      "emptyTitle": "지도에 모을 지난 여행이 없어요",
+      "emptyDescription": "여행이 끝나면 담았던 장소를 도시별 지도에 모아 보여 드려요."
+    },
     "preferences": {
       "title": "나의 여행 취향",
       "notice": "여행 스타일과 좋아하는 장소를 설정해 보세요. 설정은 이 브라우저에만 저장돼요.",
