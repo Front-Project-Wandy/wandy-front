@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { moveItemInDays } from './moveItemInDays';
 
 // toISOString()은 UTC 기준이라 한국 시간에서 하루 어긋날 수 있어 로컬 기준으로 만든다
 const toDateString = (date) => {
@@ -181,13 +182,8 @@ export const usePlanStore = create(
         set((state) => {
           if (!state.trip) return state;
 
-          const days = state.trip.days.map((day) => ({ ...day, items: [...day.items] }));
-          if (!days[from.dayIndex] || !days[to.dayIndex]) return state;
-
-          const [moved] = days[from.dayIndex].items.splice(from.index, 1);
-          if (!moved) return state;
-          days[to.dayIndex].items.splice(to.index, 0, moved);
-          return { trip: withDays(state.trip, days) };
+          const days = moveItemInDays(state.trip.days, from, to);
+          return days ? { trip: withDays(state.trip, days) } : state;
         }),
 
       // 지금 여는 여행을 지운다 (보관함은 그대로).
