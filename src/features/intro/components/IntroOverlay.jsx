@@ -27,7 +27,11 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
   }, [onFinish]);
 
   useEffect(() => {
+    // 덮개가 사라질 때 React는 ref를 먼저 비우고 이 정리 함수는 조금 뒤에 부른다.
+    // 그 사이에 tick이 한 번 더 돌아도 null을 읽지 않게, 요소를 여기서 잡아 두고 쓴다.
     const canvas = canvasRef.current;
+    const stage = stageRef.current;
+    const white = whiteRef.current;
     const ctx = canvas.getContext('2d');
     let smooth = getProgress();
     let last = performance.now();
@@ -68,10 +72,10 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
       const z = easeInOutCubic(span(smooth, INTRO_PLAY_END, 1));
       const dive = getDiveStyle(window.innerWidth, window.innerHeight, z);
       // 매 프레임 바뀌는 값이라 JSX style 대신 DOM에 직접 넣는다.
-      stageRef.current.style.transformOrigin = dive.origin;
-      stageRef.current.style.transform = dive.transform;
+      stage.style.transformOrigin = dive.origin;
+      stage.style.transform = dive.transform;
       canvas.style.filter = dive.blurPx ? `blur(${dive.blurPx}px)` : 'none';
-      whiteRef.current.style.opacity = String(span(z, INTRO_WHITE_FROM, 1));
+      white.style.opacity = String(span(z, INTRO_WHITE_FROM, 1));
 
       if (!finished && target >= 1 && smooth > 0.998) {
         finished = true;
