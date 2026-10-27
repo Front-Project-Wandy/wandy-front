@@ -17,7 +17,7 @@ export default function TransportLeg({ from, to, country, transportMode, classNa
         ? t('planner.transport.duration.hours', { hours })
         : t('planner.transport.duration.hoursMinutes', { hours, minutes });
   const mode = t(`planner.transport.mode.${leg.mode}`);
-  const text =
+  const legText =
     leg.cost > 0
       ? t('planner.transport.legWithCost', {
           mode,
@@ -27,6 +27,9 @@ export default function TransportLeg({ from, to, country, transportMode, classNa
           }),
         })
       : t('planner.transport.leg', { mode, duration });
+
+  const text =
+    leg.nightSurcharge > 0 ? t('planner.transport.withNightSurcharge', { text: legText }) : legText;
 
   return <p className={`${className} text-body-sm text-text/70`}>{text}</p>;
 }
