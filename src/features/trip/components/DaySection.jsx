@@ -2,6 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
+import DayTransportSummary from '../../transport/components/DayTransportSummary';
 import TransportLeg from '../../transport/components/TransportLeg';
 import { getFlightTimeWarnings } from '../utils/checkFlightTime';
 import { getDayDropId } from '../utils/dragPosition';
@@ -33,12 +34,15 @@ export default function DaySection({
   return (
     <section ref={setNodeRef} aria-labelledby={titleId} className="space-y-3">
       <div className="flex items-center justify-between gap-2">
-        <h2 id={titleId} className="text-subtitle font-bold">
-          {t('planner.day.title', { number: dayIndex + 1 })}
-          <span className="ml-2 text-body-sm font-normal text-text/70">
-            {formatDayDate(day.date, i18n.language)}
-          </span>
-        </h2>
+        <div>
+          <h2 id={titleId} className="text-subtitle font-bold">
+            {t('planner.day.title', { number: dayIndex + 1 })}
+            <span className="ml-2 text-body-sm font-normal text-text/70">
+              {formatDayDate(day.date, i18n.language)}
+            </span>
+          </h2>
+          <DayTransportSummary items={day.items} country={country} transportMode={transportMode} />
+        </div>
         {/* 버튼 글자는 DAY마다 같아서, 낭독기가 어느 DAY인지 알 수 있게 번호를 붙인다 */}
         <Button
           variant="secondary"
