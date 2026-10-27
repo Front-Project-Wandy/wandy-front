@@ -8,7 +8,8 @@ export const WALK_MAX_METERS = 1000;
 export const ROUTE_FACTOR = 1.3;
 
 // 평균 이동 속도(km/h). 대중교통은 기다리는 시간과 환승을 포함한 값이다.
-export const SPEED_KMH = { walk: 4.5, transit: 20, taxi: 25, car: 30 };
+// 도보는 요구사항 #19(시속 4km)에 맞춘다. 나라와 상관없이 같은 값을 쓴다.
+export const SPEED_KMH = { walk: 4, transit: 20, taxi: 25, car: 30 };
 
 // 나라별 현지 통화 기준 요금: 기본요금 + 거리(km)당 요금. 화면에서 통화 표시만 바꾼다.
 export const FARES = {
