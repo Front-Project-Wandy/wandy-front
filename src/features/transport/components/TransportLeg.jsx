@@ -53,7 +53,7 @@ export default function TransportLeg({
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t('planner.transport.directionsLabel')}
-          className="rounded-sm text-link underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="-my-2 rounded-sm py-2 text-link underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {t('planner.transport.directions')}
           <span aria-hidden="true"> ↗</span>
