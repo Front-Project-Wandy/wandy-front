@@ -38,3 +38,6 @@ export const FIT_PADDING = 48;
 export const SELECTED_MIN_ZOOM = 14;
 export const GOOGLE_MARKER_SCALE_SELECTED = 18;
 export const SELECTED_Z_INDEX = 100;
+
+// 숙소 마커는 장소 마커 위에 있되, 선택된 장소보다는 아래에 둔다
+export const STAY_MARKER_Z_INDEX = 50;
