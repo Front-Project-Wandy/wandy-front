@@ -1,0 +1,7 @@
+# docker 띄울 때 올리지 말아야할 파일
+node_modules
+dist
+.git
+.claude
+.env
+.env.*

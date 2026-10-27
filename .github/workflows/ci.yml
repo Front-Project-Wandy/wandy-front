@@ -1,0 +1,21 @@
+# PR이 올라오면 lint·build를 자동으로 확인한다 (팀 규칙: 커밋 전 둘 다 통과).
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  lint-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
