@@ -6,6 +6,7 @@ import { formatPrice } from '../../../features/product/utils/formatPrice';
 import ExternalSearchLinks from '../ExternalSearchLinks';
 import RadioCardGroup from '../RadioCardGroup';
 import StayAreaChips from './StayAreaChips';
+import StayAreaRecommendation from './StayAreaRecommendation';
 import { getStaySearchLinks } from './stayLinks';
 import { EMPTY_STAY, findStayArea, stayFromMock } from './stayOptions';
 import { useMockStays } from './useMockStays';
@@ -59,6 +60,7 @@ export default function StaySearch({ stay, trip, onSelect }) {
 
   return (
     <div className="flex flex-col gap-5">
+      <StayAreaRecommendation trip={trip} selectedArea={stay.area} onSelect={handleArea} />
       <StayAreaChips
         city={trip.city}
         value={stay.area}

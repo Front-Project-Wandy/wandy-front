@@ -42,11 +42,15 @@ export default function Step3Stay({ onPrev, onNext }) {
     onNext();
   };
 
+  // 숙소 검색 링크와 추천 지역(75)에 쓰는 값. 추천은 담은 장소·선호 카테고리를 기준으로 한다.
   const trip = {
+    country: draft.country,
     city: draft.city,
     startDate: draft.startDate,
     endDate: draft.endDate,
     people: draft.people,
+    spotPlaceIds: draft.spots.map((spot) => spot.placeId),
+    preferredCategories: draft.preferredCategories,
   };
 
   return (

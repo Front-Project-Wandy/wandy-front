@@ -273,6 +273,19 @@
       "hint": "고른 숙소는 매일 동선의 출발점이 되고, 체크인·체크아웃 시간은 첫날·마지막 날 일정에 써요.",
       "sameDayNotice": "당일 여행이라 숙소가 없어도 돼요. 필요 없으면 [건너뛰기]를 눌러 주세요.",
       "areaLegend": "지역",
+      "recommend": {
+        "badge": "추천",
+        "title": "{{area}}에 묵으면 이동이 편해요",
+        "reason": {
+          "spots": "담은 장소 {{count}}곳까지 평균 {{distance}}km로 가장 가까운 지역이에요.",
+          "categories": "좋아하는 {{categories}} 장소 {{count}}곳까지 평균 {{distance}}km로 가장 가까운 지역이에요.",
+          "city": "{{city}}의 주요 장소 {{count}}곳까지 평균 {{distance}}km로 가장 가까운 지역이에요."
+        },
+        "action": "{{area}} 숙소 보기",
+        "selected": "이 지역을 보고 있어요",
+        "loading": "가까운 지역을 찾고 있어요",
+        "error": "추천 지역을 불러오지 못했어요."
+      },
       "error": {
         "choose": "숙소 예약 여부를 골라 주세요.",
         "pick": "숙소를 하나 골라 주세요.",
