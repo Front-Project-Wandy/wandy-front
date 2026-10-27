@@ -21,13 +21,14 @@ import {
 const DRAG_START_DISTANCE = 6;
 
 // 장소 위를 먼저 본다. DAY 칸은 그 안의 장소를 감싸고 있어서 늘 같이 걸리기 때문이다.
+// 마우스·터치는 포인터가 놓인 칸만 쓴다. 지도 쪽 같은 칸 밖에 놓으면 빈 결과를 돌려줘서 취소되게 한다.
 // 키보드로 끌 때는 포인터가 없어서 겹치는 칸, 그것도 없으면 가장 가까운 칸을 쓴다.
 export const collisionDetection = (args) => {
-  const pointerHits = pointerWithin(args);
-  const hits = pointerHits.length > 0 ? pointerHits : rectIntersection(args);
+  const hits = args.pointerCoordinates ? pointerWithin(args) : rectIntersection(args);
   const itemHits = hits.filter(({ id }) => parseDayDropId(id) === null);
   if (itemHits.length > 0) return itemHits;
-  return hits.length > 0 ? hits : closestCenter(args);
+  if (hits.length > 0) return hits;
+  return args.pointerCoordinates ? [] : closestCenter(args);
 };
 
 // 끌고 있는 카드의 가운데가 놓일 자리(over)의 가운데보다 아래면 true. 다른 DAY의 장소 위에 넣을 때 앞/뒤를 정한다.
