@@ -12,10 +12,13 @@ import AiFillDialog from './AiFillDialog';
 export default function AiFillButton({ trip, conditions, onApply, className = '' }) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  // 플래너 trip에는 선호 카테고리가 없어서(회의 필요 9번) 마이페이지 프로필 값을 쓴다.
+  // 플래너는 마법사에서 고른 이번 여행 카테고리(trip.preferredCategories, 회의 필요 16번)를 먼저 쓴다.
+  // 빈 배열도 "고른 게 없음"이라는 이번 여행 값이라 그대로 쓰고(마법사 AI 채우기와 같게),
+  // 이 칸이 생기기 전에 저장한 여행(undefined)만 마이페이지 프로필 값을 쓴다.
   // 마법사는 STEP1에서 고른 이번 여행 카테고리를 conditions에 담아 넘긴다.
   const profileCategories = usePreferenceStore((state) => state.preferences.categories);
-  const fillConditions = conditions ?? buildFillConditions(trip, profileCategories);
+  const fillConditions =
+    conditions ?? buildFillConditions(trip, trip.preferredCategories ?? profileCategories);
 
   return (
     <>
