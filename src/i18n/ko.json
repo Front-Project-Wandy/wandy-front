@@ -92,6 +92,36 @@
       "savedAt": "마지막 저장 {{time}}",
       "action": "이어서 만들기"
     },
+    "curation": {
+      "title": "테마로 골라 보는 여행",
+      "start": "이 테마로 {{city}} 여행 시작",
+      "empty": "지금은 보여 줄 장소가 없어요",
+      "season": {
+        "spring": {
+          "chip": "지금은 벚꽃 철",
+          "description": "{{city}} · 벚꽃과 새싹이 예쁜 곳"
+        },
+        "summer": {
+          "chip": "지금은 여름밤",
+          "description": "{{city}} · 시원한 밤에 걷기 좋은 곳"
+        },
+        "autumn": {
+          "chip": "지금은 단풍 철",
+          "description": "{{city}} · 단풍이 예쁜 곳"
+        },
+        "winter": {
+          "chip": "지금은 겨울 야경",
+          "description": "{{city}} · 불빛이 반짝이는 곳과 몸을 녹일 곳"
+        }
+      },
+      "theme": {
+        "food": { "chip": "먹방", "description": "{{city}} · 줄 서서 먹는 맛집" },
+        "cafe": { "chip": "카페", "description": "{{city}} · 쉬어 가기 좋은 카페" },
+        "shop": { "chip": "쇼핑", "description": "{{city}} · 구경하고 사기 좋은 곳" },
+        "night": { "chip": "야경", "description": "{{city}} · 밤에 더 예쁜 곳" },
+        "onsen": { "chip": "온천", "description": "{{city}} · 피로를 푸는 온천" }
+      }
+    },
     "cities": {
       "title": "지금 떠나고 싶은 도시",
       "comingSoon": "준비 중",
