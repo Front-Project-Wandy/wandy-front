@@ -85,6 +85,7 @@ export default function DaySection({
                         to={day.items[index + 1]}
                         country={country}
                         transportMode={transportMode}
+                        showDirections
                         className="pl-21"
                       />
                     ) : null}
