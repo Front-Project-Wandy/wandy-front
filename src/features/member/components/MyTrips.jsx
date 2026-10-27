@@ -3,26 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import EmptyState from '../../../components/common/EmptyState';
-import { usePlanStore } from '../../../store/plan/usePlanStore';
-import { getLocalDateString, getTripStatus } from '../utils/tripDates';
+import { useAllTrips } from '../../../store/plan/useAllTrips';
+import { groupMyTrips } from '../utils/groupMyTrips';
+import { getLocalDateString } from '../utils/tripDates';
 import TripCard from './TripCard';
 
 // 마이페이지 내 여행 (36). 예정(진행 중·날짜 미정 포함)과 지난 여행을 나눠 보여준다.
-// 플랜 store(C)는 지금 여행을 하나만 저장해서 목록이 최대 1개다. 여러 개 저장은 회의 필요 14번에서 정한다.
-// 플랜 store는 읽기만 한다.
+// 지금 여는 여행과 보관함 여행을 모두 보여준다 (useAllTrips, C). 플랜 store는 읽기만 한다.
+// 보관함 여행을 눌러도 플래너가 주소의 id로 그 여행을 연다.
 export default function MyTrips() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const titleId = useId();
-  const trip = usePlanStore((state) => state.trip);
+  const trips = useAllTrips();
   const today = getLocalDateString();
-
-  const trips = (trip ? [trip] : []).map((item) => ({
-    trip: item,
-    status: getTripStatus(item, today),
-  }));
-  const upcoming = trips.filter(({ status }) => status !== 'past');
-  const past = trips.filter(({ status }) => status === 'past');
+  const { upcoming, past } = groupMyTrips(trips, today);
 
   const renderGroup = (label, items) =>
     items.length > 0 ? (
