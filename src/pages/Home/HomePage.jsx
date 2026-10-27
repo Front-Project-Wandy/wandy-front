@@ -1,6 +1,7 @@
 import ProductSection from '../../features/product/components/ProductSection';
 import ContinueDraftCard from './ContinueDraftCard';
 import HomeHero from './HomeHero';
+import LastTripBanner from './LastTripBanner';
 import PopularCities from './PopularCities';
 import RecentViews from './RecentViews';
 import StartTripCard from './StartTripCard';
@@ -18,6 +19,7 @@ export default function HomePage() {
       </section>
       <UpcomingTripCard />
       <ContinueDraftCard />
+      <LastTripBanner />
       <PopularCities />
       {/* 투어 상품 섹션(62)은 B파트 컴포넌트. 나라를 넘기지 않아 한국·일본 상품을 모두 보여준다. */}
       <ProductSection />
