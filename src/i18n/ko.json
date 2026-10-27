@@ -462,14 +462,29 @@
       },
       "leg": "{{mode}} {{duration}}",
       "legWithCost": "{{mode}} {{duration}} · 약 {{cost}}",
+      "withNightSurcharge": "{{text}} · 심야 할증",
       "currency": {
         "KR": "{{amount}}원",
         "JP": "{{amount}}엔"
       }
+    },
+    "drag": {
+      "handle": "{{name}} 순서 바꾸기",
+      "instructions": "스페이스 키로 장소를 집어 올리고, 방향키로 옮긴 뒤, 스페이스 키로 놓아요. Esc 키로 취소해요.",
+      "position": "DAY {{day}}의 {{number}}번째",
+      "dayEnd": "DAY {{day}}의 맨 끝",
+      "start": "{{position}} 장소를 집었어요.",
+      "over": "{{position}} 자리 위에 있어요.",
+      "end": "{{position}}에 놓았어요.",
+      "cancel": "이동을 취소했어요. 원래 자리에 그대로 있어요."
     }
   },
   "map": {
     "label": "지도",
+    "stay": {
+      "mark": "숙",
+      "title": "숙소 · {{name}}"
+    },
     "state": {
       "loading": "지도를 불러오는 중이에요",
       "error": "지도를 불러오지 못했어요",
@@ -710,7 +725,7 @@
       "from": "{{name}}에서 가까운 순이에요"
     },
     "attribution": {
-      "google": "Google 제공 정보"
+      "google": "Google Maps"
     }
   },
   "restaurant": {

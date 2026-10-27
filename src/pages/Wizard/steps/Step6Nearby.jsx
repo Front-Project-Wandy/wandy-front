@@ -64,6 +64,7 @@ export default function Step6Nearby({ onPrev, onNext }) {
         onChange={(key) => setActiveDay(Number(key))}
       />
       <DayTimeline
+        dayIndex={activeDay}
         places={dayPlaces}
         stay={toStayOrigin(draft.stay)}
         country={draft.country}

@@ -8,7 +8,8 @@ export const WALK_MAX_METERS = 1000;
 export const ROUTE_FACTOR = 1.3;
 
 // 평균 이동 속도(km/h). 대중교통은 기다리는 시간과 환승을 포함한 값이다.
-export const SPEED_KMH = { walk: 4.5, transit: 20, taxi: 25, car: 30 };
+// 도보는 요구사항 #19(시속 4km)에 맞춘다. 나라와 상관없이 같은 값을 쓴다.
+export const SPEED_KMH = { walk: 4, transit: 20, taxi: 25, car: 30 };
 
 // 나라별 현지 통화 기준 요금: 기본요금 + 거리(km)당 요금. 화면에서 통화 표시만 바꾼다.
 export const FARES = {
@@ -22,6 +23,19 @@ export const FARES = {
     taxi: { base: 500, perKm: 400 },
     car: { base: 0, perKm: 60 },
   },
+};
+
+// 택시 심야 할증 (요구사항 #60). 출발 시각이 구간 [from, to)에 들면 택시 요금 전체에 rate를 더한다.
+// 시각은 그날 0시부터의 분이고, 자정을 넘는 구간은 to가 1440을 넘는다.
+// 서울은 중형택시 기준 22~23시·02~04시 20%, 23~02시 40% (서울시 2022-12-01 시행).
+// 도쿄는 22~05시 20%인데, 실제로는 미터 거리가 2할 짧아지는 방식이라 요금에 ×1.2로 단순화했다.
+export const NIGHT_SURCHARGE = {
+  KR: [
+    { from: 22 * 60, to: 23 * 60, rate: 0.2 },
+    { from: 23 * 60, to: 26 * 60, rate: 0.4 },
+    { from: 26 * 60, to: 28 * 60, rate: 0.2 },
+  ],
+  JP: [{ from: 22 * 60, to: 29 * 60, rate: 0.2 }],
 };
 
 // 요금은 정확한 값이 아니라서 이 단위로 반올림해 보여 준다

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   DAY_BORDER_CLASSES,
   FIT_PADDING,
@@ -8,6 +9,7 @@ import {
   SELECTED_MIN_ZOOM,
   SELECTED_Z_INDEX,
   SINGLE_POINT_ZOOM,
+  STAY_MARKER_Z_INDEX,
 } from '../constants';
 import { getDayColor } from '../utils/getDayColor';
 
@@ -16,9 +18,21 @@ import { getDayColor } from '../utils/getDayColor';
 const createMarkerContent = (number, dayIndex, isSelected) =>
   `<div class="grid size-8 place-items-center rounded-full border-4 bg-background text-body-sm font-bold text-text shadow-md ${DAY_BORDER_CLASSES[dayIndex % DAY_BORDER_CLASSES.length]} ${isSelected ? 'scale-125 ring-4 ring-primary' : ''}">${number}</div>`;
 
+// 숙소는 번호 원과 헷갈리지 않게 어두운 둥근 사각형 + 글자로 그린다. 글자는 번역 문구라 HTML에 그대로 넣어도 안전하다.
+const createStayContent = (mark) =>
+  `<div class="grid size-8 place-items-center rounded-lg bg-text text-body-sm font-bold text-background shadow-md">${mark}</div>`;
+
 // 한국 지도 (네이버). SDK가 준비된 뒤에만 그려진다. routes는 DAY별 번호 마커와 동선 선이다 (14).
 // selectedId의 마커를 강조하고, 마커를 누르면 onSelectMarker(id)를 부른다 (15).
-export default function NaverMap({ center, zoom, routes = [], selectedId = null, onSelectMarker }) {
+export default function NaverMap({
+  center,
+  zoom,
+  routes = [],
+  stay = null,
+  selectedId = null,
+  onSelectMarker,
+}) {
+  const { t } = useTranslation();
   const elementRef = useRef(null);
   const mapRef = useRef(null);
   // 마커 id → { marker, number, dayIndex }. 선택이 바뀔 때 마커를 다시 그리지 않고 모양만 바꾸려고 둔다.
@@ -84,6 +98,24 @@ export default function NaverMap({ center, zoom, routes = [], selectedId = null,
       });
     });
 
+    if (stay) {
+      const position = new maps.LatLng(stay.lat, stay.lng);
+      overlays.push(
+        new maps.Marker({
+          map,
+          position,
+          title: t('map.stay.title', { name: stay.name }),
+          zIndex: STAY_MARKER_Z_INDEX,
+          icon: {
+            content: createStayContent(t('map.stay.mark')),
+            anchor: new maps.Point(MARKER_SIZE / 2, MARKER_SIZE / 2),
+          },
+        }),
+      );
+      bounds.extend(position);
+      pointCount += 1;
+    }
+
     if (pointCount === 0) {
       map.setCenter(new maps.LatLng(center.lat, center.lng));
       map.setZoom(zoom);
@@ -103,7 +135,7 @@ export default function NaverMap({ center, zoom, routes = [], selectedId = null,
       overlays.forEach((overlay) => overlay.setMap(null));
       markers.clear();
     };
-  }, [routes, center, zoom]);
+  }, [routes, stay, center, zoom, t]);
 
   // 선택이 바뀌면 마커 모양만 바꾸고, 선택된 장소로 지도를 옮긴다 (경로가 바뀐 경우는 위에서 이미 맞췄다)
   useEffect(() => {

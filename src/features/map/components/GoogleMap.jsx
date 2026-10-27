@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   FIT_PADDING,
   GOOGLE_MARKER_SCALE,
@@ -10,8 +11,12 @@ import {
   SELECTED_MIN_ZOOM,
   SELECTED_Z_INDEX,
   SINGLE_POINT_ZOOM,
+  STAY_MARKER_Z_INDEX,
 } from '../constants';
 import { getDayColor, getThemeColor } from '../utils/getDayColor';
+
+// 구글 기본 기호에는 사각형이 없어서 -1~1 정사각형을 직접 그린다. scale이 반지름이라 번호 원과 같은 크기가 된다.
+const SQUARE_PATH = 'M -1,-1 L 1,-1 L 1,1 L -1,1 z';
 
 // 일본 지도 (구글). SDK가 준비된 뒤에만 그려진다. routes는 DAY별 번호 마커와 동선 선이다 (14).
 // NOTE: 마커는 기존 google.maps.Marker를 쓴다. 새 AdvancedMarkerElement는 Map ID 발급이 필요해서 보류했다.
@@ -20,9 +25,11 @@ export default function GoogleMap({
   center,
   zoom,
   routes = [],
+  stay = null,
   selectedId = null,
   onSelectMarker,
 }) {
+  const { t } = useTranslation();
   const elementRef = useRef(null);
   const mapRef = useRef(null);
   // 마커 id → { marker, icon }. 선택이 바뀔 때 마커를 다시 그리지 않고 모양만 바꾸려고 둔다.
@@ -101,6 +108,33 @@ export default function GoogleMap({
       });
     });
 
+    if (stay) {
+      const position = { lat: stay.lat, lng: stay.lng };
+      overlays.push(
+        new maps.Marker({
+          map,
+          position,
+          title: t('map.stay.title', { name: stay.name }),
+          zIndex: STAY_MARKER_Z_INDEX,
+          icon: {
+            path: SQUARE_PATH,
+            scale: GOOGLE_MARKER_SCALE,
+            fillColor: textColor,
+            fillOpacity: 1,
+            strokeWeight: 0,
+          },
+          label: {
+            text: t('map.stay.mark'),
+            color: fillColor,
+            fontWeight: 'bold',
+            fontSize: MARKER_FONT_SIZE,
+          },
+        }),
+      );
+      bounds.extend(position);
+      pointCount += 1;
+    }
+
     if (pointCount === 0) {
       map.setCenter({ lat: center.lat, lng: center.lng });
       map.setZoom(zoom);
@@ -115,7 +149,7 @@ export default function GoogleMap({
       overlays.forEach((overlay) => overlay.setMap(null));
       markers.clear();
     };
-  }, [routes, center, zoom]);
+  }, [routes, stay, center, zoom, t]);
 
   // 선택이 바뀌면 마커 모양만 바꾸고, 선택된 장소로 지도를 옮긴다 (경로가 바뀐 경우는 위에서 이미 맞췄다)
   useEffect(() => {
