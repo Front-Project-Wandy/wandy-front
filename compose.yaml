@@ -1,0 +1,9 @@
+# EC2에서 `docker compose pull && docker compose up -d`로 배포한다 (deploy.yml이 실행).
+# 이미지는 GitHub Actions가 빌드해 GHCR에 올린 것을 받아 쓴다. 이름은 GHCR 규칙상 소문자여야 한다.
+services:
+  web:
+    image: ghcr.io/front-project-wandy/wandy-front:latest
+    container_name: wandy-front
+    ports:
+      - '80:80'
+    restart: unless-stopped
