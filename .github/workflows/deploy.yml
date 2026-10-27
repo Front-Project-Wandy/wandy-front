@@ -19,8 +19,10 @@ env:
   # GHCR 이미지 이름은 소문자만 허용한다
   IMAGE: ghcr.io/front-project-wandy/wandy-front
   # EC2의 호스트 키 지문(공개 값). 다른 서버로 SSH 키가 가지 않게 접속 대상을 고정한다.
-  # EC2를 새로 만들면 `ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub`로 확인해 바꾼다.
-  EC2_HOST_FINGERPRINT: SHA256:7wYibverVipmSgIDMeG97QOPKa7NWF9NW4wJoihfYqE
+  # 서버에 키가 ECDSA·RSA·ED25519 세 종류라 접속 도구가 협상한 종류와 맞아야 한다.
+  # ED25519(7wYibv...)는 불일치가 나서 ECDSA 지문을 쓴다. EC2를 새로 만들면
+  # `ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub`로 확인해 바꾼다.
+  EC2_HOST_FINGERPRINT: SHA256:qAvmofp6rScCi5/HDAdTcWyHXK03PvyvbxUspXBZFhw
 
 jobs:
   deploy:
