@@ -706,7 +706,7 @@
       "from": "{{name}}에서 가까운 순이에요"
     },
     "attribution": {
-      "google": "Google 제공 정보"
+      "google": "Google Maps"
     }
   },
   "restaurant": {
