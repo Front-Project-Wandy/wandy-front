@@ -5,15 +5,18 @@ import Loading from '../../../components/common/Loading';
 import { CITY_CENTERS, DEFAULT_ZOOM, MAP_PROVIDERS } from '../constants';
 import { useMapSdk } from '../hooks/useMapSdk';
 import { useRoutes } from '../hooks/useRoutes';
+import { useStayPoint } from '../hooks/useStayPoint';
 import GoogleMap from './GoogleMap';
 import NaverMap from './NaverMap';
 
 // 나라에 맞는 지도(KR 네이버 / JP 구글)를 보여주고, days의 장소를 DAY별 번호 마커·동선 선으로 그린다 (6, 14), 선택한 장소를 강조한다 (15).
+// 숙소에 좌표가 있으면 장소가 없어도 숙소 마커를 항상 그린다 (40).
 // 지도가 아닌 상태(키 없음·불러오는 중·실패)는 같은 상자 안에 가운데 정렬로 보여준다.
 export default function MapView({
   country,
   city,
   days = [],
+  stay = null,
   selectedId = null,
   onSelectMarker,
   className = '',
@@ -23,6 +26,7 @@ export default function MapView({
   const center = CITY_CENTERS[city];
   const { status, retry } = useMapSdk(provider);
   const routes = useRoutes(days);
+  const stayPoint = useStayPoint(stay);
 
   const renderState = () => {
     if (!provider || !center)
@@ -59,6 +63,7 @@ export default function MapView({
           center={center}
           zoom={DEFAULT_ZOOM}
           routes={routes}
+          stay={stayPoint}
           selectedId={selectedId}
           onSelectMarker={onSelectMarker}
         />
