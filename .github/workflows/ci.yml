@@ -5,6 +5,10 @@ on:
   pull_request:
     branches: [develop, main]
 
+# 토큰 권한을 읽기로 최소화한다
+permissions:
+  contents: read
+
 jobs:
   lint-build:
     runs-on: ubuntu-latest

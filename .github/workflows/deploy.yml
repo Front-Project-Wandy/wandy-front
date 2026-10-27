@@ -18,6 +18,9 @@ permissions:
 env:
   # GHCR 이미지 이름은 소문자만 허용한다
   IMAGE: ghcr.io/front-project-wandy/wandy-front
+  # EC2의 호스트 키 지문(공개 값). 다른 서버로 SSH 키가 가지 않게 접속 대상을 고정한다.
+  # EC2를 새로 만들면 `ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub`로 확인해 바꾼다.
+  EC2_HOST_FINGERPRINT: SHA256:7wYibverVipmSgIDMeG97QOPKa7NWF9NW4wJoihfYqE
 
 jobs:
   deploy:
@@ -49,17 +52,18 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: compose.yaml을 EC2로 복사
-        uses: appleboy/scp-action@v1
+        uses: appleboy/scp-action@ff85246acaad7bdce478db94a363cd2bf7c90345 # v1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          fingerprint: ${{ env.EC2_HOST_FINGERPRINT }}
           source: compose.yaml
           target: ~/wandy
 
       # 패키지가 private여도 받을 수 있게 이 실행에서만 유효한 토큰으로 로그인한다
       - name: EC2에서 새 이미지로 교체
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@0ff4204d59e8e51228ff73bce53f80d53301dee2 # v1
         env:
           GHCR_USER: ${{ github.actor }}
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,6 +71,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          fingerprint: ${{ env.EC2_HOST_FINGERPRINT }}
           envs: GHCR_USER,GHCR_TOKEN
           script: |
             set -e
