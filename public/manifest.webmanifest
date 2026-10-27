@@ -1,0 +1,15 @@
+{
+  "name": "Wandy · 한국·일본 여행 일정 플래너",
+  "short_name": "Wandy",
+  "description": "가고 싶은 곳부터, 나만의 여행이 시작돼요. 장소 · 일정 · 이동을 한 번에 계획하세요.",
+  "lang": "ko",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284c7",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
