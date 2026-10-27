@@ -585,6 +585,17 @@
     "error": {
       "notFound": "장소를 찾을 수 없어요",
       "notFoundDescription": "주소가 바뀌었거나 없는 장소예요"
+    },
+    "amenity": {
+      "title": "주변 편의시설",
+      "subtitle": "걸어서 {{radius}}m 안에서 가장 가까운 곳이에요",
+      "type": {
+        "convenience": "편의점",
+        "toilet": "화장실",
+        "locker": "코인락커"
+      },
+      "none": "근처에 없어요",
+      "distance": "{{value}}m"
     }
   },
   "places": {
@@ -615,12 +626,20 @@
       "label": "나라",
       "all": "전체"
     },
+    "priceRange": {
+      "label": "1인 가격대",
+      "all": "전체",
+      "under30": "~3만 원",
+      "30to70": "3~7만 원",
+      "over70": "7만 원~"
+    },
     "list": {
       "count": "{{count}}개"
     },
     "empty": {
       "title": "조건에 맞는 상품이 없어요",
-      "description": "다른 나라나 종류를 골라 보세요"
+      "description": "다른 나라·종류·가격대를 골라 보세요",
+      "clearFilters": "필터 지우기"
     },
     "card": {
       "rating": "평점 {{rating}}점, 후기 {{count}}개"
