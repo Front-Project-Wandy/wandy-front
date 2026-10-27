@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import FavoriteButton from '../../features/member/components/FavoriteButton';
 import GoogleAttribution from '../../features/search/components/GoogleAttribution';
+import PopularTimes from '../../features/search/components/PopularTimes';
 
 // 장소 상세 정보 (10) + 지도 앱에서 보기 링크 (11, 한국은 평점이 없어서 네이버 지도로 보완).
 export default function PlaceInfo({ place }) {
@@ -59,6 +60,8 @@ export default function PlaceInfo({ place }) {
           </div>
         ) : null}
       </dl>
+
+      <PopularTimes category={place.category} />
 
       {place.externalUrl ? (
         <a
