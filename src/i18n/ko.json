@@ -649,6 +649,29 @@
       "emptyDescription": "여행지와 날짜를 정하면 일정을 짤 수 있어요",
       "create": "여행 만들기"
     },
+    "profile": {
+      "title": "지난 여행으로 본 내 취향",
+      "basis": "저장한 여행 {{trips}}개, 담은 장소 {{places}}곳으로 계산했어요.",
+      "label": {
+        "categories": "자주 담은 곳",
+        "density": "하루 일정",
+        "transport": "이동 방식",
+        "meal": "식사"
+      },
+      "categoryPercent": "{{category}} {{percent}}%",
+      "densityValue": "하루 평균 {{count}}곳 · {{style}}",
+      "mealStyle": {
+        "food": "맛집 위주",
+        "cafe": "카페 위주",
+        "balanced": "맛집·카페 고르게"
+      },
+      "apply": "이 취향으로 설정",
+      "applyHint": "누르면 아래 여행 취향의 스타일과 선호 카테고리가 이 값으로 바뀌고, 다음 여행 기본값이 돼요.",
+      "applied": "여행 취향에 반영했어요.",
+      "alreadyApplied": "지금 여행 취향과 같아요.",
+      "emptyTitle": "아직 취향을 계산할 여행이 없어요",
+      "emptyDescription": "장소를 담은 여행을 저장하면 자주 가는 곳과 하루 일정을 알려 드려요."
+    },
     "preferences": {
       "title": "나의 여행 취향",
       "notice": "여행 스타일과 좋아하는 장소를 설정해 보세요. 설정은 이 브라우저에만 저장돼요.",
