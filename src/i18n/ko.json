@@ -580,7 +580,9 @@
     },
     "hoursWarning": {
       "closed": "이 날은 쉬는 날이에요 (영업시간 기준)",
-      "outside": "영업시간({{hours}}) 밖이에요"
+      "outside": "영업시간({{hours}}) 밖이에요",
+      "nextDayClosed": "다음 날은 쉬는 날이라 자정 넘어서는 열지 않아요",
+      "overnight": "자정을 넘긴 시간이 다음 날 영업시간({{hours}}) 밖이에요"
     },
     "link": {
       "naver": "네이버 지도에서 보기",
