@@ -4,6 +4,7 @@ import Button from '../../../components/common/Button';
 import Chip from '../../../components/common/Chip';
 import Modal from '../../../components/common/Modal';
 import { formatShortDate } from '../../../features/member/utils/tripDates';
+import GoogleAttribution from '../../../features/search/components/GoogleAttribution';
 
 // "어느 날 갈까요?" — 장소를 누르면 뜨는 창 (와이어프레임 W05 "장소 상세를 열고 원하는 DAY에 추가").
 // 이미 담은 장소면 그 날이 골라진 채로 열리고, 날짜를 옮기거나 뺄 수 있다.
@@ -65,6 +66,8 @@ export default function AddSpotModal({
               </Button>
             )}
           </div>
+          {/* 제목이 장소 이름이라 구글 장소면 출처를 같이 보여 준다 (약관, 요구사항 5) */}
+          {place.source === 'google' && <GoogleAttribution />}
         </div>
       )}
     </Modal>
