@@ -1,5 +1,20 @@
 {
   "common": {
+    "a11y": {
+      "skipToContent": "본문으로 바로가기"
+    },
+    "pageTitle": {
+      "format": "{{page}} · Wandy",
+      "home": "Wandy",
+      "places": "장소 탐색",
+      "place": "장소 상세",
+      "products": "투어·상품",
+      "login": "로그인",
+      "my": "마이페이지",
+      "trip": "플래너",
+      "notFound": "페이지를 찾을 수 없어요",
+      "wizard": "{{step}} · 플랜 만들기"
+    },
     "state": {
       "loading": "불러오는 중이에요",
       "error": "문제가 생겼어요. 잠시 후 다시 시도해 주세요.",
@@ -319,6 +334,7 @@
     },
     "spots": {
       "error": "장소를 하나 이상 담아 주세요.",
+      "aiHint": "고르기 어렵다면 AI가 비어 있는 날을 채워 줘요. 담은 장소와 항공 시간은 그대로 두고 채워요.",
       "basket": {
         "title": "담은 장소 ({{count}})",
         "emptyTitle": "아직 담은 장소가 없어요",
@@ -362,18 +378,11 @@
     "summary": {
       "titleLabel": "여행 제목",
       "defaultTitle": "{{city}} 여행",
-      "untitled": "이름 없는 여행",
       "info": "{{city}} · {{start}}~{{end}} · {{people}}명 · 이동: {{transport}}",
       "transportNone": "정하지 않음",
       "daysTitle": "DAY별 일정",
       "emptyDay": "담은 장소가 없어요",
       "missing": "찾을 수 없는 장소 (저장할 때 빠져요)",
-      "replace": {
-        "title": "이미 만든 여행이 있어요",
-        "description": "지금은 여행을 하나만 저장할 수 있어요. 저장하면 「{{title}}」이 지금 만든 여행으로 바뀌어요.",
-        "confirm": "바꿔서 저장",
-        "cancel": "취소"
-      },
       "flight": "항공 · 도착 {{arrive}} · 귀국 출발 {{depart}} ({{flightNo}})",
       "flightNoUnknown": "편명 없음",
       "stay": "숙소 · {{name}} · 체크인 {{checkIn}} · 체크아웃 {{checkOut}}"

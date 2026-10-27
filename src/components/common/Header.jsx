@@ -10,7 +10,10 @@ const NAV_ITEMS = [
   { key: 'my', to: '/my' },
 ];
 
-const NAV_LINK_CLASS = 'flex h-11 shrink-0 items-center px-3 text-body font-bold transition-colors';
+// 링크도 버튼과 같은 포커스 테두리를 준다 (90 접근성). 없으면 브라우저 기본 테두리가 나와 버튼과 모양이 다르다.
+const FOCUS_CLASS =
+  'focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary';
+const NAV_LINK_CLASS = `flex h-11 shrink-0 items-center rounded-xl px-3 text-body font-bold transition-colors ${FOCUS_CLASS}`;
 
 // 메뉴(nav)는 하나만 두고 순서·너비만 바꾼다.
 // 모바일: 1줄 = 로고 + 로그인, 2줄 = 메뉴(가로 스크롤) / PC(lg): 로고 · 메뉴 · 로그인 한 줄.
@@ -23,7 +26,7 @@ export default function Header() {
         <Link
           to="/"
           aria-label={t('common.header.homeLabel')}
-          className="flex h-14 items-center text-subtitle font-bold text-primary"
+          className={`flex h-14 items-center rounded-xl text-subtitle font-bold text-primary ${FOCUS_CLASS}`}
         >
           {t('common.header.logo')}
         </Link>
@@ -56,7 +59,7 @@ export default function Header() {
           <ThemeToggle />
           <Link
             to="/login"
-            className="inline-flex h-9 items-center rounded-xl border border-primary px-3 text-body font-bold text-primary transition-colors hover:bg-bg-soft"
+            className={`inline-flex h-9 items-center rounded-xl border border-primary px-3 text-body font-bold text-primary transition-colors hover:bg-bg-soft ${FOCUS_CLASS}`}
           >
             {t('common.header.login')}
           </Link>
