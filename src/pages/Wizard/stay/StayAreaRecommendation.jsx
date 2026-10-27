@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
 import ErrorState from '../../../components/common/ErrorState';
@@ -13,6 +14,14 @@ export default function StayAreaRecommendation({ trip, selectedArea, onSelect })
   const { t } = useTranslation();
   const { recommendation, basis, placeCount, isPending, isError, refetch } =
     useStayAreaRecommendation(trip);
+  // [○○ 숙소 보기]를 누르면 버튼이 「이 지역을 보고 있어요」 글자로 바뀌며 사라져서 키보드 포커스가 페이지 처음으로 간다.
+  // 버튼으로 골랐을 때만 바뀐 글자로 포커스를 옮긴다 (지역 칩으로 고르면 포커스는 칩에 그대로 둔다).
+  const shouldFocusStatus = useRef(false);
+  const focusStatus = (node) => {
+    if (!node || !shouldFocusStatus.current) return;
+    shouldFocusStatus.current = false;
+    node.focus();
+  };
 
   if (isPending) return <Loading text={t('wizard.stay.recommend.loading')} />;
   if (isError) return <ErrorState message={t('wizard.stay.recommend.error')} onRetry={refetch} />;
@@ -48,9 +57,19 @@ export default function StayAreaRecommendation({ trip, selectedArea, onSelect })
         </p>
       </div>
       {isSelected ? (
-        <p className="shrink-0 text-body-sm font-bold">{t('wizard.stay.recommend.selected')}</p>
+        <p ref={focusStatus} tabIndex={-1} className="shrink-0 text-body-sm font-bold">
+          {t('wizard.stay.recommend.selected')}
+        </p>
       ) : (
-        <Button variant="secondary" size="sm" className="shrink-0" onClick={() => onSelect(area)}>
+        <Button
+          variant="secondary"
+          size="sm"
+          className="shrink-0"
+          onClick={() => {
+            shouldFocusStatus.current = true;
+            onSelect(area);
+          }}
+        >
           {t('wizard.stay.recommend.action', { area: areaName })}
         </Button>
       )}
