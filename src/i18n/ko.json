@@ -374,6 +374,7 @@
       "fromStay": "{{name}}에서 출발",
       "openRestaurants": "근처 식당",
       "modalTitle": "{{name}} 근처 식당",
+      "modalTitleNoName": "근처 식당",
       "emptyDay": "이 날은 담은 장소가 없어요.",
       "emptyTitle": "아직 담은 장소가 없어요",
       "emptyDescription": "[이전]을 눌러 STEP 5에서 가고 싶은 장소를 담아 주세요.",
