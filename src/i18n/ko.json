@@ -751,6 +751,8 @@
       "emptyResultDescription": "이미 이 도시의 장소를 대부분 넣었어요.",
       "dropped": "확인되지 않은 장소 {{count}}곳은 뺐어요.",
       "mockNotice": "지금은 예시 장소 데이터로 만든 일정이에요.",
+      "rainy": "비 오는 날이에요",
+      "rainyHint": "쇼핑·온천 같은 실내 장소를 먼저 넣고, 공원·야경처럼 바깥에서 보는 곳은 빼요.",
       "day": "DAY {{day}}",
       "stay": "{{minutes}}분"
     },
