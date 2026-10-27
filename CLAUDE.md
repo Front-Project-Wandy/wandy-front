@@ -64,18 +64,29 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
     // trip
     { id, title, country, city, startDate, endDate, people,
       style: 'normal',        // 'relaxed' | 'normal' | 'packed'
+      transportMode: null,    // 'transit' | 'taxi' | 'car' | 'mixed' | null (마법사 STEP4, null = 건너뜀 → 계산할 때 혼합)
       budget: null,
-      flight: null,           // { flightNo, arriveAt, departAt, link }
-      stay: null,             // { name, lat, lng, checkIn, checkOut, link }
+      flight: null,           // { flightNo, returnFlightNo, arriveAt, departAt, link }
+      stay: null,             // { name, address, lat, lng, checkIn, checkOut, link } (address는 참고용, 없으면 null)
       days: [], updatedAt }
     // day
     { date: '2026-10-26', items: [] }
-    // item
-    { id, place, startTime: '10:00', stayMinutes: 90, memo: '',
-      transportToNext: null } // { mode: 'walk'|'transit'|'taxi'|'car', minutes, cost }
+    // item — 약관 때문에 Place 전체를 저장하지 않는다
+    { id,
+      placeId: 'google:ChIJxxx', // Place.id
+      source: 'google',          // Place.source
+      name: null,                // JP(구글)는 저장하지 않고(null) 화면에서 placeId로 다시 불러온다
+      lat, lng,
+      coordsCachedAt,            // 좌표 저장 시각. 30일이 지나면 다시 불러온다
+      myCategory: 'sight',       // 우리가 정한 카테고리
+      startTime: '10:00', stayMinutes: 90, memo: '',
+      transportToNext: null }    // { mode: 'walk'|'transit'|'taxi'|'car', minutes, cost }
 
-- 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip`
+- 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place, { startTime, stayMinutes }), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip, startNewTrip, selectTrip(id), deleteTrip(id)`
 - 다른 파트는 store 함수로만 값을 바꾼다. 마법사 진행 단계는 `store/wizard`(A)에 따로 둔다.
+- 여러 여행: `trip`은 지금 여는 여행이고 `trips`는 **지금 여는 여행을 뺀** 나머지 보관함이다(같은 여행을 두 곳에 두지 않는다). 새 여행을 저장하기 전에 `startNewTrip()`으로 지금 여행을 보관함에 보내고, 목록은 `useAllTrips()`(`store/plan`)로 읽는다. `resetTrip()`은 지금 여행을 지운다(보관함은 그대로).
+- `addItem`은 Place를 받아서 위 item 모양으로 바꿔 저장한다 (구글 장소의 이름·주소·사진·평점은 버린다)
+  - 세 번째 인자(`startTime` 'HH:mm', `stayMinutes` 양의 정수)는 선택이다. 없거나 형식이 틀리면 기본값(10:00, 90분)을 쓴다. AI 채우기처럼 시각이 정해진 일정을 한 번에 넣을 때 쓴다.
 
 ### 공통 컴포넌트 — A, `src/components/common`
 - `Button` (variant: primary·secondary·ghost / size: sm·md·lg / disabled / loading / onClick)
@@ -150,7 +161,10 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
 - 커밋: `타입: 한국어 설명 (#요구사항NO)` — 예: `feat: 플래너 드래그 순서 변경 (#16)`
   - 타입: `feat` 기능 / `fix` 버그 / `style` 화면만 / `refactor` 구조 / `docs` 문서 / `chore` 설정
 - `main`·`develop`에 직접 푸시 금지 (GitHub 규칙으로 막혀 있음). `feat/*` → `develop` PR.
+- 작업 시작 전: `develop`을 최신으로 받고(`git switch develop && git pull --ff-only`) 거기서 새 브랜치를 만든다.
+- push·PR 전: `develop` 최신을 내 브랜치에 합치고(`git fetch && git merge origin/develop`) lint·build를 다시 확인한다. 충돌은 이때 푼다.
 - 모든 PR은 범수(@pbs3839-afk)가 최종 검수·승인한다 (`.github/CODEOWNERS`). 승인되면 올린 사람이 Squash merge.
+- 승인받은 뒤에는 꼭 필요할 때만 push한다 (새 커밋이 올라가면 승인이 자동으로 취소된다).
 - 하루 끝에 동작 확인 후 `develop` → `main` PR을 Merge commit으로 올린다 (Squash로 합치면 두 브랜치 기록이 갈라져서 다음 날 충돌이 난다).
 - 충돌: 공유 파일은 그 파일 담당 파트가, 나머지는 PR 올린 사람이 `develop`을 받아서 해결.
 
@@ -159,3 +173,8 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
 - 큰 작업은 바로 코딩하지 말고 계획을 먼저 보여주고 확인받는다.
 - 작업 단위를 작게 나누고, 하나 끝날 때마다 lint·build를 확인한다.
 - 요구사항 번호(노션 요구사항 목록 NO)가 있으면 커밋·PR에 같이 적는다.
+- PR 리뷰 코멘트는 무조건 반영하지 않는다. 코멘트마다 먼저 재현·확인한다.
+  - 맞으면 고치고, 무엇을 어떻게 고쳤는지 그 코멘트에 답글로 남긴다.
+  - 틀렸거나 더 나은 방법이 있으면 틀린 부분을 근거(재현 결과, 부작용)와 함께 답글로 남기고, 고치지 않거나 다른 방법으로 고친다.
+  - 사용자의 제안도 같은 기준으로 검토하고, 동의하지 않으면 이유를 말한다.
+- Claude가 GitHub에 다는 댓글·답글은 맨 앞에 `[Claude]`를 붙인다 (사람이 쓴 글과 구분하려고).

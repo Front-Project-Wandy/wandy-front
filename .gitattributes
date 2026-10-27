@@ -1,0 +1,10 @@
+# 텍스트 파일은 어느 PC에서 받든 LF로 (Prettier 기본값과 같게)
+* text=auto eol=lf
+
+# 이미지는 줄바꿈 변환을 하지 않음
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.gif binary
+*.ico binary

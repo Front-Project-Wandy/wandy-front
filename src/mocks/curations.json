@@ -1,0 +1,63 @@
+{
+  "seasons": [
+    {
+      "key": "spring",
+      "months": [3, 4, 5],
+      "country": "KR",
+      "city": "seoul",
+      "categories": ["nature"],
+      "placeIds": [
+        "naver:석촌호수_1271031000_375097000",
+        "naver:서울숲_1270374000_375444000",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "tour:900001"
+      ]
+    },
+    {
+      "key": "summer",
+      "months": [6, 7, 8],
+      "country": "KR",
+      "city": "seoul",
+      "categories": ["night"],
+      "placeIds": [
+        "naver:반포한강공원 달빛무지개분수_1269958000_375101000",
+        "naver:청계천_1269784000_375690000",
+        "tour:900004",
+        "naver:롯데월드타워 서울스카이_1271025000_375126000"
+      ]
+    },
+    {
+      "key": "autumn",
+      "months": [9, 10, 11],
+      "country": "JP",
+      "city": "tokyo",
+      "categories": ["nature"],
+      "placeIds": [
+        "google:mock-shinjuku-gyoen",
+        "google:mock-meiji-jingu",
+        "google:mock-ueno-park",
+        "google:mock-yoyogi-park"
+      ]
+    },
+    {
+      "key": "winter",
+      "months": [12, 1, 2],
+      "country": "JP",
+      "city": "tokyo",
+      "categories": ["night", "onsen"],
+      "placeIds": [
+        "google:mock-tokyo-tower",
+        "google:mock-shibuya-sky",
+        "google:mock-skytree",
+        "google:mock-spa-laqua"
+      ]
+    }
+  ],
+  "themes": [
+    { "key": "food", "country": "JP", "city": "tokyo", "categories": ["food"] },
+    { "key": "cafe", "country": "KR", "city": "seoul", "categories": ["cafe"] },
+    { "key": "shop", "country": "KR", "city": "seoul", "categories": ["shop"] },
+    { "key": "night", "country": "KR", "city": "seoul", "categories": ["night"] },
+    { "key": "onsen", "country": "JP", "city": "tokyo", "categories": ["onsen"] }
+  ]
+}
