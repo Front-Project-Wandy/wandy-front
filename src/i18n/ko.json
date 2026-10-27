@@ -84,6 +84,13 @@
       "ongoing": "여행 중",
       "action": "일정 보기"
     },
+    "again": {
+      "title": "지난 여행처럼 다시 떠나 볼까요?",
+      "tagsLabel": "이어 가는 여행 취향",
+      "description": "같은 도시·인원·스타일과 자주 담은 장소 종류로 새 여행을 시작해요. 날짜만 새로 고르면 돼요.",
+      "action": "다시 떠나기",
+      "actionLabel": "{{city}} 여행처럼 다시 떠나기"
+    },
     "continue": {
       "title": "작성 중인 여행을 이어서 만들어요",
       "tripTitle": "{{city}} 여행",
