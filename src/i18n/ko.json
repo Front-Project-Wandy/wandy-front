@@ -574,6 +574,14 @@
     "page": {
       "title": "장소 상세"
     },
+    "popular": {
+      "title": "붐비는 시간",
+      "periodLabel": "요일 구분",
+      "weekday": "평일",
+      "weekend": "주말",
+      "peak": "{{period}}에는 보통 {{from}}~{{to}}시에 가장 붐벼요",
+      "estimated": "장소 종류로 추정한 혼잡도예요. 실제와 다를 수 있어요."
+    },
     "info": {
       "address": "주소",
       "hours": "영업시간"
