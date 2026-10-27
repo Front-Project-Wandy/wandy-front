@@ -11,7 +11,6 @@ export function useStartTrip() {
   const navigate = useNavigate();
   const startDraft = useWizardStore((state) => state.startDraft);
   const preferences = usePreferenceStore((state) => state.preferences);
-  const hasDraft = useWizardStore((state) => state.updatedAt !== null);
   const [pendingValues, setPendingValues] = useState(null);
 
   const start = (values) => {
@@ -21,6 +20,9 @@ export function useStartTrip() {
   };
 
   const requestStart = (values) => {
+    // 한 줄로 탭처럼 AI 응답을 기다렸다 부르는 경우 그사이 초안이 생겼을 수 있어서, 화면을 그릴 때 값이 아니라
+    // 부르는 순간의 store 값으로 확인한다
+    const hasDraft = useWizardStore.getState().updatedAt !== null;
     if (hasDraft) setPendingValues(values);
     else start(values);
   };
