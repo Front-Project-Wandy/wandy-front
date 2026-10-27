@@ -515,7 +515,7 @@
       "legWithCost": "{{mode}} {{duration}} · 약 {{cost}}",
       "withNightSurcharge": "{{text}} · 심야 할증",
       "directions": "길찾기",
-      "directionsLabel": "지도 앱에서 길찾기, 새 창",
+      "directionsLabel": "지도에서 길찾기, 새 창",
       "currency": {
         "KR": "{{amount}}원",
         "JP": "{{amount}}엔"
