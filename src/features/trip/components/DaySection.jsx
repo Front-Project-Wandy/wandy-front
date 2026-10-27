@@ -90,6 +90,7 @@ export default function DaySection({
                         country={country}
                         transportMode={transportMode}
                         showDirections
+                        showCompare
                         className="pl-21"
                       />
                     ) : null}
