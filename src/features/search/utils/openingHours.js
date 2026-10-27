@@ -48,9 +48,25 @@ const getWeekday = (date) => {
   return new Date(y, m - 1, d).getDay();
 };
 
-// 방문(startTime부터 stayMinutes 동안)이 영업시간 안인지 본다.
+// 그 요일 영업시간을 방문 날 0시 기준 구간으로 옮긴다. offset: 전날 -1440, 다음 날 +1440.
+const toRanges = (hours, offset) => {
+  if (hours === 'allDay') return [{ from: offset, to: offset + MINUTES_PER_DAY }];
+  if (!Array.isArray(hours)) return [];
+  return hours.map(({ from, to }) => ({ from: from + offset, to: to + offset }));
+};
+
+// start부터 영업 구간이 끊기지 않고 이어지는 데까지(분). start에 열려 있지 않으면 start.
+// 겹치거나 맞닿은 구간은 이어서 본다 — 구글은 밤새 여는 곳을 「22:00~24:00」과 다음 날 「00:00~03:00」으로 나눠 적기도 한다.
+const findOpenUntil = (ranges, start) =>
+  [...ranges]
+    .sort((a, b) => a.from - b.from)
+    .reduce((reached, { from, to }) => (from <= reached ? Math.max(reached, to) : reached), start);
+
+// 방문(startTime부터 stayMinutes 동안)이 처음부터 끝까지 영업시간 안인지 본다.
 // → null(괜찮음·알 수 없음) | { status: 'closed' } | { status: 'outside', hours: '06:00~17:00' }
-// 자정을 넘겨 여는 곳은 전날 영업시간(예: 월 11:00~다음 날 09:00)이 화요일 새벽 방문도 덮는다.
+//   | { status: 'nextDayClosed' } | { status: 'overnight', hours } (자정 넘은 부분이 다음 날 영업시간 밖)
+// 전날·그날·다음 날 영업시간을 함께 본다. 전날 밤샘 영업(예: 월 11:00~다음 날 09:00)은 화요일 새벽 방문도 덮고,
+// 24시간 영업인 날이라도 자정을 넘겨 다음 날 휴무 시간까지 머물면 알려 준다.
 export function checkVisitHours({ openingHours, date, startTime, stayMinutes }) {
   if (!Array.isArray(openingHours) || !date) return null;
   const start = toMinutes(startTime ?? '');
@@ -59,20 +75,25 @@ export function checkVisitHours({ openingHours, date, startTime, stayMinutes }) 
 
   const weekday = getWeekday(date);
   const todayText = findDayText(openingHours, weekday);
+  const tomorrowText = findDayText(openingHours, (weekday + 1) % 7);
   const today = parseDayHours(todayText);
-  const yesterday = parseDayHours(findDayText(openingHours, (weekday + 6) % 7));
+  const tomorrow = parseDayHours(tomorrowText);
   if (today === null) return null;
-  if (today === 'allDay') return null;
+  // 자정을 넘기는데 다음 날 영업시간을 모르면 판단할 수 없다
+  if (end > MINUTES_PER_DAY && tomorrow === null) return null;
 
   const ranges = [
-    ...(Array.isArray(today) ? today : []),
-    ...(Array.isArray(yesterday)
-      ? yesterday.map(({ from, to }) => ({
-          from: from - MINUTES_PER_DAY,
-          to: to - MINUTES_PER_DAY,
-        }))
-      : []),
+    ...toRanges(parseDayHours(findDayText(openingHours, (weekday + 6) % 7)), -MINUTES_PER_DAY),
+    ...toRanges(today, 0),
+    ...toRanges(tomorrow, MINUTES_PER_DAY),
   ];
-  if (ranges.some(({ from, to }) => from <= start && end <= to)) return null;
-  return today === 'closed' ? { status: 'closed' } : { status: 'outside', hours: todayText };
+  const openUntil = findOpenUntil(ranges, start);
+  if (openUntil >= end) return null;
+  // 끊긴 곳이 자정 전이면 그날 영업시간, 자정 뒤면 다음 날 영업시간 문제다
+  if (openUntil < MINUTES_PER_DAY) {
+    return today === 'closed' ? { status: 'closed' } : { status: 'outside', hours: todayText };
+  }
+  return tomorrow === 'closed'
+    ? { status: 'nextDayClosed' }
+    : { status: 'overnight', hours: tomorrowText };
 }
