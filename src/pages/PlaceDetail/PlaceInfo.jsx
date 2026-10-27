@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import AiPlaceDescription from '../../features/ai/components/AiPlaceDescription';
 import FavoriteButton from '../../features/member/components/FavoriteButton';
 import GoogleAttribution from '../../features/search/components/GoogleAttribution';
 
@@ -30,6 +31,7 @@ export default function PlaceInfo({ place }) {
           <h1 className="text-title font-bold">{place.name}</h1>
           <FavoriteButton place={place} />
         </div>
+        <AiPlaceDescription place={place} />
         <p className="flex items-center gap-2 text-body-sm">
           <span className="rounded-full bg-bg-soft px-3 py-1">{categoryLabel}</span>
           {place.rating !== null ? (
