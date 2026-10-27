@@ -23,6 +23,7 @@
       pages/Home, pages/Wizard                 → A
       components/common, i18n/, styles/        → A (공통 컴포넌트·번역 키·테마)
       store/wizard                             → A (마법사 진행 단계·중간 저장)
+      store/recent                             → A (최근 본 장소·상품)
       pages/PlaceDetail, pages/MyPage          → B
       pages/Login, pages/Products              → B
       features/search, restaurant, product, ai, member → B (회원·내 여행 포함)
@@ -64,8 +65,10 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
     // trip
     { id, title, country, city, startDate, endDate, people,
       style: 'normal',        // 'relaxed' | 'normal' | 'packed'
+      companion: null,        // 'solo' | 'couple' | 'friends' | 'family' | 'kids' | null (마법사 STEP1, 'solo'면 people 1)
+      budget: null,           // 1인 경비 범위 키 'under50' | '50to100' | '100to200' | 'over200' | null (항공·숙소 포함, 숫자는 만 원)
+      preferredCategories: [], // 이번 여행에 고른 Place 카테고리 배열 (마법사 STEP1, 고른 게 없으면 [])
       transportMode: null,    // 'transit' | 'taxi' | 'car' | 'mixed' | null (마법사 STEP4, null = 건너뜀 → 계산할 때 혼합)
-      budget: null,
       flight: null,           // { flightNo, returnFlightNo, arriveAt, departAt, link }
       stay: null,             // { name, address, lat, lng, checkIn, checkOut, link } (address는 참고용, 없으면 null)
       days: [], updatedAt }
@@ -84,6 +87,7 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
 
 - 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place, { startTime, stayMinutes }), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip, startNewTrip, selectTrip(id), deleteTrip(id)`
 - 다른 파트는 store 함수로만 값을 바꾼다. 마법사 진행 단계는 `store/wizard`(A)에 따로 둔다.
+- `companion`·`budget`·`preferredCategories`는 마법사 저장(`saveWizardTrip`, A)이 `setTripInfo`로 넘긴다. 이 칸이 생기기 전에 저장한 여행에는 없을 수 있어서, 읽을 때 `trip.companion ?? null`, `trip.preferredCategories ?? []`처럼 기본값을 둔다. 예산 숫자가 필요하면 범위 키를 `BUDGET_RANGES`(`pages/Wizard/tripStyleOptions.js`)로 바꿔 쓴다.
 - 여러 여행: `trip`은 지금 여는 여행이고 `trips`는 **지금 여는 여행을 뺀** 나머지 보관함이다(같은 여행을 두 곳에 두지 않는다). 새 여행을 저장하기 전에 `startNewTrip()`으로 지금 여행을 보관함에 보내고, 목록은 `useAllTrips()`(`store/plan`)로 읽는다. `resetTrip()`은 지금 여행을 지운다(보관함은 그대로).
 - `addItem`은 Place를 받아서 위 item 모양으로 바꿔 저장한다 (구글 장소의 이름·주소·사진·평점은 버린다)
   - 세 번째 인자(`startTime` 'HH:mm', `stayMinutes` 양의 정수)는 선택이다. 없거나 형식이 틀리면 기본값(10:00, 90분)을 쓴다. AI 채우기처럼 시각이 정해진 일정을 한 번에 넣을 때 쓴다.
