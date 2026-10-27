@@ -660,6 +660,10 @@
     "section": {
       "title": "여행 상품",
       "more": "전체 보기"
+    },
+    "placeSection": {
+      "title": "이 장소와 어울리는 투어",
+      "subtitle": "{{city}}에서 같이 즐기기 좋은 상품이에요"
     }
   },
   "login": {
@@ -770,6 +774,8 @@
       "emptyResultDescription": "이미 이 도시의 장소를 대부분 넣었어요.",
       "dropped": "확인되지 않은 장소 {{count}}곳은 뺐어요.",
       "mockNotice": "지금은 예시 장소 데이터로 만든 일정이에요.",
+      "rainy": "비 오는 날이에요",
+      "rainyHint": "쇼핑·온천 같은 실내 장소를 먼저 넣고, 공원·야경처럼 바깥에서 보는 곳은 빼요.",
       "day": "DAY {{day}}",
       "stay": "{{minutes}}분"
     },
@@ -803,6 +809,61 @@
       "start": "이걸로 시작",
       "fillError": "장소를 고르지 못했어요. 「장소도 AI가 미리 담아 두기」를 끄고 시작하거나 다시 시도해 주세요.",
       "mockNotice": "지금은 정해진 규칙으로 알아들어요. 실제 서비스에서는 AI가 문장을 읽어요."
+    },
+    "title": {
+      "button": "AI 제목 추천",
+      "retry": "다른 제목 추천",
+      "hint": "AI가 추천한 제목이에요. 눌러서 고르세요.",
+      "error": "제목을 추천하지 못했어요. 다시 시도해 주세요.",
+      "dayTrip": "당일치기",
+      "nightsDays": "{{nights}}박 {{days}}일",
+      "durationTheme": "{{city}} {{duration}} {{theme}} 여행",
+      "duration": "{{city}} {{duration}} 여행",
+      "themeOnly": "{{city}} {{theme}} 여행",
+      "plain": "{{city}} 여행",
+      "style": "{{style}} {{city}}",
+      "companion": "{{companion}} {{city}} 여행",
+      "themePair": "{{theme}}부터 {{nextTheme}}까지, {{city}}",
+      "memory": "{{city}}에서 만드는 추억",
+      "again": "다시 가고 싶은 {{city}}",
+      "theme": {
+        "sight": "명소",
+        "food": "먹방",
+        "cafe": "카페",
+        "shop": "쇼핑",
+        "nature": "자연",
+        "night": "야경",
+        "onsen": "온천"
+      },
+      "styleWord": {
+        "relaxed": "여유롭게 걷는",
+        "normal": "구석구석 둘러보는",
+        "packed": "알차게 누비는"
+      },
+      "companionWord": {
+        "solo": "혼자 떠나는",
+        "couple": "둘이 떠나는",
+        "friends": "친구와 떠나는",
+        "family": "가족과 떠나는",
+        "kids": "아이와 떠나는"
+      }
+    },
+    "placeDescription": {
+      "badge": "AI가 만든 설명이에요",
+      "sentence": "{{location}}의 {{kind}}",
+      "withRating": "{{location}}의 {{kind}}, 평점 {{rating}}",
+      "top": "대표 {{kind}}",
+      "popular": "인기 {{kind}}",
+      "kind": {
+        "sight": "관광 명소",
+        "food": "맛집",
+        "cafe": "카페",
+        "shop": "쇼핑 명소",
+        "nature": "자연 명소",
+        "night": "야경 명소",
+        "onsen": "온천",
+        "other": "가볼 만한 곳"
+      }
     }
   },
   "notFound": {

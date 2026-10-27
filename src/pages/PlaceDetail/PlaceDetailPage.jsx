@@ -4,13 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import EmptyState from '../../components/common/EmptyState';
 import ErrorState from '../../components/common/ErrorState';
 import Loading from '../../components/common/Loading';
+import PlaceProductSection from '../../features/product/components/PlaceProductSection';
 import NearbyRestaurants from '../../features/restaurant/components/NearbyRestaurants';
 import NearbyAmenities from '../../features/search/components/NearbyAmenities';
 import { usePlace } from '../../features/search/hooks/usePlace';
 import { getPlacePath } from '../../features/search/place';
 import PlaceInfo from './PlaceInfo';
 
-// /place/:id — 장소 상세 (10·11)와 주변 식당 (22).
+// /place/:id — 장소 상세 (10·11)와 주변 식당 (22), 어울리는 투어 상품 (84).
 export default function PlaceDetailPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -43,6 +44,7 @@ export default function PlaceDetailPage() {
       <div className="grid gap-8 lg:grid-cols-2">
         <PlaceInfo place={place} />
         <NearbyRestaurants key={place.id} place={place} onSelectPlace={handleSelectPlace} />
+        <PlaceProductSection place={place} className="lg:col-span-2" />
       </div>
     );
   };
