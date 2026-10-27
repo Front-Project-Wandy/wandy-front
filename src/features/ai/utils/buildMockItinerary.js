@@ -74,15 +74,23 @@ export function buildMockItinerary(conditions, places) {
     preferredCategories = [],
     days = [],
     excludePlaceIds = [],
+    likedPlaceIds = [],
     flight = null,
   } = conditions;
   const rule = STYLE_RULES[style] ?? STYLE_RULES.normal;
   const used = new Set(excludePlaceIds);
   const isFree = (place) => !used.has(place.id);
-  const spotPool = prioritizePreferredPlaces(
+  // 다녀와서 좋았다고 평가한 곳(97)은 관광지 후보 맨 앞, 식사는 그중에서 먼저 고른다.
+  const liked = new Set(likedPlaceIds);
+  const isLiked = (place) => liked.has(place.id);
+  const preferredSpots = prioritizePreferredPlaces(
     places.filter((place) => !MEAL_CATEGORIES.has(place.category)),
     preferredCategories,
   );
+  const spotPool = [
+    ...preferredSpots.filter(isLiked),
+    ...preferredSpots.filter((place) => !isLiked(place)),
+  ];
   const foodPool = places.filter((place) => place.category === 'food');
 
   // 야경 장소는 저녁 이후에만 넣는다. 저녁에는 야경을 먼저 쓰고, 야경이 없으면 낮 장소를 쓴다.
@@ -101,7 +109,8 @@ export function buildMockItinerary(conditions, places) {
   const takeMeal = (from) => {
     const candidates = foodPool.filter(isFree);
     if (candidates.length === 0) return null;
-    const place = pickNearest(candidates, from);
+    const likedMeals = candidates.filter(isLiked);
+    const place = pickNearest(likedMeals.length > 0 ? likedMeals : candidates, from);
     used.add(place.id);
     return place;
   };

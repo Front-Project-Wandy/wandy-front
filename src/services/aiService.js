@@ -7,7 +7,8 @@ import { getCityPlaces } from './placeService';
 
 // 빈 일정 자동 채우기 (55). 비어 있는 DAY에 넣을 장소를 Gemini 응답과 같은 모양으로 돌려준다.
 // conditions: { country, city, style, preferredCategories, days: [{ date, itemCount }], excludePlaceIds,
-//   flight: { arriveAt, departAt } | null } — 도착일·출발일은 비행기 시간을 피해서 넣는다.
+//   likedPlaceIds, flight: { arriveAt, departAt } | null } — 도착일·출발일은 비행기 시간을 피해서 넣는다.
+//   likedPlaceIds: 다녀와서 좋았다고 평가한 곳(97, 먼저 고름). 별로였던 곳은 excludePlaceIds에 들어 있다.
 // → { days: [{ dayIndex, items: [{ name, startTime, stayMinutes }] }] } — 장소 이름만 있어서 validateItinerary로 확인해서 쓴다.
 export async function fillItinerary(conditions) {
   const places = await getCityPlaces(conditions);

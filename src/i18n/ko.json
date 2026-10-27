@@ -689,6 +689,17 @@
       "emptyTitle": "아직 취향을 계산할 여행이 없어요",
       "emptyDescription": "장소를 담은 여행을 저장하면 자주 가는 곳과 하루 일정을 알려 드려요."
     },
+    "ratings": {
+      "title": "다녀온 곳 평가",
+      "notice": "좋았던 곳은 도시별 추천과 AI 일정에서 먼저 보여 주고, 별로였던 곳은 추천에서 뒤로 보내고 AI 일정에는 넣지 않아요. 같은 버튼을 다시 누르면 평가가 지워져요.",
+      "like": "좋았어요",
+      "dislike": "별로였어요",
+      "likeLabel": "{{name}} 좋았어요",
+      "dislikeLabel": "{{name}} 별로였어요",
+      "unknownPlace": "찾을 수 없는 장소",
+      "emptyTitle": "아직 다녀온 여행이 없어요",
+      "emptyDescription": "여행이 끝나면 담았던 장소를 평가해서 다음 추천에 반영할 수 있어요."
+    },
     "preferences": {
       "title": "나의 여행 취향",
       "notice": "여행 스타일과 좋아하는 장소를 설정해 보세요. 설정은 이 브라우저에만 저장돼요.",
