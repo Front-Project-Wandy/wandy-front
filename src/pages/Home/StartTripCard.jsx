@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from '../../components/common/Card';
 import TabBar from '../../components/common/TabBar';
@@ -15,6 +15,27 @@ export default function StartTripCard() {
   const { t } = useTranslation();
   const { requestStart, isConfirmOpen, confirmStart, continueDraft, cancelStart } = useStartTrip();
   const [tab, setTab] = useState('direct');
+  // [한 줄로]는 AI가 장소를 고르는 동안 기다렸다가 onStart를 부른다. 그사이 탭을 바꾸거나 홈을 떠나면
+  // 폼은 사라져도 늦게 온 결과가 새 여행을 덮어쓰므로, 지금 떠 있는 폼의 번호와 같을 때만 시작한다.
+  const [formVersion, setFormVersion] = useState(0);
+  const activeFormVersion = useRef(null);
+
+  useEffect(() => {
+    activeFormVersion.current = formVersion;
+    return () => {
+      activeFormVersion.current = null;
+    };
+  }, [formVersion]);
+
+  const handleTabChange = (key) => {
+    if (key === tab) return;
+    setTab(key);
+    setFormVersion((version) => version + 1);
+  };
+
+  const handleFormStart = (values) => {
+    if (activeFormVersion.current === formVersion) requestStart(values);
+  };
 
   return (
     <Card className="flex flex-col gap-4 p-4 sm:p-6">
@@ -25,12 +46,12 @@ export default function StartTripCard() {
           { key: 'oneLine', label: t('home.start.tab.oneLine') },
         ]}
         activeKey={tab}
-        onChange={setTab}
+        onChange={handleTabChange}
       />
       {tab === 'direct' ? (
-        <TripStartForm onStart={requestStart} />
+        <TripStartForm onStart={handleFormStart} />
       ) : (
-        <OneLineTripForm onStart={requestStart} />
+        <OneLineTripForm onStart={handleFormStart} />
       )}
       <StartTripConfirmModal
         open={isConfirmOpen}
