@@ -1,9 +1,10 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
-import { DAY_BORDER_CLASSES } from '../../map/constants';
-import { usePlace } from '../../search/hooks/usePlace';
+import { useItemName } from '../hooks/useItemName';
+import DragHandle from './DragHandle';
 import ItemEditForm from './ItemEditForm';
+import NumberBadge from './NumberBadge';
 
 // DAY 목록의 장소 한 줄. 구글 장소는 약관 때문에 이름을 저장하지 않아서(name: null)
 // placeId로 다시 불러와 보여준다. 네이버·TourAPI 장소는 저장된 이름을 바로 쓴다.
@@ -11,6 +12,7 @@ import ItemEditForm from './ItemEditForm';
 // flightWarnings: 비행기 도착·출발 시각과 어긋날 때의 경고 목록 (이것도 알려 주기만 한다).
 // isSelected·onSelect: 지도 마커와 연동된 선택 상태 (15). 지도에서 고르면 이 카드가 화면에 보이게 한다.
 // 번호 원은 지도 마커와 같은 모양(흰 원 + DAY 색 테두리 + 어두운 숫자)이라 dayIndex를 받는다.
+// dragHandleProps: 끌어서 순서를 바꾸는 손잡이에 줄 값 (16). 없으면 손잡이를 그리지 않는다.
 export default function DayItem({
   item,
   number,
@@ -18,6 +20,7 @@ export default function DayItem({
   isTimeOutOfOrder,
   flightWarnings = [],
   isSelected = false,
+  dragHandleProps,
   onSelect,
   onUpdate,
   onRemove,
@@ -29,9 +32,7 @@ export default function DayItem({
   const detailsId = useId();
   // 폼이 닫히면 편집 버튼이 새로 그려져서, 키보드 포커스를 그 버튼으로 돌려줘야 한다
   const shouldRestoreFocus = useRef(false);
-  const needsLookup = item.name === null;
-  // id가 없으면 usePlace가 요청을 보내지 않는다
-  const { data: place, isPending, isError } = usePlace(needsLookup ? item.placeId : null);
+  const name = useItemName(item);
 
   useEffect(() => {
     if (isEditing || !shouldRestoreFocus.current) return;
@@ -50,14 +51,6 @@ export default function DayItem({
     });
   }, [isSelected]);
 
-  const renderName = () => {
-    if (!needsLookup) return item.name;
-    if (isPending) return t('planner.item.nameLoading');
-    if (isError) return t('planner.item.nameError');
-    return place.name;
-  };
-
-  const name = renderName();
   const handleOpenEdit = () => setIsEditing(true);
   const handleCloseEdit = () => {
     shouldRestoreFocus.current = true;
@@ -77,6 +70,9 @@ export default function DayItem({
       className={`rounded-2xl border p-3 ${isSelected ? 'border-primary bg-bg-soft' : 'border-text/10 bg-background'}`}
     >
       <div className="flex items-center gap-3">
+        {dragHandleProps ? (
+          <DragHandle label={t('planner.drag.handle', { name })} {...dragHandleProps} />
+        ) : null}
         {/* 누르면 지도에서 이 장소를 보여 준다. 편집·삭제 버튼과 겹치지 않게 왼쪽 영역만 버튼이다.
             버튼 이름은 이름·시간만 두고, 경고·메모는 aria-describedby로 이어서 낭독기가 길게 읽지 않게 한다 */}
         <button
@@ -86,12 +82,7 @@ export default function DayItem({
           onClick={handleSelect}
           className="flex min-w-0 flex-1 items-center gap-3 rounded-xl text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <span
-            aria-hidden="true"
-            className={`grid size-8 shrink-0 place-items-center rounded-full border-4 bg-background text-body-sm font-bold text-text ${DAY_BORDER_CLASSES[dayIndex % DAY_BORDER_CLASSES.length]}`}
-          >
-            {number}
-          </span>
+          <NumberBadge number={number} dayIndex={dayIndex} />
           <span className="min-w-0 flex-1">
             <span className="block truncate text-body font-bold">{name}</span>
             <span className="block text-body-sm text-text/70">
@@ -121,7 +112,7 @@ export default function DayItem({
         )}
       </div>
       {hasDetails ? (
-        <div id={detailsId} className="pl-11 pt-1">
+        <div id={detailsId} className={`pt-1 ${dragHandleProps ? 'pl-21' : 'pl-11'}`}>
           {isTimeOutOfOrder ? (
             <span className="block text-body-sm font-bold text-text">
               {t('planner.item.timeOrderWarning')}

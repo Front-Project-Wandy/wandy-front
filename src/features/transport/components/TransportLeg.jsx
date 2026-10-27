@@ -4,7 +4,7 @@ import { formatAmount, splitMinutes } from '../utils/formatTransport';
 
 // 앞 장소(from)에서 다음 장소(to)까지의 이동 수단·시간·비용 한 줄.
 // 좌표가 없어 계산할 수 없으면 아무것도 그리지 않는다.
-export default function TransportLeg({ from, to, country, transportMode }) {
+export default function TransportLeg({ from, to, country, transportMode, className = 'pl-11' }) {
   const { t, i18n } = useTranslation();
   const leg = estimateTransport({ from, to, country, transportMode });
   if (!leg) return null;
@@ -28,5 +28,5 @@ export default function TransportLeg({ from, to, country, transportMode }) {
         })
       : t('planner.transport.leg', { mode, duration });
 
-  return <p className="pl-11 text-body-sm text-text/70">{text}</p>;
+  return <p className={`${className} text-body-sm text-text/70`}>{text}</p>;
 }
