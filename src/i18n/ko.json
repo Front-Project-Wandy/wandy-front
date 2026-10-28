@@ -25,6 +25,12 @@
       "close": "닫기",
       "back": "뒤로"
     },
+    "time": {
+      "hour": "시",
+      "minute": "분",
+      "hourOption": "{{value}}시",
+      "minuteOption": "{{value}}분"
+    },
     "category": {
       "sight": "관광",
       "food": "맛집",
@@ -458,6 +464,17 @@
   "planner": {
     "page": {
       "title": "플래너"
+    },
+    "view": {
+      "label": "일정 보기 방식",
+      "list": "목록",
+      "timeline": "타임라인"
+    },
+    "timeline": {
+      "hint": "타임라인에서는 일정을 보기만 해요. 장소 추가·편집·순서 바꾸기는 목록 보기에서 해 주세요.",
+      "nextDay": "다음 날",
+      "slack": "여유 {{duration}}",
+      "shortage": "이동 시간까지 넣으면 {{duration}} 모자라요"
     },
     "cost": {
       "title": "예상 비용",
