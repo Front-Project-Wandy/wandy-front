@@ -13,13 +13,18 @@ export default function HomeHero() {
       className="relative isolate overflow-hidden rounded-2xl bg-bg-soft"
       aria-label={t('home.editorial.heroLabel')}
     >
-      <img
-        key={city}
-        src={`/images/home/${city}.jpg`}
-        alt={t(`home.editorial.${city}.alt`)}
-        className="h-60 w-full object-cover sm:h-80 lg:absolute lg:inset-0 lg:-z-10 lg:h-full"
-        fetchPriority="high"
-      />
+      <div className="relative h-60 w-full sm:h-80 lg:absolute lg:inset-0 lg:-z-10 lg:h-full">
+        {DESTINATIONS.map((destination) => (
+          <img
+            key={destination}
+            src={`/images/home/${destination}.jpg`}
+            alt={city === destination ? t(`home.editorial.${destination}.alt`) : ''}
+            aria-hidden={city !== destination}
+            className={`hero-photo absolute inset-0 size-full object-cover ${city === destination ? 'opacity-100' : 'opacity-0'}`}
+            fetchPriority={destination === 'seoul' ? 'high' : 'auto'}
+          />
+        ))}
+      </div>
       <div className="flex min-h-85 flex-col lg:min-h-150 justify-between p-5 sm:p-8 lg:p-12">
         <div
           className="flex self-start rounded-full border border-text/10 bg-background p-1"
@@ -38,7 +43,10 @@ export default function HomeHero() {
             </button>
           ))}
         </div>
-        <div className="mt-6 max-w-md lg:mt-16 lg:rounded-2xl lg:bg-background lg:p-8">
+        <div
+          key={city}
+          className="motion-hero-copy mt-6 max-w-md lg:mt-16 lg:rounded-2xl lg:bg-background lg:p-8"
+        >
           <p className="mb-4 text-caption font-bold tracking-widest text-primary">
             {t('home.editorial.eyebrow')}
           </p>
