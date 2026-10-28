@@ -1,24 +1,44 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  getIntroPageSrc,
+  INTRO_CABIN_OFFSET,
   INTRO_FRAME_COUNT,
   INTRO_FRAME_HEIGHT,
   INTRO_FRAME_WIDTH,
+  INTRO_PAGE_FADE_FRAMES,
+  INTRO_PAGE_HEIGHT,
+  INTRO_PAGE_WIDTH,
   INTRO_PLAY_END,
   INTRO_SCRUB_SECONDS,
   INTRO_WHITE_FROM,
 } from '../constants';
 import { findReadyFrame, useIntroFrames } from '../hooks/useIntroFrames';
-import { easeInOutCubic, getCoverRect, getDiveStyle, span } from '../utils/introMath';
+import { getScreenQuad, useScreenTrack } from '../hooks/useScreenTrack';
+import {
+  clamp01,
+  easeInOutCubic,
+  getCoverRect,
+  getDiveStyle,
+  getQuadMatrix,
+  span,
+  toViewQuad,
+} from '../utils/introMath';
 
 const LEAVE_MS = 500;
 
 // 화면 전체를 덮고 스크롤 진행도(0~1)에 맞춰 프레임을 그린다. 끝나면 onFinish, 사라지면 onLeft.
+// 노트북 화면이 깨끗하게 보이기 시작하면 메인화면 사진을 그 화면 모서리에 맞춰 얹고,
+// 카메라가 화면 속으로 들어가 사진이 화면을 가득 채우면 덮개가 걷히며 진짜 홈 화면이 이어진다.
 export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft }) {
   const { t } = useTranslation();
   const { imagesRef, loadedCount } = useIntroFrames();
+  const trackRef = useScreenTrack();
+  // 사진은 지금 테마에 맞춰 고른다 (index.html이 첫 화면 전에 <html data-theme>을 정해 둔다).
+  const [pageSrc] = useState(() => getIntroPageSrc(document.documentElement.dataset.theme));
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
+  const pageRef = useRef(null);
   const whiteRef = useRef(null);
   const onFinishRef = useRef(onFinish);
 
@@ -32,6 +52,7 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
     const canvas = canvasRef.current;
     const stage = stageRef.current;
     const white = whiteRef.current;
+    const page = pageRef.current;
     const ctx = canvas.getContext('2d');
     let smooth = getProgress();
     let last = performance.now();
@@ -68,14 +89,35 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
       smooth += (target - smooth) * (1 - Math.exp(-dt / INTRO_SCRUB_SECONDS));
       if (Math.abs(target - smooth) < 0.0005) smooth = target;
 
-      draw(Math.round(span(smooth, 0, INTRO_PLAY_END) * (INTRO_FRAME_COUNT - 1)));
+      const frame = Math.round(span(smooth, 0, INTRO_PLAY_END) * (INTRO_FRAME_COUNT - 1));
+      draw(frame);
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
       const z = easeInOutCubic(span(smooth, INTRO_PLAY_END, 1));
-      const dive = getDiveStyle(window.innerWidth, window.innerHeight, z);
+      const dive = getDiveStyle(vw, vh, z);
       // 매 프레임 바뀌는 값이라 JSX style 대신 DOM에 직접 넣는다.
       stage.style.transformOrigin = dive.origin;
       stage.style.transform = dive.transform;
       canvas.style.filter = dive.blurPx ? `blur(${dive.blurPx}px)` : 'none';
-      white.style.opacity = String(span(z, INTRO_WHITE_FROM, 1));
+
+      // 메인화면 사진은 무대(stage) 안에 있어서 들어가는 변환을 영상과 같이 받는다. 흐림은 영상에만 준다.
+      const track = trackRef.current;
+      const pageReady = Boolean(track) && page.complete && page.naturalWidth > 0;
+      const cabinIndex = frame - INTRO_CABIN_OFFSET;
+      const quad = pageReady ? getScreenQuad(track, cabinIndex) : null;
+      if (quad) {
+        page.style.transform = getQuadMatrix(
+          INTRO_PAGE_WIDTH,
+          INTRO_PAGE_HEIGHT,
+          toViewQuad(quad, vw, vh),
+        );
+        page.style.opacity = String(
+          easeInOutCubic(clamp01((cabinIndex - track.first) / INTRO_PAGE_FADE_FRAMES)),
+        );
+      } else {
+        page.style.opacity = '0';
+      }
+      white.style.opacity = pageReady ? '0' : String(span(z, INTRO_WHITE_FROM, 1));
 
       if (!finished && target >= 1 && smooth > 0.998) {
         finished = true;
@@ -86,7 +128,7 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
 
     frameId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frameId);
-  }, [getProgress, imagesRef]);
+  }, [getProgress, imagesRef, trackRef]);
 
   // 흰 화면이 걷히는 시간이 지나면 덮개를 없앤다.
   useEffect(() => {
@@ -106,6 +148,16 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
           role="img"
           aria-label={t('intro.video.label')}
           className="absolute inset-0 h-full w-full"
+        />
+        <img
+          ref={pageRef}
+          src={pageSrc}
+          alt=""
+          aria-hidden="true"
+          width={INTRO_PAGE_WIDTH}
+          height={INTRO_PAGE_HEIGHT}
+          decoding="async"
+          className="pointer-events-none absolute top-0 left-0 max-w-none origin-top-left opacity-0"
         />
       </div>
       <div
