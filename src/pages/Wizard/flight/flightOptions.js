@@ -17,6 +17,8 @@ export const EMPTY_FLIGHT = {
   returnFlightNo: '',
   arriveTime: '',
   departTime: '',
+  // 가는 편 도착 공항 코드 ('NRT' 등). 목업에서 고르면 채워지고, 직접 입력하면 null (플랜에서 도시 대표 공항으로 가정)
+  arriveAirport: null,
   link: null,
 };
 
@@ -42,16 +44,18 @@ export const flightFromMock = (mock, link) => ({
   returnFlightNo: mock.inbound.flightNo,
   arriveTime: mock.outbound.arriveTime,
   departTime: mock.inbound.departTime,
+  arriveAirport: mock.to,
   link,
 });
 
-// 플랜 store(C) setFlight 모양 { flightNo, arriveAt, departAt, link }으로 바꾼다.
+// 플랜 store(C) setFlight 모양 { flightNo, returnFlightNo, arriveAirport, arriveAt, departAt, link }으로 바꾼다.
 // 시각만 받았으니 날짜는 여행 첫날·마지막 날을 붙인다.
 export function toPlanFlight(flight, { startDate, endDate }) {
   if (!flight?.status || !flight.arriveTime || !flight.departTime) return null;
   return {
     flightNo: flight.flightNo.trim() || null,
     returnFlightNo: flight.returnFlightNo.trim() || null,
+    arriveAirport: flight.arriveAirport ?? null,
     arriveAt: `${startDate}T${flight.arriveTime}`,
     departAt: `${endDate}T${flight.departTime}`,
     link: flight.link,

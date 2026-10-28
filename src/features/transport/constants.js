@@ -44,3 +44,18 @@ export const OVERLOAD_MINUTES = { relaxed: 120, normal: 180, packed: 240 };
 
 // 요금은 정확한 값이 아니라서 이 단위로 반올림해 보여 준다
 export const COST_ROUND_UNIT = 10;
+
+// 공항 (요구사항 #52). 공항 → 숙소 이동을 추정할 때 쓰는 좌표다. 나라는 어느 나라 안의 공항인지다.
+export const AIRPORTS = {
+  ICN: { country: 'KR', lat: 37.4602, lng: 126.4407 },
+  GMP: { country: 'KR', lat: 37.5586, lng: 126.7906 },
+  NRT: { country: 'JP', lat: 35.772, lng: 140.3929 },
+  HND: { country: 'JP', lat: 35.5494, lng: 139.7798 },
+};
+
+// 항공편에서 도착 공항을 알 수 없을 때(직접 입력 등) 여행 도시의 대표 공항으로 계산한다.
+export const DEFAULT_AIRPORT = { seoul: 'ICN', tokyo: 'HND' };
+
+// 공항은 도심에서 멀어서 도심 기준 속도(SPEED_KMH)로 구하면 시간이 너무 길게 나온다.
+// 공항철도·리무진·고속도로를 감안한 평균 속도(km/h). 도보는 공항 이동에 쓰지 않는다.
+export const AIRPORT_SPEED_KMH = { transit: 45, taxi: 50, car: 50 };
