@@ -38,5 +38,9 @@ export const NIGHT_SURCHARGE = {
   JP: [{ from: 22 * 60, to: 29 * 60, rate: 0.2 }],
 };
 
+// 하루 이동 시간이 이만큼(분) 이상이면 일정이 과밀하다고 알려 준다 (여행 스타일별, 요구사항 #70).
+// 여행 스타일을 모르거나 정해지지 않았으면 normal 기준을 쓴다.
+export const OVERLOAD_MINUTES = { relaxed: 120, normal: 180, packed: 240 };
+
 // 요금은 정확한 값이 아니라서 이 단위로 반올림해 보여 준다
 export const COST_ROUND_UNIT = 10;
