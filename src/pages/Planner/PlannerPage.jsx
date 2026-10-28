@@ -8,11 +8,12 @@ import AiFillButton from '../../features/ai/components/AiFillButton';
 import MapView from '../../features/map/components/MapView';
 import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
+import DuplicateTripDialog from '../../features/trip/components/DuplicateTripDialog';
 import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
 import { useUndoShortcut } from '../../features/trip/hooks/useUndoShortcut';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36), 끌어서 순서 바꾸기(16), 되돌리기·다시 실행(71)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36), 끌어서 순서 바꾸기(16), 되돌리기·다시 실행·여행 복제(71)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -29,12 +30,15 @@ export default function PlannerPage() {
   const redo = usePlanStore((state) => state.redo);
   const clearHistory = usePlanStore((state) => state.clearHistory);
   const batchChanges = usePlanStore((state) => state.batchChanges);
+  const duplicateTrip = usePlanStore((state) => state.duplicateTrip);
   const canUndo = usePlanStore((state) => state.past.length > 0);
   const canRedo = usePlanStore((state) => state.future.length > 0);
   // 장소를 넣을 DAY 번호. null이면 장소 추가 창이 닫혀 있다.
   const [addingDayIndex, setAddingDayIndex] = useState(null);
   // 목록과 지도 마커가 같이 쓰는 선택된 장소 id (15). 없으면 null.
   const [selectedItemId, setSelectedItemId] = useState(null);
+  // 여행 복제 창이 열려 있는지 (71)
+  const [isDuplicating, setIsDuplicating] = useState(false);
 
   // 주소의 여행이 보관함에 있으면 지금 여는 여행으로 바꾼다 (여러 여행). 바뀌는 동안은 로딩을 보여 준다.
   const isArchivedTrip = trip?.id !== id && trips.some((item) => item.id === id);
@@ -87,6 +91,13 @@ export default function PlannerPage() {
         ),
       ),
     );
+  };
+  // 복제한 새 여행이 지금 여는 여행이 되므로, 그 여행의 플래너로 바로 간다
+  const handleDuplicate = (values) => {
+    const newId = duplicateTrip(trip.id, values);
+    if (!newId) return;
+    setIsDuplicating(false);
+    navigate(`/trip/${newId}`);
   };
   // 여행이 정상으로 불러와졌을 때만 AI 채우기 버튼을 보여 준다
   const isTripReady = Boolean(trip) && trip.days.length > 0 && trip.id === id;
@@ -163,11 +174,22 @@ export default function PlannerPage() {
               onRedo={handleRedo}
               message={historyMessage}
             />
+            <Button variant="secondary" onClick={() => setIsDuplicating(true)}>
+              {t('planner.duplicate.button')}
+            </Button>
             <AiFillButton trip={trip} onApply={handleApplyAiFill} />
           </div>
         ) : null}
       </div>
       {renderBody()}
+      {isTripReady ? (
+        <DuplicateTripDialog
+          open={isDuplicating}
+          onClose={() => setIsDuplicating(false)}
+          trip={trip}
+          onSubmit={handleDuplicate}
+        />
+      ) : null}
     </main>
   );
 }

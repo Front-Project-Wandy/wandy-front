@@ -457,6 +457,22 @@
     "page": {
       "title": "플래너"
     },
+    "duplicate": {
+      "button": "여행 복제",
+      "title": "여행 복제하기",
+      "titleLabel": "새 여행 제목",
+      "startDate": "가는 날",
+      "summary": "{{days}}일 일정이에요. {{start}} ~ {{end}}",
+      "note": "장소는 그대로 복사하고, 항공 정보는 복사하지 않아요. 숙소는 날짜만 지워요.",
+      "submit": "복제하기",
+      "cancel": "취소",
+      "defaultTitle": "{{title}} 복사본",
+      "untitled": "내 여행",
+      "error": {
+        "startDate": "가는 날을 골라 주세요.",
+        "pastDate": "지난 날짜는 고를 수 없어요. 오늘 이후로 골라 주세요."
+      }
+    },
     "history": {
       "undo": "되돌리기",
       "redo": "다시 실행",
