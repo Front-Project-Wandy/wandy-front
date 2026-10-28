@@ -687,6 +687,12 @@
       "peak": "{{period}}에는 보통 {{from}}~{{to}}시에 가장 붐벼요",
       "estimated": "장소 종류로 추정한 혼잡도예요. 실제와 다를 수 있어요."
     },
+    "photo": {
+      "by": "사진:",
+      "cropped": "잘라서 표시",
+      "representative": "대표 사진",
+      "representativeAlt": "{{name}} 대표 사진 (근처 동네·대표 음식)"
+    },
     "info": {
       "title": "이용 정보",
       "address": "주소",
