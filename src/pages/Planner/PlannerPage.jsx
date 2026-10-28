@@ -8,9 +8,11 @@ import AiFillButton from '../../features/ai/components/AiFillButton';
 import MapView from '../../features/map/components/MapView';
 import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
+import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
+import { useUndoShortcut } from '../../features/trip/hooks/useUndoShortcut';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36), 끌어서 순서 바꾸기(16)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36), 끌어서 순서 바꾸기(16), 되돌리기·다시 실행(71)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -23,6 +25,12 @@ export default function PlannerPage() {
   const updateItem = usePlanStore((state) => state.updateItem);
   const removeItem = usePlanStore((state) => state.removeItem);
   const moveItem = usePlanStore((state) => state.moveItem);
+  const undo = usePlanStore((state) => state.undo);
+  const redo = usePlanStore((state) => state.redo);
+  const clearHistory = usePlanStore((state) => state.clearHistory);
+  const batchChanges = usePlanStore((state) => state.batchChanges);
+  const canUndo = usePlanStore((state) => state.past.length > 0);
+  const canRedo = usePlanStore((state) => state.future.length > 0);
   // 장소를 넣을 DAY 번호. null이면 장소 추가 창이 닫혀 있다.
   const [addingDayIndex, setAddingDayIndex] = useState(null);
   // 목록과 지도 마커가 같이 쓰는 선택된 장소 id (15). 없으면 null.
@@ -33,6 +41,25 @@ export default function PlannerPage() {
   useEffect(() => {
     if (isArchivedTrip) selectTrip(id);
   }, [isArchivedTrip, id, selectTrip]);
+
+  // 여행을 열 때마다 되돌리기 기록을 비운다. 마법사가 저장하면서 넣은 장소나 다른 여행의 편집은 되돌리기 대상이 아니다 (71).
+  useEffect(() => {
+    clearHistory();
+  }, [id, clearHistory]);
+  // 방금 되돌렸는지 다시 실행했는지 낭독기에 알려 주는 글자. 버튼과 단축키가 같이 쓴다.
+  const [historyMessage, setHistoryMessage] = useState({ id: 0, text: '' });
+  const announceHistory = (key) => setHistoryMessage((prev) => ({ id: prev.id + 1, text: t(key) }));
+  const handleUndo = () => {
+    if (!canUndo) return;
+    undo();
+    announceHistory('planner.history.undone');
+  };
+  const handleRedo = () => {
+    if (!canRedo) return;
+    redo();
+    announceHistory('planner.history.redone');
+  };
+  useUndoShortcut({ onUndo: handleUndo, onRedo: handleRedo, enabled: Boolean(trip) });
 
   // 지운 장소가 선택된 채로 남지 않게, 지금 일정에 있는 장소일 때만 선택으로 본다
   const activeItemId = trip?.days.some((day) =>
@@ -51,10 +78,13 @@ export default function PlannerPage() {
     setAddingDayIndex(null);
   };
   // AI가 만든 일정을 DAY별로 넣는다. 시작 시각·체류 시간은 처음부터 맞게 들어간다.
+  // 장소마다 되돌리면 번거로워서 batchChanges로 한 번에 되돌리게 묶는다.
   const handleApplyAiFill = (days) => {
-    days.forEach(({ dayIndex, items }) =>
-      items.forEach(({ place, startTime, stayMinutes }) =>
-        addItem(dayIndex, place, { startTime, stayMinutes }),
+    batchChanges(() =>
+      days.forEach(({ dayIndex, items }) =>
+        items.forEach(({ place, startTime, stayMinutes }) =>
+          addItem(dayIndex, place, { startTime, stayMinutes }),
+        ),
       ),
     );
   };
@@ -123,7 +153,18 @@ export default function PlannerPage() {
     <main className="mx-auto max-w-5xl space-y-6 px-4 py-6 lg:px-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-title font-bold">{t('planner.page.title')}</h1>
-        {isTripReady ? <AiFillButton trip={trip} onApply={handleApplyAiFill} /> : null}
+        {isTripReady ? (
+          <div className="flex flex-wrap items-center gap-2">
+            <UndoRedoBar
+              canUndo={canUndo}
+              canRedo={canRedo}
+              onUndo={handleUndo}
+              onRedo={handleRedo}
+              message={historyMessage}
+            />
+            <AiFillButton trip={trip} onApply={handleApplyAiFill} />
+          </div>
+        ) : null}
       </div>
       {renderBody()}
     </main>

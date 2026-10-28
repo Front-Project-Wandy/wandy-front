@@ -85,10 +85,11 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
       startTime: '10:00', stayMinutes: 90, memo: '',
       transportToNext: null }    // { mode: 'walk'|'transit'|'taxi'|'car', minutes, cost }
 
-- 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place, { startTime, stayMinutes }), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip, startNewTrip, selectTrip(id), deleteTrip(id)`
+- 함수: `setTripInfo, setFlight, setStay, addItem(dayIndex, place, { startTime, stayMinutes }), removeItem(dayIndex, itemId), moveItem(from, to), updateItem(dayIndex, itemId, patch), resetTrip, startNewTrip, selectTrip(id), deleteTrip(id), undo, redo, clearHistory, batchChanges(apply)`
 - 다른 파트는 store 함수로만 값을 바꾼다. 마법사 진행 단계는 `store/wizard`(A)에 따로 둔다.
 - `companion`·`budget`·`preferredCategories`는 마법사 저장(`saveWizardTrip`, A)이 `setTripInfo`로 넘긴다. 이 칸이 생기기 전에 저장한 여행에는 없을 수 있어서, 읽을 때 `trip.companion ?? null`, `trip.preferredCategories ?? []`처럼 기본값을 둔다. 예산 숫자가 필요하면 범위 키를 `BUDGET_RANGES`(`pages/Wizard/tripStyleOptions.js`)로 바꿔 쓴다.
 - 여러 여행: `trip`은 지금 여는 여행이고 `trips`는 **지금 여는 여행을 뺀** 나머지 보관함이다(같은 여행을 두 곳에 두지 않는다). 새 여행을 저장하기 전에 `startNewTrip()`으로 지금 여행을 보관함에 보내고, 목록은 `useAllTrips()`(`store/plan`)로 읽는다. `resetTrip()`은 지금 여행을 지운다(보관함은 그대로).
+- 되돌리기·다시 실행: `addItem·removeItem·moveItem·updateItem`이 바꾸기 직전의 trip을 `past`에 쌓고(최대 30단계), `undo`·`redo`가 오간다. `past`·`future`는 저장하지 않고, `startNewTrip`·`selectTrip`·`resetTrip`·현재 여행 `deleteTrip`과 플래너를 열 때(`clearHistory`) 비운다. 좌표만 바꾸는 `updateItem`(`lat`·`lng`·`coordsCachedAt`, 30일 갱신)은 기록하지 않는다. 일정을 여러 번 넣는 AI 채우기 같은 곳은 `batchChanges(() => { ...addItem 여러 번... })`로 감싸면 한 번에 되돌려진다.
 - `addItem`은 Place를 받아서 위 item 모양으로 바꿔 저장한다 (구글 장소의 이름·주소·사진·평점은 버린다)
   - 세 번째 인자(`startTime` 'HH:mm', `stayMinutes` 양의 정수)는 선택이다. 없거나 형식이 틀리면 기본값(10:00, 90분)을 쓴다. AI 채우기처럼 시각이 정해진 일정을 한 번에 넣을 때 쓴다.
 

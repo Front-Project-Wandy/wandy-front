@@ -8,7 +8,10 @@ export default function DragPreview({ item, number, dayIndex }) {
   const name = useItemName(item);
 
   return (
-    <div className="flex items-center gap-3 rounded-2xl border border-primary bg-background p-3 shadow-md">
+    <div
+      data-drag-preview
+      className="flex items-center gap-3 rounded-2xl border border-primary bg-background p-3 shadow-md"
+    >
       <NumberBadge number={number} dayIndex={dayIndex} />
       <span className="min-w-0 flex-1">
         <span className="block truncate text-body font-bold">{name}</span>
