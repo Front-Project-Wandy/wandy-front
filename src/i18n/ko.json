@@ -730,6 +730,7 @@
   "product": {
     "page": {
       "title": "투어 상품",
+      "eyebrow": "TOURS & TICKETS",
       "description": "여행지에서 바로 쓰는 투어·입장권·교통패스를 모았어요"
     },
     "category": {
@@ -753,7 +754,9 @@
       "over70": "7만 원~"
     },
     "list": {
-      "count": "{{count}}개"
+      "count": "{{count}}개",
+      "more": "더보기",
+      "progress": "{{shown}} / {{total}}"
     },
     "empty": {
       "title": "조건에 맞는 상품이 없어요",
@@ -761,7 +764,8 @@
       "clearFilters": "필터 지우기"
     },
     "card": {
-      "rating": "평점 {{rating}}점, 후기 {{count}}개"
+      "rating": "평점 {{rating}}점, 후기 {{count}}개",
+      "rank": "{{rank}}위"
     },
     "price": {
       "KRW": "{{value}}원",
@@ -795,7 +799,20 @@
   },
   "my": {
     "page": {
-      "title": "마이페이지"
+      "title": "마이페이지",
+      "greeting": "안녕하세요, 여행자님",
+      "description": "내 여행과 다녀온 곳, 여행 취향을 한곳에 모았어요",
+      "nextTrip": "다음 여행 {{title}} · D-{{count}}",
+      "ongoing": "지금 여행 중이에요 · {{title}}"
+    },
+    "summary": {
+      "label": "내 여행 요약",
+      "upcoming": "예정된 여행",
+      "past": "지난 여행",
+      "favorites": "찜한 장소",
+      "ratings": "평가한 장소",
+      "tripCount": "{{count}}개",
+      "placeCount": "{{count}}곳"
     },
     "trips": {
       "title": "내 여행",
