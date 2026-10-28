@@ -529,6 +529,30 @@
       "slack": "여유 {{duration}}",
       "shortage": "이동 시간까지 넣으면 {{duration}} 모자라요"
     },
+    "pass": {
+      "title": "교통패스",
+      "best": "{{name}}({{price}})을 {{range}}에 쓰면 1인 약 {{benefit}} 이득이에요",
+      "group": "({{people}}명 약 {{total}})",
+      "none": "일정 기준으로는 사서 이득인 교통패스가 없어요",
+      "toggle": "패스별 비교",
+      "caption": "교통패스별 이득 (1인 기준)",
+      "column": {
+        "name": "패스",
+        "range": "쓸 날",
+        "price": "가격",
+        "covered": "대중교통 요금",
+        "result": "결과"
+      },
+      "benefit": "약 {{amount}} 이득",
+      "loss": "약 {{amount}} 손해",
+      "rangeOne": "DAY {{day}}",
+      "rangeMany": "DAY {{start}}~{{end}}",
+      "noteEstimate": {
+        "KR": "대중교통 요금은 추정치예요. 패스로 탈 수 없는 노선(광역버스 등)까지 포함돼서 이득이 실제보다 크게 나올 수 있어요.",
+        "JP": "대중교통 요금은 추정치예요. 패스로 탈 수 없는 노선(JR·사철·버스 등)까지 포함돼서 이득이 실제보다 크게 나올 수 있어요."
+      },
+      "noteDay": "패스 기간은 날짜(1일 = 24시간) 기준으로 어림했어요. 가격은 {{date}}에 확인한 값이에요."
+    },
     "weather": {
       "title": "DAY별 날씨",
       "loading": "날씨를 불러오는 중…",

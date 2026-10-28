@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-10-28",
+  "passes": [
+    {
+      "id": "kr-climate-1d",
+      "country": "KR",
+      "name": "기후동행카드 단기권 1일",
+      "days": 1,
+      "price": 5000
+    },
+    {
+      "id": "kr-climate-2d",
+      "country": "KR",
+      "name": "기후동행카드 단기권 2일",
+      "days": 2,
+      "price": 8000
+    },
+    {
+      "id": "kr-climate-3d",
+      "country": "KR",
+      "name": "기후동행카드 단기권 3일",
+      "days": 3,
+      "price": 10000
+    },
+    {
+      "id": "kr-climate-5d",
+      "country": "KR",
+      "name": "기후동행카드 단기권 5일",
+      "days": 5,
+      "price": 15000
+    },
+    {
+      "id": "kr-climate-7d",
+      "country": "KR",
+      "name": "기후동행카드 단기권 7일",
+      "days": 7,
+      "price": 20000
+    },
+    {
+      "id": "jp-tokyo-subway-24h",
+      "country": "JP",
+      "name": "도쿄 서브웨이 티켓 24시간",
+      "days": 1,
+      "price": 1000
+    },
+    {
+      "id": "jp-tokyo-subway-48h",
+      "country": "JP",
+      "name": "도쿄 서브웨이 티켓 48시간",
+      "days": 2,
+      "price": 1500
+    },
+    {
+      "id": "jp-tokyo-subway-72h",
+      "country": "JP",
+      "name": "도쿄 서브웨이 티켓 72시간",
+      "days": 3,
+      "price": 2000
+    }
+  ]
+}

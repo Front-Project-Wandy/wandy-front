@@ -8,6 +8,7 @@ import AiFillButton from '../../features/ai/components/AiFillButton';
 import TripCostSummary from '../../features/budget/components/TripCostSummary';
 import MapView from '../../features/map/components/MapView';
 import AirportLeg from '../../features/transport/components/AirportLeg';
+import TransitPassAdvice from '../../features/transport/components/TransitPassAdvice';
 import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import DuplicateTripDialog from '../../features/trip/components/DuplicateTripDialog';
@@ -202,6 +203,7 @@ export default function PlannerPage() {
         ) : null}
       </div>
       {isTripReady ? <TripCostSummary trip={trip} /> : null}
+      {isTripReady ? <TransitPassAdvice trip={trip} /> : null}
       {isTripReady ? <TripWeather trip={trip} /> : null}
       {isTripReady ? <AirportLeg trip={trip} /> : null}
       {isTripReady ? <ViewToggle value={viewMode} onChange={setViewMode} /> : null}
