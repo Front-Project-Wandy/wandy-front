@@ -775,7 +775,12 @@
       "duration": "소요 시간",
       "tags": "특징",
       "book": "예약 사이트에서 보기",
-      "notice": "예약과 결제는 외부 사이트에서 진행돼요"
+      "notice": "예약과 결제는 외부 사이트에서 진행돼요",
+      "photo": {
+        "representative": "대표 이미지",
+        "author": "사진: {{author}}",
+        "cropped": "잘라서 표시"
+      }
     },
     "error": {
       "notFound": "상품을 찾을 수 없어요"
