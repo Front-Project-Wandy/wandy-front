@@ -18,7 +18,8 @@ export const PLACE_TO_PRODUCT_CATEGORIES = {
   shop: ['pass'],
 };
 
-const byRating = (a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount;
+// 평점 높은 순, 같으면 후기가 많은 쪽 먼저 (DAY 추천 pickDayProducts도 같이 쓴다)
+export const byRating = (a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount;
 
 // 같은 도시 상품 중 카테고리가 맞는 것을 먼저, 그다음 평점 높은 순으로 최대 limit개.
 // 평점이 같으면 후기가 많은 쪽을 앞에 둬서 순서가 매번 같게 한다.
