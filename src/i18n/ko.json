@@ -615,6 +615,16 @@
       "noteCar": "렌터카는 유류비(연비 {{kmPerLiter}}km/L 기준)와 고속도로 구간 통행료 추정이에요. 렌터카 대여료는 포함하지 않아요.",
       "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
     },
+    "gap": {
+      "title": "빈 시간대 추천",
+      "loading": "빈 시간에 갈 만한 곳을 찾는 중…",
+      "error": "추천 장소를 불러오지 못했어요",
+      "gapTitle": "{{start}} ~ {{end}} 사이 {{duration}}이 비어 있어요",
+      "detail": "{{category}} · {{time}} 도착 · 앞 장소에서 {{minutes}}분",
+      "add": "추가",
+      "addLabel": "빈 시간에 추가: {{name}}",
+      "note": "머무는 시간은 1시간으로 어림했고, 이동 시간은 추정이에요."
+    },
     "airportLeg": {
       "title": "도착 공항에서 숙소까지",
       "route": "{{airport}} → 숙소({{stay}})",
