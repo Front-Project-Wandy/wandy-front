@@ -103,7 +103,8 @@ export default function ProductsPage() {
     return (
       <>
         <ul
-          className={`grid grid-cols-2 gap-x-3 gap-y-8 transition-opacity lg:grid-cols-4 lg:gap-x-6 lg:gap-y-12 ${isPlaceholderData ? 'opacity-60' : ''}`}
+          key={`${filterKey}|${isPlaceholderData}`}
+          className={`motion-results grid grid-cols-2 gap-x-3 gap-y-8 transition-opacity lg:grid-cols-4 lg:gap-x-6 lg:gap-y-12 ${isPlaceholderData ? 'opacity-60' : 'motion-stagger'}`}
         >
           {visibleProducts.map((product) => (
             <li key={product.id} className="min-w-0">
