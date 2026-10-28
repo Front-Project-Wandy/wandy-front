@@ -16,7 +16,7 @@ export default function PlaceRatingRow({ item }) {
     t(isError ? 'my.ratings.unknownPlace' : 'wizard.spots.basket.loadingName');
 
   return (
-    <li className="flex flex-col gap-2 rounded-xl border border-text/10 p-3 sm:flex-row sm:items-center sm:justify-between">
+    <li className="flex flex-col gap-2 rounded-2xl border border-text/10 bg-background p-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="min-w-0">
         <p className="truncate text-body font-bold">{name}</p>
         {item.myCategory ? (
