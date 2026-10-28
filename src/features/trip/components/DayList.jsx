@@ -7,6 +7,7 @@ export default function DayList({
   days,
   country,
   transportMode,
+  style,
   flight,
   selectedItemId,
   onSelectItem,
@@ -29,6 +30,7 @@ export default function DayList({
               dayIndex={index}
               country={country}
               transportMode={transportMode}
+              style={style}
               flight={flight}
               selectedItemId={selectedItemId}
               onSelectItem={onSelectItem}

@@ -457,6 +457,28 @@
     "page": {
       "title": "플래너"
     },
+    "duplicate": {
+      "button": "여행 복제",
+      "title": "여행 복제하기",
+      "titleLabel": "새 여행 제목",
+      "startDate": "가는 날",
+      "summary": "{{days}}일 일정이에요. {{start}} ~ {{end}}",
+      "note": "장소는 그대로 복사하고, 항공 정보는 복사하지 않아요. 숙소는 날짜만 지워요.",
+      "submit": "복제하기",
+      "cancel": "취소",
+      "defaultTitle": "{{title}} 복사본",
+      "untitled": "내 여행",
+      "error": {
+        "startDate": "가는 날을 골라 주세요.",
+        "pastDate": "지난 날짜는 고를 수 없어요. 오늘 이후로 골라 주세요."
+      }
+    },
+    "history": {
+      "undo": "되돌리기",
+      "redo": "다시 실행",
+      "undone": "되돌렸어요.",
+      "redone": "다시 실행했어요."
+    },
     "empty": {
       "title": "아직 만든 여행이 없어요",
       "description": "여행지와 날짜를 정하면 일정을 짤 수 있어요",
@@ -472,7 +494,8 @@
       "addPlace": "장소 추가",
       "addPlaceLabel": "DAY {{number}}에 장소 추가",
       "transportTotal": "이동 {{duration}}",
-      "transportTotalWithCost": "이동 {{duration}} · 약 {{cost}}"
+      "transportTotalWithCost": "이동 {{duration}} · 약 {{cost}}",
+      "overloadWarning": "이동이 {{limit}} 이상이에요. 가까운 곳끼리 묶으면 덜 힘들어요."
     },
     "item": {
       "stay": "체류 {{minutes}}분",
@@ -678,6 +701,9 @@
     "placeSection": {
       "title": "이 장소와 어울리는 투어",
       "subtitle": "{{city}}에서 같이 즐기기 좋은 상품이에요"
+    },
+    "daySection": {
+      "title": "이 날과 어울리는 투어"
     }
   },
   "login": {
@@ -799,6 +825,13 @@
       "mockNotice": "지금은 예시 장소 데이터로 만든 일정이에요.",
       "rainy": "비 오는 날이에요",
       "rainyHint": "쇼핑·온천 같은 실내 장소를 먼저 넣고, 공원·야경처럼 바깥에서 보는 곳은 빼요.",
+      "regenerateDay": "AI로 이 날 다시 짜기",
+      "regenerateDayLabel": "DAY {{number}} AI로 다시 짜기",
+      "redoDay": {
+        "title": "AI로 이 날 다시 짜기",
+        "description": "이 날 장소를 AI가 새로 골라 드려요. 지금 넣은 곳과 다른 장소로 골라요.",
+        "apply": "이 날 일정 바꾸기"
+      },
       "day": "DAY {{day}}",
       "stay": "{{minutes}}분"
     },
