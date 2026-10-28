@@ -553,7 +553,8 @@
     },
     "cost": {
       "title": "예상 비용",
-      "summary": "예상 총비용 약 {{total}} ({{converted}}) · 1인 약 {{perPerson}}",
+      "summary": "예상 총비용 약 {{total}} · 1인 약 {{perPerson}}",
+      "summaryConverted": "예상 총비용 약 {{total}} (약 {{converted}}) · 1인 약 {{perPerson}}",
       "toggle": "내역 보기",
       "caption": "예상 비용 내역 ({{count}}명 기준)",
       "item": "항목",
