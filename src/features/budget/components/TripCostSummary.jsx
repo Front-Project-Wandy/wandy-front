@@ -3,12 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { formatCost } from '../../transport/utils/formatTransport';
 import { COUNTRY_CURRENCY } from '../constants';
 import { convertCurrency, getKrwPerJpy } from '../utils/convertCurrency';
+import { getHomeCountry } from '../utils/homeCountry';
 import { summarizeTripCost } from '../utils/summarizeTripCost';
 
 const ROWS = ['transport', 'entry', 'meals'];
 
 // 플래너 위쪽의 예상 총비용 한 줄과 펼쳐 보는 내역 (57). 일정에 장소가 없으면 보여 줄 게 없어서 그리지 않는다.
-// 금액은 여행 나라 통화가 기본이고, 반대 통화로 환산한 값을 괄호로 같이 보여 준다.
+// 금액은 여행 나라 통화가 기본이고, 사용자 기준 통화와 다를 때만 기준 통화로 환산한 값을 괄호로 같이 보여 준다.
 // 정확한 값이 아니라서 「약」과 추정 안내를 함께 둔다.
 export default function TripCostSummary({ trip }) {
   const { t, i18n } = useTranslation();
@@ -18,21 +19,27 @@ export default function TripCostSummary({ trip }) {
   if (!summary) return null;
 
   const { country } = trip;
-  const otherCountry = country === 'KR' ? 'JP' : 'KR';
+  const homeCountry = getHomeCountry(i18n.language);
+  const needsConversion = homeCountry !== country;
   const format = (amount, targetCountry = country) =>
     formatCost(t, i18n.language, targetCountry, amount);
-  const toOther = (amount) =>
-    convertCurrency(amount, summary.currency, COUNTRY_CURRENCY[otherCountry]);
+  const toHome = (amount) =>
+    convertCurrency(amount, summary.currency, COUNTRY_CURRENCY[homeCountry]);
 
   return (
     <section aria-label={t('planner.cost.title')} className="rounded-2xl border border-text/10 p-4">
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
         <p className="text-body font-bold">
-          {t('planner.cost.summary', {
-            total: format(summary.total),
-            converted: format(toOther(summary.total), otherCountry),
-            perPerson: format(summary.perPerson),
-          })}
+          {needsConversion
+            ? t('planner.cost.summaryConverted', {
+                total: format(summary.total),
+                converted: format(toHome(summary.total), homeCountry),
+                perPerson: format(summary.perPerson),
+              })
+            : t('planner.cost.summary', {
+                total: format(summary.total),
+                perPerson: format(summary.perPerson),
+              })}
         </p>
         <button
           type="button"
@@ -80,9 +87,11 @@ export default function TripCostSummary({ trip }) {
           </table>
           <p className="text-body-sm text-text/70">{t('planner.cost.noteEstimate')}</p>
           <p className="text-body-sm text-text/70">{t('planner.cost.noteTransport')}</p>
-          <p className="text-body-sm text-text/70">
-            {t('planner.cost.noteRate', { rate: getKrwPerJpy() })}
-          </p>
+          {needsConversion ? (
+            <p className="text-body-sm text-text/70">
+              {t('planner.cost.noteRate', { rate: getKrwPerJpy() })}
+            </p>
+          ) : null}
         </div>
       ) : null}
     </section>
