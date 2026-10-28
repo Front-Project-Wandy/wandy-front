@@ -468,6 +468,23 @@
       "slack": "여유 {{duration}}",
       "shortage": "이동 시간까지 넣으면 {{duration}} 모자라요"
     },
+    "cost": {
+      "title": "예상 비용",
+      "summary": "예상 총비용 약 {{total}} ({{converted}}) · 1인 약 {{perPerson}}",
+      "toggle": "내역 보기",
+      "caption": "예상 비용 내역 ({{count}}명 기준)",
+      "item": "항목",
+      "amount": "{{count}}명 합계",
+      "row": {
+        "transport": "교통",
+        "entry": "입장료",
+        "meals": "식비",
+        "total": "합계"
+      },
+      "noteEstimate": "추정치예요. 입장료·식비는 카테고리별 평균이고, 식비는 일정에 담은 식당·카페만 포함해요.",
+      "noteTransport": "교통은 대중교통·도보는 인원만큼, 택시·자차는 차량 1대 요금이에요. 항공·숙소는 포함하지 않아요.",
+      "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
+    },
     "duplicate": {
       "button": "여행 복제",
       "title": "여행 복제하기",
