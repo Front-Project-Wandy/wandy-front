@@ -38,7 +38,8 @@ export default function ProductSection({ country = null, city = null, variant = 
       );
     return (
       <ul
-        className={`relative flex snap-x overflow-x-auto ${isFeatured ? 'gap-6 pb-4 lg:grid lg:grid-cols-3 lg:overflow-visible' : 'gap-3 pb-2'}`}
+        key={category ?? 'all'}
+        className={`motion-results relative flex snap-x overflow-x-auto ${isFeatured ? 'gap-6 pb-4 lg:grid lg:grid-cols-3 lg:overflow-visible' : 'gap-3 pb-2'}`}
       >
         {items.map((product) => (
           <li
