@@ -43,3 +43,31 @@ export function getDiveStyle(vw, vh, z) {
     blurPx: z > 0.25 ? (8 * span(z, 0.25, 1)) / scale : 0,
   };
 }
+
+// 프레임 기준(0~1) 네 모서리를 w x h 화면 좌표로 바꾼다 (프레임을 덮어 그린 cover 기준)
+export function toViewQuad(quad, w, h) {
+  const rect = getCoverRect(w, h);
+  return quad.map(([nx, ny]) => [
+    rect.x + nx * INTRO_FRAME_WIDTH * rect.scale,
+    rect.y + ny * INTRO_FRAME_HEIGHT * rect.scale,
+  ]);
+}
+
+// 왼쪽 위가 원점인 w x h 사각형을 네 모서리 [tl, tr, br, bl]에 맞추는 CSS matrix3d (원근 변환).
+// 노트북 화면이 비스듬히 보여서 단순 크기·회전만으로는 모서리가 맞지 않는다.
+export function getQuadMatrix(w, h, [[x0, y0], [x1, y1], [x2, y2], [x3, y3]]) {
+  const dx1 = x1 - x2;
+  const dx2 = x3 - x2;
+  const dx3 = x0 - x1 + x2 - x3;
+  const dy1 = y1 - y2;
+  const dy2 = y3 - y2;
+  const dy3 = y0 - y1 + y2 - y3;
+  const den = dx1 * dy2 - dx2 * dy1;
+  const g = (dx3 * dy2 - dx2 * dy3) / den;
+  const k = (dx1 * dy3 - dx3 * dy1) / den;
+  const a = x1 - x0 + g * x1;
+  const b = x3 - x0 + k * x3;
+  const d = y1 - y0 + g * y1;
+  const e = y3 - y0 + k * y3;
+  return `matrix3d(${a / w},${d / w},0,${g / w},${b / h},${e / h},0,${k / h},0,0,1,0,${x0},${y0},0,1)`;
+}
