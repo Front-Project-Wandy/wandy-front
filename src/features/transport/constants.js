@@ -16,13 +16,25 @@ export const FARES = {
   KR: {
     transit: { base: 1500, perKm: 100 },
     taxi: { base: 4800, perKm: 1000 },
-    car: { base: 0, perKm: 200 },
   },
   JP: {
     transit: { base: 180, perKm: 40 },
     taxi: { base: 500, perKm: 400 },
-    car: { base: 0, perKm: 60 },
   },
+};
+
+// 렌터카(자차) 유류비·통행료 추정 (요구사항 #59). 실제 경로 API(Directions tollFare·fuelPrice)는 비밀 키라
+// 2단계 백엔드에서 받고, 그때까지 이 표만 고치면 된다. 금액은 나라 통화 기준이다.
+// - 고속도로로 보는 구간: 보정한 거리가 HIGHWAY_MIN_METERS 이상이면 통행료를 더하고 고속 속도로 계산한다 (시내 구간은 통행료 없음).
+// - 연비는 소형 렌터카의 도심 정체를 감안한 가정값이다. 유가는 2026년 한국 약 2,000원/L(오피넷), 일본 약 170엔/L(자원에너지청).
+// - 통행료는 1종 승용차 기준: 한국은 기본 900원 + 44.3원/km, 일본은 NEXCO 터미널 150엔 + 대도시 근교 29.52엔/km
+//   (100km 넘는 구간의 장거리 할인은 단순화하려고 뺐다).
+// 렌터카 대여료는 넣지 않는다.
+export const CAR = {
+  HIGHWAY_MIN_METERS: 30000,
+  HIGHWAY_SPEED_KMH: 70,
+  KR: { kmPerLiter: 12, fuelPricePerLiter: 2000, toll: { base: 900, perKm: 44.3 } },
+  JP: { kmPerLiter: 15, fuelPricePerLiter: 170, toll: { base: 150, perKm: 29.52 } },
 };
 
 // 택시 심야 할증 (요구사항 #60). 출발 시각이 구간 [from, to)에 들면 택시 요금 전체에 rate를 더한다.
