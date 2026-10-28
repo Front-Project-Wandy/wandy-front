@@ -5,6 +5,13 @@ import Loading from '../../../components/common/Loading';
 import { AMENITY_RADIUS_M } from '../../../services/amenityService';
 import { useNearbyAmenities } from '../hooks/useNearbyAmenities';
 
+const ICON_PATHS = {
+  convenience: 'M4 9h16l-1.5 11h-13L4 9Zm4 0V7a4 4 0 0 1 8 0v2M9 14h6',
+  toilet:
+    'M7 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM17 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM5 21v-6H4V9h6v6H9v6m6 0v-5h-2l2-7h4l2 7h-2v5M12 3v18',
+  locker: 'M5 3h14v18H5V3Zm7 0v18M9 10v2m6-2v2',
+};
+
 // 장소 주변 편의시설 (73). 종류(편의점·화장실·코인락커)마다 가장 가까운 1곳과 거리를 보여 준다.
 // 종류는 늘 세 칸을 다 그린다 — 없는 칸도 "근처에 없어요"로 남겨야 찾아봤다는 걸 알 수 있다.
 export default function NearbyAmenities({ place, className = '' }) {
@@ -16,13 +23,27 @@ export default function NearbyAmenities({ place, className = '' }) {
     if (isPending) return <Loading />;
     if (isError) return <ErrorState onRetry={() => refetch()} />;
     return (
-      <ul className="grid gap-2 sm:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:gap-6">
         {data.map(({ type, amenity, distance }) => (
-          <li
-            key={type}
-            className="flex items-center justify-between gap-3 rounded-2xl border border-text/10 bg-background p-4"
-          >
-            <span className="min-w-0">
+          <li key={type} className="flex items-center gap-4 rounded-2xl bg-bg-soft p-5">
+            <span
+              aria-hidden="true"
+              className="grid size-12 shrink-0 place-items-center rounded-full bg-background text-primary"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d={ICON_PATHS[type]} />
+              </svg>
+            </span>
+            <span className="min-w-0 flex-1">
               <span className="block text-body-sm font-bold text-link">
                 {t(`place.amenity.type.${type}`)}
               </span>
@@ -33,7 +54,7 @@ export default function NearbyAmenities({ place, className = '' }) {
               </span>
             </span>
             {amenity ? (
-              <span className="shrink-0 rounded-full bg-bg-soft px-3 py-1 text-body-sm font-bold text-link">
+              <span className="shrink-0 rounded-full bg-background px-3 py-1 text-body-sm font-bold text-link">
                 {t('place.amenity.distance', { value: distance })}
               </span>
             ) : null}
@@ -44,12 +65,12 @@ export default function NearbyAmenities({ place, className = '' }) {
   };
 
   return (
-    <section aria-labelledby={titleId} className={`min-w-0 space-y-3 ${className}`}>
+    <section aria-labelledby={titleId} className={`min-w-0 space-y-5 ${className}`}>
       <div>
-        <h2 id={titleId} className="text-subtitle font-bold">
+        <h2 id={titleId} className="text-title font-bold">
           {t('place.amenity.title')}
         </h2>
-        <p className="text-body-sm text-text/70">
+        <p className="mt-1 text-body-sm text-text/70">
           {t('place.amenity.subtitle', { radius: AMENITY_RADIUS_M })}
         </p>
       </div>

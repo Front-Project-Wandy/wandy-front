@@ -9,9 +9,11 @@ import NearbyRestaurants from '../../features/restaurant/components/NearbyRestau
 import NearbyAmenities from '../../features/search/components/NearbyAmenities';
 import { usePlace } from '../../features/search/hooks/usePlace';
 import { getPlacePath } from '../../features/search/place';
+import PlaceHero from './PlaceHero';
 import PlaceInfo from './PlaceInfo';
 
 // /place/:id — 장소 상세 (10·11)와 주변 식당 (22), 어울리는 투어 상품 (84).
+// 큰 히어로 아래로 섹션마다 큰 제목과 넉넉한 간격을 둔다. lg에서는 이용 정보·혼잡도와 주변 맛집을 좌우로 놓는다.
 export default function PlaceDetailPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -41,16 +43,20 @@ export default function PlaceDetailPage() {
       );
     if (isError) return <ErrorState onRetry={() => refetch()} />;
     return (
-      <div className="grid gap-8 lg:grid-cols-2">
-        <PlaceInfo place={place} />
-        <NearbyRestaurants key={place.id} place={place} onSelectPlace={handleSelectPlace} />
-        <PlaceProductSection place={place} className="lg:col-span-2" />
+      <div className="space-y-14 lg:space-y-20">
+        <PlaceHero place={place} />
+        <div className="grid gap-14 lg:grid-cols-2 lg:gap-12">
+          <PlaceInfo place={place} />
+          <NearbyRestaurants key={place.id} place={place} onSelectPlace={handleSelectPlace} />
+        </div>
+        <NearbyAmenities key={place.id} place={place} />
+        <PlaceProductSection place={place} />
       </div>
     );
   };
 
   return (
-    <main className="mx-auto max-w-5xl space-y-4 px-4 py-4 lg:px-6 lg:py-6">
+    <main className="mx-auto max-w-5xl space-y-4 px-4 py-4 lg:px-6 lg:py-8">
       <button
         type="button"
         onClick={handleBack}
@@ -60,7 +66,6 @@ export default function PlaceDetailPage() {
         {t('common.action.back')}
       </button>
       {renderBody()}
-      {place && !isError ? <NearbyAmenities key={place.id} place={place} className="pt-4" /> : null}
     </main>
   );
 }
