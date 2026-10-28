@@ -21,9 +21,9 @@ export default function MyTrips() {
 
   const renderGroup = (label, items) =>
     items.length > 0 ? (
-      <div className="space-y-2">
+      <div className="space-y-3">
         <h3 className="text-body font-bold text-text/70">{label}</h3>
-        <ul className="space-y-2">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map(({ trip: item, status }) => (
             <TripCard
               key={item.id}
@@ -38,18 +38,19 @@ export default function MyTrips() {
     ) : null;
 
   return (
-    <section aria-labelledby={titleId} className="space-y-3">
-      <h2 id={titleId} className="text-subtitle font-bold">
+    <section aria-labelledby={titleId} className="space-y-5">
+      <h2 id={titleId} className="text-title font-bold">
         {t('my.trips.title')}
       </h2>
       {trips.length === 0 ? (
         <EmptyState
           title={t('my.trips.emptyTitle')}
           description={t('my.trips.emptyDescription')}
+          className="rounded-2xl bg-bg-soft"
           action={<Button onClick={() => navigate('/plan/new')}>{t('my.trips.create')}</Button>}
         />
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-8">
           {renderGroup(t('my.trips.upcoming'), upcoming)}
           {renderGroup(t('my.trips.past'), past)}
         </div>
