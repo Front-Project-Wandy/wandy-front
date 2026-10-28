@@ -18,8 +18,12 @@ export function saveWizardTrip({ draft, spots, title, placesById }) {
     startDate: draft.startDate,
     endDate: draft.endDate,
     people: Number(draft.people),
-    // 동행·예산은 플랜 계약에 모양이 정해지면 넘긴다 (지금은 마법사 draft에만 있다).
     style: draft.style,
+    // 동행·예산·이번 여행 선호 카테고리 (플랜 계약, CLAUDE.md). 고르지 않으면 null·[]로 넘겨서
+    // 플래너 AI 채우기가 「이번 여행에서 고른 게 없음」으로 읽는다. 카테고리는 draft와 배열을 나눠 쓰지 않게 복사한다.
+    companion: draft.companion ?? null,
+    budget: draft.budget ?? null,
+    preferredCategories: [...(draft.preferredCategories ?? [])],
     // null(건너뜀)은 그대로 넘긴다. 교통 계산(C)에서 혼합으로 보기로 했다.
     transportMode: draft.transportMode ?? null,
   });
