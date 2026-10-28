@@ -14,7 +14,7 @@ import {
   INTRO_WHITE_FROM,
 } from '../constants';
 import { findReadyFrame, useIntroFrames } from '../hooks/useIntroFrames';
-import { getScreenQuad, useScreenTrack } from '../hooks/useScreenTrack';
+import { getScreenMask, getScreenQuad, useScreenTrack } from '../hooks/useScreenTrack';
 import {
   clamp01,
   easeInOutCubic,
@@ -28,7 +28,7 @@ import {
 const LEAVE_MS = 500;
 
 // 화면 전체를 덮고 스크롤 진행도(0~1)에 맞춰 프레임을 그린다. 끝나면 onFinish, 사라지면 onLeft.
-// 노트북 화면이 깨끗하게 보이기 시작하면 메인화면 사진을 그 화면 모서리에 맞춰 얹고,
+// 노트북 화면이 보이기 시작하면 메인화면 사진을 그 화면 모서리에 맞춰 얹고 (가려진 부분은 마스크로 뺀다),
 // 카메라가 화면 속으로 들어가 사진이 화면을 가득 채우면 덮개가 걷히며 진짜 홈 화면이 이어진다.
 export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft }) {
   const { t } = useTranslation();
@@ -54,6 +54,12 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
     const white = whiteRef.current;
     const page = pageRef.current;
     const ctx = canvas.getContext('2d');
+    // 가림 마스크는 사진 크기에 맞춰 늘려 쓴다. 마스크 이미지는 프레임마다 바뀌어서 아래 tick에서 넣는다.
+    page.style.maskSize = '100% 100%';
+    page.style.webkitMaskSize = '100% 100%';
+    page.style.maskRepeat = 'no-repeat';
+    page.style.webkitMaskRepeat = 'no-repeat';
+    let maskValue = 'none';
     let smooth = getProgress();
     let last = performance.now();
     let drawn = null;
@@ -112,8 +118,14 @@ export default function IntroOverlay({ getProgress, leaving, onFinish, onLeft })
           toViewQuad(quad, vw, vh),
         );
         page.style.opacity = String(
-          easeInOutCubic(clamp01((cabinIndex - track.first) / INTRO_PAGE_FADE_FRAMES)),
+          easeInOutCubic(clamp01((cabinIndex - track.first + 1) / INTRO_PAGE_FADE_FRAMES)),
         );
+        const mask = getScreenMask(track, cabinIndex);
+        if (mask !== maskValue) {
+          maskValue = mask;
+          page.style.maskImage = mask;
+          page.style.webkitMaskImage = mask;
+        }
       } else {
         page.style.opacity = '0';
       }
