@@ -29,6 +29,7 @@ export default function PlannerPage() {
   const updateItem = usePlanStore((state) => state.updateItem);
   const removeItem = usePlanStore((state) => state.removeItem);
   const moveItem = usePlanStore((state) => state.moveItem);
+  const reorderDay = usePlanStore((state) => state.reorderDay);
   const undo = usePlanStore((state) => state.undo);
   const redo = usePlanStore((state) => state.redo);
   const clearHistory = usePlanStore((state) => state.clearHistory);
@@ -153,6 +154,7 @@ export default function PlannerPage() {
               onUpdateItem={updateItem}
               onRemoveItem={removeItem}
               onMoveItem={moveItem}
+              onReorderDay={reorderDay}
             />
           )}
           <MapView

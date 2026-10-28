@@ -1,13 +1,16 @@
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
 import DayTransportSummary from '../../transport/components/DayTransportSummary';
 import TransportLeg from '../../transport/components/TransportLeg';
 import { getFlightTimeWarnings } from '../utils/checkFlightTime';
 import { getDayDropId } from '../utils/dragPosition';
+import { canOptimizeRoute } from '../utils/optimizeRoute';
 import { formatDayDate } from '../utils/formatDay';
 import DayItem from './DayItem';
+import OptimizeDayDialog from './OptimizeDayDialog';
 import SortableDayItem from './SortableDayItem';
 
 // 한 DAY의 제목(DAY 1 · 10월 26일 (월))과 그날의 장소 목록, 장소 추가 버튼.
@@ -23,9 +26,12 @@ export default function DaySection({
   onAddPlace,
   onUpdateItem,
   onRemoveItem,
+  onReorderDay,
 }) {
   const { t, i18n } = useTranslation();
   const titleId = `day-title-${dayIndex}`;
+  // 동선 최적화 비교 창이 열려 있는지 (69)
+  const [isOptimizing, setIsOptimizing] = useState(false);
   const handleAddPlace = () => onAddPlace(dayIndex);
   const handleUpdateItem = (itemId, patch) => onUpdateItem(dayIndex, itemId, patch);
   const handleRemoveItem = (itemId) => onRemoveItem(dayIndex, itemId);
@@ -50,15 +56,26 @@ export default function DaySection({
             style={style}
           />
         </div>
-        {/* 버튼 글자는 DAY마다 같아서, 낭독기가 어느 DAY인지 알 수 있게 번호를 붙인다 */}
-        <Button
-          variant="secondary"
-          className="shrink-0"
-          aria-label={t('planner.day.addPlaceLabel', { number: dayIndex + 1 })}
-          onClick={handleAddPlace}
-        >
-          {t('planner.day.addPlace')}
-        </Button>
+        <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+          {canOptimizeRoute(day.items) ? (
+            <Button
+              variant="ghost"
+              aria-label={t('planner.optimize.buttonLabel', { number: dayIndex + 1 })}
+              onClick={() => setIsOptimizing(true)}
+            >
+              {t('planner.optimize.button')}
+            </Button>
+          ) : null}
+          {/* 버튼 글자는 DAY마다 같아서, 낭독기가 어느 DAY인지 알 수 있게 번호를 붙인다 */}
+          <Button
+            variant="secondary"
+            className="shrink-0"
+            aria-label={t('planner.day.addPlaceLabel', { number: dayIndex + 1 })}
+            onClick={handleAddPlace}
+          >
+            {t('planner.day.addPlace')}
+          </Button>
+        </div>
       </div>
       {day.items.length === 0 ? (
         <p
@@ -109,6 +126,17 @@ export default function DaySection({
           </ol>
         </SortableContext>
       )}
+      {isOptimizing ? (
+        <OptimizeDayDialog
+          open
+          onClose={() => setIsOptimizing(false)}
+          day={day}
+          dayIndex={dayIndex}
+          country={country}
+          transportMode={transportMode}
+          onApply={onReorderDay}
+        />
+      ) : null}
     </section>
   );
 }
