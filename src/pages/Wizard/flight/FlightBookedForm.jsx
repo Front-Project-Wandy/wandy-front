@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Input from '../../../components/common/Input';
+import TimeSelect from '../../../components/common/TimeSelect';
 import { formatShortDate } from '../../../features/member/utils/tripDates';
 
 // "이미 예약했어요" — 예약한 항공편을 직접 입력한다 (47).
@@ -23,21 +24,19 @@ export default function FlightBookedForm({ flight, startDate, endDate, onChange 
         maxLength={10}
         onChange={(event) => onChange({ returnFlightNo: event.target.value.toUpperCase() })}
       />
-      <Input
-        type="time"
+      <TimeSelect
         label={t('wizard.flight.booked.arriveTime', {
           date: formatShortDate(startDate, i18n.language),
         })}
         value={flight.arriveTime}
-        onChange={(event) => onChange({ arriveTime: event.target.value })}
+        onChange={(arriveTime) => onChange({ arriveTime })}
       />
-      <Input
-        type="time"
+      <TimeSelect
         label={t('wizard.flight.booked.departTime', {
           date: formatShortDate(endDate, i18n.language),
         })}
         value={flight.departTime}
-        onChange={(event) => onChange({ departTime: event.target.value })}
+        onChange={(departTime) => onChange({ departTime })}
       />
     </div>
   );

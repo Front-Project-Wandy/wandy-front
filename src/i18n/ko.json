@@ -25,6 +25,12 @@
       "close": "닫기",
       "back": "뒤로"
     },
+    "time": {
+      "hour": "시",
+      "minute": "분",
+      "hourOption": "{{value}}시",
+      "minuteOption": "{{value}}분"
+    },
     "category": {
       "sight": "관광",
       "food": "맛집",
