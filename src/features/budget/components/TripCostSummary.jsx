@@ -1,12 +1,22 @@
 import { useId, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { CAR } from '../../transport/constants';
 import { formatCost } from '../../transport/utils/formatTransport';
 import { COUNTRY_CURRENCY } from '../constants';
 import { convertCurrency, getKrwPerJpy } from '../utils/convertCurrency';
 import { getHomeCountry } from '../utils/homeCountry';
 import { summarizeTripCost } from '../utils/summarizeTripCost';
 
-const ROWS = ['transport', 'entry', 'meals'];
+const ROWS = ['transport', 'fuel', 'toll', 'entry', 'meals'];
+// 자차를 안 쓰면 0이라 줄 자체를 보여 주지 않는 항목
+const HIDDEN_WHEN_ZERO = ['fuel', 'toll'];
+
+// 자차만 쓰면 교통 줄이 0원이라 어색해서, 자차 비용이 있을 때는 0원인 교통 줄을 뺀다
+const isRowShown = (summary, row) => {
+  if (HIDDEN_WHEN_ZERO.includes(row)) return summary[row] > 0;
+  if (row === 'transport') return summary.transport > 0 || summary.fuel + summary.toll === 0;
+  return true;
+};
 
 // 플래너 위쪽의 예상 총비용 한 줄과 펼쳐 보는 내역 (57). 일정에 장소가 없으면 보여 줄 게 없어서 그리지 않는다.
 // 금액은 여행 나라 통화가 기본이고, 사용자 기준 통화와 다를 때만 기준 통화로 환산한 값을 괄호로 같이 보여 준다.
@@ -69,7 +79,7 @@ export default function TripCostSummary({ trip }) {
               </tr>
             </thead>
             <tbody>
-              {ROWS.map((row) => (
+              {ROWS.filter((row) => isRowShown(summary, row)).map((row) => (
                 <tr key={row} className="border-t border-text/10">
                   <th scope="row" className="py-2 font-normal">
                     {t(`planner.cost.row.${row}`)}
@@ -87,6 +97,11 @@ export default function TripCostSummary({ trip }) {
           </table>
           <p className="text-body-sm text-text/70">{t('planner.cost.noteEstimate')}</p>
           <p className="text-body-sm text-text/70">{t('planner.cost.noteTransport')}</p>
+          {summary.fuel + summary.toll > 0 ? (
+            <p className="text-body-sm text-text/70">
+              {t('planner.cost.noteCar', { kmPerLiter: CAR[country].kmPerLiter })}
+            </p>
+          ) : null}
           {needsConversion ? (
             <p className="text-body-sm text-text/70">
               {t('planner.cost.noteRate', { rate: getKrwPerJpy() })}

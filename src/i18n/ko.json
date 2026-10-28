@@ -553,6 +553,25 @@
       },
       "noteDay": "패스 기간은 날짜(1일 = 24시간) 기준으로 어림했어요. 가격은 {{date}}에 확인한 값이에요."
     },
+    "share": {
+      "button": "공유·내보내기",
+      "title": "일정 공유·내보내기",
+      "previewLabel": "공유할 일정 글",
+      "copy": "글 복사",
+      "share": "공유하기",
+      "print": "인쇄·PDF 저장",
+      "untitled": "내 여행",
+      "period": "{{start}} ~ {{end}} · {{people}}명",
+      "emptyDay": "아직 장소가 없어요",
+      "googlePlace": "구글 지도 장소",
+      "googleNote": "구글 장소는 약관상 이름을 담을 수 없어서 「구글 지도 장소」로 표시했어요. 이름은 원디의 구글 지도에서 확인해요.",
+      "footer": "원디(Wandy)로 만든 일정",
+      "status": {
+        "copied": "복사했어요",
+        "copyFailed": "복사하지 못했어요. 글을 직접 선택해서 복사해 주세요",
+        "shareFailed": "공유하지 못했어요. 글 복사를 써 주세요"
+      }
+    },
     "weather": {
       "title": "DAY별 날씨",
       "loading": "날씨를 불러오는 중…",
@@ -585,12 +604,15 @@
       "amount": "{{count}}명 합계",
       "row": {
         "transport": "교통",
+        "fuel": "렌터카 유류비",
+        "toll": "렌터카 통행료",
         "entry": "입장료",
         "meals": "식비",
         "total": "합계"
       },
       "noteEstimate": "추정치예요. 입장료·식비는 카테고리별 평균이고, 식비는 일정에 담은 식당·카페만 포함해요.",
       "noteTransport": "교통은 대중교통·도보는 인원만큼, 택시·자차는 차량 1대 요금이에요. 항공·숙소는 포함하지 않아요.",
+      "noteCar": "렌터카는 유류비(연비 {{kmPerLiter}}km/L 기준)와 고속도로 구간 통행료 추정이에요. 렌터카 대여료는 포함하지 않아요.",
       "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
     },
     "airportLeg": {
