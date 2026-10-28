@@ -20,12 +20,9 @@ export default function ProfilePreferences() {
   } = usePreferenceForm();
 
   return (
-    <section
-      aria-labelledby={`${id}-title`}
-      className="rounded-2xl border border-text/10 p-4 sm:p-6"
-    >
-      <div className="mb-6 space-y-2">
-        <h2 id={`${id}-title`} className="text-subtitle font-bold">
+    <section aria-labelledby={`${id}-title`} className="space-y-5">
+      <div className="space-y-2">
+        <h2 id={`${id}-title`} className="text-title font-bold">
           {t('my.preferences.title')}
         </h2>
         <p id={`${id}-notice`} className="text-body-sm text-text/70">
@@ -33,7 +30,11 @@ export default function ProfilePreferences() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} aria-describedby={`${id}-notice`} className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        aria-describedby={`${id}-notice`}
+        className="space-y-6 rounded-2xl border border-text/10 p-5 sm:p-8"
+      >
         <fieldset className="min-w-0">
           <legend className="mb-3 font-bold">{t('my.preferences.styleLabel')}</legend>
           <div className="grid gap-3 sm:grid-cols-3">
