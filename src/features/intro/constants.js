@@ -27,25 +27,32 @@ export const INTRO_WHITE_FROM = 0.65;
 export const INTRO_PAGE_WIDTH = 1440;
 export const INTRO_PAGE_HEIGHT = 900;
 
-// 프레임마다 잡아 둔 노트북 화면 네 모서리 (프레임 기준 0~1 좌표, 기내 영상 cabin_track.json에서 뽑음).
-// first = 머리카락에 가리지 않고 화면이 깨끗하게 잡히기 시작하는 기내 프레임 번호, quads[0]이 그 프레임이다.
+// 프레임마다 잡아 둔 노트북 화면 네 모서리 (프레임 기준 0~1 좌표).
+// 영상 속 노트북 화면이 흰색이라, 1080p 프레임에서 흰 화면의 네 변에 직선을 맞추고 그 교점을 모서리로 잡았다.
+// 3D 렌더 위치를 옮겨 맞춘 처음 값은 생성 영상과 최대 40px 어긋나서 움직일 때 흰 부분이 보였다.
+// 경계에 흰 선이 남지 않게 각 변을 바깥으로 2px 넓혔다 (바깥은 검은 테두리라 덮여도 티가 안 난다).
+// first = 노트북 화면이 앞 좌석 칸막이 뒤로 보이기 시작하는 기내 프레임 번호, quads[0]이 그 프레임이다.
+// masks = 승객 어깨·팔이나 칸막이에 화면 일부가 가려지는 프레임 번호. 그 프레임은 보이는 화면 모양(마스크)대로만
+// 메인화면을 그려서 가린 것 위로 덮이지 않게 한다. 마스크는 메인화면 사진 기준 좌표라 사진과 같이 원근 변환된다.
 export const INTRO_SCREEN_TRACK_SRC = '/intro/screen-track.json';
+export const getIntroMaskSrc = (cabinIndex) =>
+  `/intro/screen-mask/cabin_${String(cabinIndex).padStart(3, '0')}.png`;
 
 // 기내 영상 i번 프레임 = 전체 240 + i번 프레임
 export const INTRO_CABIN_OFFSET = 240;
 
-// 노트북 화면에 메인화면이 켜지는 데 걸리는 프레임 수
-export const INTRO_PAGE_FADE_FRAMES = 8;
+// 노트북 화면에 메인화면이 켜지는 데 걸리는 프레임 수. 길면 그동안 흰 화면이 비쳐 보여서 짧게 둔다.
+export const INTRO_PAGE_FADE_FRAMES = 2;
 
 // 스크롤을 따라가는 부드러움 (초). 클수록 늦게 따라온다.
 export const INTRO_SCRUB_SECONDS = 0.12;
 
-// 마지막 프레임의 노트북 화면 네 모서리 (프레임 기준 0~1 좌표, cabin_track.json 176번)
+// 마지막 프레임의 노트북 화면 네 모서리 (프레임 기준 0~1 좌표, screen-track.json의 마지막 값과 같다)
 export const INTRO_FINAL_SCREEN_QUAD = [
-  [0.07207, 0.02486],
-  [0.92793, 0.02486],
-  [0.92793, 0.97514],
-  [0.07207, 0.97514],
+  [0.07005, 0.02176],
+  [0.93054, 0.02176],
+  [0.93029, 0.97824],
+  [0.07005, 0.97824],
 ];
 
 // 한 번 본 사람은 다시 보지 않는다. 주소에 ?intro 를 붙이면 다시 볼 수 있다.
