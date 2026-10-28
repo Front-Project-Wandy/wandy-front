@@ -25,7 +25,8 @@ export const removeSpot = (spots, placeId) => spots.filter((spot) => spot.placeI
 // AI 빈 일정 채우기(54) 결과를 담은 장소 뒤에 붙인다. aiDays: [{ dayIndex, items: [{ place }] }]
 // AI가 한 DAY 안에서 시각 순서로 돌려줘서 그대로 붙이면 그날 순서가 된다.
 // AI는 이미 담은 장소를 빼고 고르지만, 혹시 겹쳐도 한 장소가 두 번 담기지 않게 putSpot으로 넣는다.
-// 정한 시각(startTime·stayMinutes)은 아직 저장하지 않는다 — 회의 안건 3-1에서 저장 방법을 정한 뒤 붙인다.
+// AI가 정한 시각(startTime·stayMinutes)은 담지 않는다. 담은 뒤 순서를 바꾸거나 장소를 더하면 어긋나서,
+// 저장할 때 항공·숙소 시간에 맞춰 한 번에 다시 정한다 (summary/scheduleSpots).
 export function addAiSpots(spots, aiDays) {
   return aiDays.reduce(
     (result, { dayIndex, items }) =>
