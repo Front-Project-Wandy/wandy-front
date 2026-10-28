@@ -18,3 +18,7 @@ export const formatDuration = (t, totalMinutes) => {
 // 요금을 나라별 통화 글자로: "6,790원" / "720엔"
 export const formatCost = (t, locale, country, cost) =>
   t(`planner.transport.currency.${country}`, { amount: formatAmount(cost, locale) });
+
+// 거리(m)를 "850m" / "12.4km"로. 단위 글자는 나라와 상관없어서 번역 없이 쓴다.
+export const formatDistance = (meters) =>
+  meters < 1000 ? `${Math.round(meters)}m` : `${(meters / 1000).toFixed(1)}km`;
