@@ -21,7 +21,7 @@ export default function Header() {
   const { t } = useTranslation();
 
   return (
-    <header className="border-b border-text/10 bg-background">
+    <header className="border-b border-text/10 bg-background print:hidden">
       <div className="mx-auto w-full max-w-360 flex flex-wrap items-center justify-between gap-x-6 px-4 lg:px-5">
         <Link
           to="/"

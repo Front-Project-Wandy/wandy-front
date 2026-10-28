@@ -529,6 +529,25 @@
       "slack": "여유 {{duration}}",
       "shortage": "이동 시간까지 넣으면 {{duration}} 모자라요"
     },
+    "share": {
+      "button": "공유·내보내기",
+      "title": "일정 공유·내보내기",
+      "previewLabel": "공유할 일정 글",
+      "copy": "글 복사",
+      "share": "공유하기",
+      "print": "인쇄·PDF 저장",
+      "untitled": "내 여행",
+      "period": "{{start}} ~ {{end}} · {{people}}명",
+      "emptyDay": "아직 장소가 없어요",
+      "googlePlace": "구글 지도 장소",
+      "googleNote": "구글 장소는 약관상 이름을 담을 수 없어서 「구글 지도 장소」로 표시했어요. 이름은 원디의 구글 지도에서 확인해요.",
+      "footer": "원디(Wandy)로 만든 일정",
+      "status": {
+        "copied": "복사했어요",
+        "copyFailed": "복사하지 못했어요. 글을 직접 선택해서 복사해 주세요",
+        "shareFailed": "공유하지 못했어요. 글 복사를 써 주세요"
+      }
+    },
     "weather": {
       "title": "DAY별 날씨",
       "loading": "날씨를 불러오는 중…",
