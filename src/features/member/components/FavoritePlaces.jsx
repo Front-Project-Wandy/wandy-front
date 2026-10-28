@@ -24,14 +24,15 @@ export default function FavoritePlaces() {
         <EmptyState
           title={t('my.favorites.emptyTitle')}
           description={t('my.favorites.emptyDescription')}
+          className="rounded-2xl bg-bg-soft"
           action={<Button onClick={() => navigate('/places')}>{t('my.favorites.explore')}</Button>}
         />
       );
     if (isPending) return <Loading />;
     if (isError) return <ErrorState onRetry={refetch} />;
     return (
-      <div className="space-y-2">
-        <ul className="space-y-2">
+      <div className="space-y-3">
+        <ul className="grid gap-3 lg:grid-cols-2">
           {places.map((place) => (
             <PlaceCard
               key={place.id}
@@ -47,9 +48,9 @@ export default function FavoritePlaces() {
   };
 
   return (
-    <section aria-labelledby={titleId} className="space-y-3">
+    <section aria-labelledby={titleId} className="space-y-5">
       <div className="flex items-baseline justify-between gap-2">
-        <h2 id={titleId} className="text-subtitle font-bold">
+        <h2 id={titleId} className="text-title font-bold">
           {t('my.favorites.title')}
         </h2>
         {places.length > 0 ? (
