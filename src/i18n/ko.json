@@ -474,6 +474,17 @@
       "noteTransport": "교통은 대중교통·도보는 인원만큼, 택시·자차는 차량 1대 요금이에요. 항공·숙소는 포함하지 않아요.",
       "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
     },
+    "airportLeg": {
+      "title": "도착 공항에서 숙소까지",
+      "route": "{{airport}} → 숙소({{stay}})",
+      "assumed": "도착 공항을 몰라서 {{airport}} 기준으로 계산했어요.",
+      "airport": {
+        "ICN": "인천공항",
+        "GMP": "김포공항",
+        "NRT": "나리타공항",
+        "HND": "하네다공항"
+      }
+    },
     "duplicate": {
       "button": "여행 복제",
       "title": "여행 복제하기",

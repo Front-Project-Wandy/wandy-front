@@ -69,7 +69,7 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
       budget: null,           // 1인 경비 범위 키 'under50' | '50to100' | '100to200' | 'over200' | null (항공·숙소 포함, 숫자는 만 원)
       preferredCategories: [], // 이번 여행에 고른 Place 카테고리 배열 (마법사 STEP1, 고른 게 없으면 [])
       transportMode: null,    // 'transit' | 'taxi' | 'car' | 'mixed' | null (마법사 STEP4, null = 건너뜀 → 계산할 때 혼합)
-      flight: null,           // { flightNo, returnFlightNo, arriveAt, departAt, link }
+      flight: null,           // { flightNo, returnFlightNo, arriveAirport, arriveAt, departAt, link } (arriveAirport: 'ICN'|'GMP'|'NRT'|'HND'|null, 목업에서 고른 항공편만 채워지고 없으면 null)
       stay: null,             // { name, address, lat, lng, checkIn, checkOut, link } (address는 참고용, 없으면 null)
       days: [], updatedAt }
     // day
