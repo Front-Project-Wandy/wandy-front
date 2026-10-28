@@ -28,12 +28,12 @@ export default function PastVisitMap() {
     trip.title || t('my.trips.cityTrip', { city: t(`common.city.${trip.city}`) });
 
   return (
-    <section aria-labelledby={titleId} className="space-y-3">
-      <h2 id={titleId} className="text-subtitle font-bold">
+    <section aria-labelledby={titleId} className="space-y-5">
+      <h2 id={titleId} className="text-title font-bold">
         {t('my.visitMap.title')}
       </h2>
       {current ? (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {cities.length > 1 ? (
             <div
               role="group"
@@ -50,14 +50,22 @@ export default function PastVisitMap() {
               ))}
             </div>
           ) : null}
-          <MapView country={current.country} city={current.city} days={days} className="h-80" />
+          <MapView
+            country={current.country}
+            city={current.city}
+            days={days}
+            className="h-80 lg:h-96"
+          />
           <p className="text-body-sm font-bold">
             {t('my.visitMap.summary', {
               trips: current.trips.length,
               places: current.placeCount,
             })}
           </p>
-          <ul aria-label={t('my.visitMap.legendLabel')} className="space-y-2">
+          <ul
+            aria-label={t('my.visitMap.legendLabel')}
+            className="space-y-3 rounded-2xl border border-text/10 p-4 sm:p-5"
+          >
             {current.trips.map(({ trip, items }, index) => (
               <li key={trip.id} className="flex items-center gap-2 text-body-sm">
                 {/* 지도 마커가 DAY 색 테두리 원이라 범례도 같은 모양으로 그린다. */}
@@ -82,6 +90,7 @@ export default function PastVisitMap() {
         <EmptyState
           title={t('my.visitMap.emptyTitle')}
           description={t('my.visitMap.emptyDescription')}
+          className="rounded-2xl bg-bg-soft"
         />
       )}
     </section>
