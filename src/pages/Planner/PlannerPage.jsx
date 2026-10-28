@@ -12,6 +12,7 @@ import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import DuplicateTripDialog from '../../features/trip/components/DuplicateTripDialog';
 import TimelineView from '../../features/trip/components/TimelineView';
+import TripWeather from '../../features/trip/components/TripWeather';
 import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
 import ViewToggle from '../../features/trip/components/ViewToggle';
 import { useUndoShortcut } from '../../features/trip/hooks/useUndoShortcut';
@@ -201,6 +202,7 @@ export default function PlannerPage() {
         ) : null}
       </div>
       {isTripReady ? <TripCostSummary trip={trip} /> : null}
+      {isTripReady ? <TripWeather trip={trip} /> : null}
       {isTripReady ? <AirportLeg trip={trip} /> : null}
       {isTripReady ? <ViewToggle value={viewMode} onChange={setViewMode} /> : null}
       {renderBody()}

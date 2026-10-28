@@ -476,6 +476,28 @@
       "slack": "여유 {{duration}}",
       "shortage": "이동 시간까지 넣으면 {{duration}} 모자라요"
     },
+    "weather": {
+      "title": "DAY별 날씨",
+      "loading": "날씨를 불러오는 중…",
+      "error": "날씨를 불러오지 못했어요",
+      "tooFar": "날씨 예보는 {{date}}부터 볼 수 있어요 (오늘부터 16일 뒤까지 제공돼요)",
+      "noData": "아직 예보가 없어요",
+      "temp": "{{max}}° / {{min}}°",
+      "rain": "비 올 확률 {{percent}}%",
+      "umbrella": "우산 챙기기",
+      "credit": "날씨 데이터: Open-Meteo",
+      "kind": {
+        "clear": "맑음",
+        "partly": "구름 조금",
+        "cloudy": "흐림",
+        "fog": "안개",
+        "drizzle": "이슬비",
+        "rain": "비",
+        "snow": "눈",
+        "thunder": "뇌우",
+        "unknown": "알 수 없음"
+      }
+    },
     "cost": {
       "title": "예상 비용",
       "summary": "예상 총비용 약 {{total}} ({{converted}}) · 1인 약 {{perPerson}}",
