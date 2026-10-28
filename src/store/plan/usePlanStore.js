@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 import { moveItemInDays } from './moveItemInDays';
 import { buildTripCopy } from './planCopy';
 import { buildDays } from './planDays';
+import { reorderItems } from './reorderItems';
 import { isChangingItem, isSystemPatch, pushHistory, redoState, undoState } from './planHistory';
 
 const withUpdatedAt = (trip) => ({ ...trip, updatedAt: new Date().toISOString() });
@@ -170,6 +171,19 @@ export const usePlanStore = create(
 
           const days = moveItemInDays(state.trip.days, from, to);
           return days ? recordChange(state, withDays(state.trip, days)) : state;
+        }),
+
+      // 한 DAY의 장소를 itemIds 순서로 다시 놓는다 (동선 최적화, 69). 시작 시각은 자리에 남고 장소만 옮겨 간다.
+      // itemIds가 지금 장소들의 순서 바꿈이 아니거나 순서가 그대로면 아무것도 하지 않고, 바뀌면 되돌리기 한 단계로 남는다.
+      reorderDay: (dayIndex, itemIds) =>
+        set((state) => {
+          const day = state.trip?.days[dayIndex];
+          const next = day ? reorderItems(day.items, itemIds) : null;
+          if (!next || next === day.items) return state;
+          return recordChange(
+            state,
+            updateDayItems(state.trip, dayIndex, () => next),
+          );
         }),
 
       // 가장 최근 편집을 되돌리고(undo), 되돌린 편집을 다시 적용한다(redo).
