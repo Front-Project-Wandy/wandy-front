@@ -10,6 +10,8 @@ import GoogleAttribution from '../../features/search/components/GoogleAttributio
 import PlaceCard from '../../features/search/components/PlaceCard';
 import { getCurationItems } from './curation/curationList';
 import { useCurationPlaces } from './curation/useCurationPlaces';
+import PhotoCredits from './PhotoCredits';
+import { CURATION_PHOTOS } from './curation/placePhotos';
 import StartTripConfirmModal from './StartTripConfirmModal';
 import { useStartTrip } from './useStartTrip';
 
@@ -39,20 +41,28 @@ export default function CurationSection() {
             <PlaceCard
               key={place.id}
               place={place}
+              imageUrl={CURATION_PHOTOS[place.id]?.src ?? place.imageUrl}
               onSelect={() => navigate(`/place/${encodeURIComponent(place.id)}`)}
             />
           ))}
         </ul>
         {places.some((place) => place.source === 'google') && <GoogleAttribution />}
+        <PhotoCredits places={places} />
       </>
     );
   };
 
   return (
-    <section aria-labelledby="curation-title" className="flex flex-col gap-3">
-      <h2 id="curation-title" className="text-subtitle font-bold">
-        {t('home.curation.title')}
-      </h2>
+    <section aria-labelledby="curation-title" className="flex flex-col gap-5">
+      <div className="mb-2">
+        <p className="mb-3 text-caption font-bold tracking-widest text-primary">
+          {t('home.editorial.curationEyebrow')}
+        </p>
+        <h2 id="curation-title" className="text-title font-bold lg:text-display">
+          {t('home.curation.title')}
+        </h2>
+        <p className="mt-3 text-body-sm text-text/60">{t('home.editorial.curationDescription')}</p>
+      </div>
       <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
         {items.map((item) => (
           <Chip
@@ -63,23 +73,39 @@ export default function CurationSection() {
           />
         ))}
       </div>
-      <p className="text-body-sm text-text/70">
-        {t(`home.curation.${selected.type}.${selected.key}.description`, { city: cityName })}
-      </p>
-      {renderPlaces()}
-      <Button
-        variant="secondary"
-        className="w-full sm:w-auto sm:self-start"
-        onClick={() =>
-          requestStart({
-            country: selected.country,
-            city: selected.city,
-            preferredCategories: selected.categories,
-          })
-        }
-      >
-        {t('home.curation.start', { city: cityName })}
-      </Button>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-start">
+        <div className="overflow-hidden rounded-2xl bg-bg-soft">
+          <img
+            src={`/images/home/${selected.city}.jpg`}
+            alt={t(`home.editorial.${selected.city}.alt`)}
+            loading="lazy"
+            className="aspect-video w-full object-cover lg:aspect-square"
+          />
+          <div className="p-6">
+            <p className="text-caption font-bold text-primary">
+              {t(`common.country.${selected.country}`)}
+            </p>
+            <h3 className="mt-2 text-title font-bold">{cityName}</h3>
+            <p className="mt-3 text-body-sm leading-relaxed text-text/70">
+              {t(`home.curation.${selected.type}.${selected.key}.description`, { city: cityName })}
+            </p>
+            <Button
+              variant="secondary"
+              className="mt-6 w-full"
+              onClick={() =>
+                requestStart({
+                  country: selected.country,
+                  city: selected.city,
+                  preferredCategories: selected.categories,
+                })
+              }
+            >
+              {t('home.curation.start', { city: cityName })}
+            </Button>
+          </div>
+        </div>
+        <div className="flex min-w-0 flex-col gap-4 lg:col-span-2">{renderPlaces()}</div>
+      </div>
       <StartTripConfirmModal
         open={isConfirmOpen}
         onConfirm={confirmStart}

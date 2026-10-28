@@ -11,12 +11,14 @@ import ProductCategoryChips from './ProductCategoryChips';
 
 // 홈 하단 투어 상품 섹션 (62). A파트가 홈(H01)에 <ProductSection />으로 놓기만 하면 된다.
 // country·city를 넘기면 그 여행지 상품만 보여준다.
-export default function ProductSection({ country = null, city = null }) {
+// variant="featured": 홈 큰 진열용. 제목을 키우고 lg부터 옆으로 넘기는 줄 대신 3열 그리드로 놓는다.
+export default function ProductSection({ country = null, city = null, variant = 'default' }) {
   const { t } = useTranslation();
   const titleId = useId();
   const navigate = useNavigate();
   const [category, setCategory] = useState(null);
   const { data, isPending, isError, refetch } = useProducts({ country, city, category });
+  const isFeatured = variant === 'featured';
   const items = (data ?? []).slice(0, PRODUCT_SECTION_LIMIT);
 
   const listParams = new URLSearchParams();
@@ -35,9 +37,14 @@ export default function ProductSection({ country = null, city = null }) {
         </div>
       );
     return (
-      <ul className="relative flex snap-x gap-3 overflow-x-auto pb-2">
+      <ul
+        className={`relative flex snap-x overflow-x-auto ${isFeatured ? 'gap-6 pb-4 lg:grid lg:grid-cols-3 lg:overflow-visible' : 'gap-3 pb-2'}`}
+      >
         {items.map((product) => (
-          <li key={product.id} className="w-64 shrink-0 snap-start">
+          <li
+            key={product.id}
+            className={`w-64 shrink-0 snap-start ${isFeatured ? 'lg:w-auto lg:min-w-0' : ''}`}
+          >
             <ProductCard
               product={product}
               onSelect={(item) => navigate(`/products?id=${encodeURIComponent(item.id)}`)}
@@ -51,7 +58,12 @@ export default function ProductSection({ country = null, city = null }) {
   return (
     <section aria-labelledby={titleId} className="space-y-3">
       <div className="flex items-baseline justify-between gap-2">
-        <h2 id={titleId} className="text-subtitle font-bold">
+        <h2
+          id={titleId}
+          className={
+            isFeatured ? 'text-title font-bold lg:text-display' : 'text-subtitle font-bold'
+          }
+        >
           {t('product.section.title')}
         </h2>
         <Link to={listPath} className="shrink-0 text-body-sm font-bold text-link">
