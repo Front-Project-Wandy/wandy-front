@@ -154,6 +154,57 @@
         "place": "장소",
         "product": "상품"
       }
+    },
+    "editorial": {
+      "heroLabel": "서울과 도쿄, 여행의 시작",
+      "destination": "추천 여행지 선택",
+      "eyebrow": "WANDY · YOUR NEXT JOURNEY",
+      "explore": "이 도시 둘러보기",
+      "seoul": {
+        "title": "익숙한 도시에서,\n새로운 하루를.",
+        "description": "한강의 저녁부터 골목 안 작은 카페까지. 나만의 속도로 서울을 만나보세요.",
+        "alt": "해 질 무렵 한강과 서울의 도심 풍경"
+      },
+      "tokyo": {
+        "title": "설레는 골목마다,\n나만의 도쿄.",
+        "description": "도쿄 타워가 보이는 풍경과 취향을 담은 맛집. 가고 싶은 곳을 모아 여행을 시작해요.",
+        "alt": "도쿄 타워와 도쿄 도심의 전경"
+      },
+      "busan": { "alt": "밤의 광안대교와 부산 바다" },
+      "jeju": { "alt": "제주 성산일출봉" },
+      "osaka": { "alt": "밤의 오사카 도톤보리 거리" },
+      "fukuoka": { "alt": "후쿠오카 나카스 강변의 포장마차" },
+      "shortcutsLabel": "여행 바로가기",
+      "shortcuts": {
+        "start": "여행 만들기",
+        "seoul": "서울 여행",
+        "tokyo": "도쿄 여행",
+        "products": "투어 · 티켓",
+        "themes": "테마 여행",
+        "my": "내 여행"
+      },
+      "startEyebrow": "MAKE IT YOURS",
+      "startTitle": "가고 싶은 마음을,\n나만의 일정으로.",
+      "startDescription": "도시와 날짜만 골라보세요. 직접 하나씩 담아도, AI에게 한 줄로 부탁해도 좋아요.",
+      "steps": {
+        "destination": "여행할 도시와 날짜를 골라요",
+        "places": "취향에 맞는 장소를 담아요",
+        "schedule": "동선을 확인하고 일정을 완성해요"
+      },
+      "citiesEyebrow": "FIND YOUR DESTINATION",
+      "citiesDescription": "가까운 일상부터 새로운 풍경까지, 다음 여행을 골라보세요.",
+      "cityAction": "이 도시로 여행 만들기",
+      "more": "여행지 둘러보기",
+      "footer": "가고 싶은 곳부터, 나만의 여행이 시작되는 곳.",
+      "photoCredit": "사진:",
+      "cityPhotoNote": "도시 사진은 화면에 맞게 줄이고 잘라서 표시했습니다.",
+      "curationEyebrow": "A LITTLE INSPIRATION",
+      "curationDescription": "좋아하는 순간을 모으면, 나다운 여행이 돼요.",
+      "outroEyebrow": "READY WHEN YOU ARE",
+      "outroTitle": "다음 여행은, 당신의 취향대로.",
+      "outroDescription": "가고 싶은 곳을 담고 나만의 여행을 완성해 보세요.",
+      "placePhotoCredits": "장소 사진 출처",
+      "photoCropNote": "Wikimedia Commons · 사진은 축소하고 정사각형으로 잘라 표시했습니다."
     }
   },
   "intro": {
@@ -502,7 +553,8 @@
     },
     "cost": {
       "title": "예상 비용",
-      "summary": "예상 총비용 약 {{total}} ({{converted}}) · 1인 약 {{perPerson}}",
+      "summary": "예상 총비용 약 {{total}} · 1인 약 {{perPerson}}",
+      "summaryConverted": "예상 총비용 약 {{total}} (약 {{converted}}) · 1인 약 {{perPerson}}",
       "toggle": "내역 보기",
       "caption": "예상 비용 내역 ({{count}}명 기준)",
       "item": "항목",
@@ -687,7 +739,14 @@
       "peak": "{{period}}에는 보통 {{from}}~{{to}}시에 가장 붐벼요",
       "estimated": "장소 종류로 추정한 혼잡도예요. 실제와 다를 수 있어요."
     },
+    "photo": {
+      "by": "사진:",
+      "cropped": "잘라서 표시",
+      "representative": "대표 사진",
+      "representativeAlt": "{{name}} 대표 사진 (근처 동네·대표 음식)"
+    },
     "info": {
+      "title": "이용 정보",
       "address": "주소",
       "hours": "영업시간"
     },
@@ -725,6 +784,19 @@
     "destination": {
       "country": "나라",
       "city": "도시"
+    },
+    "hero": {
+      "intro": {
+        "seoul": "궁궐 산책부터 시장 맛집, 야경 명소까지 서울의 가 볼 만한 곳을 모았어요",
+        "tokyo": "신사와 전망대, 라멘 골목과 온천까지 도쿄의 가 볼 만한 곳을 모았어요"
+      }
+    },
+    "card": {
+      "rank": "{{rank}}위"
+    },
+    "list": {
+      "more": "더보기",
+      "moreCount": "{{shown}}/{{total}}"
     }
   },
   "product": {

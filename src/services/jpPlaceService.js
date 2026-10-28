@@ -2,6 +2,7 @@
 import { createPlace } from '../features/search/place';
 import { filterPlaces } from '../features/search/utils/filterPlaces';
 import googleData from '../mocks/places/jp_google.json';
+import { withPlacePhoto } from './placePhotoService';
 
 // primaryType → [카테고리, 검색어로 찾을 수 있는 한국어]
 const GOOGLE_TYPES = {
@@ -54,7 +55,7 @@ export function getGoogleMapsUrl(name, placeId) {
 
 export function toPlaceFromGoogle(item, city) {
   const name = item.displayName?.text ?? '';
-  return createPlace({
+  const place = createPlace({
     id: `google:${item.id}`,
     source: 'google',
     sourceId: item.id,
@@ -65,12 +66,13 @@ export function toPlaceFromGoogle(item, city) {
     lat: item.location.latitude,
     lng: item.location.longitude,
     address: item.formattedAddress,
-    // 사진은 Place Photos API로 따로 받아야 해서 1단계 더미에서는 비워 둔다.
+    // 사진은 Place Photos API로 따로 받아야 해서 1단계 더미에서는 비우고, 아래에서 직접 고른 사진으로 채운다.
     imageUrl: null,
     rating: item.rating ?? null,
     openingHours: item.regularOpeningHours?.weekdayDescriptions ?? null,
     externalUrl: getGoogleMapsUrl(name, item.id),
   });
+  return withPlacePhoto(place);
 }
 
 const getGoogleEntries = (city) =>

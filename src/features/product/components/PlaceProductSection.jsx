@@ -25,7 +25,7 @@ export default function PlaceProductSection({ place, className = '' }) {
     if (isPending) return <Loading />;
     if (isError) return <ErrorState onRetry={() => refetch()} />;
     return (
-      <ul className="flex snap-x gap-3 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:overflow-visible">
+      <ul className="flex snap-x gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible">
         {items.map((product) => (
           <li key={product.id} className="w-64 shrink-0 snap-start lg:w-auto">
             <ProductCard
@@ -40,21 +40,21 @@ export default function PlaceProductSection({ place, className = '' }) {
 
   return (
     // 가로로 넘기는 목록이 그리드 칸을 밀어 넓히지 않도록 min-w-0을 둔다.
-    <section aria-labelledby={titleId} className={`min-w-0 space-y-3 ${className}`}>
-      <div className="flex items-baseline justify-between gap-2">
-        <div>
-          <h2 id={titleId} className="text-subtitle font-bold">
+    <section aria-labelledby={titleId} className={`min-w-0 space-y-5 ${className}`}>
+      <div className="flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <h2 id={titleId} className="text-title font-bold break-keep">
             {t('product.placeSection.title')}
           </h2>
-          <p className="text-body-sm text-text/70">
+          <p className="mt-1 text-body-sm text-text/70">
             {t('product.placeSection.subtitle', { city: t(`common.city.${place.city}`) })}
           </p>
         </div>
         <Link
           to={`/products?country=${place.country}`}
-          className="shrink-0 text-body-sm font-bold text-link"
+          className="shrink-0 rounded-xl py-2 text-body-sm font-bold text-link focus-visible:outline-2 focus-visible:outline-primary"
         >
-          {t('product.section.more')}
+          {t('product.section.more')} <span aria-hidden="true">↗</span>
         </Link>
       </div>
       {renderItems()}
