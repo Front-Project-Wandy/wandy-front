@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import Input from '../../../components/common/Input';
+import TimeSelect from '../../../components/common/TimeSelect';
 import { formatShortDate } from '../../../features/member/utils/tripDates';
 import StayAreaChips from './StayAreaChips';
 
@@ -33,21 +34,19 @@ export default function StayBookedForm({ stay, city, startDate, endDate, onChang
         onChange={(event) => onChange({ address: event.target.value })}
       />
       <div className="grid gap-4 sm:grid-cols-2">
-        <Input
-          type="time"
+        <TimeSelect
           label={t('wizard.stay.booked.checkIn', {
             date: formatShortDate(startDate, i18n.language),
           })}
           value={stay.checkInTime}
-          onChange={(event) => onChange({ checkInTime: event.target.value })}
+          onChange={(checkInTime) => onChange({ checkInTime })}
         />
-        <Input
-          type="time"
+        <TimeSelect
           label={t('wizard.stay.booked.checkOut', {
             date: formatShortDate(endDate, i18n.language),
           })}
           value={stay.checkOutTime}
-          onChange={(event) => onChange({ checkOutTime: event.target.value })}
+          onChange={(checkOutTime) => onChange({ checkOutTime })}
         />
       </div>
     </div>

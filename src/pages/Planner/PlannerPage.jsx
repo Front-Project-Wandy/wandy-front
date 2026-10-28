@@ -11,11 +11,13 @@ import AirportLeg from '../../features/transport/components/AirportLeg';
 import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import DuplicateTripDialog from '../../features/trip/components/DuplicateTripDialog';
+import TimelineView from '../../features/trip/components/TimelineView';
 import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
+import ViewToggle from '../../features/trip/components/ViewToggle';
 import { useUndoShortcut } from '../../features/trip/hooks/useUndoShortcut';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
-// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36), 끌어서 순서 바꾸기(16), 되돌리기·다시 실행·여행 복제(71), 예상 총비용(57), 공항 → 숙소 이동(52)까지.
+// /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36), 끌어서 순서 바꾸기(16), 되돌리기·다시 실행·여행 복제(71), 예상 총비용(57), 공항 → 숙소 이동(52), 타임라인 보기(80)까지.
 export default function PlannerPage() {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -42,6 +44,8 @@ export default function PlannerPage() {
   const [selectedItemId, setSelectedItemId] = useState(null);
   // 여행 복제 창이 열려 있는지 (71)
   const [isDuplicating, setIsDuplicating] = useState(false);
+  // 일정을 목록('list')으로 볼지 타임라인('timeline')으로 볼지 (80)
+  const [viewMode, setViewMode] = useState('list');
 
   // 주소의 여행이 보관함에 있으면 지금 여는 여행으로 바꾼다 (여러 여행). 바뀌는 동안은 로딩을 보여 준다.
   const isArchivedTrip = trip?.id !== id && trips.some((item) => item.id === id);
@@ -129,20 +133,31 @@ export default function PlannerPage() {
       <>
         {/* grid-cols-1: 열을 정하지 않으면 모바일에서 칸이 긴 장소 이름의 너비까지 늘어나 화면이 가로로 넘친다 */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
-          <DayList
-            days={trip.days}
-            country={trip.country}
-            transportMode={trip.transportMode}
-            style={trip.style}
-            flight={trip.flight}
-            selectedItemId={activeItemId}
-            onSelectItem={handleToggleItem}
-            onAddPlace={setAddingDayIndex}
-            onUpdateItem={updateItem}
-            onRemoveItem={removeItem}
-            onMoveItem={moveItem}
-            onReorderDay={reorderDay}
-          />
+          {viewMode === 'timeline' ? (
+            <TimelineView
+              days={trip.days}
+              country={trip.country}
+              transportMode={trip.transportMode}
+              style={trip.style}
+              selectedItemId={activeItemId}
+              onSelectItem={handleToggleItem}
+            />
+          ) : (
+            <DayList
+              days={trip.days}
+              country={trip.country}
+              transportMode={trip.transportMode}
+              style={trip.style}
+              flight={trip.flight}
+              selectedItemId={activeItemId}
+              onSelectItem={handleToggleItem}
+              onAddPlace={setAddingDayIndex}
+              onUpdateItem={updateItem}
+              onRemoveItem={removeItem}
+              onMoveItem={moveItem}
+              onReorderDay={reorderDay}
+            />
+          )}
           <MapView
             country={trip.country}
             city={trip.city}
@@ -187,6 +202,7 @@ export default function PlannerPage() {
       </div>
       {isTripReady ? <TripCostSummary trip={trip} /> : null}
       {isTripReady ? <AirportLeg trip={trip} /> : null}
+      {isTripReady ? <ViewToggle value={viewMode} onChange={setViewMode} /> : null}
       {renderBody()}
       {isTripReady ? (
         <DuplicateTripDialog
