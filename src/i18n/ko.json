@@ -688,6 +688,7 @@
       "estimated": "장소 종류로 추정한 혼잡도예요. 실제와 다를 수 있어요."
     },
     "info": {
+      "title": "이용 정보",
       "address": "주소",
       "hours": "영업시간"
     },
@@ -725,6 +726,19 @@
     "destination": {
       "country": "나라",
       "city": "도시"
+    },
+    "hero": {
+      "intro": {
+        "seoul": "궁궐 산책부터 시장 맛집, 야경 명소까지 서울의 가 볼 만한 곳을 모았어요",
+        "tokyo": "신사와 전망대, 라멘 골목과 온천까지 도쿄의 가 볼 만한 곳을 모았어요"
+      }
+    },
+    "card": {
+      "rank": "{{rank}}위"
+    },
+    "list": {
+      "more": "더보기",
+      "moreCount": "{{shown}}/{{total}}"
     }
   },
   "product": {
