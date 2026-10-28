@@ -1,45 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { moveItemInDays } from './moveItemInDays';
+import { buildTripCopy } from './planCopy';
+import { buildDays } from './planDays';
 import { isChangingItem, isSystemPatch, pushHistory, redoState, undoState } from './planHistory';
-
-// toISOString()은 UTC 기준이라 한국 시간에서 하루 어긋날 수 있어 로컬 기준으로 만든다
-const toDateString = (date) => {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-};
-
-const getDateRange = (startDate, endDate) => {
-  if (!startDate || !endDate) return [];
-  const [sy, sm, sd] = startDate.split('-').map(Number);
-  const [ey, em, ed] = endDate.split('-').map(Number);
-  const current = new Date(sy, sm - 1, sd);
-  const end = new Date(ey, em - 1, ed);
-  const dates = [];
-  while (current <= end) {
-    dates.push(toDateString(current));
-    current.setDate(current.getDate() + 1);
-  }
-  return dates;
-};
-
-// 날짜를 밀어도 일정이 DAY 번호에 붙어 있도록, 날짜가 아니라 순서로 기존 DAY를 이어 붙인다.
-// 시작일이 종료일보다 늦는 등 날짜가 아직 맞지 않으면 기존 일정을 지우지 않으려고 그대로 둔다.
-const buildDays = (startDate, endDate, prevDays = []) => {
-  const dates = getDateRange(startDate, endDate);
-  if (dates.length === 0) return prevDays;
-
-  const days = dates.map((date, i) => ({ date, items: prevDays[i]?.items ?? [] }));
-
-  const overflow = prevDays.slice(dates.length).flatMap((day) => day.items);
-  if (overflow.length > 0) {
-    const last = days[days.length - 1];
-    last.items = [...last.items, ...overflow];
-  }
-  return days;
-};
 
 const withUpdatedAt = (trip) => ({ ...trip, updatedAt: new Date().toISOString() });
 
@@ -227,6 +191,18 @@ export const usePlanStore = create(
             ? { past: pushHistory(state.past, before), future: [] }
             : state,
         );
+      },
+
+      // 여행(id를 생략하면 지금 여는 여행)을 새 날짜(startDate)로 통째로 복사해 새 여행으로 연다 (71).
+      // 지금 열려 있던 여행은 보관함으로 가고 원본은 그대로다. 새 여행의 id를 돌려주고, 복사할 수 없으면 null이다.
+      duplicateTrip: (id, { title, startDate }) => {
+        const { trip, trips } = get();
+        const source = !id || id === trip?.id ? trip : trips.find((item) => item.id === id);
+        const copy = buildTripCopy(source, { title, startDate }, () => crypto.randomUUID());
+        if (!copy) return null;
+
+        set({ trip: copy, trips: trip ? [trip, ...trips] : trips, past: [], future: [] });
+        return copy.id;
       },
 
       // 지금 여는 여행을 지운다 (보관함은 그대로).
