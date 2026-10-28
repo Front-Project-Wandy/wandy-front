@@ -800,6 +800,13 @@
       "mockNotice": "지금은 예시 장소 데이터로 만든 일정이에요.",
       "rainy": "비 오는 날이에요",
       "rainyHint": "쇼핑·온천 같은 실내 장소를 먼저 넣고, 공원·야경처럼 바깥에서 보는 곳은 빼요.",
+      "regenerateDay": "AI로 이 날 다시 짜기",
+      "regenerateDayLabel": "DAY {{number}} AI로 다시 짜기",
+      "redoDay": {
+        "title": "AI로 이 날 다시 짜기",
+        "description": "이 날 장소를 AI가 새로 골라 드려요. 지금 넣은 곳과 다른 장소로 골라요.",
+        "apply": "이 날 일정 바꾸기"
+      },
       "day": "DAY {{day}}",
       "stay": "{{minutes}}분"
     },
