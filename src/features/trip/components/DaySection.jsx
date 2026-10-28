@@ -10,6 +10,7 @@ import { getDayDropId } from '../utils/dragPosition';
 import { canOptimizeRoute } from '../utils/optimizeRoute';
 import { formatDayDate } from '../utils/formatDay';
 import DayItem from './DayItem';
+import GapSuggestions from './GapSuggestions';
 import OptimizeDayDialog from './OptimizeDayDialog';
 import SortableDayItem from './SortableDayItem';
 
@@ -77,6 +78,7 @@ export default function DaySection({
           </Button>
         </div>
       </div>
+      <GapSuggestions dayIndex={dayIndex} />
       {day.items.length === 0 ? (
         <p
           className={`rounded-2xl bg-bg-soft px-4 py-6 text-center text-body-sm text-text/70 ${isOver ? 'ring-2 ring-primary' : ''}`}
