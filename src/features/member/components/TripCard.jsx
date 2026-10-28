@@ -15,36 +15,65 @@ export default function TripCard({ trip, status, today, onSelect }) {
     ? `${formatShortDate(trip.startDate, i18n.language)} ~ ${formatShortDate(trip.endDate, i18n.language)}`
     : t('my.trips.noDates');
 
-  const renderBadge = () => {
+  // 날짜 미정 여행은 startDate가 없어서 D-day를 구하지 않도록 상태별로 나눠 만든다.
+  const getBadge = () => {
     if (status === 'upcoming')
-      return (
-        <span className="text-point">
-          {t('my.trips.dday', { count: getDaysUntil(trip.startDate, today) })}
-        </span>
-      );
-    if (status === 'ongoing') return <span className="text-link">{t('my.trips.ongoing')}</span>;
+      return {
+        label: t('my.trips.dday', { count: getDaysUntil(trip.startDate, today) }),
+        className: 'text-point',
+      };
+    if (status === 'ongoing') return { label: t('my.trips.ongoing'), className: 'text-link' };
     return null;
   };
-  const badge = renderBadge();
+  const badge = getBadge();
 
   return (
-    <li>
+    <li className="min-w-0">
       <button
         type="button"
         onClick={() => onSelect(trip)}
-        className="flex w-full items-center justify-between gap-3 rounded-2xl border border-text/10 bg-background p-4 text-left transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary"
+        className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-text/10 bg-background text-left transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
-        <span className="min-w-0">
+        {/* 여행에는 사진이 없어서 상품 카드처럼 옅은 바탕에 도시 이름을 크게 둔다. 지난 여행은 한 단계 흐리게. */}
+        <span
+          className={`relative flex aspect-3/1 min-h-32 w-full flex-col justify-end p-5 sm:aspect-5/2 ${status === 'past' ? 'bg-bg-soft' : 'bg-brand/15'}`}
+        >
+          {badge ? (
+            <span
+              className={`absolute top-4 left-4 rounded-full bg-background px-3 py-1 text-body-sm font-bold ${badge.className}`}
+            >
+              {badge.label}
+            </span>
+          ) : null}
+          {trip.country ? (
+            <span className="text-caption text-text/60">{t(`common.country.${trip.country}`)}</span>
+          ) : null}
+          {/* 도시를 아직 안 고른 여행은 아래 제목이 「이름 없는 여행」이라 같은 글자를 두 번 쓰지 않고 그림만 둔다. */}
+          {trip.city ? (
+            <span className="text-title font-bold break-keep">{t(`common.city.${trip.city}`)}</span>
+          ) : (
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className="text-primary"
+            >
+              <path d="M2 13.5 22 4l-5 16-4.5-6.5L2 13.5Zm10.5 0L22 4" />
+            </svg>
+          )}
+        </span>
+        <span className="flex flex-1 flex-col gap-1 p-5">
           <span className="block truncate text-body font-bold">{title}</span>
           <span className="block text-body-sm text-text/70">
             {dates} · {t('my.trips.people', { count: trip.people })}
           </span>
         </span>
-        {badge ? (
-          <span className="shrink-0 rounded-full bg-bg-soft px-3 py-1 text-body-sm font-bold">
-            {badge}
-          </span>
-        ) : null}
       </button>
     </li>
   );
