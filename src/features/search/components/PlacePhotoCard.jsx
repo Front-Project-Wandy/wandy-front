@@ -22,19 +22,19 @@ export default function PlacePhotoCard({ place, onSelect, distance = null, rank 
         onClick={() => onSelect(place)}
         className="group block w-full rounded-2xl text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
       >
-        <span className="relative block aspect-4/3 overflow-hidden rounded-2xl bg-bg-soft">
+        <span className="motion-card-frame relative block aspect-4/3 overflow-hidden rounded-2xl bg-bg-soft">
           {hasImage ? (
             <img
               src={place.imageUrl}
               onError={() => setFailedImage(place.imageUrl)}
               alt=""
               loading="lazy"
-              className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="size-full object-cover motion-card-image"
             />
           ) : (
             <span
               aria-hidden="true"
-              className={`grid size-full place-items-center transition-transform duration-500 group-hover:scale-105 ${CATEGORY_TONE_CLASSES[place.category] ?? DEFAULT_TONE_CLASS}`}
+              className={`grid size-full place-items-center motion-card-image ${CATEGORY_TONE_CLASSES[place.category] ?? DEFAULT_TONE_CLASS}`}
             >
               <CategoryIcon category={place.category} size={44} />
             </span>
