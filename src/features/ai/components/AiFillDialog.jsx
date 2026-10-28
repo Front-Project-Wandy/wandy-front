@@ -14,8 +14,10 @@ import AiFillPreview from './AiFillPreview';
 // 결과를 어디에 넣을지(플랜 store, 마법사 spots)는 부르는 쪽이 정한다.
 // 열 때마다 처음부터 시작하도록, 부르는 쪽(AiFillButton)이 열려 있을 때만 그린다.
 // 「비 오는 날이에요」를 켜면 실내 장소 위주로 만든다 (79). 결과를 본 뒤 바꾸고 [다시 만들기]를 눌러도 된다.
-export default function AiFillDialog({ conditions, onApply, onClose }) {
+// isRegenerate: 플래너 DAY 다시 짜기(79)로 열었을 때 제목·안내·넣기 버튼 글자만 바꾼다.
+export default function AiFillDialog({ conditions, isRegenerate = false, onApply, onClose }) {
   const { t } = useTranslation();
+  const textKey = (name) => `ai.fill.${isRegenerate ? `redoDay.${name}` : name}`;
   const rainyHintId = useId();
   const { mutate, data, isPending, isError } = useFillItinerary();
   const [rainy, setRainy] = useState(false);
@@ -57,7 +59,7 @@ export default function AiFillDialog({ conditions, onApply, onClose }) {
     if (!data)
       return (
         <div className="space-y-4">
-          <p className="text-body text-text/70 break-keep">{t('ai.fill.description')}</p>
+          <p className="text-body text-text/70 break-keep">{t(textKey('description'))}</p>
           {rainyOption}
           <Button className="w-full" onClick={handleGenerate}>
             {t('ai.fill.generate')}
@@ -86,7 +88,7 @@ export default function AiFillDialog({ conditions, onApply, onClose }) {
         {rainyOption}
         <div className="flex flex-col gap-2 sm:flex-row-reverse">
           <Button className="sm:flex-1" onClick={handleApply}>
-            {t('ai.fill.apply')}
+            {t(textKey('apply'))}
           </Button>
           <Button variant="secondary" className="sm:flex-1" onClick={handleGenerate}>
             {t('ai.fill.regenerate')}
@@ -97,7 +99,7 @@ export default function AiFillDialog({ conditions, onApply, onClose }) {
   };
 
   return (
-    <Modal open onClose={onClose} title={t('ai.fill.title')}>
+    <Modal open onClose={onClose} title={t(textKey('title'))}>
       {renderBody()}
     </Modal>
   );
