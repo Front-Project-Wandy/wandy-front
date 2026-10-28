@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import ProductSection from '../../features/product/components/ProductSection';
 import ContinueDraftCard from './ContinueDraftCard';
 import CurationSection from './CurationSection';
+import HomeFlightPath from './HomeFlightPath';
 import HomeHero from './HomeHero';
 import HomeShortcuts from './HomeShortcuts';
 import LastTripBanner from './LastTripBanner';
@@ -9,13 +10,19 @@ import PopularCities from './PopularCities';
 import RecentViews from './RecentViews';
 import StartTripCard from './StartTripCard';
 import UpcomingTripCard from './UpcomingTripCard';
+import { useHomeReveal } from './useHomeReveal';
 import { CITY_PHOTOS } from './cityPhotos';
 
 export default function HomePage() {
   const { t } = useTranslation();
+  const revealRef = useHomeReveal();
   return (
-    <main>
-      <div className="mx-auto w-full max-w-360 px-4 pt-6 lg:px-5 lg:pt-10">
+    <main ref={revealRef} className="relative">
+      <HomeFlightPath />
+      <div
+        data-flight-stop="hero"
+        className="mx-auto w-full max-w-360 px-4 pt-6 lg:px-5 lg:pt-10"
+      >
         <HomeHero />
         <HomeShortcuts />
         <div className="flex flex-col gap-4 empty:hidden">
@@ -24,10 +31,14 @@ export default function HomePage() {
           <LastTripBanner />
         </div>
       </div>
-      <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-5 lg:py-20">
+      <div
+        data-reveal=""
+        data-flight-stop="cities"
+        className="mx-auto w-full max-w-360 px-4 py-12 lg:px-5 lg:py-20"
+      >
         <PopularCities />
       </div>
-      <section id="home-start" className="scroll-mt-8 bg-bg-soft">
+      <section id="home-start" data-flight-stop="plan" className="scroll-mt-8 bg-bg-soft">
         <div className="mx-auto w-full max-w-360 grid gap-8 px-4 py-12 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-5 lg:py-20">
           <div>
             <p className="mb-4 text-caption font-bold tracking-widest text-primary">
@@ -55,12 +66,14 @@ export default function HomePage() {
       </section>
       <div
         id="home-curation"
+        data-reveal=""
+        data-flight-stop="curation"
         className="mx-auto w-full max-w-360 scroll-mt-8 px-4 py-12 lg:px-5 lg:py-20"
       >
         <CurationSection />
       </div>
-      <div className="border-y border-text/10 bg-bg-soft">
-        <div className="mx-auto w-full max-w-360 px-4 py-12 lg:px-5 lg:py-20">
+      <div data-flight-stop="products" className="border-y border-text/10 bg-bg-soft">
+        <div data-reveal="" className="mx-auto w-full max-w-360 px-4 py-12 lg:px-5 lg:py-20">
           <ProductSection variant="featured" />
         </div>
       </div>
@@ -68,6 +81,7 @@ export default function HomePage() {
         <RecentViews />
       </div>
       <section
+        data-flight-stop="arrive"
         className="mx-auto w-full max-w-360 px-4 py-12 lg:px-5 lg:py-16"
         aria-labelledby="home-outro-title"
       >
