@@ -113,7 +113,8 @@ export default function PlannerPage() {
     // lg부터 목록과 지도를 좌우로 나눈다 (디자인 기준). 지도는 목록을 내려도 따라온다.
     return (
       <>
-        <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+        {/* grid-cols-1: 열을 정하지 않으면 모바일에서 칸이 긴 장소 이름의 너비까지 늘어나 화면이 가로로 넘친다 */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
           <DayList
             days={trip.days}
             country={trip.country}
