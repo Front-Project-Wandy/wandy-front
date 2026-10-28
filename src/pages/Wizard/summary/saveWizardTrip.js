@@ -7,7 +7,8 @@ import { toPlanStay } from '../stay/stayOptions';
 //   startNewTrip → setTripInfo(날짜로 DAY를 만든다) → setFlight·setStay(있을 때) → 장소마다 addItem
 // startNewTrip은 지금 열린 여행을 보관함(trips)으로 보낸다. 이전 여행은 지워지지 않고 내 여행 목록에 남는다 (#59).
 // placesById: 담은 장소를 placeId로 다시 불러온 값. 찾을 수 없는 장소는 넣지 않는다.
-export function saveWizardTrip({ draft, spots, title, placesById }) {
+// schedule: scheduleSpots로 정한 장소별 { startTime, stayMinutes } (48·51). 없으면 addItem 기본값(10:00, 90분).
+export function saveWizardTrip({ draft, spots, schedule = {}, title, placesById }) {
   const { startNewTrip, setTripInfo, setFlight, setStay, addItem } = usePlanStore.getState();
 
   startNewTrip();
@@ -35,7 +36,7 @@ export function saveWizardTrip({ draft, spots, title, placesById }) {
 
   spots.forEach(({ placeId, dayIndex }) => {
     const place = placesById[placeId]?.place;
-    if (place) addItem(dayIndex, place);
+    if (place) addItem(dayIndex, place, schedule[placeId]);
   });
 
   return usePlanStore.getState().trip.id;

@@ -8,6 +8,7 @@ import { fitSpotsToDays } from '../spots/spotList';
 import { toPlanStay } from '../stay/stayOptions';
 import { useSpotPlaces } from '../spots/useSpotPlaces';
 import { saveWizardTrip } from '../summary/saveWizardTrip';
+import { scheduleSpots } from '../summary/scheduleSpots';
 import SummaryDays from '../summary/SummaryDays';
 import { getTripDays } from '../tripDays';
 import WizardNav from '../WizardNav';
@@ -31,6 +32,15 @@ export default function Step7Summary({ onPrev }) {
   // 항공(STEP2)은 시각이 다 있을 때만 저장·표시한다.
   const planFlight = toPlanFlight(draft.flight, draft);
   const planStay = toPlanStay(draft.stay, draft);
+  // 장소 시각 (48·51). 화면에 보여 준 시각 그대로 저장하려고 여기서 한 번만 계산해 둘 다 넘긴다.
+  // 항공·숙소는 저장되는 것(planFlight·planStay가 있을 때)만 기준으로 쓴다.
+  const { schedule, departLimit } = scheduleSpots({
+    spots,
+    dayCount: days.length,
+    flight: planFlight ? draft.flight : null,
+    stay: planStay ? draft.stay : null,
+    style: draft.style,
+  });
   const transportLabel = draft.transportMode
     ? t(`wizard.transport.mode.${draft.transportMode}.title`)
     : t('wizard.summary.transportNone');
@@ -40,6 +50,7 @@ export default function Step7Summary({ onPrev }) {
     const tripId = saveWizardTrip({
       draft,
       spots,
+      schedule,
       title: draft.title.trim() || defaultTitle,
       placesById,
     });
@@ -91,6 +102,8 @@ export default function Step7Summary({ onPrev }) {
       <SummaryDays
         days={days}
         spots={spots}
+        schedule={schedule}
+        departLimit={departLimit}
         placesById={placesById}
         isGoogle={draft.country === 'JP'}
       />

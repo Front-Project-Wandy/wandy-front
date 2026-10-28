@@ -444,6 +444,8 @@
       "info": "{{city}} · {{start}}~{{end}} · {{people}}명 · 이동: {{transport}}",
       "transportNone": "정하지 않음",
       "daysTitle": "DAY별 일정",
+      "timeHint": "시작 시각은 항공·숙소 시간에 맞춰 정했어요. 플래너에서 바꿀 수 있어요.",
+      "departWarning": "출발 3시간 전까지 끝나지 않는 장소가 있어요. 플래너에서 시간을 줄이거나 다른 날로 옮겨 보세요.",
       "emptyDay": "담은 장소가 없어요",
       "missing": "찾을 수 없는 장소 (저장할 때 빠져요)",
       "flight": "항공 · 도착 {{arrive}} · 귀국 출발 {{depart}} ({{flightNo}})",
