@@ -1,12 +1,51 @@
 import { useTranslation } from 'react-i18next';
 import Chip from '../../../components/common/Chip';
 import { PRODUCT_CATEGORIES } from '../constants';
+import ProductCategoryIcon from './ProductCategoryIcon';
 
 const CHIP_VALUES = [null, ...PRODUCT_CATEGORIES];
 
 // 상품 종류 필터. null = 전체.
-export default function ProductCategoryChips({ value, onChange }) {
+// variant="icon": 상품 목록 위쪽의 둥근 아이콘 바로가기. 홈 섹션은 기본(칩)을 그대로 쓴다.
+export default function ProductCategoryChips({ value, onChange, variant = 'chip' }) {
   const { t } = useTranslation();
+
+  if (variant === 'icon')
+    // 6개가 360px 한 줄에 들어가도록 칸을 똑같이 나누고, 원 크기는 sm부터 키운다.
+    // 선택 표시는 Chip과 같은 규칙(brand 바탕 + 진한 ink 글자)이고 aria-pressed로 알린다.
+    return (
+      <div
+        role="group"
+        aria-label={t('product.category.label')}
+        className="grid grid-cols-6 gap-1 sm:gap-4"
+      >
+        {CHIP_VALUES.map((category) => {
+          const selected = value === category;
+          return (
+            <button
+              key={category ?? 'all'}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => onChange(category)}
+              className="group flex min-w-0 flex-col items-center gap-2 rounded-xl py-1 focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              <span
+                className={`grid size-12 place-items-center rounded-full transition-[transform,background-color] group-hover:-translate-y-0.5 sm:size-16 ${
+                  selected ? 'bg-brand text-ink' : 'bg-bg-soft text-primary'
+                }`}
+              >
+                <ProductCategoryIcon category={category ?? 'all'} />
+              </span>
+              <span
+                className={`text-caption break-keep sm:text-body-sm ${selected ? 'font-bold text-text' : 'text-text/70'}`}
+              >
+                {t(`product.category.${category ?? 'all'}`)}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    );
 
   // 가로 스크롤 줄은 칩 바깥에 그려지는 포커스 테두리를 잘라 버린다.
   // 안쪽 여백(p-1)으로 테두리 자리를 두고, 음수 여백으로 칩 위치는 그대로 둔다.

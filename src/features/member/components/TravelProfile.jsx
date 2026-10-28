@@ -98,11 +98,11 @@ export default function TravelProfile() {
   };
 
   return (
-    <section aria-labelledby={titleId} className="rounded-2xl border border-text/10 p-4 sm:p-6">
-      <h2 id={titleId} className="mb-4 text-subtitle font-bold">
+    <section aria-labelledby={titleId} className="space-y-5">
+      <h2 id={titleId} className="text-title font-bold">
         {t('my.profile.title')}
       </h2>
-      {renderBody()}
+      <div className="rounded-2xl border border-text/10 p-5 sm:p-8">{renderBody()}</div>
     </section>
   );
 }

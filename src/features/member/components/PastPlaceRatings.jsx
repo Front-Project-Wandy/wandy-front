@@ -22,27 +22,28 @@ export default function PastPlaceRatings() {
       : t('my.trips.untitled'));
 
   return (
-    <section aria-labelledby={titleId} className="space-y-3">
-      <h2 id={titleId} className="text-subtitle font-bold">
+    <section aria-labelledby={titleId} className="space-y-5">
+      <h2 id={titleId} className="text-title font-bold">
         {t('my.ratings.title')}
       </h2>
       {groups.length === 0 ? (
         <EmptyState
           title={t('my.ratings.emptyTitle')}
           description={t('my.ratings.emptyDescription')}
+          className="rounded-2xl bg-bg-soft"
         />
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-6">
           <p className="text-body-sm text-text/70 break-keep">{t('my.ratings.notice')}</p>
           {groups.map(({ trip, items }) => (
-            <div key={trip.id} className="space-y-2">
+            <div key={trip.id} className="space-y-3">
               <h3 className="text-body font-bold">
                 {renderTitle(trip)}
                 <span className="ml-2 text-body-sm font-normal text-text/70">
                   {`${formatShortDate(trip.startDate, i18n.language)} ~ ${formatShortDate(trip.endDate, i18n.language)}`}
                 </span>
               </h3>
-              <ul className="space-y-2">
+              <ul className="grid gap-3 lg:grid-cols-2">
                 {items.map((item) => (
                   <PlaceRatingRow key={item.placeId} item={item} />
                 ))}
