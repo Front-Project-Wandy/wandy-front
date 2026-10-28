@@ -7,6 +7,8 @@ import {
   CATEGORY_TONE_CLASSES,
   DEFAULT_TONE_CLASS,
 } from '../../features/search/utils/categoryTone';
+import { getPlacePhoto } from '../../services/placePhotoService';
+import PhotoCredit from './PhotoCredit';
 
 // 장소 상세 맨 위 큰 사진 + 이름·카테고리·평점·AI 한 줄 설명 (10·78).
 // 사진은 장소 데이터의 imageUrl만 쓰고, 없거나 못 불러오면 카테고리 색 바탕에 큰 아이콘을 그린다.
@@ -15,16 +17,30 @@ export default function PlaceHero({ place }) {
   const [failedImage, setFailedImage] = useState(null);
   const hasImage = Boolean(place.imageUrl && place.imageUrl !== failedImage);
   const categoryLabel = t(`common.category.${place.category}`);
+  // 직접 고른 사진일 때만 출처를 붙인다 (2단계에서 API 사진이 오면 그쪽 출처 규칙을 따른다).
+  const photo = getPlacePhoto(place.id);
+  const credit = photo && photo.src === place.imageUrl ? photo : null;
 
   return (
     <header className="space-y-6 lg:space-y-8">
       {hasImage ? (
-        <img
-          src={place.imageUrl}
-          onError={() => setFailedImage(place.imageUrl)}
-          alt={place.name}
-          className="aspect-4/3 w-full rounded-3xl object-cover sm:aspect-video lg:aspect-21/9"
-        />
+        <figure className="relative">
+          <img
+            src={place.imageUrl}
+            onError={() => setFailedImage(place.imageUrl)}
+            alt={
+              credit?.representative
+                ? t('place.photo.representativeAlt', { name: place.name })
+                : place.name
+            }
+            className="aspect-4/3 w-full rounded-3xl object-cover sm:aspect-video lg:aspect-2/1"
+          />
+          {credit ? (
+            <figcaption className="absolute inset-x-3 bottom-3 flex justify-end">
+              <PhotoCredit photo={credit} />
+            </figcaption>
+          ) : null}
+        </figure>
       ) : (
         <div
           aria-hidden="true"
