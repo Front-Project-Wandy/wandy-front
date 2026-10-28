@@ -474,6 +474,17 @@
       "noteTransport": "교통은 대중교통·도보는 인원만큼, 택시·자차는 차량 1대 요금이에요. 항공·숙소는 포함하지 않아요.",
       "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
     },
+    "optimize": {
+      "button": "동선 최적화",
+      "buttonLabel": "DAY {{number}} 동선 최적화",
+      "title": "DAY {{number}} 동선 최적화",
+      "distance": "이동 거리 {{before}} → {{after}}",
+      "time": "이동 시간 {{before}} → {{after}}",
+      "note": "첫 장소는 그대로 두고, 이동 거리가 가장 짧도록 나머지 장소를 다시 놓아요. 각 자리의 시작 시각은 그대로예요.",
+      "alreadyShortest": "이미 가장 짧은 동선이에요.",
+      "apply": "적용",
+      "cancel": "취소"
+    },
     "duplicate": {
       "button": "여행 복제",
       "title": "여행 복제하기",
