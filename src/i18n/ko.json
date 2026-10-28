@@ -679,6 +679,9 @@
     "placeSection": {
       "title": "이 장소와 어울리는 투어",
       "subtitle": "{{city}}에서 같이 즐기기 좋은 상품이에요"
+    },
+    "daySection": {
+      "title": "이 날과 어울리는 투어"
     }
   },
   "login": {
