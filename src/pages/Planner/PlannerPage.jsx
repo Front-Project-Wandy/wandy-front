@@ -11,6 +11,8 @@ import AirportLeg from '../../features/transport/components/AirportLeg';
 import AddPlaceModal from '../../features/trip/components/AddPlaceModal';
 import DayList from '../../features/trip/components/DayList';
 import DuplicateTripDialog from '../../features/trip/components/DuplicateTripDialog';
+import PrintableTrip from '../../features/trip/components/PrintableTrip';
+import ShareTripDialog from '../../features/trip/components/ShareTripDialog';
 import TimelineView from '../../features/trip/components/TimelineView';
 import TripWeather from '../../features/trip/components/TripWeather';
 import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
@@ -45,6 +47,8 @@ export default function PlannerPage() {
   const [selectedItemId, setSelectedItemId] = useState(null);
   // 여행 복제 창이 열려 있는지 (71)
   const [isDuplicating, setIsDuplicating] = useState(false);
+  // 공유·내보내기 창이 열려 있는지 (72)
+  const [isSharing, setIsSharing] = useState(false);
   // 일정을 목록('list')으로 볼지 타임라인('timeline')으로 볼지 (80)
   const [viewMode, setViewMode] = useState('list');
 
@@ -70,6 +74,11 @@ export default function PlannerPage() {
     if (!canRedo) return;
     redo();
     announceHistory('planner.history.redone');
+  };
+  // 인쇄(PDF로 저장): 열려 있는 창을 먼저 닫아야 인쇄 화면에 안 섞인다
+  const handlePrint = () => {
+    setIsSharing(false);
+    setTimeout(() => window.print(), 150);
   };
   useUndoShortcut({ onUndo: handleUndo, onRedo: handleRedo, enabled: Boolean(trip) });
 
@@ -182,38 +191,52 @@ export default function PlannerPage() {
   };
 
   return (
-    <main className="mx-auto max-w-5xl space-y-6 px-4 py-6 lg:px-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-title font-bold">{t('planner.page.title')}</h1>
+    <>
+      <main className="mx-auto max-w-5xl space-y-6 px-4 py-6 lg:px-6 print:hidden">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h1 className="text-title font-bold">{t('planner.page.title')}</h1>
+          {isTripReady ? (
+            <div className="flex flex-wrap items-center gap-2">
+              <UndoRedoBar
+                canUndo={canUndo}
+                canRedo={canRedo}
+                onUndo={handleUndo}
+                onRedo={handleRedo}
+                message={historyMessage}
+              />
+              <Button variant="secondary" onClick={() => setIsDuplicating(true)}>
+                {t('planner.duplicate.button')}
+              </Button>
+              <Button variant="secondary" onClick={() => setIsSharing(true)}>
+                {t('planner.share.button')}
+              </Button>
+              <AiFillButton trip={trip} onApply={handleApplyAiFill} />
+            </div>
+          ) : null}
+        </div>
+        {isTripReady ? <TripCostSummary trip={trip} /> : null}
+        {isTripReady ? <TripWeather trip={trip} /> : null}
+        {isTripReady ? <AirportLeg trip={trip} /> : null}
+        {isTripReady ? <ViewToggle value={viewMode} onChange={setViewMode} /> : null}
+        {renderBody()}
         {isTripReady ? (
-          <div className="flex flex-wrap items-center gap-2">
-            <UndoRedoBar
-              canUndo={canUndo}
-              canRedo={canRedo}
-              onUndo={handleUndo}
-              onRedo={handleRedo}
-              message={historyMessage}
-            />
-            <Button variant="secondary" onClick={() => setIsDuplicating(true)}>
-              {t('planner.duplicate.button')}
-            </Button>
-            <AiFillButton trip={trip} onApply={handleApplyAiFill} />
-          </div>
+          <DuplicateTripDialog
+            open={isDuplicating}
+            onClose={() => setIsDuplicating(false)}
+            trip={trip}
+            onSubmit={handleDuplicate}
+          />
         ) : null}
-      </div>
-      {isTripReady ? <TripCostSummary trip={trip} /> : null}
-      {isTripReady ? <TripWeather trip={trip} /> : null}
-      {isTripReady ? <AirportLeg trip={trip} /> : null}
-      {isTripReady ? <ViewToggle value={viewMode} onChange={setViewMode} /> : null}
-      {renderBody()}
-      {isTripReady ? (
-        <DuplicateTripDialog
-          open={isDuplicating}
-          onClose={() => setIsDuplicating(false)}
-          trip={trip}
-          onSubmit={handleDuplicate}
-        />
-      ) : null}
-    </main>
+        {isTripReady ? (
+          <ShareTripDialog
+            open={isSharing}
+            onClose={() => setIsSharing(false)}
+            trip={trip}
+            onPrint={handlePrint}
+          />
+        ) : null}
+      </main>
+      {isTripReady ? <PrintableTrip trip={trip} /> : null}
+    </>
   );
 }
