@@ -5,14 +5,14 @@ export const FLIGHT_STOPS = ['hero', 'cities', 'plan', 'curation', 'products', '
 
 // 본문(max-w-360 = 1440px) 양옆에 여백이 생기는 폭(Tailwind 2xl)에서만 켠다. 그보다 좁으면 본문과 겹친다.
 const WIDE_SCREEN = '(min-width: 96rem)';
-// 섹션 윗변이 화면 위에서 이 비율에 닿으면 그 경유지에 도착한 것으로 본다.
-const ANCHOR_RATIO = 0.35;
+// 섹션 한가운데가 화면 위에서 이 비율에 닿으면 그 경유지에 도착한 것으로 본다.
+const ANCHOR_RATIO = 0.5;
 // 경유지 앞뒤로 이만큼(px) 스크롤하는 동안은 비행기가 그 자리에 머문다.
 const DWELL_PX = 120;
 
 const smoothstep = (u) => u * u * (3 - 2 * u);
 
-// 경유지마다 쓸 두 값을 잰다. positions는 페이지 위쪽에서 잰 섹션 윗변(점이 놓일 곳),
+// 경유지마다 쓸 두 값을 잰다. positions는 페이지 위쪽에서 잰 섹션 한가운데(점이 놓일 곳),
 // scrolls는 그 경유지에 도착했다고 볼 스크롤 위치다. 끝까지 스크롤해도 닿지 못하는 경유지가 없도록
 // scrolls는 범위 안으로 묶고, 위치가 겹쳐도 순서가 뒤집히지 않게 1px씩 밀어 둔다.
 function measureStops(elements, rail) {
@@ -20,13 +20,17 @@ function measureStops(elements, rail) {
   // 띠는 헤더 아래(main)에서 시작하므로, 점·선·비행기 높이는 띠의 윗변을 0으로 잰다.
   const origin = rail ? rail.getBoundingClientRect().top + window.scrollY : 0;
   const maxScroll = Math.max(document.documentElement.scrollHeight - viewport, 0);
-  const positions = elements.map((element) => element.getBoundingClientRect().top + window.scrollY);
+  const rects = elements.map((element) => element.getBoundingClientRect());
+  const positions = rects.map((rect) => rect.top + rect.height / 2 + window.scrollY);
+  // 선은 점이 아니라 첫 섹션의 윗변에서 마지막 섹션의 아랫변까지 처음부터 끝까지 잇는다.
+  const lineStart = rects[0].top + window.scrollY;
+  const lineEnd = rects[rects.length - 1].bottom + window.scrollY;
   const scrolls = [];
   positions.forEach((position, index) => {
     const clamped = Math.min(Math.max(position - viewport * ANCHOR_RATIO, 0), maxScroll);
     scrolls.push(index === 0 ? clamped : Math.max(clamped, scrolls[index - 1] + 1));
   });
-  return { positions, scrolls, origin };
+  return { positions, scrolls, origin, lineStart, lineEnd };
 }
 
 // 스크롤 위치 → 경로 위 비행기 높이(페이지 위에서부터 px)와 지금 머무는 경유지 번호(없으면 -1).
@@ -77,14 +81,13 @@ export function useFlightProgress() {
     let frame = 0;
     let current = -2;
 
-    // 경로는 첫 경유지에서 마지막 경유지까지 이어지고, 점은 각 섹션 윗변에 놓는다.
+    // 경로는 첫 섹션 윗변에서 마지막 섹션 아랫변까지 이어지고, 점은 각 섹션 한가운데에 놓는다.
     const layout = () => {
       const rail = railRef.current;
       if (!rail) return;
-      const { positions, origin } = measured;
-      const first = positions[0] - origin;
-      rail.style.setProperty('--line-top', `${first}px`);
-      rail.style.setProperty('--line-height', `${positions[positions.length - 1] - positions[0]}px`);
+      const { positions, origin, lineStart, lineEnd } = measured;
+      rail.style.setProperty('--line-top', `${lineStart - origin}px`);
+      rail.style.setProperty('--line-height', `${lineEnd - lineStart}px`);
       rail.querySelectorAll('li').forEach((dot, index) => {
         dot.style.setProperty('--y', `${positions[index] - origin}px`);
       });
