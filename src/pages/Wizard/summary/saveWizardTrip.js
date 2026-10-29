@@ -1,6 +1,7 @@
 import { usePlanStore } from '../../../store/plan/usePlanStore';
 import { toPlanFlight } from '../flight/flightOptions';
 import { toPlanStay } from '../stay/stayOptions';
+import { matchCompanionToPeople } from '../tripStyleOptions';
 
 // 마법사에서 고른 값을 플랜 store(C파트)에 저장하고 새 여행 id를 돌려준다.
 // 다른 파트 store는 정해진 함수로만 바꾼다 (CLAUDE.md 공유 계약):
@@ -22,7 +23,8 @@ export function saveWizardTrip({ draft, spots, schedule = {}, title, placesById 
     style: draft.style,
     // 동행·예산·이번 여행 선호 카테고리 (플랜 계약, CLAUDE.md). 고르지 않으면 null·[]로 넘겨서
     // 플래너 AI 채우기가 「이번 여행에서 고른 게 없음」으로 읽는다. 카테고리는 draft와 배열을 나눠 쓰지 않게 복사한다.
-    companion: draft.companion ?? null,
+    // 「혼자」면 인원 1명 (플랜 계약). 프로필 기본값으로 「혼자」가 들어온 뒤 인원만 바꾼 경우도 여기서 맞춘다.
+    companion: matchCompanionToPeople(draft.companion ?? null, draft.people),
     budget: draft.budget ?? null,
     preferredCategories: [...(draft.preferredCategories ?? [])],
     // null(건너뜀)은 그대로 넘긴다. 교통 계산(C)에서 혼합으로 보기로 했다.

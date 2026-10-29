@@ -74,7 +74,9 @@ export function useFlightProgress() {
 
   useEffect(() => {
     if (!enabled) return undefined;
-    const elements = FLIGHT_STOPS.map((key) => document.querySelector(`[data-flight-stop="${key}"]`));
+    const elements = FLIGHT_STOPS.map((key) =>
+      document.querySelector(`[data-flight-stop="${key}"]`),
+    );
     if (elements.some((element) => !element)) return undefined;
 
     let measured = measureStops(elements, railRef.current);

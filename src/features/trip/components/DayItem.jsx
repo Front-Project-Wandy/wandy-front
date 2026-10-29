@@ -1,6 +1,9 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import Button from '../../../components/common/Button';
+import { getItemProductId } from '../../product/utils/productPlanItem';
+import OpeningHoursWarning from '../../search/components/OpeningHoursWarning';
 import { useItemName } from '../hooks/useItemName';
 import DragHandle from './DragHandle';
 import ItemEditForm from './ItemEditForm';
@@ -18,6 +21,7 @@ export default function DayItem({
   item,
   number,
   dayIndex,
+  date,
   isTimeOutOfOrder,
   flightWarnings = [],
   isSelected = false,
@@ -36,6 +40,8 @@ export default function DayItem({
   // 폼이 닫히면 편집 버튼이 새로 그려져서, 키보드 포커스를 그 버튼으로 돌려줘야 한다
   const shouldRestoreFocus = useRef(false);
   const name = useItemName(item);
+  // 상품 상세의 [일정에 넣기]·DAY 추천으로 넣은 투어 상품이면 상품 id (84). 예약하러 상품 상세로 돌아갈 수 있게 한다.
+  const productId = getItemProductId(item);
 
   useEffect(() => {
     if (isEditing || !shouldRestoreFocus.current) return;
@@ -65,14 +71,14 @@ export default function DayItem({
   };
   const handleRemove = () => onRemove(item.id);
   const handleSelect = () => onSelect?.(item.id);
-  const hasDetails = isTimeOutOfOrder || flightWarnings.length > 0 || Boolean(item.memo);
 
   return (
     <div
       ref={itemRef}
       className={`rounded-2xl border p-3 ${isSelected ? 'border-primary bg-bg-soft' : 'border-text/10 bg-background'}`}
     >
-      <div className="flex items-center gap-3">
+      {/* flex-wrap·min-w-40: 현지어·편집·삭제 버튼이 이름 칸을 한두 글자로 줄이지 않게, 모자라면 버튼이 아래 줄로 내려간다 */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         {dragHandleProps ? (
           <DragHandle label={t('planner.drag.handle', { name })} {...dragHandleProps} />
         ) : null}
@@ -81,9 +87,9 @@ export default function DayItem({
         <button
           type="button"
           aria-pressed={isSelected}
-          aria-describedby={hasDetails ? detailsId : undefined}
+          aria-describedby={detailsId}
           onClick={handleSelect}
-          className="flex min-w-0 flex-1 items-center gap-3 rounded-xl text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="flex min-w-40 flex-1 items-center gap-3 rounded-xl text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <NumberBadge number={number} dayIndex={dayIndex} />
           <span className="min-w-0 flex-1">
@@ -95,7 +101,7 @@ export default function DayItem({
         </button>
         {/* 화면에는 "편집"·"삭제"만 보여서, 낭독기가 어느 장소인지 알 수 있게 이름을 붙인다 */}
         {isEditing ? null : (
-          <span className="flex shrink-0 items-center">
+          <span className="ml-auto flex shrink-0 items-center">
             {item.source === 'google' ? (
               <Button
                 variant="ghost"
@@ -104,6 +110,15 @@ export default function DayItem({
               >
                 {t('planner.local.button')}
               </Button>
+            ) : null}
+            {productId ? (
+              <Link
+                to={`/products?id=${encodeURIComponent(productId)}`}
+                aria-label={t('product.addToTrip.viewProductLabel', { name })}
+                className="inline-flex h-11 items-center justify-center rounded-xl px-4 text-body font-bold text-text transition-colors hover:bg-text/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                {t('product.addToTrip.viewProduct')}
+              </Link>
             ) : null}
             <Button
               ref={editButtonRef}
@@ -123,25 +138,36 @@ export default function DayItem({
           </span>
         )}
       </div>
-      {hasDetails ? (
-        <div id={detailsId} className={`pt-1 ${dragHandleProps ? 'pl-21' : 'pl-11'}`}>
-          {isTimeOutOfOrder ? (
-            <span className="block text-body-sm font-bold text-text">
-              {t('planner.item.timeOrderWarning')}
-            </span>
-          ) : null}
-          {flightWarnings.map(({ type, time }) => (
-            <span key={type} className="block text-body-sm font-bold text-text">
-              {t(`planner.item.${type}Warning`, { time })}
-            </span>
-          ))}
-          {item.memo ? (
-            <span className="block break-words text-body-sm text-text/70">{item.memo}</span>
-          ) : null}
-        </div>
-      ) : null}
+      {/* 경고·메모가 하나도 없으면 비어서 :empty로 숨겨진다 (영업시간 경고는 불러온 뒤에야 생길 수 있다) */}
+      <div id={detailsId} className={`pt-1 empty:hidden ${dragHandleProps ? 'pl-21' : 'pl-11'}`}>
+        {isTimeOutOfOrder ? (
+          <span className="block text-body-sm font-bold text-text">
+            {t('planner.item.timeOrderWarning')}
+          </span>
+        ) : null}
+        {flightWarnings.map(({ type, time }) => (
+          <span key={type} className="block text-body-sm font-bold text-text">
+            {t(`planner.item.${type}Warning`, { time })}
+          </span>
+        ))}
+        <OpeningHoursWarning
+          placeId={item.placeId}
+          date={date}
+          startTime={item.startTime}
+          stayMinutes={item.stayMinutes}
+        />
+        {item.memo ? (
+          <span className="block break-words text-body-sm text-text/70">{item.memo}</span>
+        ) : null}
+      </div>
       {isEditing ? (
-        <ItemEditForm item={item} onSave={handleSave} onCancel={handleCloseEdit} />
+        // 폼은 열 때의 값을 들고 있어서, 되돌리기·다시 실행으로 이 장소의 값이 바뀌면 새로 그려 옛 값으로 덮어쓰지 않게 한다.
+        <ItemEditForm
+          key={`${item.startTime}|${item.stayMinutes}|${item.memo}`}
+          item={item}
+          onSave={handleSave}
+          onCancel={handleCloseEdit}
+        />
       ) : null}
       {item.source === 'google' ? (
         <LocalNameDialog

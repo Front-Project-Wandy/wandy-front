@@ -21,9 +21,11 @@
 
     src/
       pages/Home, pages/Wizard                 → A
+      pages/Community                          → A (공개 일정 둘러보기·장소 후기)
       components/common, i18n/, styles/        → A (공통 컴포넌트·번역 키·테마)
       store/wizard                             → A (마법사 진행 단계·중간 저장)
       store/recent                             → A (최근 본 장소·상품)
+      store/community                          → A (공개 일정 좋아요·내 후기)
       pages/PlaceDetail, pages/MyPage          → B
       pages/Login, pages/Products              → B
       features/search, restaurant, product, ai, member → B (회원·내 여행 포함)
@@ -32,6 +34,7 @@
       features/map, transport, budget, trip    → C
       store/plan                               → C (플랜 데이터)
       mocks/                                   → 항공·숙소·투어 상품 더미 JSON
+      vendor/                                  → 외부 원본 컴포넌트 (React Bits, 라이선스 문구를 파일 머리에 둔다)
 
 - 기능 폴더 안은 `components/`, `hooks/`, `utils/`로 나눈다.
 - 자기 파트 폴더 밖의 파일은 수정하지 말고, 필요하면 먼저 사용자에게 물어본다.
@@ -110,14 +113,21 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
 - Tailwind 테마에 등록한 값만 쓴다. 색 코드·px 값을 컴포넌트에 직접 쓰지 않는다.
 - 색은 CSS 변수(`--color-primary` 등)로 정의하고 Tailwind가 그 변수를 쓰게 한다 (다크모드 대비).
 
-| 이름 | 값 | 쓰는 곳 |
+- 톤: 하늘(기준색)과 그 보색 양옆의 살구·연금빛을 쓰는 분할보색. 흰색·검은색 바탕 대신 라이트는 하늘빛 틴트, 다크는 깊은 남청 셰이드로 나눈다.
+  따뜻한 두 색은 면(배지·칩 바탕)에만 연하게 쓰고 글자는 갈색·남색으로 둔다 (진한 빨강은 쓰지 않는다). 값은 `src/styles/index.css`가 기준이다.
+
+| 이름 | 라이트 / 다크 | 쓰는 곳 |
 |---|---|---|
-| brand | `#38BDF8` | 히어로, 일러스트, 선택된 칩 배경 |
-| primary | `#0284C7` | 주요 버튼, 진행 표시줄 |
-| link | `#0369A1` | 작은 링크 글자 |
-| point | `#FF7A59` | 찜, 배지, D-day, 알림 (작게만) |
-| bg / bg-soft | `#FFFFFF` / `#F0F9FF` | 기본 배경 / 섹션 구분 |
-| text | `#1E293B` | 본문 |
+| brand | `#7CC7EE` / `#4DB3E6` | 선택된 칩 배경, 일러스트 |
+| primary | `#0B6FA8` | 주요 버튼, 진행 표시줄 (다크에서 글자로 쓰면 link 색으로 바뀐다) |
+| link | `#0B5E8E` / `#7CC7EE` | 작은 링크 글자, 섹션 위 작은 영문 제목 |
+| point | `#C66C43` / `#F2A07C` | 찜 하트 같은 작은 아이콘만 |
+| page | `#EEF5FB` / `#0F1D2C` | 화면 바탕 |
+| background | `#F8FBFE` / `#16293D` | 헤더·카드처럼 바탕 위에 놓이는 면 |
+| bg-soft | `#E4EFF8` / `#1C3248` | 섹션 구분, 카드 뒷면 |
+| apricot (·soft·ink) | 배지 면 / 칩 바탕 / 그 위 글자 | 순위·D-day 배지, 카테고리 칩 |
+| gold (·soft·ink) | 별 아이콘 / 칩 바탕 / 그 위 글자 | 별점, 카테고리 칩 |
+| text · ink | `#12263A` / `#E6EEF6` · `#12263A` | 본문 · 밝은 면 위 진한 글자(다크에서도 그대로) |
 | error | `#EF4444` | 에러 |
 
 - 흰 글자는 `primary` 위에서만, 16px 이상 굵게. `brand` 위에는 흰 글자 금지.
@@ -144,7 +154,7 @@ Zustand + `persist`(localStorage). 2단계에서 서버 저장으로 바꾼다.
 - TypeScript, 별도 CSS 파일, 인라인 `style={{}}`, 정해지지 않은 UI 라이브러리
 - 색 코드·글자 하드코딩
 - 목업 데이터를 컴포넌트 안에 직접 쓰기 (`src/mocks/`에 JSON으로)
-- 파일 하나 300줄 넘기기 (넘으면 쪼갠다)
+- 파일 하나 300줄 넘기기 (넘으면 쪼갠다). 단, `src/vendor/`의 외부 원본 코드(React Bits 등)는 원본과 맞추기 쉽게 300줄·인라인 style 규칙의 예외로 두고, 고친 곳에 「Wandy 수정」 주석을 단다
 - `console.log`를 남긴 채 커밋
 - 묻지 않고 새 npm 패키지 설치
 

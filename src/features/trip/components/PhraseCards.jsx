@@ -34,7 +34,7 @@ export default function PhraseCards({ country }) {
           />
         ))}
       </div>
-      {group.tip ? <p className="text-body-sm font-bold text-point">{group.tip}</p> : null}
+      {group.tip ? <p className="text-body-sm font-bold text-apricot-ink">{group.tip}</p> : null}
       <ul className="space-y-2">
         {group.phrases.map((phrase) => (
           <li key={phrase.id}>

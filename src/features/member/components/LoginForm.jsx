@@ -1,15 +1,26 @@
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/common/Button';
 import Input from '../../../components/common/Input';
+import { loginWithPassword } from '../../../services/authService';
+import { useAuthStore } from '../hooks/useAuthStore';
 
-// 로그인 입력 화면 (B파트). 아직 서버가 없어서 입력값 검사까지만 하고, 통과하면 홈으로 보낸다. 로그인 요청은 보내지 않는다.
+// 로그인 입력 화면 (B파트). 입력값을 검사하고, 통과하면 로그인 상태를 저장한 뒤 홈으로 보낸다.
 // 입력창의 값은 useState가 들고 있고, 글자를 칠 때마다 onChange로 state를 바꾼다 (제어 컴포넌트).
-// 2단계에서 로그인 API가 생기면 handleSubmit의 마지막 부분을 요청 함수 호출(성공했을 때 홈으로 이동)로 바꾸면 된다.
+// 1단계는 서버가 없어서 loginWithPassword가 가짜 사용자를 돌려준다. 2단계에서는 그 함수 안만 API 호출로 바뀐다.
 export default function LoginForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
+  const mutation = useMutation({
+    mutationFn: loginWithPassword,
+    onSuccess: (user) => {
+      login(user);
+      navigate('/');
+    },
+  });
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   // 칸마다 에러 문구를 따로 들고 있어서 틀린 칸 바로 아래에 보여 줄 수 있다. 비어 있으면 에러 없음.
@@ -26,7 +37,7 @@ export default function LoginForm() {
     setErrors(nextErrors);
 
     const hasError = Boolean(nextErrors.id || nextErrors.password);
-    if (!hasError) navigate('/');
+    if (!hasError) mutation.mutate({ id: id.trim() });
   };
 
   return (
@@ -49,9 +60,14 @@ export default function LoginForm() {
         error={errors.password}
         autoComplete="current-password"
       />
-      <Button type="submit" size="lg" className="w-full">
+      <Button type="submit" size="lg" className="w-full" loading={mutation.isPending}>
         {t('login.form.submit')}
       </Button>
+      {mutation.isError ? (
+        <p role="alert" className="text-body-sm text-error">
+          {t('login.form.error')}
+        </p>
+      ) : null}
     </form>
   );
 }

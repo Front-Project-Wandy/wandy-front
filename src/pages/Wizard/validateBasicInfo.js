@@ -1,4 +1,24 @@
+import { MAX_TRIP_DAYS } from '../../features/ai/utils/normalizeTripRequest';
+
 export const MAX_PEOPLE = 20;
+// 여행 최대 일수. AI 한 줄 입력과 같은 값을 써서 어느 쪽으로 시작해도 같은 기준이 되게 한다.
+export { MAX_TRIP_DAYS };
+
+// 'YYYY-MM-DD' (연도 4자리). 날짜 칸에 5자리 연도를 넣으면 글자 비교가 어긋나고 DAY가 수만 개 만들어질 수 있다.
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+// 날짜 칸 max. 달력과 키보드 입력이 5자리 연도로 넘어가지 않게 막는다 (검사는 위 패턴이 한 번 더 한다).
+export const MAX_DATE = '9999-12-31';
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+// 가는 날~오는 날 일수 (당일 = 1). 하루씩 세지 않고 빼서 구해, 기간이 아무리 길어도 바로 끝난다.
+// Date.UTC로 계산해서 서머타임 같은 시차 변화에 흔들리지 않는다.
+const countTripDays = (startDate, endDate) => {
+  const toUtc = (date) => {
+    const [year, month, day] = date.split('-').map(Number);
+    return Date.UTC(year, month - 1, day);
+  };
+  return Math.round((toUtc(endDate) - toUtc(startDate)) / DAY_MS) + 1;
+};
 
 // 오늘 날짜를 'YYYY-MM-DD'로. toISOString()은 UTC 기준이라 한국 오전 9시 전에는 어제 날짜가 나와서 쓰지 않는다.
 export function getTodayString(now = new Date()) {
@@ -38,11 +58,20 @@ export function validateBasicInfo(
   if (!country) errors.country = 'wizard.basic.error.country';
   if (!city) errors.city = 'wizard.basic.error.city';
   if (!startDate || !endDate) errors.dates = 'wizard.basic.error.dates';
-  else if (startDate < today) errors.dates = 'wizard.basic.error.pastDate';
+  else if (!DATE_PATTERN.test(startDate) || !DATE_PATTERN.test(endDate)) {
+    errors.dates = 'wizard.basic.error.invalidDate';
+  } else if (startDate < today) errors.dates = 'wizard.basic.error.pastDate';
   else if (endDate < startDate) errors.dates = 'wizard.basic.error.dateOrder';
+  else if (countTripDays(startDate, endDate) > MAX_TRIP_DAYS) {
+    errors.dates = 'wizard.basic.error.tooLong';
+  }
   if (!Number.isInteger(peopleCount) || peopleCount < 1 || peopleCount > MAX_PEOPLE) {
     errors.people = 'wizard.basic.error.people';
   }
 
   return errors;
 }
+
+// 마법사를 이어서 열거나 저장하기 직전에 STEP1 값이 아직 괜찮은지 본다.
+export const hasBasicInfoErrors = (values, today = getTodayString()) =>
+  Object.keys(validateBasicInfo(values, today)).length > 0;

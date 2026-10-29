@@ -73,6 +73,22 @@ export function getPlace(id) {
   });
 }
 
+// 장소 id 목록에, 후보(candidates) 중 같은 장소의 id를 더해서 돌려준다.
+// 한국은 같은 곳이 네이버 검색(naver:…)과 TourAPI 추천(tour:…)에 다른 id로 있고 getCityPlaces는 하나만 남겨서,
+// id만 비교하면 검색으로 넣은 경복궁을 AI 채우기·비서·추천이 다시 고른다. 후보에 없는 id만 불러와 이름·위치로 맞춘다.
+// 못 불러온 id는 그대로 둔다 (제외·좋아요 목록이라 빠져도 화면이 깨지지 않는다).
+export async function withSamePlaceIds(ids, candidates) {
+  const candidateIds = new Set(candidates.map((place) => place.id));
+  const others = [...new Set(ids)].filter((id) => !candidateIds.has(id));
+  const places = (await Promise.all(others.map((id) => getPlace(id).catch(() => null)))).filter(
+    Boolean,
+  );
+  const sameIds = candidates
+    .filter((candidate) => places.some((place) => isSamePlace(place, candidate)))
+    .map((candidate) => candidate.id);
+  return [...new Set([...ids, ...sameIds])];
+}
+
 // 기준 좌표 반경 안의 먹고 마시는 곳 → [{ place, distance, foodType }] 가까운 순 (distance 단위 m)
 // foodType (44): 'korean' | 'ramen' | 'sushi' | 'cafe' | 'dessert' | 'bar' | 'other'
 export function getNearbyRestaurants({ country, city, lat, lng, radius = NEARBY_RADIUS_M }) {

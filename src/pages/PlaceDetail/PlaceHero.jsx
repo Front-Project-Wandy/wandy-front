@@ -62,7 +62,7 @@ export default function PlaceHero({ place }) {
             </span>
             <span className="text-text/60">{t(`common.city.${place.city}`)}</span>
             {place.rating !== null ? (
-              <span className="font-bold text-point">
+              <span className="font-bold text-gold-ink">
                 <span aria-hidden="true">★ {place.rating}</span>
                 <span className="sr-only">{t('search.card.rating', { rating: place.rating })}</span>
               </span>

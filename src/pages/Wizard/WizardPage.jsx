@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setPageTitle } from '../../components/common/setPageTitle';
 import SkipLink from '../../components/common/SkipLink';
 import { isRouteChange } from '../../components/common/useRouteFocus';
+import { useScrollToTop } from '../../components/common/useScrollToTop';
 import { useWizardStore } from '../../store/wizard/wizardStore';
 import Step1BasicInfo from './steps/Step1BasicInfo';
 import Step2Flight from './steps/Step2Flight';
@@ -12,6 +13,7 @@ import Step4Transport from './steps/Step4Transport';
 import Step5Spots from './steps/Step5Spots';
 import Step6Nearby from './steps/Step6Nearby';
 import Step7Summary from './steps/Step7Summary';
+import { hasBasicInfoErrors } from './validateBasicInfo';
 import { getNextStep, getPrevStep, getStepInfo } from './wizardSteps';
 import WizardProgress from './WizardProgress';
 
@@ -30,12 +32,26 @@ const STEP_SCREENS = {
 // 와이어프레임에 사이트 헤더가 없어서 App.jsx 레이아웃 밖에 있고, 나가는 길로 로고만 둔다.
 export default function WizardPage() {
   const { t } = useTranslation();
-  const step = useWizardStore((state) => state.step);
+  const savedStep = useWizardStore((state) => state.step);
+  const draft = useWizardStore((state) => state.draft);
   const setStep = useWizardStore((state) => state.setStep);
+  // 「이어서 만들기」로 들어오면 저장된 단계부터 열려서 STEP1 검사를 다시 거치지 않는다.
+  // STEP2 이후인데 출발일이 지났거나 기본 정보가 잘못됐으면 STEP1을 그린다 (STEP1은 그 에러를 바로 보여 준다).
+  // 렌더에서 바로 정해서 첫 화면부터 STEP1이다 — effect에서만 옮기면 저장된 단계가 한 번 그려지는데,
+  // 잘못된 날짜(5자리 연도)면 그 단계의 DAY 계산이 오래 걸린다.
+  // 기본 정보는 STEP1에서만 바뀌어서 STEP1에서 고치는 도중에 끌려가는 일은 없다.
+  const mustFixBasicInfo = savedStep > 1 && hasBasicInfoErrors(draft);
+  const step = mustFixBasicInfo ? 1 : savedStep;
   const { step: current, key } = getStepInfo(step);
   const StepScreen = STEP_SCREENS[current];
   const heading = t('wizard.step.heading', { step: current, title: t(`wizard.step.${key}.title`) });
   const headingRef = useRef(null);
+  useScrollToTop();
+
+  // 화면은 이미 STEP1을 그렸고, 저장된 단계(wizardStore)도 STEP1로 맞춰 둔다 (홈 「이어서 만들기」 표시와 맞게).
+  useEffect(() => {
+    if (mustFixBasicInfo) setStep(1);
+  }, [mustFixBasicInfo, setStep]);
 
   // 단계가 바뀌거나 다른 화면에서 들어오면 탭 제목을 바꾸고 포커스를 단계 제목으로 옮긴다 (90 접근성).
   // [다음]을 눌러도 포커스가 아래 버튼 자리에 남으면 화면 낭독기가 새 단계를 읽어 주지 않는다.

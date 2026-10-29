@@ -40,7 +40,7 @@ export default function StayAreaRecommendation({ trip, selectedArea, onSelect })
       <div className="flex min-w-0 flex-col gap-1">
         <h3 id="stay-recommend-title" className="flex items-center gap-2 text-body font-bold">
           {/* point 배경 위 글자는 테마와 상관없이 진한 ink (홈 D-day 배지와 같은 규칙) */}
-          <span className="shrink-0 rounded-full bg-point px-2 py-0.5 text-caption font-bold text-ink">
+          <span className="shrink-0 rounded-full bg-apricot px-2 py-0.5 text-caption font-bold text-ink">
             {t('wizard.stay.recommend.badge')}
           </span>
           {t('wizard.stay.recommend.title', { area: areaName })}

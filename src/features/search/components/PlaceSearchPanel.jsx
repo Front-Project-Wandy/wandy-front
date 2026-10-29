@@ -1,5 +1,6 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Button from '../../../components/common/Button';
 import Chip from '../../../components/common/Chip';
 import EmptyState from '../../../components/common/EmptyState';
 import ErrorState from '../../../components/common/ErrorState';
@@ -7,12 +8,15 @@ import Loading from '../../../components/common/Loading';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { usePlaceSearch } from '../hooks/usePlaceSearch';
 import { usePlaceSuggestions } from '../hooks/usePlaceSuggestions';
+import { filterByBounds } from '../utils/filterByBounds';
 import { isValidOrigin, sortByDistance } from '../utils/sortByDistance';
 import CategoryChips from './CategoryChips';
 import GoogleAttribution from './GoogleAttribution';
 import PlaceCard from './PlaceCard';
+import PlaceMapView from './PlaceMapView';
 import PlacePhotoCard from './PlacePhotoCard';
 import PlaceSearchField from './PlaceSearchField';
+import PlaceViewToggle from './PlaceViewToggle';
 
 // 자동완성 후보는 결과 검색보다 빨리 떠야 도움이 돼서 기다리는 시간을 짧게 둔다
 const SUGGEST_DELAY_MS = 150;
@@ -20,12 +24,15 @@ const SUGGEST_DELAY_MS = 150;
 const GRID_PAGE_SIZE = 8;
 // 「1위·2위·3위」 배지는 추천 순서일 때 앞쪽 몇 곳에만 붙인다
 const RANK_BADGE_COUNT = 3;
+// 결과가 아직 없을 때도 같은 빈 배열을 넘겨야 지도 마커가 렌더마다 다시 그려지지 않는다
+const NO_PLACES = [];
 
 // S01 장소 검색 (7 키워드 검색 · 8 카테고리 · 9 도시별 추천 · 43 자동완성).
 // 마법사 STEP5(A) 같은 화면에 넣어 쓰고, 장소를 고르면 onSelectPlace(place)를 부른다.
 // preferredCategories(65)는 이번 여행 초안의 선호 카테고리. 생략하면 기존 추천 순서다.
 // origin({ lat, lng, name }, 43)은 숙소, 없으면 그날 직전 장소. 넘기면 「가까운 순」을 고를 수 있다.
 // layout="grid"는 장소 탐색(/places)의 사진 카드 그리드다. 마법사·일정 추가 모달은 좁은 칸이라 기본 목록을 쓴다.
+// 그리드에서만 [목록 | 지도]를 고를 수 있고, 지도에서 [이 지역에서 검색]을 누르면 결과를 그 범위로 좁힌다 (74).
 export default function PlaceSearchPanel({
   country,
   city,
@@ -49,15 +56,22 @@ export default function PlaceSearchPanel({
   const { data, isPending, isError, isFetching, isPlaceholderData, refetch, mode } = usePlaceSearch(
     { country, city, keyword: debouncedKeyword, category, preferredCategories },
   );
-  const places = data ?? [];
+  const places = data ?? NO_PLACES;
+  const [view, setView] = useState('list');
+  // 지도 범위로 좁히기는 검색어·카테고리가 바뀌면 풀린다 — 지도가 새 결과에 맞춰 다시 움직이기 때문이다.
+  const searchKey = `${debouncedKeyword}|${category}`;
+  const [area, setArea] = useState({ key: null, bounds: null });
+  const areaBounds = area.key === searchKey ? area.bounds : null;
+  const shownPlaces = areaBounds ? filterByBounds(places, areaBounds) : places;
+  const clearArea = () => setArea({ key: null, bounds: null });
   const canSortByDistance = isValidOrigin(origin);
   const isDistanceSort = canSortByDistance && sort === 'distance';
   const items = isDistanceSort
-    ? sortByDistance(places, origin)
-    : places.map((place) => ({ place, distance: null }));
+    ? sortByDistance(shownPlaces, origin)
+    : shownPlaces.map((place) => ({ place, distance: null }));
   const isGrid = layout === 'grid';
-  // 검색어·카테고리·정렬이 바뀌면 [더보기]로 늘린 개수를 처음으로 되돌린다 (key가 다르면 기본 개수).
-  const listKey = `${debouncedKeyword}|${category}|${sort}`;
+  // 검색어·카테고리·정렬·지도 범위가 바뀌면 [더보기]로 늘린 개수를 처음으로 되돌린다 (key가 다르면 기본 개수).
+  const listKey = `${searchKey}|${sort}|${JSON.stringify(areaBounds)}`;
   const [more, setMore] = useState({ key: listKey, count: GRID_PAGE_SIZE });
   const visibleCount = more.key === listKey ? more.count : GRID_PAGE_SIZE;
   const visibleItems = isGrid ? items.slice(0, visibleCount) : items;
@@ -84,6 +98,18 @@ export default function PlaceSearchPanel({
     if (places.length === 0)
       return (
         <EmptyState title={t('search.empty.title')} description={t('search.empty.description')} />
+      );
+    if (shownPlaces.length === 0)
+      return (
+        <EmptyState
+          title={t('places.mapView.emptyArea.title')}
+          description={t('places.mapView.emptyArea.description')}
+          action={
+            <Button variant="secondary" size="sm" onClick={clearArea}>
+              {t('places.mapView.clearArea')}
+            </Button>
+          }
+        />
       );
     return (
       <div className={`space-y-2 transition-opacity ${isPlaceholderData ? 'opacity-60' : ''}`}>
@@ -174,9 +200,36 @@ export default function PlaceSearchPanel({
         <p role="status" aria-live="polite" className="shrink-0 text-body-sm text-text/70">
           {isFetching
             ? t('search.result.updating')
-            : t('search.result.count', { count: places.length })}
+            : t('search.result.count', { count: shownPlaces.length })}
         </p>
       </div>
+      {isGrid ? (
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          {areaBounds ? (
+            <button
+              type="button"
+              onClick={clearArea}
+              aria-label={t('places.mapView.clearAreaLabel')}
+              className="inline-flex h-9 items-center gap-2 rounded-full bg-gold-soft px-4 text-body-sm font-bold text-gold-ink focus-visible:outline-2 focus-visible:outline-primary"
+            >
+              {t('places.mapView.areaApplied')}
+              <span aria-hidden="true">×</span>
+            </button>
+          ) : (
+            <span />
+          )}
+          <PlaceViewToggle value={view} onChange={setView} />
+        </div>
+      ) : null}
+      {isGrid && view === 'map' && !isPending && !isError ? (
+        <PlaceMapView
+          country={country}
+          city={city}
+          places={places}
+          onSearchArea={(bounds) => setArea({ key: searchKey, bounds })}
+          onSelectPlace={onSelectPlace}
+        />
+      ) : null}
       {renderResult()}
     </section>
   );

@@ -19,10 +19,7 @@ export default function HomePage() {
   return (
     <main ref={revealRef} className="relative">
       <HomeFlightPath />
-      <div
-        data-flight-stop="hero"
-        className="mx-auto w-full max-w-360 px-4 pt-6 lg:px-5 lg:pt-10"
-      >
+      <div data-flight-stop="hero" className="mx-auto w-full max-w-360 px-4 pt-6 lg:px-5 lg:pt-10">
         <HomeHero />
         <HomeShortcuts />
         <div className="flex flex-col gap-4 empty:hidden">
@@ -41,7 +38,7 @@ export default function HomePage() {
       <section id="home-start" data-flight-stop="plan" className="scroll-mt-8 bg-bg-soft">
         <div className="mx-auto w-full max-w-360 grid gap-8 px-4 py-12 lg:grid-cols-2 lg:items-center lg:gap-20 lg:px-5 lg:py-20">
           <div>
-            <p className="mb-4 text-caption font-bold tracking-widest text-primary">
+            <p className="mb-4 text-caption font-bold tracking-widest text-link">
               {t('home.editorial.startEyebrow')}
             </p>
             <h2 className="whitespace-pre-line text-display font-bold break-keep">
@@ -87,7 +84,7 @@ export default function HomePage() {
       >
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl bg-bg-soft p-6 sm:p-10 lg:flex-row lg:items-center">
           <div>
-            <p className="mb-3 text-caption font-bold tracking-widest text-primary">
+            <p className="mb-3 text-caption font-bold tracking-widest text-link">
               {t('home.editorial.outroEyebrow')}
             </p>
             <h2 id="home-outro-title" className="text-title font-bold break-keep">

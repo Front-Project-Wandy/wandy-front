@@ -5,6 +5,7 @@ import Button from '../../components/common/Button';
 import EmptyState from '../../components/common/EmptyState';
 import ErrorState from '../../components/common/ErrorState';
 import Loading from '../../components/common/Loading';
+import { useAdminStore } from '../../features/admin/hooks/useAdminStore';
 import ProductCard from '../../features/product/components/ProductCard';
 import ProductCategoryChips from '../../features/product/components/ProductCategoryChips';
 import ProductDetail from '../../features/product/components/ProductDetail';
@@ -34,7 +35,12 @@ export default function ProductsPage() {
   });
   // 가격대는 받은 목록에서 거른다 — 칩을 바꿀 때마다 다시 요청하지 않는다 (주변 식당 종류 필터와 같은 방식).
   const products = useMemo(() => filterByPriceRange(data ?? [], priceRange), [data, priceRange]);
-  const ranks = useMemo(() => rankProducts(products), [products]);
+  // 추천 고정 상품(85)은 「추천」 배지를 따로 달아서 순위에서 뺀다.
+  const pinnedIds = useAdminStore((state) => state.pinnedProductIds);
+  const ranks = useMemo(
+    () => rankProducts(products.filter((product) => !pinnedIds.includes(product.id))),
+    [products, pinnedIds],
+  );
   const hasFilter = Boolean(country || category || priceRange);
 
   // [더보기]로 늘린 개수는 필터가 바뀌면 처음(한 쪽)으로 돌아간다.
@@ -111,6 +117,7 @@ export default function ProductsPage() {
               <ProductCard
                 product={product}
                 rank={ranks.get(product.id)}
+                sizeClass="aspect-2/3 sm:aspect-3/4"
                 onSelect={(item) => updateParams({ id: item.id })}
               />
             </li>
@@ -148,7 +155,7 @@ export default function ProductsPage() {
   return (
     <main className="mx-auto w-full max-w-360 px-4 pt-8 pb-16 lg:px-5 lg:pt-12 lg:pb-20">
       <header className="mb-8 lg:mb-12">
-        <p className="mb-3 text-caption font-bold tracking-widest text-primary">
+        <p className="mb-3 text-caption font-bold tracking-widest text-link">
           {t('product.page.eyebrow')}
         </p>
         <h1 className="text-title font-bold break-keep lg:text-display">

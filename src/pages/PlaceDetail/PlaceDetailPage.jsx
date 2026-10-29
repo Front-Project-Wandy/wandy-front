@@ -11,8 +11,9 @@ import { usePlace } from '../../features/search/hooks/usePlace';
 import { getPlacePath } from '../../features/search/place';
 import PlaceHero from './PlaceHero';
 import PlaceInfo from './PlaceInfo';
+import WandyReviewSection from './WandyReviewSection';
 
-// /place/:id — 장소 상세 (10·11)와 주변 식당 (22), 어울리는 투어 상품 (84).
+// /place/:id — 장소 상세 (10·11)와 주변 식당 (22), Wandy 여행자 평점 (74), 어울리는 투어 상품 (84).
 // 큰 히어로 아래로 섹션마다 큰 제목과 넉넉한 간격을 둔다. lg에서는 이용 정보·혼잡도와 주변 맛집을 좌우로 놓는다.
 export default function PlaceDetailPage() {
   const { t } = useTranslation();
@@ -49,6 +50,7 @@ export default function PlaceDetailPage() {
           <PlaceInfo place={place} />
           <NearbyRestaurants key={place.id} place={place} onSelectPlace={handleSelectPlace} />
         </div>
+        <WandyReviewSection place={place} />
         <NearbyAmenities key={place.id} place={place} />
         <PlaceProductSection place={place} />
       </div>

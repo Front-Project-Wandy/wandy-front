@@ -1,6 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import AppLayout from './components/common/AppLayout';
 import IntroGate from './features/intro/components/IntroGate';
+import AdminPage from './pages/Admin/AdminPage';
+import CommunityPage from './pages/Community/CommunityPage';
+import PublicTripDetailPage from './pages/Community/PublicTripDetailPage';
 import HomePage from './pages/Home/HomePage';
 import LoginPage from './pages/Login/LoginPage';
 import MyPage from './pages/MyPage/MyPage';
@@ -9,6 +12,7 @@ import PlaceDetailPage from './pages/PlaceDetail/PlaceDetailPage';
 import PlacesPage from './pages/Places/PlacesPage';
 import PlannerPage from './pages/Planner/PlannerPage';
 import ProductsPage from './pages/Products/ProductsPage';
+import SignupPage from './pages/Signup/SignupPage';
 import WizardPage from './pages/Wizard/WizardPage';
 
 // 경로는 프롬프트 MD "사용자 흐름 & 페이지 경로" 표를 따른다.
@@ -31,9 +35,13 @@ export default function App() {
         <Route path="/trip/:id" element={<PlannerPage />} />
         <Route path="/places" element={<PlacesPage />} />
         <Route path="/place/:id" element={<PlaceDetailPage />} />
+        <Route path="/community" element={<CommunityPage />} />
+        <Route path="/community/:id" element={<PublicTripDetailPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/my" element={<MyPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 
