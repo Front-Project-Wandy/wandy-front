@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import AppLayout from './components/common/AppLayout';
 import IntroGate from './features/intro/components/IntroGate';
+import AdminPage from './pages/Admin/AdminPage';
 import CommunityPage from './pages/Community/CommunityPage';
 import PublicTripDetailPage from './pages/Community/PublicTripDetailPage';
 import HomePage from './pages/Home/HomePage';
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/my" element={<MyPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
 
