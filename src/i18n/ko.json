@@ -615,6 +615,32 @@
       "noteCar": "렌터카는 유류비(연비 {{kmPerLiter}}km/L 기준)와 고속도로 구간 통행료 추정이에요. 렌터카 대여료는 포함하지 않아요.",
       "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
     },
+    "expense": {
+      "title": "지출 기록",
+      "date": "날짜",
+      "dayOption": "DAY {{number}} ({{date}})",
+      "category": {
+        "label": "지출 분류",
+        "meals": "식비",
+        "transport": "교통",
+        "entry": "입장료",
+        "shopping": "쇼핑",
+        "lodging": "숙박",
+        "other": "기타"
+      },
+      "amount": "금액 ({{currency}})",
+      "amountError": "금액은 1 이상의 숫자로 적어 주세요",
+      "memo": "메모 (선택)",
+      "add": "지출 추가",
+      "empty": "아직 기록한 지출이 없어요",
+      "total": "총 지출 {{amount}}",
+      "compare": "예상 {{estimated}} · 교통·입장료·식비 지출 {{spent}} →",
+      "remaining": "{{amount}} 남았어요",
+      "over": "{{amount}} 더 썼어요",
+      "remove": "삭제",
+      "removeLabel": "지출 삭제: {{label}} {{amount}}",
+      "note": "이 기기에만 저장돼요. 예상 비용에는 쇼핑·숙박이 없어서 교통·입장료·식비만 견줘요."
+    },
     "gap": {
       "title": "빈 시간대 추천",
       "loading": "빈 시간에 갈 만한 곳을 찾는 중…",
