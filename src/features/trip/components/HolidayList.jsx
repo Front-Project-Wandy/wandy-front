@@ -23,7 +23,7 @@ export default function HolidayList({ trip }) {
             <li key={`${entry.type}-${entry.start}-${entry.name}`} className="text-body-sm">
               <p>
                 <span className="font-bold">{entry.name}</span>
-                <span className="ml-2 rounded-full border border-point px-2 text-caption text-point">
+                <span className="ml-2 rounded-full border border-apricot-ink/40 px-2 text-caption text-apricot-ink">
                   {t(`planner.prep.holiday.${entry.type}`)}
                 </span>
               </p>
