@@ -21,6 +21,7 @@ const SQUARE_PATH = 'M -1,-1 L 1,-1 L 1,1 L -1,1 z';
 // 일본 지도 (구글). SDK가 준비된 뒤에만 그려진다. routes는 DAY별 번호 마커와 동선 선이다 (14).
 // NOTE: 마커는 기존 google.maps.Marker를 쓴다. 새 AdvancedMarkerElement는 Map ID 발급이 필요해서 보류했다.
 // selectedId의 마커를 강조하고, 마커를 누르면 onSelectMarker(id)를 부른다 (15).
+// onBoundsChange를 넘기면 지도가 멈출 때마다 보이는 범위 { south, west, north, east }를 알린다 (74).
 export default function GoogleMap({
   center,
   zoom,
@@ -28,6 +29,7 @@ export default function GoogleMap({
   stay = null,
   selectedId = null,
   onSelectMarker,
+  onBoundsChange,
 }) {
   const { t } = useTranslation();
   const elementRef = useRef(null);
@@ -37,9 +39,11 @@ export default function GoogleMap({
   // 마커를 다시 그릴 때(장소가 바뀔 때) 지금 선택된 것을 처음부터 강조하고, 클릭 처리는 항상 최신 함수를 부른다
   const selectedIdRef = useRef(selectedId);
   const onSelectRef = useRef(onSelectMarker);
+  const onBoundsChangeRef = useRef(onBoundsChange);
   useEffect(() => {
     selectedIdRef.current = selectedId;
     onSelectRef.current = onSelectMarker;
+    onBoundsChangeRef.current = onBoundsChange;
   });
 
   // 지도는 한 번만 만들고 이후에는 중심만 옮긴다. 다시 만들면 같은 자리에 지도가 겹쳐 쌓인다.
@@ -52,6 +56,17 @@ export default function GoogleMap({
       mapRef.current.setZoom(zoom);
     }
   }, [center.lat, center.lng, zoom]);
+
+  // idle은 끌기·확대·맞추기가 다 끝난 뒤 한 번 온다. 위에서 만든 지도에 붙여야 해서 지도 만들기 다음에 둔다.
+  // 처음 그려지기 전에는 getBounds()가 비어 있어서 건너뛴다.
+  useEffect(() => {
+    const map = mapRef.current;
+    const listener = map.addListener('idle', () => {
+      const bounds = map.getBounds();
+      if (bounds) onBoundsChangeRef.current?.(bounds.toJSON());
+    });
+    return () => listener.remove();
+  }, []);
 
   // 장소가 바뀔 때마다 마커·선을 지우고 다시 그린 뒤 모든 장소가 보이도록 지도를 맞춘다
   useEffect(() => {
