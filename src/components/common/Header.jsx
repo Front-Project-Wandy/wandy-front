@@ -7,6 +7,7 @@ import ThemeToggle from './ThemeToggle';
 const NAV_ITEMS = [
   { key: 'start', to: '/plan/new' },
   { key: 'explore', to: '/places' },
+  { key: 'community', to: '/community' },
   { key: 'products', to: '/products' },
   { key: 'my', to: '/my' },
 ];
