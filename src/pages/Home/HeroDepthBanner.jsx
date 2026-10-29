@@ -17,7 +17,7 @@ const PHOTO_RATIO = 0.75;
 // 라이트 모드 홈 히어로 배너 (React Bits Depth Carousel). 앞에 큰 사진 한 장, 뒤로 다음 사진들이 겹쳐 보인다.
 // 플렉스 캐러셀(다크 모드)의 휘는 효과는 밝은 화면에서 눈이 피로해서, 사진을 왜곡하지 않는 쪽을 쓴다.
 // 가운데 사진을 한 번 더 누르면 그 장소·도시로 간다. 움직임 줄이기를 켜면 원본이 자동 넘김을 끈다.
-export default function HeroDepthBanner({ items }) {
+export default function HeroDepthBanner({ items, autoplay = true }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const boxRef = useRef(null);
@@ -49,7 +49,7 @@ export default function HeroDepthBanner({ items }) {
           tint="var(--color-bg-soft)"
           blur={3}
           tilt={14}
-          autoplay
+          autoplay={autoplay}
           autoplayDelay={4500}
           onChange={(index) => setActive(index)}
           onSelect={(_, item) => navigate(item.link)}
