@@ -1,0 +1,39 @@
+{
+  "mock-sensoji": { "name": "浅草寺", "address": "東京都台東区浅草2-3-1" },
+  "mock-nakamise": { "name": "仲見世通り", "address": "東京都台東区浅草1-36-3" },
+  "mock-gyukatsu-asakusa": { "name": "浅草牛かつ", "address": "東京都台東区浅草1-1-2" },
+  "mock-daikokuya": { "name": "天麩羅 大黒家", "address": "東京都台東区浅草1-38-10" },
+  "mock-skytree": { "name": "東京スカイツリー", "address": "東京都墨田区押上1-1-2" },
+  "mock-shibuya-crossing": {
+    "name": "渋谷スクランブル交差点",
+    "address": "東京都渋谷区道玄坂2-2-1"
+  },
+  "mock-shibuya-sky": { "name": "SHIBUYA SKY", "address": "東京都渋谷区渋谷2-24-12" },
+  "mock-ichiran-shibuya": { "name": "一蘭 渋谷店", "address": "東京都渋谷区神南1-22-7" },
+  "mock-meiji-jingu": { "name": "明治神宮", "address": "東京都渋谷区代々木神園町1-1" },
+  "mock-yoyogi-park": { "name": "代々木公園", "address": "東京都渋谷区代々木神園町2-1" },
+  "mock-takeshita": { "name": "竹下通り", "address": "東京都渋谷区神宮前1-17" },
+  "mock-afuri-harajuku": { "name": "AFURI 原宿", "address": "東京都渋谷区神宮前1-1-7" },
+  "mock-fuglen": { "name": "Fuglen Tokyo", "address": "東京都渋谷区富ヶ谷1-16-11" },
+  "mock-shinjuku-gyoen": { "name": "新宿御苑", "address": "東京都新宿区内藤町11" },
+  "mock-omoide-yokocho": { "name": "思い出横丁", "address": "東京都新宿区西新宿1-2" },
+  "mock-tocho": { "name": "東京都庁 展望室", "address": "東京都新宿区西新宿2-8-1" },
+  "mock-fuunji": { "name": "風雲児", "address": "東京都渋谷区代々木2-14-3" },
+  "mock-tokyo-tower": { "name": "東京タワー", "address": "東京都港区芝公園4-2-8" },
+  "mock-ginza-six": { "name": "GINZA SIX", "address": "東京都中央区銀座6-10-1" },
+  "mock-tsukiji": { "name": "築地場外市場", "address": "東京都中央区築地4-16-2" },
+  "mock-teamlab-planets": { "name": "チームラボプラネッツ", "address": "東京都江東区豊洲6-1-16" },
+  "mock-ueno-park": { "name": "上野恩賜公園", "address": "東京都台東区上野公園" },
+  "mock-ameyoko": { "name": "アメヤ横丁", "address": "東京都台東区上野4-7-8" },
+  "mock-mihashi": { "name": "みはし 上野本店", "address": "東京都台東区上野4-9-7" },
+  "mock-bluebottle-kiyosumi": {
+    "name": "ブルーボトルコーヒー 清澄白河フラッグシップ カフェ",
+    "address": "東京都江東区平野1-4-8"
+  },
+  "mock-spa-laqua": { "name": "東京ドーム天然温泉 Spa LaQua", "address": "東京都文京区春日1-1-1" },
+  "mock-sushizanmai-tsukiji": {
+    "name": "すしざんまい 築地本店",
+    "address": "東京都中央区築地4-11-9"
+  },
+  "mock-uobei-shibuya": { "name": "魚べい 渋谷道玄坂店", "address": "東京都渋谷区道玄坂2-29-11" }
+}

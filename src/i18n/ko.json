@@ -636,6 +636,14 @@
         "HND": "하네다공항"
       }
     },
+    "local": {
+      "button": "현지어",
+      "buttonLabel": "현지어로 보기: {{name}}",
+      "title": "{{name}} (현지어)",
+      "hint": "택시 기사님께 이 화면을 보여 주세요",
+      "loading": "현지어 주소를 불러오는 중…",
+      "error": "현지어 주소를 불러오지 못했어요"
+    },
     "optimize": {
       "button": "동선 최적화",
       "buttonLabel": "DAY {{number}} 동선 최적화",
