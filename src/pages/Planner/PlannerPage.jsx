@@ -5,6 +5,7 @@ import Button from '../../components/common/Button';
 import EmptyState from '../../components/common/EmptyState';
 import Loading from '../../components/common/Loading';
 import AiFillButton from '../../features/ai/components/AiFillButton';
+import ExpenseLog from '../../features/budget/components/ExpenseLog';
 import TripCostSummary from '../../features/budget/components/TripCostSummary';
 import MapView from '../../features/map/components/MapView';
 import AirportLeg from '../../features/transport/components/AirportLeg';
@@ -227,6 +228,7 @@ export default function PlannerPage() {
           ) : null}
         </div>
         {isTripReady ? <TripCostSummary trip={trip} /> : null}
+        {isTripReady ? <ExpenseLog key={trip.id} trip={trip} /> : null}
         {isTripReady ? <TransitPassAdvice trip={trip} /> : null}
         {isTripReady ? <TripWeather trip={trip} /> : null}
         {isTripReady ? <AirportLeg trip={trip} /> : null}
