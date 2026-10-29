@@ -30,7 +30,7 @@ export default function ReviewItem({ review, onUpdate, onRemove }) {
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-body-sm font-bold">{review.author}</span>
         {review.isMine ? (
-          <span className="rounded-full bg-point/10 px-2 py-0.5 text-caption font-bold text-point">
+          <span className="rounded-full bg-apricot-soft px-2 py-0.5 text-caption font-bold text-apricot-ink">
             {t('community.review.mine')}
           </span>
         ) : null}
