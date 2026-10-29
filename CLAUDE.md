@@ -21,9 +21,11 @@
 
     src/
       pages/Home, pages/Wizard                 → A
+      pages/Community                          → A (공개 일정 둘러보기·장소 후기)
       components/common, i18n/, styles/        → A (공통 컴포넌트·번역 키·테마)
       store/wizard                             → A (마법사 진행 단계·중간 저장)
       store/recent                             → A (최근 본 장소·상품)
+      store/community                          → A (공개 일정 좋아요·내 후기)
       pages/PlaceDetail, pages/MyPage          → B
       pages/Login, pages/Products              → B
       features/search, restaurant, product, ai, member → B (회원·내 여행 포함)
