@@ -1,4 +1,5 @@
-import { CITY_CODES } from './flightOptions';
+// 여행 도시 → 외부 예약 사이트 검색에 쓰는 도시 코드 (도쿄 = 나리타·하네다를 묶은 TYO).
+export const CITY_CODES = { tokyo: 'TYO' };
 
 // 실제 예약은 외부 사이트로 보낸다 (49). 제휴·API 없이 출발지·도착지·날짜·인원을 채운 일반 검색 링크.
 // 날짜는 'YYYY-MM-DD'를 사이트마다 원하는 모양으로 바꾼다.

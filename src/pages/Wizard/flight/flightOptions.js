@@ -1,10 +1,8 @@
 // STEP2 항공에서 쓰는 값과 계산 (화면 코드와 분리).
+import { getFlightSearchLinks } from './flightLinks';
 
 // 출발 공항 후보 — 한국 사용자가 해외로 나가는 주요 공항. 처음에는 아무것도 고르지 않는다.
 export const KR_AIRPORTS = ['ICN', 'GMP', 'PUS', 'CJU', 'TAE', 'CJJ'];
-
-// 여행 도시 → 외부 예약 사이트 검색에 쓰는 도시 코드 (도쿄 = 나리타·하네다를 묶은 TYO).
-export const CITY_CODES = { tokyo: 'TYO' };
 
 // draft.flight 모양. null이면 아직 고르지 않았거나 건너뛴 것.
 //   status: 'booked'(이미 예약함, 직접 입력) | 'searching'(아직 안 함, 목업에서 고름)
@@ -50,14 +48,21 @@ export const flightFromMock = (mock, link) => ({
 
 // 플랜 store(C) setFlight 모양 { flightNo, returnFlightNo, arriveAirport, arriveAt, departAt, link }으로 바꾼다.
 // 시각만 받았으니 날짜는 여행 첫날·마지막 날을 붙인다.
-export function toPlanFlight(flight, { startDate, endDate }) {
+// 목업에서 고른 항공편의 예약 링크는 고른 순간의 날짜·인원으로 만들어져서, 그 뒤 STEP1에서 날짜를 바꾸면 어긋난다.
+// 그래서 저장할 때 지금 날짜·인원으로 다시 만든다 (만들 수 없으면 원래 링크).
+export function toPlanFlight(flight, trip) {
   if (!flight?.status || !flight.arriveTime || !flight.departTime) return null;
+  const { startDate, endDate } = trip;
+  const link =
+    flight.status === 'searching'
+      ? (getFlightSearchLinks({ from: flight.departureAirport, ...trip })[0]?.href ?? flight.link)
+      : flight.link;
   return {
     flightNo: flight.flightNo.trim() || null,
     returnFlightNo: flight.returnFlightNo.trim() || null,
     arriveAirport: flight.arriveAirport ?? null,
     arriveAt: `${startDate}T${flight.arriveTime}`,
     departAt: `${endDate}T${flight.departTime}`,
-    link: flight.link,
+    link,
   };
 }

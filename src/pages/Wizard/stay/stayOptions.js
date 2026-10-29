@@ -1,4 +1,5 @@
 import stayData from '../../../mocks/stays.json';
+import { getStaySearchLinks } from './stayLinks';
 
 // STEP3 숙소에서 쓰는 값과 계산 (화면 코드와 분리).
 
@@ -54,8 +55,15 @@ export const stayFromMock = (mock, link) => ({
 
 // 플랜 store(C) setStay 모양 { name, lat, lng, checkIn, checkOut, link }으로 바꾼다.
 // 시각만 받았으니 날짜는 여행 첫날(체크인)·마지막 날(체크아웃)을 붙인다.
-export function toPlanStay(stay, { startDate, endDate }) {
+// 목업에서 고른 숙소의 예약 링크는 저장할 때 지금 날짜·인원으로 다시 만든다 (항공 toPlanFlight와 같은 이유).
+export function toPlanStay(stay, trip) {
   if (!stay?.status || !stay.name.trim() || stay.lat === null) return null;
+  const { startDate, endDate } = trip;
+  const searchName = findStayArea(trip.city, stay.area)?.searchName;
+  const link =
+    stay.status === 'searching'
+      ? (getStaySearchLinks({ searchName, ...trip })[0]?.href ?? stay.link)
+      : stay.link;
   return {
     name: stay.name.trim(),
     address: stay.address.trim() || null,
@@ -63,7 +71,7 @@ export function toPlanStay(stay, { startDate, endDate }) {
     lng: stay.lng,
     checkIn: `${startDate}T${stay.checkInTime}`,
     checkOut: `${endDate}T${stay.checkOutTime}`,
-    link: stay.link,
+    link,
   };
 }
 
