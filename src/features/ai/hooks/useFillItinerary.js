@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { fillItinerary } from '../../../services/aiService';
-import { getCityPlaces } from '../../../services/placeService';
+import { getCityPlaces, withSamePlaceIds } from '../../../services/placeService';
 import { usePlaceRatingStore } from '../../member/hooks/usePlaceRatingStore';
 import { getRatedPlaceIds } from '../../search/utils/applyPlaceRatings';
 import { validateItinerary } from '../utils/validateItinerary';
@@ -25,11 +25,16 @@ const withPlaceRatings = (conditions) => {
 export function useFillItinerary() {
   return useMutation({
     mutationFn: async (baseConditions) => {
-      const conditions = withPlaceRatings(baseConditions);
-      const [raw, candidates] = await Promise.all([
-        fillItinerary(conditions),
-        getCityPlaces(conditions),
+      const rated = withPlaceRatings(baseConditions);
+      const candidates = await getCityPlaces(rated);
+      // 검색으로 넣은 장소는 후보와 id가 다를 수 있어서(네이버 ↔ TourAPI) 같은 장소의 후보 id까지 넓힌다.
+      // 넓히지 않으면 이미 넣은 경복궁을 AI가 다시 넣는다.
+      const [excludePlaceIds, likedPlaceIds] = await Promise.all([
+        withSamePlaceIds(rated.excludePlaceIds, candidates),
+        withSamePlaceIds(rated.likedPlaceIds, candidates),
       ]);
+      const conditions = { ...rated, excludePlaceIds, likedPlaceIds };
+      const raw = await fillItinerary(conditions);
       return validateItinerary(raw, candidates, {
         excludePlaceIds: conditions.excludePlaceIds,
         dayCount: conditions.days?.length,
