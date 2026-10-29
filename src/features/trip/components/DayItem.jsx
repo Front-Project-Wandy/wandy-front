@@ -4,6 +4,7 @@ import Button from '../../../components/common/Button';
 import { useItemName } from '../hooks/useItemName';
 import DragHandle from './DragHandle';
 import ItemEditForm from './ItemEditForm';
+import LocalNameDialog from './LocalNameDialog';
 import NumberBadge from './NumberBadge';
 
 // DAY 목록의 장소 한 줄. 구글 장소는 약관 때문에 이름을 저장하지 않아서(name: null)
@@ -27,6 +28,8 @@ export default function DayItem({
 }) {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
+  // 현지어 이름·주소 창이 열려 있는지 (94). 일본(구글) 장소만 있다. 한국은 화면 글자가 곧 현지어다.
+  const [isShowingLocal, setIsShowingLocal] = useState(false);
   const editButtonRef = useRef(null);
   const itemRef = useRef(null);
   const detailsId = useId();
@@ -93,6 +96,15 @@ export default function DayItem({
         {/* 화면에는 "편집"·"삭제"만 보여서, 낭독기가 어느 장소인지 알 수 있게 이름을 붙인다 */}
         {isEditing ? null : (
           <span className="flex shrink-0 items-center">
+            {item.source === 'google' ? (
+              <Button
+                variant="ghost"
+                aria-label={t('planner.local.buttonLabel', { name })}
+                onClick={() => setIsShowingLocal(true)}
+              >
+                {t('planner.local.button')}
+              </Button>
+            ) : null}
             <Button
               ref={editButtonRef}
               variant="ghost"
@@ -130,6 +142,14 @@ export default function DayItem({
       ) : null}
       {isEditing ? (
         <ItemEditForm item={item} onSave={handleSave} onCancel={handleCloseEdit} />
+      ) : null}
+      {item.source === 'google' ? (
+        <LocalNameDialog
+          open={isShowingLocal}
+          onClose={() => setIsShowingLocal(false)}
+          placeId={item.placeId}
+          displayName={name}
+        />
       ) : null}
     </div>
   );
