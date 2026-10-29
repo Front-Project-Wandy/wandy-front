@@ -111,6 +111,7 @@ export default function ProductsPage() {
               <ProductCard
                 product={product}
                 rank={ranks.get(product.id)}
+                sizeClass="aspect-2/3 sm:aspect-3/4"
                 onSelect={(item) => updateParams({ id: item.id })}
               />
             </li>
@@ -148,7 +149,7 @@ export default function ProductsPage() {
   return (
     <main className="mx-auto w-full max-w-360 px-4 pt-8 pb-16 lg:px-5 lg:pt-12 lg:pb-20">
       <header className="mb-8 lg:mb-12">
-        <p className="mb-3 text-caption font-bold tracking-widest text-primary">
+        <p className="mb-3 text-caption font-bold tracking-widest text-link">
           {t('product.page.eyebrow')}
         </p>
         <h1 className="text-title font-bold break-keep lg:text-display">
