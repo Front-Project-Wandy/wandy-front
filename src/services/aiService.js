@@ -1,5 +1,10 @@
 // aiService — AI(Gemini) 호출 함수 (B파트). 화면은 이 파일의 함수만 부른다.
 // 1단계: 규칙으로 만든 가짜 일정을 돌려준다. 2단계: 함수 안만 Spring Boot API 호출로 바꾼다 (Gemini 키는 서버에만).
+import {
+  buildAssistantRequest,
+  parseAssistantText,
+} from '../features/ai/utils/buildAssistantRequest';
+import { buildMockAssistantReply } from '../features/ai/utils/buildMockAssistantReply';
 import { buildMockItinerary } from '../features/ai/utils/buildMockItinerary';
 import { buildMockPlaceDescription } from '../features/ai/utils/buildMockPlaceDescription';
 import { buildMockTripRequest } from '../features/ai/utils/buildMockTripRequest';
@@ -40,4 +45,32 @@ export function suggestTripTitle(conditions) {
 // 2단계: 서버가 placeId로 장소를 다시 불러와 Gemini에 넘긴다 — 구글 장소 이름·주소를 우리 서버에 저장하지 않게.
 export function describePlace(place) {
   return mockRequest(() => buildMockPlaceDescription(place, translate));
+}
+
+// 대화형 여행 비서 (101). history: [{ role: 'user'|'assistant', text }], context: buildAssistantContext 결과
+// → { reply, actions(검증 전), source: 'gemini' | 'mock' }
+// 1단계: 개발 서버(npm run dev)는 vite-plugins/geminiProxy.js가 Gemini를 대신 부른다(키는 서버 쪽 .env.local에만).
+//   키가 없거나(503) 빌드한 배포판이면 가짜 비서가 같은 모양으로 답한다.
+// 2단계: 주소만 Spring Boot API로 바꾸고 가짜 비서로 넘어가는 부분은 지운다.
+const ASSISTANT_URL = '/api/ai/chat';
+const NO_PROXY_STATUS = 503;
+
+export async function chatWithAssistant({ history, context }) {
+  if (import.meta.env.DEV) {
+    const response = await fetch(ASSISTANT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(buildAssistantRequest({ history, context })),
+    });
+    if (response.status !== NO_PROXY_STATUS) {
+      const body = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(body?.error?.code ?? 'AI_ERROR');
+      return { ...parseAssistantText(body?.data?.text), source: 'gemini' };
+    }
+  }
+  const lastText = history.at(-1)?.text ?? '';
+  return mockRequest(() => ({
+    ...buildMockAssistantReply(lastText, context, translate),
+    source: 'mock',
+  }));
 }

@@ -5,6 +5,7 @@ import Button from '../../components/common/Button';
 import EmptyState from '../../components/common/EmptyState';
 import Loading from '../../components/common/Loading';
 import AiFillButton from '../../features/ai/components/AiFillButton';
+import AssistantLauncher from '../../features/ai/components/AssistantLauncher';
 import ExpenseLog from '../../features/budget/components/ExpenseLog';
 import TripCostSummary from '../../features/budget/components/TripCostSummary';
 import MapView from '../../features/map/components/MapView';
@@ -252,6 +253,9 @@ export default function PlannerPage() {
             onPrint={handlePrint}
           />
         ) : null}
+        {/* 대화형 여행 비서 (101, B파트). 여행이 바뀌면 key로 대화를 새로 시작한다.
+            같은 부모의 ExpenseLog도 trip.id를 key로 써서, 겹치지 않게 앞에 이름을 붙인다. */}
+        {isTripReady ? <AssistantLauncher key={`assistant-${trip.id}`} trip={trip} /> : null}
       </main>
       {isTripReady ? <PrintableTrip trip={trip} /> : null}
     </>
