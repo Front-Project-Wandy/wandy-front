@@ -36,7 +36,7 @@ export default function PublicTripCard({ trip }) {
             {trip.author} · {t(`wizard.style.companion.${trip.companion}`)} ·{' '}
             {t('community.card.placeCount', { count: getTripPlaceCount(trip) })}
           </span>
-          <span className={`font-bold ${isLiked ? 'text-point' : ''}`}>
+          <span className={`font-bold ${isLiked ? 'text-apricot-ink' : ''}`}>
             <span aria-hidden="true">{isLiked ? '♥' : '♡'}</span>{' '}
             <span className="sr-only">{t('community.like.label')}</span>
             {getLikeCount(trip, isLiked)}

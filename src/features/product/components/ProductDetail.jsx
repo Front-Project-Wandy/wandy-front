@@ -44,7 +44,7 @@ export default function ProductDetail({ id }) {
             {t(`common.city.${product.city}`)} · {categoryLabel}
           </p>
           <h1 className="text-title font-bold">{product.title}</h1>
-          <p className="text-body-sm text-point">
+          <p className="text-body-sm text-gold-ink">
             <span aria-hidden="true">
               ★ {product.rating} ({product.reviewCount.toLocaleString('ko-KR')})
             </span>

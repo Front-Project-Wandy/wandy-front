@@ -3,6 +3,9 @@ import Chip from '../../../components/common/Chip';
 import { PRODUCT_CATEGORIES } from '../constants';
 import ProductCategoryIcon from './ProductCategoryIcon';
 
+// 고르지 않은 칸은 살구·연금빛을 번갈아 깔아, 하늘색(고른 칸) 하나만 반복되지 않게 한다 (분할보색 톤).
+const WARM_TONES = ['bg-apricot-soft text-apricot-ink', 'bg-gold-soft text-gold-ink'];
+
 const CHIP_VALUES = [null, ...PRODUCT_CATEGORIES];
 
 // 상품 종류 필터. null = 전체.
@@ -19,7 +22,7 @@ export default function ProductCategoryChips({ value, onChange, variant = 'chip'
         aria-label={t('product.category.label')}
         className="grid grid-cols-6 gap-1 sm:gap-4"
       >
-        {CHIP_VALUES.map((category) => {
+        {CHIP_VALUES.map((category, index) => {
           const selected = value === category;
           return (
             <button
@@ -31,7 +34,7 @@ export default function ProductCategoryChips({ value, onChange, variant = 'chip'
             >
               <span
                 className={`grid size-12 place-items-center rounded-full transition-[transform,background-color] group-hover:-translate-y-0.5 sm:size-16 ${
-                  selected ? 'bg-brand text-ink' : 'bg-bg-soft text-primary'
+                  selected ? 'bg-brand text-ink' : WARM_TONES[index % WARM_TONES.length]
                 }`}
               >
                 <ProductCategoryIcon category={category ?? 'all'} />

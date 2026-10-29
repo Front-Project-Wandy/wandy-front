@@ -42,7 +42,7 @@ export default function MyPageSummary({ anchors }) {
 
   return (
     <header className="rounded-2xl bg-bg-soft p-6 sm:p-10">
-      <h1 className="text-caption font-bold tracking-widest text-primary">{t('my.page.title')}</h1>
+      <h1 className="text-caption font-bold tracking-widest text-link">{t('my.page.title')}</h1>
       <p className="mt-3 text-title font-bold break-keep lg:text-display">
         {t('my.page.greeting')}
       </p>

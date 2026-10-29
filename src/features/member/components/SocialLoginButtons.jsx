@@ -40,11 +40,7 @@ export default function SocialLoginButtons() {
             aria-busy={isPending}
             className={`motion-press relative flex h-12 w-full items-center justify-center rounded-xl px-12 text-body focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60 ${PROVIDER_CLASS[provider]}`}
           >
-            <img
-              src={`/images/social/${provider}.svg`}
-              alt=""
-              className="absolute left-4 size-5"
-            />
+            <img src={`/images/social/${provider}.svg`} alt="" className="absolute left-4 size-5" />
             {isPending ? t('login.social.pending') : t(`login.social.${provider}`)}
           </button>
         );

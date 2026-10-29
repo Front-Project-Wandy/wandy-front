@@ -48,6 +48,8 @@ export default function ProductSection({ country = null, city = null, variant = 
           >
             <ProductCard
               product={product}
+              draggable={false}
+              sizeClass={isFeatured ? 'aspect-3/4 lg:aspect-square' : 'aspect-3/4'}
               onSelect={(item) => navigate(`/products?id=${encodeURIComponent(item.id)}`)}
             />
           </li>
