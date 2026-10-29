@@ -662,6 +662,14 @@
         "HND": "하네다공항"
       }
     },
+    "local": {
+      "button": "현지어",
+      "buttonLabel": "현지어로 보기: {{name}}",
+      "title": "{{name}} (현지어)",
+      "hint": "택시 기사님께 이 화면을 보여 주세요",
+      "loading": "현지어 주소를 불러오는 중…",
+      "error": "현지어 주소를 불러오지 못했어요"
+    },
     "optimize": {
       "button": "동선 최적화",
       "buttonLabel": "DAY {{number}} 동선 최적화",
@@ -953,7 +961,17 @@
   },
   "login": {
     "page": {
-      "title": "로그인"
+      "title": "로그인",
+      "description": "아이디와 비밀번호를 입력해 주세요"
+    },
+    "form": {
+      "idLabel": "아이디",
+      "idPlaceholder": "아이디를 입력하세요",
+      "idError": "아이디를 입력해 주세요",
+      "passwordLabel": "비밀번호",
+      "passwordPlaceholder": "비밀번호를 입력하세요",
+      "passwordError": "비밀번호를 입력해 주세요",
+      "submit": "로그인"
     }
   },
   "my": {
