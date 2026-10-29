@@ -9,6 +9,7 @@ import PlaceDetailPage from './pages/PlaceDetail/PlaceDetailPage';
 import PlacesPage from './pages/Places/PlacesPage';
 import PlannerPage from './pages/Planner/PlannerPage';
 import ProductsPage from './pages/Products/ProductsPage';
+import SignupPage from './pages/Signup/SignupPage';
 import WizardPage from './pages/Wizard/WizardPage';
 
 // 경로는 프롬프트 MD "사용자 흐름 & 페이지 경로" 표를 따른다.
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/place/:id" element={<PlaceDetailPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/my" element={<MyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
