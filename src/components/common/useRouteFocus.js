@@ -16,6 +16,8 @@ const ROUTE_TITLES = [
   { path: '/signup', key: 'signup' },
   { path: '/my', key: 'my' },
   { path: '/trip/:id', key: 'trip' },
+  // 관리 화면(85)은 번역 키를 admin 묶음에 모아 둬서 키 전체를 따로 적는다.
+  { path: '/admin', key: 'admin', titleKey: 'admin.page.title' },
 ];
 
 // 화면 이동 뒤 탭 제목과 포커스 (90 접근성).
@@ -42,7 +44,8 @@ export function useRouteFocus() {
   useEffect(() => {
     const matched = ROUTE_TITLES.find(({ path }) => matchPath(path, pathname));
     const key = matched?.key ?? 'notFound';
-    setPageTitle(t, key === 'home' ? null : t(`common.pageTitle.${key}`));
+    const titleKey = matched?.titleKey ?? `common.pageTitle.${key}`;
+    setPageTitle(t, key === 'home' ? null : t(titleKey));
 
     if (isRouteChange(pathname)) focusMain();
   }, [pathname, t]);
