@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
+import OpeningHoursWarning from '../../search/components/OpeningHoursWarning';
 import { useItemName } from '../hooks/useItemName';
 import DragHandle from './DragHandle';
 import ItemEditForm from './ItemEditForm';
@@ -18,6 +19,7 @@ export default function DayItem({
   item,
   number,
   dayIndex,
+  date,
   isTimeOutOfOrder,
   flightWarnings = [],
   isSelected = false,
@@ -65,7 +67,6 @@ export default function DayItem({
   };
   const handleRemove = () => onRemove(item.id);
   const handleSelect = () => onSelect?.(item.id);
-  const hasDetails = isTimeOutOfOrder || flightWarnings.length > 0 || Boolean(item.memo);
 
   return (
     <div
@@ -81,7 +82,7 @@ export default function DayItem({
         <button
           type="button"
           aria-pressed={isSelected}
-          aria-describedby={hasDetails ? detailsId : undefined}
+          aria-describedby={detailsId}
           onClick={handleSelect}
           className="flex min-w-0 flex-1 items-center gap-3 rounded-xl text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
@@ -123,23 +124,28 @@ export default function DayItem({
           </span>
         )}
       </div>
-      {hasDetails ? (
-        <div id={detailsId} className={`pt-1 ${dragHandleProps ? 'pl-21' : 'pl-11'}`}>
-          {isTimeOutOfOrder ? (
-            <span className="block text-body-sm font-bold text-text">
-              {t('planner.item.timeOrderWarning')}
-            </span>
-          ) : null}
-          {flightWarnings.map(({ type, time }) => (
-            <span key={type} className="block text-body-sm font-bold text-text">
-              {t(`planner.item.${type}Warning`, { time })}
-            </span>
-          ))}
-          {item.memo ? (
-            <span className="block break-words text-body-sm text-text/70">{item.memo}</span>
-          ) : null}
-        </div>
-      ) : null}
+      {/* 경고·메모가 하나도 없으면 비어서 :empty로 숨겨진다 (영업시간 경고는 불러온 뒤에야 생길 수 있다) */}
+      <div id={detailsId} className={`pt-1 empty:hidden ${dragHandleProps ? 'pl-21' : 'pl-11'}`}>
+        {isTimeOutOfOrder ? (
+          <span className="block text-body-sm font-bold text-text">
+            {t('planner.item.timeOrderWarning')}
+          </span>
+        ) : null}
+        {flightWarnings.map(({ type, time }) => (
+          <span key={type} className="block text-body-sm font-bold text-text">
+            {t(`planner.item.${type}Warning`, { time })}
+          </span>
+        ))}
+        <OpeningHoursWarning
+          placeId={item.placeId}
+          date={date}
+          startTime={item.startTime}
+          stayMinutes={item.stayMinutes}
+        />
+        {item.memo ? (
+          <span className="block break-words text-body-sm text-text/70">{item.memo}</span>
+        ) : null}
+      </div>
       {isEditing ? (
         <ItemEditForm item={item} onSave={handleSave} onCancel={handleCloseEdit} />
       ) : null}

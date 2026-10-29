@@ -15,13 +15,23 @@ export default function ShareTripDialog({ open, onClose, trip, onPrint }) {
     () => formatShareText({ data, t, locale: i18n.language }),
     [data, t, i18n.language],
   );
-  const { status, canShare, copy, share } = useShareActions({
+  const { status, canShare, copy, share, resetStatus } = useShareActions({
     title: data.title || t('planner.share.untitled'),
     text,
   });
 
+  // 이 창은 닫아도 그려져 있어서 안내 글자가 남는다. 닫거나 인쇄로 넘어갈 때 지운다.
+  const handleClose = () => {
+    resetStatus();
+    onClose();
+  };
+  const handlePrint = () => {
+    resetStatus();
+    onPrint();
+  };
+
   return (
-    <Modal open={open} onClose={onClose} title={t('planner.share.title')}>
+    <Modal open={open} onClose={handleClose} title={t('planner.share.title')}>
       <div className="space-y-4">
         <textarea
           readOnly
@@ -40,7 +50,7 @@ export default function ShareTripDialog({ open, onClose, trip, onPrint }) {
               {t('planner.share.share')}
             </Button>
           ) : null}
-          <Button variant="secondary" onClick={onPrint}>
+          <Button variant="secondary" onClick={handlePrint}>
             {t('planner.share.print')}
           </Button>
         </div>

@@ -3,6 +3,9 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
+import AiFillButton from '../../ai/components/AiFillButton';
+import DayProductSuggestions from '../../product/components/DayProductSuggestions';
+import { usePlanStore } from '../../../store/plan/usePlanStore';
 import DayTransportSummary from '../../transport/components/DayTransportSummary';
 import TransportLeg from '../../transport/components/TransportLeg';
 import { getFlightTimeWarnings } from '../utils/checkFlightTime';
@@ -19,6 +22,7 @@ export default function DaySection({
   day,
   dayIndex,
   country,
+  city,
   transportMode,
   style,
   flight,
@@ -28,8 +32,10 @@ export default function DaySection({
   onUpdateItem,
   onRemoveItem,
   onReorderDay,
+  onRegenerateDay,
 }) {
   const { t, i18n } = useTranslation();
+  const trip = usePlanStore((state) => state.trip);
   const titleId = `day-title-${dayIndex}`;
   // 동선 최적화 비교 창이 열려 있는지 (69)
   const [isOptimizing, setIsOptimizing] = useState(false);
@@ -67,6 +73,12 @@ export default function DaySection({
               {t('planner.optimize.button')}
             </Button>
           ) : null}
+          {/* 이 DAY만 AI로 다시 짠다 (79). 넣는 일은 플래너가 한다 */}
+          <AiFillButton
+            trip={trip}
+            dayIndex={dayIndex}
+            onApply={(days) => onRegenerateDay(dayIndex, days)}
+          />
           {/* 버튼 글자는 DAY마다 같아서, 낭독기가 어느 DAY인지 알 수 있게 번호를 붙인다 */}
           <Button
             variant="secondary"
@@ -100,6 +112,7 @@ export default function DaySection({
                       item={item}
                       number={index + 1}
                       dayIndex={dayIndex}
+                      date={day.date}
                       isTimeOutOfOrder={
                         index > 0 && item.startTime < day.items[index - 1].startTime
                       }
@@ -128,6 +141,7 @@ export default function DaySection({
           </ol>
         </SortableContext>
       )}
+      <DayProductSuggestions country={country} city={city} items={day.items} />
       {isOptimizing ? (
         <OptimizeDayDialog
           open
