@@ -82,6 +82,24 @@
       "title": "다른 여행자의 일정 둘러보기",
       "description": "마음에 드는 일정을 골라 날짜만 정하면 내 여행으로 바로 가져올 수 있어요."
     },
+    "tab": {
+      "browse": "둘러보기",
+      "activity": "내 활동"
+    },
+    "activity": {
+      "liked": "좋아요한 일정 {{count}}개",
+      "likedEmpty": {
+        "title": "좋아요한 일정이 없어요",
+        "description": "마음에 드는 일정에 좋아요를 누르면 여기에 모여요."
+      },
+      "reviews": "내가 쓴 후기 {{count}}개",
+      "reviewsEmpty": {
+        "title": "아직 쓴 후기가 없어요",
+        "description": "일정 상세에서 장소 옆 「후기」를 눌러 남길 수 있어요."
+      },
+      "browse": "일정 둘러보러 가기",
+      "missingPlace": "장소 정보를 불러오지 못했어요"
+    },
     "filter": {
       "all": "전체",
       "group": {
