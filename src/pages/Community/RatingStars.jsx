@@ -7,7 +7,7 @@ export default function RatingStars({ rating }) {
   const filled = Math.round(rating);
 
   return (
-    <span className="inline-flex items-center text-body-sm text-point">
+    <span className="inline-flex items-center text-body-sm text-gold">
       <span aria-hidden="true">
         {'★'.repeat(filled)}
         <span className="text-text/20">{'★'.repeat(MAX_RATING - filled)}</span>
