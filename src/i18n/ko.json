@@ -121,6 +121,23 @@
         "title": "일정을 찾을 수 없어요",
         "description": "삭제되었거나 주소가 잘못된 일정이에요."
       }
+    },
+    "copy": {
+      "open": "내 여행으로 가져오기",
+      "title": "내 여행으로 가져오기",
+      "description": "가는 날을 고르면 {{nights}}박 {{days}}일 일정이 그대로 내 여행에 들어가요.",
+      "startDate": "가는 날",
+      "period": "{{start}} ~ {{end}}",
+      "people": "인원",
+      "tripTitle": "여행 제목",
+      "notice": "항공·숙소는 가져오지 않아요. 지금 열려 있던 여행은 내 여행 목록에 그대로 남아요.",
+      "cancel": "취소",
+      "submit": "가져와서 플래너 열기",
+      "error": {
+        "startDate": "가는 날을 골라 주세요.",
+        "pastDate": "오늘 이후 날짜를 골라 주세요.",
+        "people": "인원은 1~{{max}}명으로 입력해 주세요."
+      }
     }
   },
   "home": {

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
+import Button from '../../components/common/Button';
 import EmptyState from '../../components/common/EmptyState';
 import ErrorState from '../../components/common/ErrorState';
 import Loading from '../../components/common/Loading';
 import MapView from '../../features/map/components/MapView';
 import GoogleAttribution from '../../features/search/components/GoogleAttribution';
+import CopyTripModal from './CopyTripModal';
 import LikeButton from './LikeButton';
 import PublicTripDayList from './PublicTripDayList';
 import { findPublicTrip, getTripNights } from './publicTripUtils';
@@ -22,6 +24,7 @@ export default function PublicTripDetailPage() {
   const trip = findPublicTrip(id);
   const { placesById, mapDays, isPending, isError, refetch } = usePublicTripPlaces(trip);
   const [selectedId, setSelectedId] = useState(null);
+  const [isCopyOpen, setIsCopyOpen] = useState(false);
 
   if (!trip) {
     return (
@@ -77,6 +80,10 @@ export default function PublicTripDetailPage() {
         </p>
         <div className="flex flex-wrap gap-3">
           <LikeButton trip={trip} />
+          {/* 장소를 다 불러오기 전에 복사하면 빠진 장소가 생겨서, 다 불러온 뒤에 누를 수 있다. */}
+          <Button disabled={isPending || isError} onClick={() => setIsCopyOpen(true)}>
+            {t('community.copy.open')}
+          </Button>
         </div>
       </div>
       <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
@@ -93,6 +100,9 @@ export default function PublicTripDetailPage() {
           className="lg:sticky lg:top-6"
         />
       </div>
+      {isCopyOpen ? (
+        <CopyTripModal trip={trip} placesById={placesById} onClose={() => setIsCopyOpen(false)} />
+      ) : null}
     </main>
   );
 }
