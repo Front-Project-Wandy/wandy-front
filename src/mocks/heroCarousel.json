@@ -1,0 +1,72 @@
+[
+  {
+    "city": "seoul",
+    "title": "서울",
+    "alt": "해 질 무렵 한강과 서울 도심 풍경"
+  },
+  {
+    "placeId": "google:mock-tokyo-tower",
+    "city": "tokyo",
+    "title": "도쿄타워",
+    "alt": "밤에 불이 켜진 도쿄타워와 도심 야경"
+  },
+  {
+    "placeId": "tour:126508",
+    "city": "seoul",
+    "title": "경복궁",
+    "alt": "경복궁 근정전 앞마당"
+  },
+  {
+    "placeId": "google:mock-sensoji",
+    "city": "tokyo",
+    "title": "센소지",
+    "alt": "센소지 가미나리몬과 붉은 등"
+  },
+  {
+    "placeId": "naver:북촌한옥마을_1269831000_375826000",
+    "city": "seoul",
+    "title": "북촌한옥마을",
+    "alt": "해 질 녘 북촌 한옥 골목"
+  },
+  {
+    "placeId": "google:mock-shibuya-crossing",
+    "city": "tokyo",
+    "title": "시부야 스크램블 교차로",
+    "alt": "밤의 시부야 교차로를 건너는 사람들"
+  },
+  {
+    "placeId": "naver:롯데월드타워 서울스카이_1271025000_375126000",
+    "city": "seoul",
+    "title": "롯데월드타워 서울스카이",
+    "alt": "석촌호수 너머로 보이는 롯데월드타워"
+  },
+  {
+    "placeId": "google:mock-skytree",
+    "city": "tokyo",
+    "title": "도쿄 스카이트리",
+    "alt": "스미다강 너머로 보이는 도쿄 스카이트리"
+  },
+  {
+    "placeId": "naver:반포한강공원 달빛무지개분수_1269958000_375101000",
+    "city": "seoul",
+    "title": "반포 달빛무지개분수",
+    "alt": "밤의 반포대교 무지개분수"
+  },
+  {
+    "placeId": "google:mock-shibuya-sky",
+    "city": "tokyo",
+    "title": "시부야 스카이",
+    "alt": "시부야 스카이 전망대에서 본 도쿄 시내"
+  },
+  {
+    "placeId": "tour:900004",
+    "city": "seoul",
+    "title": "N서울타워",
+    "alt": "파란 하늘 아래 N서울타워"
+  },
+  {
+    "city": "tokyo",
+    "title": "도쿄",
+    "alt": "도쿄타워가 보이는 도쿄 도심"
+  }
+]
