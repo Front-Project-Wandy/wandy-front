@@ -5,6 +5,7 @@ import AiFillButton from '../../../features/ai/components/AiFillButton';
 import { buildWizardFillConditions } from '../../../features/ai/utils/buildWizardFillConditions';
 import { useFavoritePlaces } from '../../../features/member/hooks/useFavoritePlaces';
 import PlaceSearchPanel from '../../../features/search/components/PlaceSearchPanel';
+import SimilarTravelerPlaces from '../../../features/search/components/SimilarTravelerPlaces';
 import { useWizardStore } from '../../../store/wizard/wizardStore';
 import AddSpotModal from '../spots/AddSpotModal';
 import FavoriteSpots from '../spots/FavoriteSpots';
@@ -98,6 +99,8 @@ export default function Step5Spots({ onPrev, onNext }) {
                 ? t('wizard.spots.tab.favoritesPending')
                 : t('wizard.spots.tab.favorites', { count: cityFavorites.length }),
             },
+            // 비슷한 성향 여행자들이 많이 간 곳 (102, 범수 님 추천 목록)
+            { key: 'similar', label: t('wizard.spots.tab.similar') },
           ]}
           activeKey={tab}
           onChange={setTab}
@@ -112,7 +115,19 @@ export default function Step5Spots({ onPrev, onNext }) {
             // STEP1에서 고른(처음엔 프로필) 카테고리를 추천 목록 앞으로 올린다 (65).
             preferredCategories={draft.preferredCategories}
           />
-        ) : (
+        ) : null}
+        {tab === 'similar' ? (
+          <SimilarTravelerPlaces
+            country={draft.country}
+            city={draft.city}
+            // STEP1에서 고른(처음엔 프로필) 여행 스타일·동행·예산·카테고리가 내 성향이다
+            profile={draft}
+            // 이미 담은 곳은 다시 추천하지 않는다
+            excludePlaceIds={spots.map((spot) => spot.placeId)}
+            onSelectPlace={setTargetPlace}
+          />
+        ) : null}
+        {tab === 'favorites' ? (
           <FavoriteSpots
             city={draft.city}
             places={cityFavorites}
@@ -121,7 +136,7 @@ export default function Step5Spots({ onPrev, onNext }) {
             onRetry={favorites.refetch}
             onSelectPlace={setTargetPlace}
           />
-        )}
+        ) : null}
       </div>
 
       {hasError && (
