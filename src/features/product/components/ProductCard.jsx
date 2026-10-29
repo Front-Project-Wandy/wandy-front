@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import FlipCardFrame from '../../../components/common/FlipCardFrame';
+import { useAdminStore } from '../../admin/hooks/useAdminStore';
 import { formatPrice } from '../utils/formatPrice';
 import ProductCategoryIcon from './ProductCategoryIcon';
 
@@ -16,6 +17,7 @@ const FALLBACK_CLASS = {
 // 상품 카드 — 목록(63)과 홈 섹션(62)·장소 상세에서 같이 쓴다. 누르면 뒤집혀 뒷면에 소개·소요 시간과
 // [상품 자세히 보기]가 나온다 (상세로 가는 건 뒷면 버튼).
 // rank를 넘기면 사진 왼쪽 위에 「1위」 같은 순위 배지를 단다 (목록의 평점 상위).
+// 관리자가 추천 고정한 상품(85)은 순위 대신 「추천」 배지를 단다 — 맨 앞에 와서 순위와 섞이면 헷갈린다.
 // draggable={false}: 가로로 넘기는 목록(홈·장소 상세)에서는 끌어서 뒤집기가 목록 스크롤과 부딪혀서 끈다.
 // sizeClass: 카드 높이(비율). 좁은 2열 그리드는 글자 자리가 모자라서 더 길쭉하게 쓴다.
 export default function ProductCard({
@@ -26,6 +28,7 @@ export default function ProductCard({
   sizeClass = 'aspect-3/4',
 }) {
   const { t } = useTranslation();
+  const isPinned = useAdminStore((state) => state.pinnedProductIds.includes(product.id));
   const categoryLabel = t(`product.category.${product.category}`);
   const reviewCount = product.reviewCount.toLocaleString('ko-KR');
   const price = t(`product.price.${product.currency}`, { value: formatPrice(product.price) });
@@ -54,9 +57,9 @@ export default function ProductCard({
             <span className="text-body-sm font-bold text-text/70">{categoryLabel}</span>
           </span>
         )}
-        {rank ? (
+        {isPinned || rank ? (
           <span className="absolute top-3 left-3 rounded-full bg-apricot px-2.5 py-1 text-caption font-bold text-ink">
-            {t('product.card.rank', { rank })}
+            {isPinned ? t('product.card.pinned') : t('product.card.rank', { rank })}
           </span>
         ) : null}
       </span>
