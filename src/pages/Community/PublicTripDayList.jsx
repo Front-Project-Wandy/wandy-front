@@ -82,7 +82,7 @@ export default function PublicTripDayList({
                       t('community.review.open')
                     ) : (
                       <>
-                        <span aria-hidden="true" className="text-point">
+                        <span aria-hidden="true" className="text-gold">
                           ★
                         </span>
                         {t('community.review.openWithRating', { average, count })}
