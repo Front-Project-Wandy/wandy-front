@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/common/Input';
+import AiTitleSuggest from '../../../features/ai/components/AiTitleSuggest';
 import { formatShortDate } from '../../../features/member/utils/tripDates';
 import { useWizardStore } from '../../../store/wizard/wizardStore';
 import { toPlanFlight } from '../flight/flightOptions';
@@ -11,6 +12,7 @@ import { saveWizardTrip } from '../summary/saveWizardTrip';
 import { scheduleSpots } from '../summary/scheduleSpots';
 import SummaryDays from '../summary/SummaryDays';
 import { getTripDays } from '../tripDays';
+import { hasBasicInfoErrors } from '../validateBasicInfo';
 import WizardNav from '../WizardNav';
 
 // STEP7 요약·저장 (29). 지금까지 고른 걸 보여주고, [저장]하면 플랜 store(C)에 넣고 플래너로 간다.
@@ -21,6 +23,7 @@ export default function Step7Summary({ onPrev }) {
   const draft = useWizardStore((state) => state.draft);
   const updateDraft = useWizardStore((state) => state.updateDraft);
   const resetWizard = useWizardStore((state) => state.resetWizard);
+  const setStep = useWizardStore((state) => state.setStep);
 
   const days = getTripDays(draft.startDate, draft.endDate);
   const spots = fitSpotsToDays(draft.spots, days.length);
@@ -47,6 +50,12 @@ export default function Step7Summary({ onPrev }) {
 
   // 이전 여행은 보관함에 남아서(#59) "바꿔서 저장" 확인 없이 바로 저장한다.
   const handleSave = () => {
+    // 마법사를 열어 둔 채 날짜가 지나는 경우까지 막으려고 저장 직전에도 기본 정보를 다시 본다.
+    if (hasBasicInfoErrors(draft)) {
+      setStep(1);
+      window.scrollTo(0, 0);
+      return;
+    }
     const tripId = saveWizardTrip({
       draft,
       spots,
@@ -67,6 +76,18 @@ export default function Step7Summary({ onPrev }) {
         placeholder={defaultTitle}
         maxLength={40}
         onChange={(event) => updateDraft({ title: event.target.value })}
+      />
+      {/* AI 제목 추천 (78, B파트 컴포넌트). 고른 후보를 제목칸에 넣고, 그 뒤에도 직접 고칠 수 있다. */}
+      <AiTitleSuggest
+        conditions={{
+          city: draft.city,
+          days: days.length,
+          style: draft.style,
+          companion: draft.companion,
+          preferredCategories: draft.preferredCategories ?? [],
+        }}
+        onSelect={(title) => updateDraft({ title })}
+        className="-mt-3"
       />
 
       <div className="flex flex-col gap-1 rounded-2xl bg-bg-soft p-4 text-body-sm">

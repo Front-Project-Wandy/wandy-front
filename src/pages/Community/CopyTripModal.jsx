@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import Modal from '../../components/common/Modal';
-import { getTodayString, MAX_PEOPLE } from '../Wizard/validateBasicInfo';
+import { getTodayString, MAX_DATE, MAX_PEOPLE } from '../Wizard/validateBasicInfo';
 import { copyPublicTrip, getCopyEndDate } from './copyPublicTrip';
 import { getTripNights } from './publicTripUtils';
 
@@ -66,6 +66,7 @@ export default function CopyTripModal({ trip, placesById, onClose }) {
           label={t('community.copy.startDate')}
           value={values.startDate}
           min={today}
+          max={MAX_DATE}
           onChange={handleChange('startDate')}
           error={errors.startDate && t(errors.startDate)}
         />

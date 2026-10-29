@@ -5,10 +5,6 @@ import { saveWizardTrip } from '../Wizard/summary/saveWizardTrip';
 // 가는 날을 정하면 오는 날은 공개 일정의 일수로 정해진다.
 export const getCopyEndDate = (trip, startDate) => addDays(startDate, trip.days.length - 1);
 
-// 플랜 계약상 동행이 'solo'면 인원은 1명이다. 혼자 간 일정을 여럿이 가져오면 동행을 비운다(null = 고르지 않음).
-export const getCopyCompanion = (companion, people) =>
-  companion === 'solo' && people !== 1 ? null : companion;
-
 // 공개 일정을 내 새 여행으로 복사하고 새 여행 id를 돌려준다 (105).
 // 마법사 저장(saveWizardTrip)을 그대로 써서, 지금 열린 여행이 보관함으로 가는 것까지 마법사와 똑같다.
 // 항공·숙소·예산은 남의 일정에서 가져오지 않는다. 장소는 불러온 것만 넣는다(placesById에 없으면 건너뜀).
@@ -23,7 +19,8 @@ export function copyPublicTrip({ trip, startDate, people, title, placesById }) {
     endDate: getCopyEndDate(trip, startDate),
     people,
     style: trip.style,
-    companion: getCopyCompanion(trip.companion, people),
+    // 혼자 간 일정을 여럿이 가져오면 saveWizardTrip이 동행을 비운다 (「solo면 1명」 계약).
+    companion: trip.companion,
     budget: null,
     preferredCategories: trip.categories,
     transportMode: null,
