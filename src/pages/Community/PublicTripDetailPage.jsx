@@ -9,6 +9,7 @@ import MapView from '../../features/map/components/MapView';
 import GoogleAttribution from '../../features/search/components/GoogleAttribution';
 import CopyTripModal from './CopyTripModal';
 import LikeButton from './LikeButton';
+import PlaceReviewModal from './PlaceReviewModal';
 import PublicTripDayList from './PublicTripDayList';
 import { findPublicTrip, getTripNights } from './publicTripUtils';
 import { usePublicTripPlaces } from './usePublicTripPlaces';
@@ -25,6 +26,7 @@ export default function PublicTripDetailPage() {
   const { placesById, mapDays, isPending, isError, refetch } = usePublicTripPlaces(trip);
   const [selectedId, setSelectedId] = useState(null);
   const [isCopyOpen, setIsCopyOpen] = useState(false);
+  const [reviewPlace, setReviewPlace] = useState(null);
 
   if (!trip) {
     return (
@@ -54,6 +56,7 @@ export default function PublicTripDetailPage() {
         placesById={placesById}
         selectedId={selectedId}
         onSelect={setSelectedId}
+        onOpenReviews={setReviewPlace}
       />
     );
   };
@@ -102,6 +105,9 @@ export default function PublicTripDetailPage() {
       </div>
       {isCopyOpen ? (
         <CopyTripModal trip={trip} placesById={placesById} onClose={() => setIsCopyOpen(false)} />
+      ) : null}
+      {reviewPlace ? (
+        <PlaceReviewModal place={reviewPlace} onClose={() => setReviewPlace(null)} />
       ) : null}
     </main>
   );
