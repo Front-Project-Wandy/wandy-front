@@ -53,7 +53,7 @@ export default function ReviewForm({ initial = null, onSubmit, onCancel }) {
               onChange={() => setRating(value)}
               className="sr-only"
             />
-            <span aria-hidden="true" className={value <= rating ? 'text-point' : 'text-text/20'}>
+            <span aria-hidden="true" className={value <= rating ? 'text-gold' : 'text-text/20'}>
               ★
             </span>
             <span className="sr-only">{t('community.review.ratingLabel', { rating: value })}</span>
