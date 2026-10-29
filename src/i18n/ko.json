@@ -465,7 +465,8 @@
       "tab": {
         "search": "검색·추천",
         "favorites": "찜한 장소 ({{count}})",
-        "favoritesPending": "찜한 장소"
+        "favoritesPending": "찜한 장소",
+        "similar": "비슷한 여행자 인기"
       },
       "favorites": {
         "emptyTitle": "{{city}}에서 찜한 장소가 없어요",
@@ -1367,6 +1368,19 @@
     }
   },
   "search": {
+    "similar": {
+      "intro": {
+        "similar": "여행 스타일·동행·예산·선호 카테고리가 나와 가장 비슷한 여행자 {{count}}명이 많이 간 곳이에요.",
+        "popular": "STEP1에서 동행·예산·카테고리를 고르면 더 잘 맞춰 드려요. 지금은 이 도시 여행자 {{count}}명이 많이 간 곳이에요."
+      },
+      "reason": {
+        "similar": "비슷한 여행자 {{total}}명 중 {{count}}명이 다녀갔어요",
+        "popular": "여행자 {{total}}명 중 {{count}}명이 다녀갔어요"
+      },
+      "emptyTitle": "더 추천할 곳이 없어요",
+      "emptyDescription": "비슷한 여행자들이 간 곳을 이미 모두 담았어요. 검색·추천 탭에서 더 찾아보세요.",
+      "mockNote": "지금은 예시 여행자 데이터로 계산해요. 실제 사용자가 늘면 그 기록으로 바뀌어요."
+    },
     "field": {
       "label": "장소 검색",
       "placeholder": "장소 이름이나 주소 (예: 경복궁, 라멘)"
