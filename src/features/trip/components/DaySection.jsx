@@ -47,7 +47,8 @@ export default function DaySection({
 
   return (
     <section ref={setNodeRef} aria-labelledby={titleId} className="space-y-3">
-      <div className="flex items-center justify-between gap-2">
+      {/* flex-wrap: 버튼이 셋(AI·최적화·추가)이 되면 좁은 화면에서 날짜가 줄바꿈되므로, 모자라면 버튼 묶음이 아래 줄로 내려간다 */}
+      <div className="flex flex-wrap items-center justify-between gap-2">
         {/* 좁은 화면에서 긴 경고 문장이 버튼을 찌그러뜨리지 않게, 왼쪽 묶음은 줄어들 수 있고(min-w-0) 버튼은 줄어들지 않는다(shrink-0) */}
         <div className="min-w-0">
           <h2 id={titleId} className="text-subtitle font-bold">

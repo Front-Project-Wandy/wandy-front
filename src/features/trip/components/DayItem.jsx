@@ -73,7 +73,8 @@ export default function DayItem({
       ref={itemRef}
       className={`rounded-2xl border p-3 ${isSelected ? 'border-primary bg-bg-soft' : 'border-text/10 bg-background'}`}
     >
-      <div className="flex items-center gap-3">
+      {/* flex-wrap·min-w-40: 현지어·편집·삭제 버튼이 이름 칸을 한두 글자로 줄이지 않게, 모자라면 버튼이 아래 줄로 내려간다 */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
         {dragHandleProps ? (
           <DragHandle label={t('planner.drag.handle', { name })} {...dragHandleProps} />
         ) : null}
@@ -84,7 +85,7 @@ export default function DayItem({
           aria-pressed={isSelected}
           aria-describedby={detailsId}
           onClick={handleSelect}
-          className="flex min-w-0 flex-1 items-center gap-3 rounded-xl text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="flex min-w-40 flex-1 items-center gap-3 rounded-xl text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <NumberBadge number={number} dayIndex={dayIndex} />
           <span className="min-w-0 flex-1">
@@ -96,7 +97,7 @@ export default function DayItem({
         </button>
         {/* 화면에는 "편집"·"삭제"만 보여서, 낭독기가 어느 장소인지 알 수 있게 이름을 붙인다 */}
         {isEditing ? null : (
-          <span className="flex shrink-0 items-center">
+          <span className="ml-auto flex shrink-0 items-center">
             {item.source === 'google' ? (
               <Button
                 variant="ghost"
