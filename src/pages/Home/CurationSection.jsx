@@ -36,7 +36,7 @@ export default function CurationSection() {
     return (
       <>
         {/* grid-cols-1을 꼭 쓴다: 열을 정하지 않으면 칸 너비가 긴 주소 글자만큼 늘어 좁은 폰에서 카드가 넘친다. */}
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <ul key={selectedKey} className="motion-results grid grid-cols-1 gap-3 sm:grid-cols-2">
           {places.map((place) => (
             <PlaceCard
               key={place.id}

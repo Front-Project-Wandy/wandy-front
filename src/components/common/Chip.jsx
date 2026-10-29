@@ -9,7 +9,7 @@ export default function Chip({ label, selected = false, onClick, className = '',
       type="button"
       aria-pressed={selected}
       onClick={onClick}
-      className={`inline-flex h-9 shrink-0 items-center rounded-full border px-4 text-body-sm font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+      className={`inline-flex h-9 shrink-0 items-center rounded-full border px-4 text-body-sm font-bold motion-press transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
         selected
           ? 'border-brand bg-brand text-ink'
           : 'border-text/20 bg-background text-text/70 hover:bg-bg-soft'

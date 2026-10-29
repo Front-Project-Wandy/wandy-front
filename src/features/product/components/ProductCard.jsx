@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { formatPrice } from '../utils/formatPrice';
 import ProductCategoryIcon from './ProductCategoryIcon';
@@ -18,6 +19,9 @@ export default function ProductCard({ product, onSelect, rank = null }) {
   const { t } = useTranslation();
   const categoryLabel = t(`product.category.${product.category}`);
   const reviewCount = product.reviewCount.toLocaleString('ko-KR');
+  // 사진이 늦게 오면 등장 연출이 끝난 뒤 빈 틀에 툭 튀어나오므로, 불러온 뒤에 부드럽게 보이게 한다.
+  // 오류가 나도 보이게 해서 영영 숨겨지는 일이 없게 하고, 이미 받아 둔 사진은 ref에서 바로 잡는다.
+  const [imageReady, setImageReady] = useState(false);
 
   return (
     <button
@@ -25,18 +29,24 @@ export default function ProductCard({ product, onSelect, rank = null }) {
       onClick={() => onSelect(product)}
       className="group flex h-full w-full flex-col rounded-2xl text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
     >
-      <span className="relative block aspect-4/3 w-full overflow-hidden rounded-2xl bg-bg-soft">
+      <span className="motion-card-frame relative block aspect-4/3 w-full overflow-hidden rounded-2xl bg-bg-soft">
         {product.imageUrl ? (
           <img
+            ref={(el) => {
+              if (el?.complete) setImageReady(true);
+            }}
             src={product.imageUrl}
             alt=""
-            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="size-full object-cover motion-card-image"
+            data-ready={imageReady}
+            onLoad={() => setImageReady(true)}
+            onError={() => setImageReady(true)}
             loading="lazy"
           />
         ) : (
           <span
             aria-hidden="true"
-            className={`flex size-full flex-col items-center justify-center gap-2 transition-transform duration-500 group-hover:scale-105 ${FALLBACK_CLASS[product.category] ?? 'text-primary'}`}
+            className={`flex size-full flex-col items-center justify-center gap-2 motion-card-image ${FALLBACK_CLASS[product.category] ?? 'text-primary'}`}
           >
             <ProductCategoryIcon category={product.category} size={40} />
             <span className="text-body-sm font-bold text-text/70">{categoryLabel}</span>

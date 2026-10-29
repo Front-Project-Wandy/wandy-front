@@ -40,12 +40,12 @@ export default function PopularCities() {
           const isAvailable = isCityAvailable(item);
           const content = (
             <>
-              <div className="relative overflow-hidden">
+              <div className="motion-card-frame relative overflow-hidden">
                 <img
                   src={`/images/home/${item.city}.jpg`}
                   alt={t(`home.editorial.${item.city}.alt`)}
                   loading="lazy"
-                  className={`w-full object-cover transition-transform duration-500 ${isAvailable ? 'aspect-video group-hover:scale-105' : 'aspect-3/2 grayscale-60'}`}
+                  className={`w-full object-cover motion-card-image ${isAvailable ? 'aspect-video' : 'aspect-3/2 grayscale-60'}`}
                 />
                 {isAvailable ? null : (
                   <span className="absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 text-caption font-bold text-white">

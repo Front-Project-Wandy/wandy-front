@@ -58,6 +58,206 @@
   }
 }
 
+.places-city-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: 1.1;
+}
+
+/* 장식 동작은 기본적으로 끄고, 동작을 허용한 기기에서만 실행한다. */
+@keyframes soft-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes soft-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes heart-pop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.18);
+  }
+}
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes card-zoomout {
+  from {
+    transform: scale(1.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-photo {
+    transition: opacity 450ms ease-in-out;
+  }
+  .motion-hero-copy {
+    animation: soft-rise 450ms ease-out;
+  }
+  [data-reveal] {
+    transition:
+      opacity 500ms ease-out,
+      transform 500ms ease-out;
+  }
+  [data-reveal='waiting'] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  /* 키보드로 이동하면 등장 시점을 기다리지 않고 즉시 보여 준다. */
+  [data-reveal]:focus-within {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .motion-results {
+    animation: soft-fade 180ms ease-out;
+  }
+  .motion-heart {
+    display: inline-block;
+    animation: heart-pop 200ms ease-out;
+  }
+  .motion-press {
+    transition:
+      transform 150ms ease-out,
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+  .motion-press:enabled:active {
+    transform: scale(0.98);
+  }
+  .motion-dialog[open] {
+    animation: dialog-enter 200ms ease-out;
+  }
+  .motion-dialog[open]::backdrop {
+    animation: soft-fade 200ms ease-out;
+  }
+  .motion-card-image {
+    transition:
+      transform 250ms ease-out,
+      opacity 400ms ease-out;
+  }
+  .motion-card-image[data-ready='false'] {
+    opacity: 0;
+  }
+  .motion-card-frame {
+    transition: box-shadow 250ms ease-out;
+  }
+  /* 상품 목록 카드가 아래에서 떠오르고 사진은 줌아웃된다. 시작 시점은 열(column) 순서로 준다.
+     행 순서로 주면 [더보기]로 붙는 카드가 한참 기다리고, 인라인 style은 쓰지 않기 때문이다.
+     카드를 세로로 잘라 보여 주는 clip-path 방식은 글자가 중간에서 끊겨 깨져 보여서 쓰지 않는다.
+     backwards로 두는 건 끝난 뒤 transform이 남아 호버 효과를 막는 걸 피하려는 것이다. */
+  .motion-stagger > li {
+    animation: card-rise 800ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  .motion-stagger .motion-card-image {
+    animation: card-zoomout 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  .motion-stagger > li:nth-child(2n),
+  .motion-stagger > li:nth-child(2n) .motion-card-image {
+    animation-delay: 200ms;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+  .motion-stagger > li:nth-child(4n + 1),
+  .motion-stagger > li:nth-child(4n + 1) .motion-card-image {
+    animation-delay: 0ms;
+  }
+  .motion-stagger > li:nth-child(4n + 2),
+  .motion-stagger > li:nth-child(4n + 2) .motion-card-image {
+    animation-delay: 200ms;
+  }
+  .motion-stagger > li:nth-child(4n + 3),
+  .motion-stagger > li:nth-child(4n + 3) .motion-card-image {
+    animation-delay: 400ms;
+  }
+  .motion-stagger > li:nth-child(4n + 4),
+  .motion-stagger > li:nth-child(4n + 4) .motion-card-image {
+    animation-delay: 600ms;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .group:hover .motion-card-image {
+    transform: scale(1.03);
+  }
+  .group:hover .motion-card-frame,
+  .group:hover.motion-card-frame {
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--color-ink) 12%, transparent);
+  }
+}
+
+/* 홈 왼쪽 여백의 비행 경로. 홈 전체 높이를 따라가는 띠를 본문(90rem) 양옆 여백의 한가운데에 세운다.
+   선·점·비행기 높이는 스크롤 훅이 쓰는 --line-top, --line-height, --plane-y, 점마다의 --y를 따라가고,
+   값이 바뀔 때마다 계산이 필요해서 클래스로 뺐다. */
+.flight-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc((100% - 90rem) / 4);
+  z-index: 10;
+  width: 3rem;
+  margin-left: -1.5rem;
+  pointer-events: none;
+}
+.flight-line {
+  top: var(--line-top, 0);
+  height: var(--line-height, 0);
+}
+.flight-trail {
+  top: var(--line-top, 0);
+  height: max(0px, calc(var(--plane-y, 0px) - var(--line-top, 0px)));
+}
+.flight-stop {
+  position: absolute;
+  top: var(--y, 0);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.flight-plane {
+  position: absolute;
+  top: var(--plane-y, 0);
+  left: 50%;
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 9999px;
+  background: var(--color-background);
+  border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+  transform: translate(-50%, -50%);
+}
+
 /* 움직임 줄이기 (90 접근성). 기기에서 "동작 줄이기"를 켠 사람에게는 회전·전환 효과를 거의 없앤다.
    어지럼증이 있는 사용자를 위한 설정이라, 컴포넌트마다 넣지 않고 여기서 한 번에 막는다.
    0이 아니라 0.01ms로 두는 건 transitionend 같은 끝 이벤트를 기다리는 코드가 멈추지 않게 하려는 것이다. */

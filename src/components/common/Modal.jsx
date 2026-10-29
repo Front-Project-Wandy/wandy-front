@@ -35,7 +35,7 @@ export default function Modal({ open, onClose, title, children }) {
       aria-labelledby={titleId}
       onCancel={handleCancel}
       onClick={handleClick}
-      className="mx-auto mt-auto mb-0 w-full max-w-none rounded-t-2xl bg-background text-text backdrop:bg-ink/50 sm:m-auto sm:max-w-lg sm:rounded-2xl"
+      className="motion-dialog mx-auto mt-auto mb-0 w-full max-w-none rounded-t-2xl bg-background text-text backdrop:bg-ink/50 sm:m-auto sm:max-w-lg sm:rounded-2xl"
     >
       <div className="flex items-center justify-between gap-2 border-b border-text/10 px-4 py-3">
         <h2 id={titleId} className="text-subtitle font-bold">
