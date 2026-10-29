@@ -1193,6 +1193,57 @@
     "toggle": "{{name}} 찜하기"
   },
   "ai": {
+    "assistant": {
+      "open": "여행 비서",
+      "title": "여행 비서",
+      "subtitle": "일정을 묻거나 바꿔 달라고 말해 보세요",
+      "intro": "지금 여행 일정을 보고 답해요. 일정을 바꾸자고 하면 미리 보여 드리고, [적용]을 눌러야 바뀌어요.",
+      "suggestion": {
+        "schedule": "남은 일정 알려줘",
+        "cost": "예상 비용은 얼마야?",
+        "add": "가 볼 만한 곳 하나 추가해 줘"
+      },
+      "inputLabel": "여행 비서에게 보낼 말",
+      "placeholder": "예: 2일차 오후에 갈 만한 곳 추가해 줘",
+      "send": "보내기",
+      "thinking": "생각하는 중…",
+      "error": "답을 받지 못했어요.",
+      "emptyReply": "답을 만들지 못했어요. 다르게 물어봐 주세요.",
+      "mockNote": "AI 키가 없어 연습용 비서가 답했어요",
+      "speaker": {
+        "user": "나:",
+        "assistant": "여행 비서:"
+      },
+      "preview": {
+        "title": "이렇게 바꿀까요?",
+        "dropped": "일정에 없거나 찾을 수 없는 제안 {{count}}개는 뺐어요",
+        "apply": "적용",
+        "dismiss": "안 할래요",
+        "applied": "적용했어요. 되돌리려면 위의 [되돌리기]를 누르세요.",
+        "dismissed": "적용하지 않았어요."
+      },
+      "action": {
+        "add": "DAY {{day}}에 {{name}} 추가 ({{time}}, {{minutes}}분)",
+        "remove": "DAY {{day}}에서 {{name}} 빼기",
+        "move": "{{name}}: DAY {{from}} → DAY {{to}} 옮기기",
+        "updateTime": "{{name}}: 시작 시각 → {{time}}",
+        "updateStay": "{{name}}: 머무는 시간 → {{minutes}}분",
+        "updateBoth": "{{name}}: 시작 시각 → {{time}}, 머무는 시간 → {{minutes}}분"
+      },
+      "mock": {
+        "remove": "일정에서 {{name}}, 이 장소를 뺄까요?",
+        "move": "{{name}} → DAY {{day}}, 이렇게 옮길까요?",
+        "updateTime": "{{name}} 시작 시각 → {{time}}, 이렇게 바꿀까요?",
+        "add": "DAY {{day}}에 {{name}}, 이 장소를 넣을까요?",
+        "cost": "지금 일정의 예상 비용은 약 {{amount}} {{currency}}예요. 교통·입장료·식비만 계산한 추정치예요.",
+        "noCost": "아직 일정에 장소가 없어서 예상 비용을 계산할 수 없어요.",
+        "summary": "지금 일정이에요.\n{{days}}",
+        "dayLine": "DAY {{day}}: {{places}}",
+        "emptyDay": "아직 장소 없음",
+        "unknownPlace": "(이름을 불러오지 못한 곳)",
+        "help": "연습용 비서는 정해진 말만 알아들어요. 예: 「남은 일정 알려줘」, 「예상 비용은?」, 「2일차에 ○○ 추가해 줘」, 「○○ 빼 줘」, 「○○ 3일차로 옮겨 줘」, 「○○ 14시로 바꿔 줘」"
+      }
+    },
     "fill": {
       "button": "AI로 빈 날 채우기",
       "title": "AI 일정 채우기",
