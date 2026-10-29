@@ -11,6 +11,7 @@ const ROUTE_TITLES = [
   { path: '/place/:id', key: 'place' },
   { path: '/products', key: 'products' },
   { path: '/login', key: 'login' },
+  { path: '/signup', key: 'signup' },
   { path: '/my', key: 'my' },
   { path: '/trip/:id', key: 'trip' },
 ];
