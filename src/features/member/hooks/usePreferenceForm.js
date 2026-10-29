@@ -7,6 +7,16 @@ export function usePreferenceForm() {
   const save = usePreferenceStore((state) => state.save);
   const [draft, setDraft] = useState(preferences);
   const [status, setStatus] = useState('');
+  // 다른 곳(지난 여행 취향 카드, 66)에서 취향을 바꾸면, 고치던 내용이 없을 때만 폼도 새 값으로 맞춘다.
+  // 고치던 중이면 사용자가 고른 값을 지우지 않는다.
+  const [syncedPreferences, setSyncedPreferences] = useState(preferences);
+  if (preferences !== syncedPreferences) {
+    setSyncedPreferences(preferences);
+    if (arePreferencesEqual(draft, syncedPreferences)) {
+      setDraft(preferences);
+      setStatus('');
+    }
+  }
   const isDirty = !arePreferencesEqual(draft, preferences);
 
   const handleStyleChange = (style) => {

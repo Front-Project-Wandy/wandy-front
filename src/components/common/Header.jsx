@@ -21,19 +21,19 @@ export default function Header() {
   const { t } = useTranslation();
 
   return (
-    <header className="border-b border-text/10 bg-background">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 px-4 lg:px-6">
+    <header className="border-b border-text/10 bg-background print:hidden">
+      <div className="mx-auto w-full max-w-360 flex flex-wrap items-center justify-between gap-x-6 px-4 lg:px-5">
         <Link
           to="/"
           aria-label={t('common.header.homeLabel')}
-          className={`flex h-14 items-center rounded-xl text-subtitle font-bold text-primary ${FOCUS_CLASS}`}
+          className={`flex h-16 items-center lg:h-24 rounded-xl text-title font-bold text-primary ${FOCUS_CLASS}`}
         >
           {t('common.header.logo')}
         </Link>
 
         <nav
           aria-label={t('common.header.navLabel')}
-          className="order-last -mx-3 flex w-full overflow-x-auto [scrollbar-width:none] lg:order-none lg:mx-0 lg:w-auto lg:flex-1"
+          className="order-last -mx-3 flex w-full overflow-x-auto [scrollbar-width:none] lg:order-none lg:mx-0 lg:w-auto lg:flex-1 lg:justify-center lg:gap-6"
         >
           {NAV_ITEMS.map(({ key, to }) =>
             to ? (
@@ -41,7 +41,7 @@ export default function Header() {
                 key={key}
                 to={to}
                 className={({ isActive }) =>
-                  `${NAV_LINK_CLASS} ${isActive ? 'text-primary' : 'text-text/70 hover:text-text'}`
+                  `${NAV_LINK_CLASS} ${key === 'start' ? 'lg:order-last lg:ml-4 lg:bg-primary lg:text-white' : ''} ${isActive ? 'text-primary' : 'text-text/70 hover:text-text'}`
                 }
               >
                 {t(`common.header.nav.${key}`)}

@@ -25,6 +25,12 @@
       "close": "닫기",
       "back": "뒤로"
     },
+    "time": {
+      "hour": "시",
+      "minute": "분",
+      "hourOption": "{{value}}시",
+      "minuteOption": "{{value}}분"
+    },
     "category": {
       "sight": "관광",
       "food": "맛집",
@@ -71,6 +77,8 @@
     "start": {
       "title": "내 여행 만들기",
       "submit": "플래너 시작",
+      "manual": "직접 짤게요",
+      "manualHint": "마법사 없이 바로 빈 플래너를 열어요. 항공·숙소·장소는 플래너에서 직접 넣어요.",
       "tab": {
         "direct": "직접 입력",
         "oneLine": "한 줄로"
@@ -146,6 +154,57 @@
         "place": "장소",
         "product": "상품"
       }
+    },
+    "editorial": {
+      "heroLabel": "서울과 도쿄, 여행의 시작",
+      "destination": "추천 여행지 선택",
+      "eyebrow": "WANDY · YOUR NEXT JOURNEY",
+      "explore": "이 도시 둘러보기",
+      "seoul": {
+        "title": "익숙한 도시에서,\n새로운 하루를.",
+        "description": "한강의 저녁부터 골목 안 작은 카페까지. 나만의 속도로 서울을 만나보세요.",
+        "alt": "해 질 무렵 한강과 서울의 도심 풍경"
+      },
+      "tokyo": {
+        "title": "설레는 골목마다,\n나만의 도쿄.",
+        "description": "도쿄 타워가 보이는 풍경과 취향을 담은 맛집. 가고 싶은 곳을 모아 여행을 시작해요.",
+        "alt": "도쿄 타워와 도쿄 도심의 전경"
+      },
+      "busan": { "alt": "밤의 광안대교와 부산 바다" },
+      "jeju": { "alt": "제주 성산일출봉" },
+      "osaka": { "alt": "밤의 오사카 도톤보리 거리" },
+      "fukuoka": { "alt": "후쿠오카 나카스 강변의 포장마차" },
+      "shortcutsLabel": "여행 바로가기",
+      "shortcuts": {
+        "start": "여행 만들기",
+        "seoul": "서울 여행",
+        "tokyo": "도쿄 여행",
+        "products": "투어 · 티켓",
+        "themes": "테마 여행",
+        "my": "내 여행"
+      },
+      "startEyebrow": "MAKE IT YOURS",
+      "startTitle": "가고 싶은 마음을,\n나만의 일정으로.",
+      "startDescription": "도시와 날짜만 골라보세요. 직접 하나씩 담아도, AI에게 한 줄로 부탁해도 좋아요.",
+      "steps": {
+        "destination": "여행할 도시와 날짜를 골라요",
+        "places": "취향에 맞는 장소를 담아요",
+        "schedule": "동선을 확인하고 일정을 완성해요"
+      },
+      "citiesEyebrow": "FIND YOUR DESTINATION",
+      "citiesDescription": "가까운 일상부터 새로운 풍경까지, 다음 여행을 골라보세요.",
+      "cityAction": "이 도시로 여행 만들기",
+      "more": "여행지 둘러보기",
+      "footer": "가고 싶은 곳부터, 나만의 여행이 시작되는 곳.",
+      "photoCredit": "사진:",
+      "cityPhotoNote": "도시 사진은 화면에 맞게 줄이고 잘라서 표시했습니다.",
+      "curationEyebrow": "A LITTLE INSPIRATION",
+      "curationDescription": "좋아하는 순간을 모으면, 나다운 여행이 돼요.",
+      "outroEyebrow": "READY WHEN YOU ARE",
+      "outroTitle": "다음 여행은, 당신의 취향대로.",
+      "outroDescription": "가고 싶은 곳을 담고 나만의 여행을 완성해 보세요.",
+      "placePhotoCredits": "장소 사진 출처",
+      "photoCropNote": "Wikimedia Commons · 사진은 축소하고 정사각형으로 잘라 표시했습니다."
     }
   },
   "intro": {
@@ -436,6 +495,8 @@
       "info": "{{city}} · {{start}}~{{end}} · {{people}}명 · 이동: {{transport}}",
       "transportNone": "정하지 않음",
       "daysTitle": "DAY별 일정",
+      "timeHint": "시작 시각은 항공·숙소 시간에 맞춰 정했어요. 플래너에서 바꿀 수 있어요.",
+      "departWarning": "출발 3시간 전까지 끝나지 않는 장소가 있어요. 플래너에서 시간을 줄이거나 다른 날로 옮겨 보세요.",
       "emptyDay": "담은 장소가 없어요",
       "missing": "찾을 수 없는 장소 (저장할 때 빠져요)",
       "flight": "항공 · 도착 {{arrive}} · 귀국 출발 {{depart}} ({{flightNo}})",
@@ -457,6 +518,247 @@
     "page": {
       "title": "플래너"
     },
+    "view": {
+      "label": "일정 보기 방식",
+      "list": "목록",
+      "timeline": "타임라인",
+      "today": "오늘"
+    },
+    "today": {
+      "notInRange": "오늘은 여행 기간이 아니에요. 보고 싶은 날을 골라 그날을 오늘처럼 볼 수 있어요.",
+      "pickDay": "볼 날짜 고르기",
+      "dayLabel": "DAY {{number}}",
+      "dayHeading": "오늘은 DAY {{number}} ({{date}})",
+      "empty": "이 날은 일정이 없어요",
+      "allDone": "오늘 일정을 모두 다녀왔어요",
+      "next": "다음 일정",
+      "until": "{{duration}} 뒤 시작",
+      "untilNow": "지금 시작할 시간이에요",
+      "overdue": "시작 시각이 {{duration}} 지났어요",
+      "locate": "내 위치 확인",
+      "locating": "내 위치를 확인하는 중…",
+      "directions": "길찾기",
+      "distance": "내 위치에서 직선 {{distance}} · {{mode}} 약 {{duration}}",
+      "distanceOnly": "내 위치에서 직선 {{distance}}",
+      "position": {
+        "denied": "위치 권한이 꺼져 있어요. 길찾기는 지도 앱이 현재 위치를 써서 열어요.",
+        "unsupported": "이 브라우저는 위치 확인을 지원하지 않아요.",
+        "error": "내 위치를 확인하지 못했어요. 다시 눌러 보세요."
+      },
+      "visited": "다녀옴",
+      "visitedLabel": "{{name}} 다녀옴 표시"
+    },
+    "timeline": {
+      "hint": "타임라인에서는 일정을 보기만 해요. 장소 추가·편집·순서 바꾸기는 목록 보기에서 해 주세요.",
+      "nextDay": "다음 날",
+      "slack": "여유 {{duration}}",
+      "shortage": "이동 시간까지 넣으면 {{duration}} 모자라요"
+    },
+    "pass": {
+      "title": "교통패스",
+      "best": "{{name}}({{price}})을 {{range}}에 쓰면 1인 약 {{benefit}} 이득이에요",
+      "group": "({{people}}명 약 {{total}})",
+      "none": "일정 기준으로는 사서 이득인 교통패스가 없어요",
+      "toggle": "패스별 비교",
+      "caption": "교통패스별 이득 (1인 기준)",
+      "column": {
+        "name": "패스",
+        "range": "쓸 날",
+        "price": "가격",
+        "covered": "대중교통 요금",
+        "result": "결과"
+      },
+      "benefit": "약 {{amount}} 이득",
+      "loss": "약 {{amount}} 손해",
+      "rangeOne": "DAY {{day}}",
+      "rangeMany": "DAY {{start}}~{{end}}",
+      "noteEstimate": {
+        "KR": "대중교통 요금은 추정치예요. 패스로 탈 수 없는 노선(광역버스 등)까지 포함돼서 이득이 실제보다 크게 나올 수 있어요.",
+        "JP": "대중교통 요금은 추정치예요. 패스로 탈 수 없는 노선(JR·사철·버스 등)까지 포함돼서 이득이 실제보다 크게 나올 수 있어요."
+      },
+      "noteDay": "패스 기간은 날짜(1일 = 24시간) 기준으로 어림했어요. 가격은 {{date}}에 확인한 값이에요."
+    },
+    "share": {
+      "button": "공유·내보내기",
+      "title": "일정 공유·내보내기",
+      "previewLabel": "공유할 일정 글",
+      "copy": "글 복사",
+      "share": "공유하기",
+      "print": "인쇄·PDF 저장",
+      "untitled": "내 여행",
+      "period": "{{start}} ~ {{end}} · {{people}}명",
+      "emptyDay": "아직 장소가 없어요",
+      "googlePlace": "구글 지도 장소",
+      "googleNote": "구글 장소는 약관상 이름을 담을 수 없어서 「구글 지도 장소」로 표시했어요. 이름은 원디의 구글 지도에서 확인해요.",
+      "footer": "원디(Wandy)로 만든 일정",
+      "status": {
+        "copied": "복사했어요",
+        "copyFailed": "복사하지 못했어요. 글을 직접 선택해서 복사해 주세요",
+        "shareFailed": "공유하지 못했어요. 글 복사를 써 주세요"
+      }
+    },
+    "weather": {
+      "title": "DAY별 날씨",
+      "loading": "날씨를 불러오는 중…",
+      "error": "날씨를 불러오지 못했어요",
+      "tooFar": "날씨 예보는 {{date}}부터 볼 수 있어요 (오늘부터 16일 뒤까지 제공돼요)",
+      "noData": "아직 예보가 없어요",
+      "temp": "{{max}}° / {{min}}°",
+      "rain": "비 올 확률 {{percent}}%",
+      "umbrella": "우산 챙기기",
+      "credit": "날씨 데이터: Open-Meteo",
+      "kind": {
+        "clear": "맑음",
+        "partly": "구름 조금",
+        "cloudy": "흐림",
+        "fog": "안개",
+        "drizzle": "이슬비",
+        "rain": "비",
+        "snow": "눈",
+        "thunder": "뇌우",
+        "unknown": "알 수 없음"
+      }
+    },
+    "cost": {
+      "title": "예상 비용",
+      "summary": "예상 총비용 약 {{total}} · 1인 약 {{perPerson}}",
+      "summaryConverted": "예상 총비용 약 {{total}} (약 {{converted}}) · 1인 약 {{perPerson}}",
+      "toggle": "내역 보기",
+      "caption": "예상 비용 내역 ({{count}}명 기준)",
+      "item": "항목",
+      "amount": "{{count}}명 합계",
+      "row": {
+        "transport": "교통",
+        "fuel": "렌터카 유류비",
+        "toll": "렌터카 통행료",
+        "entry": "입장료",
+        "meals": "식비",
+        "total": "합계"
+      },
+      "noteEstimate": "추정치예요. 입장료·식비는 카테고리별 평균이고, 식비는 일정에 담은 식당·카페만 포함해요.",
+      "noteTransport": "교통은 대중교통·도보는 인원만큼, 택시·자차는 차량 1대 요금이에요. 항공·숙소는 포함하지 않아요.",
+      "noteCar": "렌터카는 유류비(연비 {{kmPerLiter}}km/L 기준)와 고속도로 구간 통행료 추정이에요. 렌터카 대여료는 포함하지 않아요.",
+      "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
+    },
+    "prep": {
+      "title": "여행 준비",
+      "tab": {
+        "packing": "준비물",
+        "entry": "입국 안내",
+        "holiday": "공휴일·행사",
+        "phrase": "회화"
+      },
+      "phrase": {
+        "empty": "국내 여행이라 회화 카드가 없어요",
+        "groupLabel": "상황 고르기",
+        "showLabel": "크게 보기: {{text}}",
+        "hint": "문장을 누르면 크게 보여 줄 수 있어요. 발음은 한글로 어림한 것이에요."
+      },
+      "entry": {
+        "empty": "국내 여행이라 따로 입국 절차가 없어요",
+        "note": "{{date}}에 확인한 내용이에요. 규정은 바뀔 수 있어서 출발 전에 공식 사이트에서 다시 확인하세요."
+      },
+      "holiday": {
+        "empty": "여행 기간에 겹치는 공휴일·행사가 없어요",
+        "holiday": "공휴일",
+        "event": "행사",
+        "note": "{{date}}에 확인한 날짜예요(2026~2027년). 임시공휴일 등으로 바뀔 수 있어요."
+      },
+      "packing": {
+        "title": "준비물 체크리스트",
+        "progress": "{{total}}개 중 {{checked}}개 챙김",
+        "clear": "전체 해제",
+        "empty": "이 나라의 준비물 목록이 아직 없어요"
+      }
+    },
+    "gap": {
+      "title": "빈 시간대 추천",
+      "loading": "빈 시간에 갈 만한 곳을 찾는 중…",
+      "error": "추천 장소를 불러오지 못했어요",
+      "gapTitle": "{{start}} ~ {{end}} 사이 {{duration}}이 비어 있어요",
+      "detail": "{{category}} · {{time}} 도착 · 앞 장소에서 {{minutes}}분",
+      "add": "추가",
+      "addLabel": "빈 시간에 추가: {{name}}",
+      "note": "머무는 시간은 1시간으로 어림했고, 이동 시간은 추정이에요."
+    },
+    "expense": {
+      "title": "지출 기록",
+      "date": "날짜",
+      "dayOption": "DAY {{number}} ({{date}})",
+      "category": {
+        "label": "지출 분류",
+        "meals": "식비",
+        "transport": "교통",
+        "entry": "입장료",
+        "shopping": "쇼핑",
+        "lodging": "숙박",
+        "other": "기타"
+      },
+      "amount": "금액 ({{currency}})",
+      "amountError": "금액은 1 이상의 숫자로 적어 주세요",
+      "memo": "메모 (선택)",
+      "add": "지출 추가",
+      "empty": "아직 기록한 지출이 없어요",
+      "total": "총 지출 {{amount}}",
+      "compare": "예상 {{estimated}} · 교통·입장료·식비 지출 {{spent}} →",
+      "remaining": "{{amount}} 남았어요",
+      "over": "{{amount}} 더 썼어요",
+      "remove": "삭제",
+      "removeLabel": "지출 삭제: {{label}} {{amount}}",
+      "note": "이 기기에만 저장돼요. 예상 비용에는 쇼핑·숙박이 없어서 교통·입장료·식비만 견줘요."
+    },
+    "airportLeg": {
+      "title": "도착 공항에서 숙소까지",
+      "route": "{{airport}} → 숙소({{stay}})",
+      "assumed": "도착 공항을 몰라서 {{airport}} 기준으로 계산했어요.",
+      "airport": {
+        "ICN": "인천공항",
+        "GMP": "김포공항",
+        "NRT": "나리타공항",
+        "HND": "하네다공항"
+      }
+    },
+    "local": {
+      "button": "현지어",
+      "buttonLabel": "현지어로 보기: {{name}}",
+      "title": "{{name}} (현지어)",
+      "hint": "택시 기사님께 이 화면을 보여 주세요",
+      "loading": "현지어 주소를 불러오는 중…",
+      "error": "현지어 주소를 불러오지 못했어요"
+    },
+    "optimize": {
+      "button": "동선 최적화",
+      "buttonLabel": "DAY {{number}} 동선 최적화",
+      "title": "DAY {{number}} 동선 최적화",
+      "distance": "이동 거리 {{before}} → {{after}}",
+      "time": "이동 시간 {{before}} → {{after}}",
+      "note": "첫 장소는 그대로 두고, 이동 거리가 가장 짧도록 나머지 장소를 다시 놓아요. 각 자리의 시작 시각은 그대로예요.",
+      "alreadyShortest": "이미 가장 짧은 동선이에요.",
+      "apply": "적용",
+      "cancel": "취소"
+    },
+    "duplicate": {
+      "button": "여행 복제",
+      "title": "여행 복제하기",
+      "titleLabel": "새 여행 제목",
+      "startDate": "가는 날",
+      "summary": "{{days}}일 일정이에요. {{start}} ~ {{end}}",
+      "note": "장소는 그대로 복사하고, 항공 정보는 복사하지 않아요. 숙소는 날짜만 지워요.",
+      "submit": "복제하기",
+      "cancel": "취소",
+      "defaultTitle": "{{title}} 복사본",
+      "untitled": "내 여행",
+      "error": {
+        "startDate": "가는 날을 골라 주세요.",
+        "pastDate": "지난 날짜는 고를 수 없어요. 오늘 이후로 골라 주세요."
+      }
+    },
+    "history": {
+      "undo": "되돌리기",
+      "redo": "다시 실행",
+      "undone": "되돌렸어요.",
+      "redone": "다시 실행했어요."
+    },
     "empty": {
       "title": "아직 만든 여행이 없어요",
       "description": "여행지와 날짜를 정하면 일정을 짤 수 있어요",
@@ -472,7 +774,8 @@
       "addPlace": "장소 추가",
       "addPlaceLabel": "DAY {{number}}에 장소 추가",
       "transportTotal": "이동 {{duration}}",
-      "transportTotalWithCost": "이동 {{duration}} · 약 {{cost}}"
+      "transportTotalWithCost": "이동 {{duration}} · 약 {{cost}}",
+      "overloadWarning": "이동이 {{limit}} 이상이에요. 가까운 곳끼리 묶으면 덜 힘들어요."
     },
     "item": {
       "stay": "체류 {{minutes}}분",
@@ -488,6 +791,10 @@
     },
     "edit": {
       "startTime": "시작 시간",
+      "hour": "시",
+      "minute": "분",
+      "hourOption": "{{value}}시",
+      "minuteOption": "{{value}}분",
       "stayMinutes": "체류 시간(분)",
       "memo": "메모",
       "memoPlaceholder": "예: 오픈 전에 줄 서기",
@@ -518,6 +825,19 @@
       "withNightSurcharge": "{{text}} · 심야 할증",
       "directions": "길찾기",
       "directionsLabel": "지도에서 길찾기, 새 창",
+      "compare": {
+        "toggle": "수단 비교",
+        "caption": "이 구간의 수단별 시간과 요금",
+        "mode": "수단",
+        "duration": "시간",
+        "cost": "요금",
+        "costValue": "약 {{cost}}",
+        "free": "무료",
+        "nightSurcharge": "심야 할증",
+        "current": "현재",
+        "fastest": "가장 빠름",
+        "cheapest": "가장 저렴"
+      },
       "currency": {
         "KR": "{{amount}}원",
         "JP": "{{amount}}엔"
@@ -557,9 +877,30 @@
     "page": {
       "title": "장소 상세"
     },
+    "popular": {
+      "title": "붐비는 시간",
+      "periodLabel": "요일 구분",
+      "weekday": "평일",
+      "weekend": "주말",
+      "peak": "{{period}}에는 보통 {{from}}~{{to}}시에 가장 붐벼요",
+      "estimated": "장소 종류로 추정한 혼잡도예요. 실제와 다를 수 있어요."
+    },
+    "photo": {
+      "by": "사진:",
+      "cropped": "잘라서 표시",
+      "representative": "대표 사진",
+      "representativeAlt": "{{name}} 대표 사진 (근처 동네·대표 음식)"
+    },
     "info": {
+      "title": "이용 정보",
       "address": "주소",
       "hours": "영업시간"
+    },
+    "hoursWarning": {
+      "closed": "이 날은 쉬는 날이에요 (영업시간 기준)",
+      "outside": "영업시간({{hours}}) 밖이에요",
+      "nextDayClosed": "다음 날은 쉬는 날이라 자정 넘어서는 열지 않아요",
+      "overnight": "자정을 넘긴 시간이 다음 날 영업시간({{hours}}) 밖이에요"
     },
     "link": {
       "naver": "네이버 지도에서 보기",
@@ -568,6 +909,17 @@
     "error": {
       "notFound": "장소를 찾을 수 없어요",
       "notFoundDescription": "주소가 바뀌었거나 없는 장소예요"
+    },
+    "amenity": {
+      "title": "주변 편의시설",
+      "subtitle": "걸어서 {{radius}}m 안에서 가장 가까운 곳이에요",
+      "type": {
+        "convenience": "편의점",
+        "toilet": "화장실",
+        "locker": "코인락커"
+      },
+      "none": "근처에 없어요",
+      "distance": "{{value}}m"
     }
   },
   "places": {
@@ -578,11 +930,25 @@
     "destination": {
       "country": "나라",
       "city": "도시"
+    },
+    "hero": {
+      "intro": {
+        "seoul": "궁궐 산책부터 시장 맛집, 야경 명소까지 서울의 가 볼 만한 곳을 모았어요",
+        "tokyo": "신사와 전망대, 라멘 골목과 온천까지 도쿄의 가 볼 만한 곳을 모았어요"
+      }
+    },
+    "card": {
+      "rank": "{{rank}}위"
+    },
+    "list": {
+      "more": "더보기",
+      "moreCount": "{{shown}}/{{total}}"
     }
   },
   "product": {
     "page": {
       "title": "투어 상품",
+      "eyebrow": "TOURS & TICKETS",
       "description": "여행지에서 바로 쓰는 투어·입장권·교통패스를 모았어요"
     },
     "category": {
@@ -598,15 +964,26 @@
       "label": "나라",
       "all": "전체"
     },
+    "priceRange": {
+      "label": "1인 가격대",
+      "all": "전체",
+      "under30": "~3만 원",
+      "30to70": "3~7만 원",
+      "over70": "7만 원~"
+    },
     "list": {
-      "count": "{{count}}개"
+      "count": "{{count}}개",
+      "more": "더보기",
+      "progress": "{{shown}} / {{total}}"
     },
     "empty": {
       "title": "조건에 맞는 상품이 없어요",
-      "description": "다른 나라나 종류를 골라 보세요"
+      "description": "다른 나라·종류·가격대를 골라 보세요",
+      "clearFilters": "필터 지우기"
     },
     "card": {
-      "rating": "평점 {{rating}}점, 후기 {{count}}개"
+      "rating": "평점 {{rating}}점, 후기 {{count}}개",
+      "rank": "{{rank}}위"
     },
     "price": {
       "KRW": "{{value}}원",
@@ -616,7 +993,12 @@
       "duration": "소요 시간",
       "tags": "특징",
       "book": "예약 사이트에서 보기",
-      "notice": "예약과 결제는 외부 사이트에서 진행돼요"
+      "notice": "예약과 결제는 외부 사이트에서 진행돼요",
+      "photo": {
+        "representative": "대표 이미지",
+        "author": "사진: {{author}}",
+        "cropped": "잘라서 표시"
+      }
     },
     "error": {
       "notFound": "상품을 찾을 수 없어요"
@@ -624,16 +1006,46 @@
     "section": {
       "title": "여행 상품",
       "more": "전체 보기"
+    },
+    "placeSection": {
+      "title": "이 장소와 어울리는 투어",
+      "subtitle": "{{city}}에서 같이 즐기기 좋은 상품이에요"
+    },
+    "daySection": {
+      "title": "이 날과 어울리는 투어"
     }
   },
   "login": {
     "page": {
-      "title": "로그인"
+      "title": "로그인",
+      "description": "아이디와 비밀번호를 입력해 주세요"
+    },
+    "form": {
+      "idLabel": "아이디",
+      "idPlaceholder": "아이디를 입력하세요",
+      "idError": "아이디를 입력해 주세요",
+      "passwordLabel": "비밀번호",
+      "passwordPlaceholder": "비밀번호를 입력하세요",
+      "passwordError": "비밀번호를 입력해 주세요",
+      "submit": "로그인"
     }
   },
   "my": {
     "page": {
-      "title": "마이페이지"
+      "title": "마이페이지",
+      "greeting": "안녕하세요, 여행자님",
+      "description": "내 여행과 다녀온 곳, 여행 취향을 한곳에 모았어요",
+      "nextTrip": "다음 여행 {{title}} · D-{{count}}",
+      "ongoing": "지금 여행 중이에요 · {{title}}"
+    },
+    "summary": {
+      "label": "내 여행 요약",
+      "upcoming": "예정된 여행",
+      "past": "지난 여행",
+      "favorites": "찜한 장소",
+      "ratings": "평가한 장소",
+      "tripCount": "{{count}}개",
+      "placeCount": "{{count}}곳"
     },
     "trips": {
       "title": "내 여행",
@@ -648,6 +1060,49 @@
       "emptyTitle": "아직 만든 여행이 없어요",
       "emptyDescription": "여행지와 날짜를 정하면 일정을 짤 수 있어요",
       "create": "여행 만들기"
+    },
+    "profile": {
+      "title": "지난 여행으로 본 내 취향",
+      "basis": "저장한 여행 {{trips}}개, 담은 장소 {{places}}곳으로 계산했어요.",
+      "label": {
+        "categories": "자주 담은 곳",
+        "density": "하루 일정",
+        "transport": "이동 방식",
+        "meal": "식사"
+      },
+      "categoryPercent": "{{category}} {{percent}}%",
+      "densityValue": "하루 평균 {{count}}곳 · {{style}}",
+      "mealStyle": {
+        "food": "맛집 위주",
+        "cafe": "카페 위주",
+        "balanced": "맛집·카페 고르게"
+      },
+      "apply": "이 취향으로 설정",
+      "applyHint": "누르면 아래 여행 취향의 스타일과 선호 카테고리가 이 값으로 바뀌고, 다음 여행 기본값이 돼요.",
+      "applied": "여행 취향에 반영했어요.",
+      "alreadyApplied": "지금 여행 취향과 같아요.",
+      "emptyTitle": "아직 취향을 계산할 여행이 없어요",
+      "emptyDescription": "장소를 담은 여행을 저장하면 자주 가는 곳과 하루 일정을 알려 드려요."
+    },
+    "ratings": {
+      "title": "다녀온 곳 평가",
+      "notice": "좋았던 곳은 도시별 추천과 AI 일정에서 먼저 보여 주고, 별로였던 곳은 추천에서 뒤로 보내고 AI 일정에는 넣지 않아요. 같은 버튼을 다시 누르면 평가가 지워져요.",
+      "like": "좋았어요",
+      "dislike": "별로였어요",
+      "likeLabel": "{{name}} 좋았어요",
+      "dislikeLabel": "{{name}} 별로였어요",
+      "unknownPlace": "찾을 수 없는 장소",
+      "emptyTitle": "아직 다녀온 여행이 없어요",
+      "emptyDescription": "여행이 끝나면 담았던 장소를 평가해서 다음 추천에 반영할 수 있어요."
+    },
+    "visitMap": {
+      "title": "다녀온 곳 지도",
+      "cityLabel": "지도로 볼 도시",
+      "summary": "여행 {{trips}}개 · 장소 {{places}}곳",
+      "legendLabel": "여행별 마커 색",
+      "placeCount": "{{count}}곳",
+      "emptyTitle": "지도에 모을 지난 여행이 없어요",
+      "emptyDescription": "여행이 끝나면 담았던 장소를 도시별 지도에 모아 보여 드려요."
     },
     "preferences": {
       "title": "나의 여행 취향",
@@ -700,6 +1155,15 @@
       "emptyResultDescription": "이미 이 도시의 장소를 대부분 넣었어요.",
       "dropped": "확인되지 않은 장소 {{count}}곳은 뺐어요.",
       "mockNotice": "지금은 예시 장소 데이터로 만든 일정이에요.",
+      "rainy": "비 오는 날이에요",
+      "rainyHint": "쇼핑·온천 같은 실내 장소를 먼저 넣고, 공원·야경처럼 바깥에서 보는 곳은 빼요.",
+      "regenerateDay": "AI로 이 날 다시 짜기",
+      "regenerateDayLabel": "DAY {{number}} AI로 다시 짜기",
+      "redoDay": {
+        "title": "AI로 이 날 다시 짜기",
+        "description": "이 날 장소를 AI가 새로 골라 드려요. 지금 넣은 곳과 다른 장소로 골라요.",
+        "apply": "이 날 일정 바꾸기"
+      },
       "day": "DAY {{day}}",
       "stay": "{{minutes}}분"
     },
@@ -733,6 +1197,61 @@
       "start": "이걸로 시작",
       "fillError": "장소를 고르지 못했어요. 「장소도 AI가 미리 담아 두기」를 끄고 시작하거나 다시 시도해 주세요.",
       "mockNotice": "지금은 정해진 규칙으로 알아들어요. 실제 서비스에서는 AI가 문장을 읽어요."
+    },
+    "title": {
+      "button": "AI 제목 추천",
+      "retry": "다른 제목 추천",
+      "hint": "AI가 추천한 제목이에요. 눌러서 고르세요.",
+      "error": "제목을 추천하지 못했어요. 다시 시도해 주세요.",
+      "dayTrip": "당일치기",
+      "nightsDays": "{{nights}}박 {{days}}일",
+      "durationTheme": "{{city}} {{duration}} {{theme}} 여행",
+      "duration": "{{city}} {{duration}} 여행",
+      "themeOnly": "{{city}} {{theme}} 여행",
+      "plain": "{{city}} 여행",
+      "style": "{{style}} {{city}}",
+      "companion": "{{companion}} {{city}} 여행",
+      "themePair": "{{theme}}부터 {{nextTheme}}까지, {{city}}",
+      "memory": "{{city}}에서 만드는 추억",
+      "again": "다시 가고 싶은 {{city}}",
+      "theme": {
+        "sight": "명소",
+        "food": "먹방",
+        "cafe": "카페",
+        "shop": "쇼핑",
+        "nature": "자연",
+        "night": "야경",
+        "onsen": "온천"
+      },
+      "styleWord": {
+        "relaxed": "여유롭게 걷는",
+        "normal": "구석구석 둘러보는",
+        "packed": "알차게 누비는"
+      },
+      "companionWord": {
+        "solo": "혼자 떠나는",
+        "couple": "둘이 떠나는",
+        "friends": "친구와 떠나는",
+        "family": "가족과 떠나는",
+        "kids": "아이와 떠나는"
+      }
+    },
+    "placeDescription": {
+      "badge": "AI가 만든 설명이에요",
+      "sentence": "{{location}}의 {{kind}}",
+      "withRating": "{{location}}의 {{kind}}, 평점 {{rating}}",
+      "top": "대표 {{kind}}",
+      "popular": "인기 {{kind}}",
+      "kind": {
+        "sight": "관광 명소",
+        "food": "맛집",
+        "cafe": "카페",
+        "shop": "쇼핑 명소",
+        "nature": "자연 명소",
+        "night": "야경 명소",
+        "onsen": "온천",
+        "other": "가볼 만한 곳"
+      }
     }
   },
   "notFound": {

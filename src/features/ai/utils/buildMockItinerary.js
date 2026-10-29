@@ -27,6 +27,11 @@ const DEPARTURE_BUFFER = 180;
 const NEXT_SPOT_CHOICES = 5;
 
 const MEAL_CATEGORIES = new Set(['food', 'cafe']);
+// 비 오는 날(79) 대체. Place에는 실내·실외 정보가 없어서 카테고리로 나눈다.
+// 쇼핑·온천은 실내, 자연·야경은 실외로 보고 뺀다. 관광(sight)은 사찰·전망대·박물관이 섞여 있어 그대로 남긴다.
+// 2단계 Gemini는 장소별로 실내인지 판단할 수 있어서 같은 조건(rainy)만 넘기면 된다.
+const INDOOR_CATEGORIES = new Set(['shop', 'onsen']);
+const OUTDOOR_CATEGORIES = new Set(['nature', 'night']);
 
 const toTime = (minutes) =>
   `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`;
@@ -67,6 +72,7 @@ const pickNearest = (candidates, from) =>
 
 // conditions.days: [{ date, itemCount }] — 이미 장소가 있는 DAY는 건드리지 않고 비어 있는 DAY만 채운다.
 // conditions.flight: { arriveAt, departAt } | null — 도착일·출발일은 비행기 시간을 피해서 넣는다.
+// conditions.rainy: true면 비 오는 날 일정 — 실내 장소를 먼저, 자연·야경은 빼고 넣는다 (79).
 // places: 그 도시의 장소 전체 (placeService.getCityPlaces)
 export function buildMockItinerary(conditions, places) {
   const {
@@ -74,15 +80,29 @@ export function buildMockItinerary(conditions, places) {
     preferredCategories = [],
     days = [],
     excludePlaceIds = [],
+    likedPlaceIds = [],
     flight = null,
+    rainy = false,
   } = conditions;
   const rule = STYLE_RULES[style] ?? STYLE_RULES.normal;
   const used = new Set(excludePlaceIds);
   const isFree = (place) => !used.has(place.id);
-  const spotPool = prioritizePreferredPlaces(
-    places.filter((place) => !MEAL_CATEGORIES.has(place.category)),
+  // 다녀와서 좋았다고 평가한 곳(97)은 관광지 후보 맨 앞, 식사는 그중에서 먼저 고른다.
+  const liked = new Set(likedPlaceIds);
+  const isLiked = (place) => liked.has(place.id);
+  // 비 오는 날(79)은 바깥 장소를 빼고 실내 장소를 앞에 둔다. 식사는 원래 실내라 그대로 둔다.
+  const isAllowedSpot = (place) =>
+    !MEAL_CATEGORIES.has(place.category) && !(rainy && OUTDOOR_CATEGORIES.has(place.category));
+  const preferredSpots = prioritizePreferredPlaces(
+    places.filter(isAllowedSpot),
     preferredCategories,
   );
+  const isIndoor = (place) => rainy && INDOOR_CATEGORIES.has(place.category);
+  const spotPool = [
+    ...preferredSpots.filter(isLiked),
+    ...preferredSpots.filter((place) => !isLiked(place) && isIndoor(place)),
+    ...preferredSpots.filter((place) => !isLiked(place) && !isIndoor(place)),
+  ];
   const foodPool = places.filter((place) => place.category === 'food');
 
   // 야경 장소는 저녁 이후에만 넣는다. 저녁에는 야경을 먼저 쓰고, 야경이 없으면 낮 장소를 쓴다.
@@ -101,7 +121,8 @@ export function buildMockItinerary(conditions, places) {
   const takeMeal = (from) => {
     const candidates = foodPool.filter(isFree);
     if (candidates.length === 0) return null;
-    const place = pickNearest(candidates, from);
+    const likedMeals = candidates.filter(isLiked);
+    const place = pickNearest(likedMeals.length > 0 ? likedMeals : candidates, from);
     used.add(place.id);
     return place;
   };

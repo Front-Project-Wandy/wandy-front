@@ -4,6 +4,7 @@ import ErrorState from '../../../components/common/ErrorState';
 import Loading from '../../../components/common/Loading';
 import { useProduct } from '../hooks/useProducts';
 import { formatPrice } from '../utils/formatPrice';
+import ProductPhotoCredit from './ProductPhotoCredit';
 
 // 상품 상세 + 외부 예약 링크 (64). 예약·결제는 우리 서비스에서 하지 않는다.
 export default function ProductDetail({ id }) {
@@ -20,11 +21,14 @@ export default function ProductDetail({ id }) {
   return (
     <article className="grid gap-6 lg:grid-cols-2">
       {product.imageUrl ? (
-        <img
-          src={product.imageUrl}
-          alt={product.title}
-          className="aspect-[4/3] w-full rounded-2xl object-cover"
-        />
+        <figure className="space-y-2">
+          <img
+            src={product.imageUrl}
+            alt={product.title}
+            className="aspect-[4/3] w-full rounded-2xl object-cover"
+          />
+          {product.photoCredit ? <ProductPhotoCredit credit={product.photoCredit} /> : null}
+        </figure>
       ) : (
         <div
           aria-hidden="true"

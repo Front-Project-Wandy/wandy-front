@@ -16,13 +16,25 @@ export const FARES = {
   KR: {
     transit: { base: 1500, perKm: 100 },
     taxi: { base: 4800, perKm: 1000 },
-    car: { base: 0, perKm: 200 },
   },
   JP: {
     transit: { base: 180, perKm: 40 },
     taxi: { base: 500, perKm: 400 },
-    car: { base: 0, perKm: 60 },
   },
+};
+
+// 렌터카(자차) 유류비·통행료 추정 (요구사항 #59). 실제 경로 API(Directions tollFare·fuelPrice)는 비밀 키라
+// 2단계 백엔드에서 받고, 그때까지 이 표만 고치면 된다. 금액은 나라 통화 기준이다.
+// - 고속도로로 보는 구간: 보정한 거리가 HIGHWAY_MIN_METERS 이상이면 통행료를 더하고 고속 속도로 계산한다 (시내 구간은 통행료 없음).
+// - 연비는 소형 렌터카의 도심 정체를 감안한 가정값이다. 유가는 2026년 한국 약 2,000원/L(오피넷), 일본 약 170엔/L(자원에너지청).
+// - 통행료는 1종 승용차 기준: 한국은 기본 900원 + 44.3원/km, 일본은 NEXCO 터미널 150엔 + 대도시 근교 29.52엔/km
+//   (100km 넘는 구간의 장거리 할인은 단순화하려고 뺐다).
+// 렌터카 대여료는 넣지 않는다.
+export const CAR = {
+  HIGHWAY_MIN_METERS: 30000,
+  HIGHWAY_SPEED_KMH: 70,
+  KR: { kmPerLiter: 12, fuelPricePerLiter: 2000, toll: { base: 900, perKm: 44.3 } },
+  JP: { kmPerLiter: 15, fuelPricePerLiter: 170, toll: { base: 150, perKm: 29.52 } },
 };
 
 // 택시 심야 할증 (요구사항 #60). 출발 시각이 구간 [from, to)에 들면 택시 요금 전체에 rate를 더한다.
@@ -38,5 +50,24 @@ export const NIGHT_SURCHARGE = {
   JP: [{ from: 22 * 60, to: 29 * 60, rate: 0.2 }],
 };
 
+// 하루 이동 시간이 이만큼(분) 이상이면 일정이 과밀하다고 알려 준다 (여행 스타일별, 요구사항 #70).
+// 여행 스타일을 모르거나 정해지지 않았으면 normal 기준을 쓴다.
+export const OVERLOAD_MINUTES = { relaxed: 120, normal: 180, packed: 240 };
+
 // 요금은 정확한 값이 아니라서 이 단위로 반올림해 보여 준다
 export const COST_ROUND_UNIT = 10;
+
+// 공항 (요구사항 #52). 공항 → 숙소 이동을 추정할 때 쓰는 좌표다. 나라는 어느 나라 안의 공항인지다.
+export const AIRPORTS = {
+  ICN: { country: 'KR', lat: 37.4602, lng: 126.4407 },
+  GMP: { country: 'KR', lat: 37.5586, lng: 126.7906 },
+  NRT: { country: 'JP', lat: 35.772, lng: 140.3929 },
+  HND: { country: 'JP', lat: 35.5494, lng: 139.7798 },
+};
+
+// 항공편에서 도착 공항을 알 수 없을 때(직접 입력 등) 여행 도시의 대표 공항으로 계산한다.
+export const DEFAULT_AIRPORT = { seoul: 'ICN', tokyo: 'HND' };
+
+// 공항은 도심에서 멀어서 도심 기준 속도(SPEED_KMH)로 구하면 시간이 너무 길게 나온다.
+// 공항철도·리무진·고속도로를 감안한 평균 속도(km/h). 도보는 공항 이동에 쓰지 않는다.
+export const AIRPORT_SPEED_KMH = { transit: 45, taxi: 50, car: 50 };

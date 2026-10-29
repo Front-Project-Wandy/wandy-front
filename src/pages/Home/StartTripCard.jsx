@@ -5,6 +5,7 @@ import TabBar from '../../components/common/TabBar';
 import OneLineTripForm from '../../features/ai/components/OneLineTripForm';
 import StartTripConfirmModal from './StartTripConfirmModal';
 import TripStartForm from './TripStartForm';
+import { useStartManualTrip } from './useStartManualTrip';
 import { useStartTrip } from './useStartTrip';
 
 // 홈 "내 여행 만들기" 카드 (23 + 56). 새 여행을 시작하는 두 방법을 탭으로 나눈다.
@@ -14,6 +15,8 @@ import { useStartTrip } from './useStartTrip';
 export default function StartTripCard() {
   const { t } = useTranslation();
   const { requestStart, isConfirmOpen, confirmStart, continueDraft, cancelStart } = useStartTrip();
+  // [직접 짤게요]는 마법사 초안을 건드리지 않아서 작성 중인 여행 확인 창을 거치지 않는다 (53)
+  const startManual = useStartManualTrip();
   const [tab, setTab] = useState('direct');
   // [한 줄로]는 AI가 장소를 고르는 동안 기다렸다가 onStart를 부른다. 그사이 탭을 바꾸거나 홈을 떠나면
   // 폼은 사라져도 늦게 온 결과가 새 여행을 덮어쓰므로, 지금 떠 있는 폼의 번호와 같을 때만 시작한다.
@@ -49,7 +52,7 @@ export default function StartTripCard() {
         onChange={handleTabChange}
       />
       {tab === 'direct' ? (
-        <TripStartForm onStart={handleFormStart} />
+        <TripStartForm onStart={handleFormStart} onStartManual={startManual} />
       ) : (
         <OneLineTripForm onStart={handleFormStart} />
       )}

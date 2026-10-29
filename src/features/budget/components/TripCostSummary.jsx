@@ -1,0 +1,114 @@
+import { useId, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { CAR } from '../../transport/constants';
+import { formatCost } from '../../transport/utils/formatTransport';
+import { COUNTRY_CURRENCY } from '../constants';
+import { convertCurrency, getKrwPerJpy } from '../utils/convertCurrency';
+import { getHomeCountry } from '../utils/homeCountry';
+import { summarizeTripCost } from '../utils/summarizeTripCost';
+
+const ROWS = ['transport', 'fuel', 'toll', 'entry', 'meals'];
+// 자차를 안 쓰면 0이라 줄 자체를 보여 주지 않는 항목
+const HIDDEN_WHEN_ZERO = ['fuel', 'toll'];
+
+// 자차만 쓰면 교통 줄이 0원이라 어색해서, 자차 비용이 있을 때는 0원인 교통 줄을 뺀다
+const isRowShown = (summary, row) => {
+  if (HIDDEN_WHEN_ZERO.includes(row)) return summary[row] > 0;
+  if (row === 'transport') return summary.transport > 0 || summary.fuel + summary.toll === 0;
+  return true;
+};
+
+// 플래너 위쪽의 예상 총비용 한 줄과 펼쳐 보는 내역 (57). 일정에 장소가 없으면 보여 줄 게 없어서 그리지 않는다.
+// 금액은 여행 나라 통화가 기본이고, 사용자 기준 통화와 다를 때만 기준 통화로 환산한 값을 괄호로 같이 보여 준다.
+// 정확한 값이 아니라서 「약」과 추정 안내를 함께 둔다.
+export default function TripCostSummary({ trip }) {
+  const { t, i18n } = useTranslation();
+  const detailsId = useId();
+  const [isOpen, setIsOpen] = useState(false);
+  const summary = useMemo(() => summarizeTripCost(trip), [trip]);
+  if (!summary) return null;
+
+  const { country } = trip;
+  const homeCountry = getHomeCountry(i18n.language);
+  const needsConversion = homeCountry !== country;
+  const format = (amount, targetCountry = country) =>
+    formatCost(t, i18n.language, targetCountry, amount);
+  const toHome = (amount) =>
+    convertCurrency(amount, summary.currency, COUNTRY_CURRENCY[homeCountry]);
+
+  return (
+    <section aria-label={t('planner.cost.title')} className="rounded-2xl border border-text/10 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+        <p className="text-body font-bold">
+          {needsConversion
+            ? t('planner.cost.summaryConverted', {
+                total: format(summary.total),
+                converted: format(toHome(summary.total), homeCountry),
+                perPerson: format(summary.perPerson),
+              })
+            : t('planner.cost.summary', {
+                total: format(summary.total),
+                perPerson: format(summary.perPerson),
+              })}
+        </p>
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls={detailsId}
+          onClick={() => setIsOpen((prev) => !prev)}
+          className="-my-2 rounded-sm py-2 text-body-sm text-link underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          {t('planner.cost.toggle')}
+          <span aria-hidden="true"> {isOpen ? '▴' : '▾'}</span>
+        </button>
+      </div>
+      {isOpen ? (
+        <div id={detailsId} className="mt-3 space-y-2">
+          <table className="w-full text-left text-body-sm">
+            <caption className="sr-only">
+              {t('planner.cost.caption', { count: summary.people })}
+            </caption>
+            <thead>
+              <tr className="text-text/70">
+                <th scope="col" className="pb-2 font-normal">
+                  {t('planner.cost.item')}
+                </th>
+                <th scope="col" className="pb-2 text-right font-normal">
+                  {t('planner.cost.amount', { count: summary.people })}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {ROWS.filter((row) => isRowShown(summary, row)).map((row) => (
+                <tr key={row} className="border-t border-text/10">
+                  <th scope="row" className="py-2 font-normal">
+                    {t(`planner.cost.row.${row}`)}
+                  </th>
+                  <td className="py-2 text-right">{format(summary[row])}</td>
+                </tr>
+              ))}
+              <tr className="border-t border-text/10 font-bold">
+                <th scope="row" className="py-2">
+                  {t('planner.cost.row.total')}
+                </th>
+                <td className="py-2 text-right">{format(summary.total)}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="text-body-sm text-text/70">{t('planner.cost.noteEstimate')}</p>
+          <p className="text-body-sm text-text/70">{t('planner.cost.noteTransport')}</p>
+          {summary.fuel + summary.toll > 0 ? (
+            <p className="text-body-sm text-text/70">
+              {t('planner.cost.noteCar', { kmPerLiter: CAR[country].kmPerLiter })}
+            </p>
+          ) : null}
+          {needsConversion ? (
+            <p className="text-body-sm text-text/70">
+              {t('planner.cost.noteRate', { rate: getKrwPerJpy() })}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+    </section>
+  );
+}

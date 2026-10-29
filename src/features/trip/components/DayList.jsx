@@ -7,6 +7,7 @@ export default function DayList({
   days,
   country,
   transportMode,
+  style,
   flight,
   selectedItemId,
   onSelectItem,
@@ -14,6 +15,7 @@ export default function DayList({
   onUpdateItem,
   onRemoveItem,
   onMoveItem,
+  onReorderDay,
 }) {
   // 구글 장소 데이터를 보여 줄 때는 구글 표기를 남긴다 (약관).
   const hasGooglePlace = days.some((day) => day.items.some((item) => item.source === 'google'));
@@ -29,12 +31,14 @@ export default function DayList({
               dayIndex={index}
               country={country}
               transportMode={transportMode}
+              style={style}
               flight={flight}
               selectedItemId={selectedItemId}
               onSelectItem={onSelectItem}
               onAddPlace={onAddPlace}
               onUpdateItem={onUpdateItem}
               onRemoveItem={onRemoveItem}
+              onReorderDay={onReorderDay}
             />
           ))}
           {hasGooglePlace ? <GoogleAttribution /> : null}

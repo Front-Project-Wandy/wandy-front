@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFavoriteStore } from '../hooks/useFavoriteStore';
 
@@ -6,6 +7,7 @@ import { useFavoriteStore } from '../hooks/useFavoriteStore';
 export default function FavoriteButton({ place, className = '' }) {
   const { t } = useTranslation();
   const isFavorite = useFavoriteStore((state) => state.ids.includes(place.id));
+  const [pulse, setPulse] = useState(0);
   const toggle = useFavoriteStore((state) => state.toggle);
 
   return (
@@ -13,10 +15,15 @@ export default function FavoriteButton({ place, className = '' }) {
       type="button"
       aria-pressed={isFavorite}
       aria-label={t('favorite.toggle', { name: place.name })}
-      onClick={() => toggle(place.id)}
+      onClick={() => {
+        toggle(place.id);
+        setPulse((value) => value + 1);
+      }}
       className={`grid size-11 shrink-0 place-items-center rounded-full text-subtitle transition-colors hover:bg-bg-soft focus-visible:outline-2 focus-visible:outline-primary ${isFavorite ? 'text-point' : 'text-text/60'} ${className}`}
     >
-      <span aria-hidden="true">{isFavorite ? '♥' : '♡'}</span>
+      <span key={pulse} className={pulse ? 'motion-heart' : ''} aria-hidden="true">
+        {isFavorite ? '♥' : '♡'}
+      </span>
     </button>
   );
 }

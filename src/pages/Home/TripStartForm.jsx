@@ -10,7 +10,8 @@ const INITIAL_VALUES = { country: null, city: null, startDate: '', endDate: '', 
 // 입력 중에는 이 컴포넌트 안(useState)에만 두고, [플래너 시작]을 눌러 검사를 통과하면 넘긴다.
 // (마법사 STEP1은 반대로 입력할 때마다 바로 저장한다 — 중간 저장)
 // 작성 중인 여행 확인 창은 [한 줄로] 탭과 같이 쓰려고 StartTripCard가 맡는다.
-export default function TripStartForm({ onStart }) {
+// onStartManual이 있으면 [직접 짤게요]도 보여 준다 (53). 같은 입력·검사를 거쳐 마법사 없이 바로 빈 플래너를 연다.
+export default function TripStartForm({ onStart, onStartManual }) {
   const { t } = useTranslation();
   const [values, setValues] = useState(INITIAL_VALUES);
   const [errors, setErrors] = useState({});
@@ -20,13 +21,18 @@ export default function TripStartForm({ onStart }) {
     setErrors((prev) => clearFieldErrors(prev, patch));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // 두 버튼이 같은 검사를 거치고, 통과하면 인원을 숫자로 맞춰 넘긴다.
+  const submitWith = (start) => {
     const nextErrors = validateBasicInfo(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    onStart({ ...values, people: Number(values.people) });
+    start({ ...values, people: Number(values.people) });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    submitWith(onStart);
   };
 
   return (
@@ -35,6 +41,19 @@ export default function TripStartForm({ onStart }) {
       <Button type="submit" size="lg" className="w-full">
         {t('home.start.submit')}
       </Button>
+      {onStartManual ? (
+        <div className="flex flex-col gap-1">
+          <Button
+            variant="secondary"
+            size="lg"
+            className="w-full"
+            onClick={() => submitWith(onStartManual)}
+          >
+            {t('home.start.manual')}
+          </Button>
+          <p className="text-center text-body-sm text-text/70">{t('home.start.manualHint')}</p>
+        </div>
+      ) : null}
     </form>
   );
 }
