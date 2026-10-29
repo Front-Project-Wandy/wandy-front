@@ -615,6 +615,15 @@
       "noteCar": "렌터카는 유류비(연비 {{kmPerLiter}}km/L 기준)와 고속도로 구간 통행료 추정이에요. 렌터카 대여료는 포함하지 않아요.",
       "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
     },
+    "prep": {
+      "title": "여행 준비",
+      "packing": {
+        "title": "준비물 체크리스트",
+        "progress": "{{total}}개 중 {{checked}}개 챙김",
+        "clear": "전체 해제",
+        "empty": "이 나라의 준비물 목록이 아직 없어요"
+      }
+    },
     "gap": {
       "title": "빈 시간대 추천",
       "loading": "빈 시간에 갈 만한 곳을 찾는 중…",
