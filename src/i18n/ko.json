@@ -625,14 +625,6 @@
       "addLabel": "빈 시간에 추가: {{name}}",
       "note": "머무는 시간은 1시간으로 어림했고, 이동 시간은 추정이에요."
     },
-    "local": {
-      "button": "현지어",
-      "buttonLabel": "현지어로 보기: {{name}}",
-      "title": "{{name}} (현지어)",
-      "hint": "택시 기사님께 이 화면을 보여 주세요",
-      "loading": "현지어 주소를 불러오는 중…",
-      "error": "현지어 주소를 불러오지 못했어요"
-    },
     "airportLeg": {
       "title": "도착 공항에서 숙소까지",
       "route": "{{airport}} → 숙소({{stay}})",
@@ -643,6 +635,14 @@
         "NRT": "나리타공항",
         "HND": "하네다공항"
       }
+    },
+    "local": {
+      "button": "현지어",
+      "buttonLabel": "현지어로 보기: {{name}}",
+      "title": "{{name}} (현지어)",
+      "hint": "택시 기사님께 이 화면을 보여 주세요",
+      "loading": "현지어 주소를 불러오는 중…",
+      "error": "현지어 주소를 불러오지 못했어요"
     },
     "optimize": {
       "button": "동선 최적화",
