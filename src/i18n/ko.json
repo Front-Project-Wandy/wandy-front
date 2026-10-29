@@ -8,6 +8,8 @@
       "home": "Wandy",
       "places": "장소 탐색",
       "place": "장소 상세",
+      "community": "일정 둘러보기",
+      "communityTrip": "공개 일정",
       "products": "투어·상품",
       "login": "로그인",
       "signup": "회원가입",
@@ -72,8 +74,122 @@
       "nav": {
         "start": "여행 시작",
         "explore": "장소 탐색",
+        "community": "일정 둘러보기",
         "products": "투어·상품",
         "my": "내 여행"
+      }
+    }
+  },
+  "community": {
+    "page": {
+      "eyebrow": "TRAVELERS' PLANS",
+      "title": "다른 여행자의 일정 둘러보기",
+      "description": "마음에 드는 일정을 골라 날짜만 정하면 내 여행으로 바로 가져올 수 있어요."
+    },
+    "tab": {
+      "browse": "둘러보기",
+      "activity": "내 활동"
+    },
+    "activity": {
+      "liked": "좋아요한 일정 {{count}}개",
+      "likedEmpty": {
+        "title": "좋아요한 일정이 없어요",
+        "description": "마음에 드는 일정에 좋아요를 누르면 여기에 모여요."
+      },
+      "reviews": "내가 쓴 후기 {{count}}개",
+      "reviewsEmpty": {
+        "title": "아직 쓴 후기가 없어요",
+        "description": "일정 상세에서 장소 옆 「후기」를 눌러 남길 수 있어요."
+      },
+      "browse": "일정 둘러보러 가기",
+      "missingPlace": "장소 정보를 불러오지 못했어요"
+    },
+    "filter": {
+      "all": "전체",
+      "group": {
+        "city": "도시",
+        "length": "일정",
+        "style": "스타일"
+      },
+      "length": {
+        "short": "1박 2일 이하",
+        "long": "2박 3일 이상"
+      }
+    },
+    "list": {
+      "count": "일정 {{count}}개",
+      "empty": {
+        "title": "조건에 맞는 일정이 없어요",
+        "description": "필터를 바꾸거나 전체 일정을 다시 봐 주세요.",
+        "reset": "필터 초기화"
+      }
+    },
+    "card": {
+      "nightsDays": "{{nights}}박 {{days}}일",
+      "placeCount": "장소 {{count}}곳"
+    },
+    "like": {
+      "label": "좋아요"
+    },
+    "photoCredits": "일정 사진 출처",
+    "detail": {
+      "back": "일정 목록으로",
+      "photoBy": "사진",
+      "day": "DAY {{day}}",
+      "meta": "{{author}} · {{companion}} {{people}}명 · {{style}}",
+      "stay": "{{duration}} 머무름",
+      "loadingName": "장소 정보를 불러오는 중",
+      "loading": "일정의 장소를 불러오는 중이에요",
+      "error": "장소 정보를 불러오지 못했어요.",
+      "notFound": {
+        "title": "일정을 찾을 수 없어요",
+        "description": "삭제되었거나 주소가 잘못된 일정이에요."
+      }
+    },
+    "copy": {
+      "open": "내 여행으로 가져오기",
+      "title": "내 여행으로 가져오기",
+      "description": "가는 날을 고르면 {{nights}}박 {{days}}일 일정이 그대로 내 여행에 들어가요.",
+      "startDate": "가는 날",
+      "period": "{{start}} ~ {{end}}",
+      "people": "인원",
+      "tripTitle": "여행 제목",
+      "notice": "항공·숙소는 가져오지 않아요. 지금 열려 있던 여행은 내 여행 목록에 그대로 남아요.",
+      "cancel": "취소",
+      "submit": "가져와서 플래너 열기",
+      "error": {
+        "startDate": "가는 날을 골라 주세요.",
+        "pastDate": "오늘 이후 날짜를 골라 주세요.",
+        "people": "인원은 1~{{max}}명으로 입력해 주세요."
+      }
+    },
+    "review": {
+      "open": "후기",
+      "openWithRating": "{{average}} · 후기 {{count}}",
+      "openLabel": "{{name}} 후기 보기 ({{count}}개)",
+      "title": "{{name}} 후기",
+      "summary": "{{average}}점 · 후기 {{count}}개",
+      "noRating": "아직 별점이 없어요",
+      "ratingLegend": "별점",
+      "ratingLabel": "별점 {{rating}}점",
+      "textLabel": "후기",
+      "placeholder": "다녀온 경험을 짧게 남겨 주세요",
+      "length": "{{count}}/{{max}}",
+      "error": "후기 내용을 적어 주세요.",
+      "submit": "후기 남기기",
+      "save": "저장",
+      "cancel": "취소",
+      "edit": "고치기",
+      "remove": "지우기",
+      "confirmRemove": "정말 지울까요?",
+      "mine": "내 후기",
+      "edited": "{{date}} 수정",
+      "guestName": "게스트",
+      "localNotice": "지금은 내 후기가 이 기기에만 저장돼서 다른 사람에게는 보이지 않아요.",
+      "listLabel": "후기 목록",
+      "empty": {
+        "title": "아직 후기가 없어요",
+        "description": "첫 후기를 남겨 보세요."
       }
     }
   },
@@ -283,6 +399,8 @@
         "dates": "가는 날과 오는 날을 모두 골라 주세요.",
         "pastDate": "지난 날짜는 고를 수 없어요. 오늘 이후로 골라 주세요.",
         "dateOrder": "오는 날은 가는 날과 같거나 뒤여야 해요.",
+        "invalidDate": "날짜를 다시 확인해 주세요.",
+        "tooLong": "여행 기간은 최대 {{max}}일까지 만들 수 있어요.",
         "people": "인원은 1~{{max}}명으로 입력해 주세요."
       }
     },

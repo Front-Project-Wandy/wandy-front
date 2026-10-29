@@ -15,12 +15,15 @@ export default function WeatherDayCard({ number, forecast }) {
             <span aria-hidden="true">{WEATHER_ICONS[kind]}</span>{' '}
             {t(`planner.weather.kind.${kind}`)}
           </p>
-          <p>
-            {t('planner.weather.temp', {
-              max: Math.round(forecast.tempMax),
-              min: Math.round(forecast.tempMin),
-            })}
-          </p>
+          {/* 값이 비어 오면 Math.round(null)이 0이라 0°로 보이니, 둘 다 있을 때만 보여 준다 */}
+          {forecast.tempMax != null && forecast.tempMin != null ? (
+            <p>
+              {t('planner.weather.temp', {
+                max: Math.round(forecast.tempMax),
+                min: Math.round(forecast.tempMin),
+              })}
+            </p>
+          ) : null}
           <p className="text-text/70">
             {t('planner.weather.rain', { percent: forecast.rainChance ?? 0 })}
           </p>

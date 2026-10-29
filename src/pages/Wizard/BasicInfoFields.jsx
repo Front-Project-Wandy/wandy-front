@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Chip from '../../components/common/Chip';
 import Input from '../../components/common/Input';
 import { CITIES_BY_COUNTRY, COUNTRIES } from '../../features/search/place';
-import { getTodayString, MAX_PEOPLE } from './validateBasicInfo';
+import { getTodayString, MAX_DATE, MAX_PEOPLE, MAX_TRIP_DAYS } from './validateBasicInfo';
 
 const CHIP_GROUP_CLASS = 'flex flex-col gap-2';
 const LEGEND_CLASS = 'text-body-sm font-bold';
@@ -83,6 +83,7 @@ export default function BasicInfoFields({ values, errors, onChange }) {
           label={t('wizard.basic.startDate')}
           value={startDate}
           min={today}
+          max={MAX_DATE}
           onChange={(event) => onChange({ startDate: event.target.value })}
           aria-invalid={Boolean(errors.dates)}
           aria-describedby={describedBy('dates')}
@@ -92,13 +93,14 @@ export default function BasicInfoFields({ values, errors, onChange }) {
           label={t('wizard.basic.endDate')}
           value={endDate}
           min={startDate || today}
+          max={MAX_DATE}
           onChange={(event) => onChange({ endDate: event.target.value })}
           aria-invalid={Boolean(errors.dates)}
           aria-describedby={describedBy('dates')}
         />
         {errors.dates && (
           <p id={errorIds.dates} role="alert" className={`-mt-1 sm:col-span-2 ${ERROR_CLASS}`}>
-            {t(errors.dates)}
+            {t(errors.dates, { max: MAX_TRIP_DAYS })}
           </p>
         )}
       </div>

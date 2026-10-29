@@ -2,10 +2,23 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useRecentStore } from '../../store/recent/useRecentStore';
 
+// '%'가 잘못 들어간 주소(/place/100%)는 decodeURIComponent가 에러를 던져서 앱 전체가 흰 화면이 된다.
+// 기록은 덤 기능이라, 풀 수 없는 주소는 기록하지 않고 넘어간다 (화면은 장소 상세가 「없는 장소」로 보여 준다).
+const safeDecode = (value) => {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return null;
+  }
+};
+
 // 주소를 보고 "무엇의 상세를 봤는지" 알아낸다. 장소 상세 /place/:id, 상품 상세 /products?id=...
 export function getViewFromLocation({ pathname, search }) {
   const placeMatch = pathname.match(/^\/place\/([^/]+)$/);
-  if (placeMatch) return { type: 'place', id: decodeURIComponent(placeMatch[1]) };
+  if (placeMatch) {
+    const id = safeDecode(placeMatch[1]);
+    return id ? { type: 'place', id } : null;
+  }
 
   const productId = pathname === '/products' ? new URLSearchParams(search).get('id') : null;
   if (productId) return { type: 'product', id: productId };

@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import AppLayout from './components/common/AppLayout';
 import IntroGate from './features/intro/components/IntroGate';
+import CommunityPage from './pages/Community/CommunityPage';
+import PublicTripDetailPage from './pages/Community/PublicTripDetailPage';
 import HomePage from './pages/Home/HomePage';
 import LoginPage from './pages/Login/LoginPage';
 import MyPage from './pages/MyPage/MyPage';
@@ -32,6 +34,8 @@ export default function App() {
         <Route path="/trip/:id" element={<PlannerPage />} />
         <Route path="/places" element={<PlacesPage />} />
         <Route path="/place/:id" element={<PlaceDetailPage />} />
+        <Route path="/community" element={<CommunityPage />} />
+        <Route path="/community/:id" element={<PublicTripDetailPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
