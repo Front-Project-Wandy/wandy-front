@@ -1,0 +1,1362 @@
+{
+  "seoul": [
+    {
+      "id": "seoul-01",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "over200",
+      "preferredCategories": ["sight", "food"],
+      "visitedPlaceIds": [
+        "tour:900002",
+        "tour:900003",
+        "naver:삼청동수제비_1269819000_375848000",
+        "tour:126508",
+        "tour:900009",
+        "tour:900001",
+        "naver:을지로 노가리골목_1269921000_375662000",
+        "tour:900007",
+        "tour:900006",
+        "naver:명동교자 본점_1269856000_375626000",
+        "tour:900004",
+        "naver:북촌한옥마을_1269831000_375826000"
+      ]
+    },
+    {
+      "id": "seoul-02",
+      "style": "relaxed",
+      "companion": "family",
+      "budget": "50to100",
+      "preferredCategories": ["shop", "cafe"],
+      "visitedPlaceIds": [
+        "naver:더현대 서울_1269284000_375259000",
+        "naver:어니언 성수_1270581000_375447000",
+        "tour:900007",
+        "naver:명동거리_1269850000_375636000",
+        "naver:어니언 안국_1269862000_375772000",
+        "tour:900008",
+        "naver:인사동 쌈지길_1269853000_375743000"
+      ]
+    },
+    {
+      "id": "seoul-03",
+      "style": "packed",
+      "companion": "family",
+      "budget": "50to100",
+      "preferredCategories": ["onsen", "food"],
+      "visitedPlaceIds": [
+        "naver:툭툭누들타이_1269255000_375627000",
+        "naver:드래곤힐스파_1269645000_375297000",
+        "naver:남산돈까스_1269835000_375565000",
+        "naver:삼청동수제비_1269819000_375848000",
+        "naver:소문난성수감자탕_1270560000_375430000",
+        "naver:토속촌 삼계탕_1269711000_375781000",
+        "naver:명동교자 본점_1269856000_375626000",
+        "tour:900009",
+        "naver:석촌호수_1271031000_375097000"
+      ]
+    },
+    {
+      "id": "seoul-04",
+      "style": "packed",
+      "companion": "friends",
+      "budget": "over200",
+      "preferredCategories": ["food", "cafe"],
+      "visitedPlaceIds": [
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "tour:900003",
+        "naver:삼청동수제비_1269819000_375848000",
+        "naver:어니언 안국_1269862000_375772000",
+        "naver:툭툭누들타이_1269255000_375627000",
+        "tour:900002",
+        "naver:명동교자 본점_1269856000_375626000",
+        "tour:900001",
+        "naver:남산돈까스_1269835000_375565000",
+        "naver:서울숲_1270374000_375444000",
+        "tour:126508",
+        "naver:토속촌 삼계탕_1269711000_375781000"
+      ]
+    },
+    {
+      "id": "seoul-05",
+      "style": "relaxed",
+      "companion": "solo",
+      "budget": "50to100",
+      "preferredCategories": ["cafe", "onsen"],
+      "visitedPlaceIds": [
+        "naver:어니언 안국_1269862000_375772000",
+        "tour:900005",
+        "naver:툭툭누들타이_1269255000_375627000",
+        "naver:어니언 성수_1270581000_375447000",
+        "naver:드래곤힐스파_1269645000_375297000"
+      ]
+    },
+    {
+      "id": "seoul-06",
+      "style": "normal",
+      "companion": "family",
+      "budget": "100to200",
+      "preferredCategories": ["nature", "shop"],
+      "visitedPlaceIds": [
+        "naver:툭툭누들타이_1269255000_375627000",
+        "naver:더현대 서울_1269284000_375259000",
+        "tour:900004",
+        "tour:900007",
+        "naver:인사동 쌈지길_1269853000_375743000",
+        "naver:어니언 성수_1270581000_375447000",
+        "tour:900009",
+        "naver:서울숲_1270374000_375444000",
+        "naver:석촌호수_1271031000_375097000"
+      ]
+    },
+    {
+      "id": "seoul-07",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "50to100",
+      "preferredCategories": ["sight", "nature"],
+      "visitedPlaceIds": [
+        "tour:900001",
+        "tour:900005",
+        "naver:인사동 쌈지길_1269853000_375743000",
+        "tour:900002",
+        "tour:900008",
+        "tour:900009",
+        "tour:900004"
+      ]
+    },
+    {
+      "id": "seoul-08",
+      "style": "relaxed",
+      "companion": "solo",
+      "budget": "under50",
+      "preferredCategories": ["sight", "night"],
+      "visitedPlaceIds": [
+        "tour:126508",
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "tour:900002",
+        "tour:900001"
+      ]
+    },
+    {
+      "id": "seoul-09",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "under50",
+      "preferredCategories": ["sight", "cafe", "food"],
+      "visitedPlaceIds": [
+        "tour:900005",
+        "naver:어니언 성수_1270581000_375447000",
+        "tour:900001",
+        "tour:900004",
+        "tour:126508",
+        "naver:소문난성수감자탕_1270560000_375430000",
+        "naver:홍대 걷고싶은거리_1269236000_375563000"
+      ]
+    },
+    {
+      "id": "seoul-10",
+      "style": "relaxed",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["shop", "onsen"],
+      "visitedPlaceIds": [
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "tour:900007",
+        "naver:어니언 안국_1269862000_375772000",
+        "tour:900008",
+        "naver:삼청동수제비_1269819000_375848000"
+      ]
+    },
+    {
+      "id": "seoul-11",
+      "style": "relaxed",
+      "companion": "family",
+      "budget": "over200",
+      "preferredCategories": ["food", "night"],
+      "visitedPlaceIds": [
+        "naver:소문난성수감자탕_1270560000_375430000",
+        "naver:명동교자 본점_1269856000_375626000",
+        "naver:반포한강공원 달빛무지개분수_1269958000_375101000",
+        "naver:토속촌 삼계탕_1269711000_375781000",
+        "naver:삼청동수제비_1269819000_375848000"
+      ]
+    },
+    {
+      "id": "seoul-12",
+      "style": "normal",
+      "companion": "family",
+      "budget": "under50",
+      "preferredCategories": ["food", "shop", "sight"],
+      "visitedPlaceIds": [
+        "tour:900007",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "tour:900001",
+        "tour:126508",
+        "tour:900003",
+        "naver:명동거리_1269850000_375636000",
+        "naver:삼청동수제비_1269819000_375848000",
+        "naver:명동교자 본점_1269856000_375626000"
+      ]
+    },
+    {
+      "id": "seoul-13",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "over200",
+      "preferredCategories": ["nature", "night"],
+      "visitedPlaceIds": [
+        "tour:126508",
+        "naver:롯데월드타워 서울스카이_1271025000_375126000",
+        "naver:서울숲_1270374000_375444000",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "naver:청계천_1269784000_375690000",
+        "tour:900001",
+        "tour:900006"
+      ]
+    },
+    {
+      "id": "seoul-14",
+      "style": "relaxed",
+      "companion": "couple",
+      "budget": "over200",
+      "preferredCategories": ["nature", "shop"],
+      "visitedPlaceIds": [
+        "naver:명동거리_1269850000_375636000",
+        "tour:900006",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "tour:126508",
+        "naver:토속촌 삼계탕_1269711000_375781000",
+        "tour:900007",
+        "naver:삼청동수제비_1269819000_375848000"
+      ]
+    },
+    {
+      "id": "seoul-15",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "100to200",
+      "preferredCategories": ["sight", "night"],
+      "visitedPlaceIds": [
+        "tour:900001",
+        "naver:롯데월드타워 서울스카이_1271025000_375126000",
+        "tour:900003",
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "tour:900009",
+        "tour:126508"
+      ]
+    },
+    {
+      "id": "seoul-16",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "100to200",
+      "preferredCategories": ["food", "nature"],
+      "visitedPlaceIds": [
+        "naver:삼청동수제비_1269819000_375848000",
+        "tour:900005",
+        "naver:소문난성수감자탕_1270560000_375430000",
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "tour:126508",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "naver:툭툭누들타이_1269255000_375627000",
+        "tour:900006",
+        "naver:토속촌 삼계탕_1269711000_375781000"
+      ]
+    },
+    {
+      "id": "seoul-17",
+      "style": "relaxed",
+      "companion": "friends",
+      "budget": "100to200",
+      "preferredCategories": ["onsen", "sight", "night"],
+      "visitedPlaceIds": [
+        "tour:900001",
+        "tour:126508",
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "naver:을지로 노가리골목_1269921000_375662000",
+        "tour:900002",
+        "naver:드래곤힐스파_1269645000_375297000"
+      ]
+    },
+    {
+      "id": "seoul-18",
+      "style": "relaxed",
+      "companion": "couple",
+      "budget": "over200",
+      "preferredCategories": ["shop", "nature", "night"],
+      "visitedPlaceIds": [
+        "naver:명동거리_1269850000_375636000",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "tour:900006",
+        "tour:900005",
+        "naver:인사동 쌈지길_1269853000_375743000"
+      ]
+    },
+    {
+      "id": "seoul-19",
+      "style": "normal",
+      "companion": "solo",
+      "budget": "100to200",
+      "preferredCategories": ["nature", "night", "onsen"],
+      "visitedPlaceIds": [
+        "tour:900005",
+        "tour:900003",
+        "naver:토속촌 삼계탕_1269711000_375781000",
+        "naver:어니언 안국_1269862000_375772000",
+        "naver:명동교자 본점_1269856000_375626000",
+        "tour:900004",
+        "naver:청계천_1269784000_375690000"
+      ]
+    },
+    {
+      "id": "seoul-20",
+      "style": "relaxed",
+      "companion": "kids",
+      "budget": "50to100",
+      "preferredCategories": ["nature", "sight", "cafe"],
+      "visitedPlaceIds": [
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "naver:인사동 쌈지길_1269853000_375743000",
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "naver:어니언 안국_1269862000_375772000",
+        "tour:900009",
+        "naver:서울숲_1270374000_375444000",
+        "tour:126508"
+      ]
+    },
+    {
+      "id": "seoul-21",
+      "style": "relaxed",
+      "companion": "solo",
+      "budget": "over200",
+      "preferredCategories": ["nature", "cafe"],
+      "visitedPlaceIds": [
+        "tour:900005",
+        "tour:900006",
+        "naver:반포한강공원 달빛무지개분수_1269958000_375101000",
+        "naver:청계천_1269784000_375690000",
+        "naver:서울숲_1270374000_375444000",
+        "tour:900001"
+      ]
+    },
+    {
+      "id": "seoul-22",
+      "style": "normal",
+      "companion": "kids",
+      "budget": "50to100",
+      "preferredCategories": ["nature", "shop"],
+      "visitedPlaceIds": [
+        "naver:롯데월드타워 서울스카이_1271025000_375126000",
+        "naver:인사동 쌈지길_1269853000_375743000",
+        "naver:청계천_1269784000_375690000",
+        "tour:900008",
+        "tour:126508",
+        "tour:900006",
+        "naver:석촌호수_1271031000_375097000"
+      ]
+    },
+    {
+      "id": "seoul-23",
+      "style": "relaxed",
+      "companion": "solo",
+      "budget": "over200",
+      "preferredCategories": ["sight", "nature", "cafe"],
+      "visitedPlaceIds": [
+        "tour:900002",
+        "tour:900007",
+        "naver:드래곤힐스파_1269645000_375297000",
+        "tour:126508",
+        "naver:남산돈까스_1269835000_375565000"
+      ]
+    },
+    {
+      "id": "seoul-24",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "50to100",
+      "preferredCategories": ["onsen", "food"],
+      "visitedPlaceIds": [
+        "tour:900009",
+        "naver:소문난성수감자탕_1270560000_375430000",
+        "naver:툭툭누들타이_1269255000_375627000",
+        "tour:900002",
+        "naver:명동교자 본점_1269856000_375626000",
+        "naver:삼청동수제비_1269819000_375848000",
+        "naver:토속촌 삼계탕_1269711000_375781000",
+        "tour:126508",
+        "naver:롯데월드타워 서울스카이_1271025000_375126000",
+        "naver:드래곤힐스파_1269645000_375297000",
+        "naver:남산돈까스_1269835000_375565000"
+      ]
+    },
+    {
+      "id": "seoul-25",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "over200",
+      "preferredCategories": ["onsen", "night"],
+      "visitedPlaceIds": [
+        "tour:900004",
+        "naver:반포한강공원 달빛무지개분수_1269958000_375101000",
+        "naver:을지로 노가리골목_1269921000_375662000",
+        "naver:드래곤힐스파_1269645000_375297000",
+        "naver:툭툭누들타이_1269255000_375627000",
+        "naver:어니언 안국_1269862000_375772000",
+        "naver:롯데월드타워 서울스카이_1271025000_375126000",
+        "tour:900003"
+      ]
+    },
+    {
+      "id": "seoul-26",
+      "style": "relaxed",
+      "companion": "kids",
+      "budget": "100to200",
+      "preferredCategories": ["night", "sight"],
+      "visitedPlaceIds": [
+        "tour:900009",
+        "tour:126508",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "tour:900004",
+        "tour:900003",
+        "tour:900001",
+        "naver:동대문디자인플라자_1270092000_375665000"
+      ]
+    },
+    {
+      "id": "seoul-27",
+      "style": "relaxed",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["onsen", "sight"],
+      "visitedPlaceIds": [
+        "tour:126508",
+        "tour:900001",
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "naver:명동교자 본점_1269856000_375626000",
+        "tour:900009"
+      ]
+    },
+    {
+      "id": "seoul-28",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "100to200",
+      "preferredCategories": ["food", "sight", "onsen"],
+      "visitedPlaceIds": [
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "tour:900003",
+        "tour:126508",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "tour:900001",
+        "tour:900007",
+        "naver:홍대 걷고싶은거리_1269236000_375563000"
+      ]
+    },
+    {
+      "id": "seoul-29",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "100to200",
+      "preferredCategories": ["sight", "night", "food"],
+      "visitedPlaceIds": [
+        "naver:삼청동수제비_1269819000_375848000",
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "naver:남산돈까스_1269835000_375565000",
+        "tour:900002",
+        "tour:900001",
+        "tour:126508",
+        "naver:토속촌 삼계탕_1269711000_375781000",
+        "naver:롯데월드타워 서울스카이_1271025000_375126000",
+        "tour:900009"
+      ]
+    },
+    {
+      "id": "seoul-30",
+      "style": "relaxed",
+      "companion": "kids",
+      "budget": "100to200",
+      "preferredCategories": ["nature", "cafe", "sight"],
+      "visitedPlaceIds": [
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "tour:900006",
+        "tour:126508",
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "tour:900002"
+      ]
+    },
+    {
+      "id": "seoul-31",
+      "style": "packed",
+      "companion": "family",
+      "budget": "100to200",
+      "preferredCategories": ["sight", "cafe", "nature"],
+      "visitedPlaceIds": [
+        "tour:900002",
+        "naver:청계천_1269784000_375690000",
+        "tour:900005",
+        "naver:어니언 성수_1270581000_375447000",
+        "naver:명동거리_1269850000_375636000",
+        "tour:900003",
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "tour:126508",
+        "tour:900001",
+        "naver:석촌호수_1271031000_375097000",
+        "tour:900006"
+      ]
+    },
+    {
+      "id": "seoul-32",
+      "style": "packed",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["cafe", "onsen"],
+      "visitedPlaceIds": [
+        "naver:어니언 안국_1269862000_375772000",
+        "naver:어니언 성수_1270581000_375447000",
+        "naver:드래곤힐스파_1269645000_375297000",
+        "naver:소문난성수감자탕_1270560000_375430000",
+        "tour:900005",
+        "tour:900007",
+        "tour:900001",
+        "tour:126508",
+        "naver:더현대 서울_1269284000_375259000",
+        "tour:900002",
+        "naver:홍대 걷고싶은거리_1269236000_375563000"
+      ]
+    },
+    {
+      "id": "seoul-33",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["sight", "shop", "night"],
+      "visitedPlaceIds": [
+        "tour:126508",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "tour:900007",
+        "naver:명동교자 본점_1269856000_375626000",
+        "naver:명동거리_1269850000_375636000",
+        "tour:900003",
+        "naver:석촌호수_1271031000_375097000",
+        "tour:900009"
+      ]
+    },
+    {
+      "id": "seoul-34",
+      "style": "relaxed",
+      "companion": "kids",
+      "budget": "under50",
+      "preferredCategories": ["cafe", "onsen", "sight"],
+      "visitedPlaceIds": [
+        "tour:126508",
+        "tour:900001",
+        "naver:어니언 성수_1270581000_375447000",
+        "tour:900003",
+        "tour:900004"
+      ]
+    },
+    {
+      "id": "seoul-35",
+      "style": "packed",
+      "companion": "family",
+      "budget": "100to200",
+      "preferredCategories": ["cafe", "shop", "onsen"],
+      "visitedPlaceIds": [
+        "tour:900007",
+        "tour:900008",
+        "naver:어니언 성수_1270581000_375447000",
+        "tour:900004",
+        "naver:석촌호수_1271031000_375097000",
+        "naver:드래곤힐스파_1269645000_375297000",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "naver:명동교자 본점_1269856000_375626000",
+        "naver:청계천_1269784000_375690000"
+      ]
+    },
+    {
+      "id": "seoul-36",
+      "style": "relaxed",
+      "companion": "friends",
+      "budget": "100to200",
+      "preferredCategories": ["food", "cafe", "onsen"],
+      "visitedPlaceIds": [
+        "naver:어니언 성수_1270581000_375447000",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "tour:900002",
+        "naver:어니언 안국_1269862000_375772000",
+        "naver:명동교자 본점_1269856000_375626000",
+        "tour:900005"
+      ]
+    },
+    {
+      "id": "seoul-37",
+      "style": "packed",
+      "companion": "family",
+      "budget": "over200",
+      "preferredCategories": ["shop", "sight", "nature"],
+      "visitedPlaceIds": [
+        "tour:900004",
+        "tour:126508",
+        "naver:서울숲_1270374000_375444000",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "tour:900006",
+        "naver:더현대 서울_1269284000_375259000",
+        "tour:900002",
+        "tour:900001",
+        "naver:동대문디자인플라자_1270092000_375665000",
+        "tour:900009",
+        "naver:소문난성수감자탕_1270560000_375430000"
+      ]
+    },
+    {
+      "id": "seoul-38",
+      "style": "normal",
+      "companion": "solo",
+      "budget": "under50",
+      "preferredCategories": ["sight", "nature", "cafe"],
+      "visitedPlaceIds": [
+        "tour:900005",
+        "tour:900009",
+        "tour:126508",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000",
+        "naver:홍대 걷고싶은거리_1269236000_375563000",
+        "tour:900002",
+        "naver:석촌호수_1271031000_375097000",
+        "naver:북촌한옥마을_1269831000_375826000",
+        "tour:900006"
+      ]
+    },
+    {
+      "id": "seoul-39",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "over200",
+      "preferredCategories": ["nature", "cafe"],
+      "visitedPlaceIds": [
+        "naver:서울숲_1270374000_375444000",
+        "tour:900006",
+        "naver:소문난성수감자탕_1270560000_375430000",
+        "naver:어니언 안국_1269862000_375772000",
+        "naver:어니언 성수_1270581000_375447000",
+        "tour:900005",
+        "naver:석촌호수_1271031000_375097000",
+        "naver:더현대 서울_1269284000_375259000",
+        "naver:청계천_1269784000_375690000",
+        "tour:900002",
+        "naver:인사동 쌈지길_1269853000_375743000",
+        "naver:경의선숲길 연남동 구간_1269246000_375622000"
+      ]
+    },
+    {
+      "id": "seoul-40",
+      "style": "packed",
+      "companion": "family",
+      "budget": "100to200",
+      "preferredCategories": ["shop", "nature", "onsen"],
+      "visitedPlaceIds": [
+        "tour:126508",
+        "tour:900006",
+        "tour:900007",
+        "tour:900005",
+        "naver:더현대 서울_1269284000_375259000",
+        "naver:명동교자 본점_1269856000_375626000",
+        "naver:명동거리_1269850000_375636000",
+        "tour:900002",
+        "naver:드래곤힐스파_1269645000_375297000"
+      ]
+    }
+  ],
+  "tokyo": [
+    {
+      "id": "tokyo-01",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "100to200",
+      "preferredCategories": ["shop", "onsen"],
+      "visitedPlaceIds": [
+        "google:mock-shibuya-sky",
+        "google:mock-nakamise",
+        "google:mock-ginza-six",
+        "google:mock-takeshita",
+        "google:mock-ameyoko",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-spa-laqua",
+        "google:mock-meiji-jingu",
+        "google:mock-sensoji",
+        "google:mock-omoide-yokocho"
+      ]
+    },
+    {
+      "id": "tokyo-02",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "under50",
+      "preferredCategories": ["shop", "onsen", "food"],
+      "visitedPlaceIds": [
+        "google:mock-tsukiji",
+        "google:mock-ginza-six",
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-tokyo-tower",
+        "google:mock-afuri-harajuku",
+        "google:mock-nakamise",
+        "google:mock-yoyogi-park",
+        "google:mock-fuunji",
+        "google:mock-shibuya-sky",
+        "google:mock-takeshita"
+      ]
+    },
+    {
+      "id": "tokyo-03",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "under50",
+      "preferredCategories": ["shop", "nature", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-shinjuku-gyoen",
+        "google:mock-takeshita",
+        "google:mock-yoyogi-park",
+        "google:mock-ameyoko",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-ueno-park",
+        "google:mock-nakamise"
+      ]
+    },
+    {
+      "id": "tokyo-04",
+      "style": "packed",
+      "companion": "family",
+      "budget": "over200",
+      "preferredCategories": ["cafe", "night", "food"],
+      "visitedPlaceIds": [
+        "google:mock-uobei-shibuya",
+        "google:mock-daikokuya",
+        "google:mock-fuglen",
+        "google:mock-tsukiji",
+        "google:mock-tocho",
+        "google:mock-skytree",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-tokyo-tower",
+        "google:mock-afuri-harajuku",
+        "google:mock-ichiran-shibuya"
+      ]
+    },
+    {
+      "id": "tokyo-05",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "over200",
+      "preferredCategories": ["sight", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-meiji-jingu",
+        "google:mock-teamlab-planets",
+        "google:mock-mihashi",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-shibuya-crossing",
+        "google:mock-sensoji",
+        "google:mock-skytree",
+        "google:mock-shibuya-sky",
+        "google:mock-fuglen"
+      ]
+    },
+    {
+      "id": "tokyo-06",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "under50",
+      "preferredCategories": ["night", "sight", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-tocho",
+        "google:mock-meiji-jingu",
+        "google:mock-skytree",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-omoide-yokocho",
+        "google:mock-shibuya-sky",
+        "google:mock-tokyo-tower"
+      ]
+    },
+    {
+      "id": "tokyo-07",
+      "style": "relaxed",
+      "companion": "couple",
+      "budget": "50to100",
+      "preferredCategories": ["night", "nature", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-skytree",
+        "google:mock-tokyo-tower",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-yoyogi-park"
+      ]
+    },
+    {
+      "id": "tokyo-08",
+      "style": "normal",
+      "companion": "solo",
+      "budget": "100to200",
+      "preferredCategories": ["sight", "shop"],
+      "visitedPlaceIds": [
+        "google:mock-teamlab-planets",
+        "google:mock-ginza-six",
+        "google:mock-nakamise",
+        "google:mock-sensoji",
+        "google:mock-ameyoko",
+        "google:mock-meiji-jingu",
+        "google:mock-shinjuku-gyoen"
+      ]
+    },
+    {
+      "id": "tokyo-09",
+      "style": "packed",
+      "companion": "couple",
+      "budget": "100to200",
+      "preferredCategories": ["night", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-omoide-yokocho",
+        "google:mock-skytree",
+        "google:mock-ameyoko",
+        "google:mock-ichiran-shibuya",
+        "google:mock-tocho",
+        "google:mock-sensoji",
+        "google:mock-shibuya-sky",
+        "google:mock-nakamise",
+        "google:mock-tokyo-tower",
+        "google:mock-shibuya-crossing",
+        "google:mock-mihashi",
+        "google:mock-bluebottle-kiyosumi"
+      ]
+    },
+    {
+      "id": "tokyo-10",
+      "style": "packed",
+      "companion": "family",
+      "budget": "over200",
+      "preferredCategories": ["shop", "cafe", "sight"],
+      "visitedPlaceIds": [
+        "google:mock-fuglen",
+        "google:mock-meiji-jingu",
+        "google:mock-teamlab-planets",
+        "google:mock-ameyoko",
+        "google:mock-mihashi",
+        "google:mock-shibuya-crossing",
+        "google:mock-tsukiji",
+        "google:mock-sensoji",
+        "google:mock-skytree"
+      ]
+    },
+    {
+      "id": "tokyo-11",
+      "style": "relaxed",
+      "companion": "friends",
+      "budget": "100to200",
+      "preferredCategories": ["food", "cafe", "night"],
+      "visitedPlaceIds": [
+        "google:mock-tokyo-tower",
+        "google:mock-ameyoko",
+        "google:mock-skytree",
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-afuri-harajuku",
+        "google:mock-fuunji",
+        "google:mock-shibuya-crossing"
+      ]
+    },
+    {
+      "id": "tokyo-12",
+      "style": "packed",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["food", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-ichiran-shibuya",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-tokyo-tower",
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-tsukiji",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-uobei-shibuya",
+        "google:mock-ginza-six",
+        "google:mock-afuri-harajuku"
+      ]
+    },
+    {
+      "id": "tokyo-13",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["food", "sight"],
+      "visitedPlaceIds": [
+        "google:mock-shibuya-crossing",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-skytree",
+        "google:mock-sensoji",
+        "google:mock-uobei-shibuya",
+        "google:mock-takeshita",
+        "google:mock-teamlab-planets",
+        "google:mock-sushizanmai-tsukiji"
+      ]
+    },
+    {
+      "id": "tokyo-14",
+      "style": "packed",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["cafe", "shop", "night"],
+      "visitedPlaceIds": [
+        "google:mock-omoide-yokocho",
+        "google:mock-mihashi",
+        "google:mock-shibuya-sky",
+        "google:mock-skytree",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-tocho",
+        "google:mock-tokyo-tower",
+        "google:mock-takeshita",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-ameyoko",
+        "google:mock-shibuya-crossing",
+        "google:mock-yoyogi-park"
+      ]
+    },
+    {
+      "id": "tokyo-15",
+      "style": "relaxed",
+      "companion": "couple",
+      "budget": "under50",
+      "preferredCategories": ["shop", "nature", "food"],
+      "visitedPlaceIds": [
+        "google:mock-nakamise",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-sensoji",
+        "google:mock-tsukiji",
+        "google:mock-shibuya-sky",
+        "google:mock-uobei-shibuya"
+      ]
+    },
+    {
+      "id": "tokyo-16",
+      "style": "normal",
+      "companion": "kids",
+      "budget": "100to200",
+      "preferredCategories": ["onsen", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-meiji-jingu",
+        "google:mock-fuglen",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-mihashi",
+        "google:mock-spa-laqua",
+        "google:mock-ueno-park",
+        "google:mock-ameyoko"
+      ]
+    },
+    {
+      "id": "tokyo-17",
+      "style": "relaxed",
+      "companion": "solo",
+      "budget": "under50",
+      "preferredCategories": ["cafe", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-sensoji",
+        "google:mock-ueno-park",
+        "google:mock-teamlab-planets",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-fuglen",
+        "google:mock-mihashi",
+        "google:mock-tokyo-tower"
+      ]
+    },
+    {
+      "id": "tokyo-18",
+      "style": "packed",
+      "companion": "friends",
+      "budget": "under50",
+      "preferredCategories": ["shop", "onsen"],
+      "visitedPlaceIds": [
+        "google:mock-ginza-six",
+        "google:mock-takeshita",
+        "google:mock-spa-laqua",
+        "google:mock-nakamise",
+        "google:mock-ameyoko",
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-uobei-shibuya",
+        "google:mock-skytree",
+        "google:mock-shibuya-crossing",
+        "google:mock-tocho",
+        "google:mock-tokyo-tower"
+      ]
+    },
+    {
+      "id": "tokyo-19",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "100to200",
+      "preferredCategories": ["night", "sight", "shop"],
+      "visitedPlaceIds": [
+        "google:mock-tocho",
+        "google:mock-shibuya-sky",
+        "google:mock-meiji-jingu",
+        "google:mock-tsukiji",
+        "google:mock-ameyoko",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-gyukatsu-asakusa"
+      ]
+    },
+    {
+      "id": "tokyo-20",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "50to100",
+      "preferredCategories": ["cafe", "sight"],
+      "visitedPlaceIds": [
+        "google:mock-sensoji",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-fuglen",
+        "google:mock-ameyoko",
+        "google:mock-shibuya-crossing",
+        "google:mock-meiji-jingu",
+        "google:mock-teamlab-planets"
+      ]
+    },
+    {
+      "id": "tokyo-21",
+      "style": "relaxed",
+      "companion": "couple",
+      "budget": "under50",
+      "preferredCategories": ["onsen", "food"],
+      "visitedPlaceIds": [
+        "google:mock-fuunji",
+        "google:mock-spa-laqua",
+        "google:mock-tsukiji",
+        "google:mock-daikokuya",
+        "google:mock-tocho",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-afuri-harajuku"
+      ]
+    },
+    {
+      "id": "tokyo-22",
+      "style": "normal",
+      "companion": "kids",
+      "budget": "50to100",
+      "preferredCategories": ["nature", "food", "onsen"],
+      "visitedPlaceIds": [
+        "google:mock-mihashi",
+        "google:mock-daikokuya",
+        "google:mock-ichiran-shibuya",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-spa-laqua",
+        "google:mock-tsukiji"
+      ]
+    },
+    {
+      "id": "tokyo-23",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "100to200",
+      "preferredCategories": ["food", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-fuunji",
+        "google:mock-afuri-harajuku",
+        "google:mock-tsukiji",
+        "google:mock-ueno-park",
+        "google:mock-daikokuya",
+        "google:mock-meiji-jingu"
+      ]
+    },
+    {
+      "id": "tokyo-24",
+      "style": "normal",
+      "companion": "couple",
+      "budget": "over200",
+      "preferredCategories": ["food", "cafe", "sight"],
+      "visitedPlaceIds": [
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-teamlab-planets",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-daikokuya",
+        "google:mock-sensoji",
+        "google:mock-tsukiji"
+      ]
+    },
+    {
+      "id": "tokyo-25",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "100to200",
+      "preferredCategories": ["cafe", "night", "onsen"],
+      "visitedPlaceIds": [
+        "google:mock-daikokuya",
+        "google:mock-skytree",
+        "google:mock-spa-laqua",
+        "google:mock-tokyo-tower",
+        "google:mock-mihashi",
+        "google:mock-tocho",
+        "google:mock-shibuya-sky",
+        "google:mock-nakamise",
+        "google:mock-bluebottle-kiyosumi"
+      ]
+    },
+    {
+      "id": "tokyo-26",
+      "style": "relaxed",
+      "companion": "solo",
+      "budget": "under50",
+      "preferredCategories": ["sight", "cafe", "night"],
+      "visitedPlaceIds": [
+        "google:mock-sensoji",
+        "google:mock-fuglen",
+        "google:mock-skytree",
+        "google:mock-tokyo-tower",
+        "google:mock-meiji-jingu",
+        "google:mock-shibuya-sky"
+      ]
+    },
+    {
+      "id": "tokyo-27",
+      "style": "relaxed",
+      "companion": "solo",
+      "budget": "50to100",
+      "preferredCategories": ["cafe", "night", "onsen"],
+      "visitedPlaceIds": [
+        "google:mock-omoide-yokocho",
+        "google:mock-tokyo-tower",
+        "google:mock-tocho",
+        "google:mock-skytree",
+        "google:mock-shibuya-sky",
+        "google:mock-spa-laqua"
+      ]
+    },
+    {
+      "id": "tokyo-28",
+      "style": "relaxed",
+      "companion": "kids",
+      "budget": "50to100",
+      "preferredCategories": ["shop", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-ameyoko",
+        "google:mock-skytree",
+        "google:mock-takeshita",
+        "google:mock-ichiran-shibuya",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-nakamise",
+        "google:mock-ginza-six"
+      ]
+    },
+    {
+      "id": "tokyo-29",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "under50",
+      "preferredCategories": ["sight", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-shinjuku-gyoen",
+        "google:mock-shibuya-crossing",
+        "google:mock-yoyogi-park",
+        "google:mock-meiji-jingu",
+        "google:mock-ueno-park",
+        "google:mock-sensoji",
+        "google:mock-omoide-yokocho",
+        "google:mock-teamlab-planets",
+        "google:mock-ichiran-shibuya",
+        "google:mock-skytree"
+      ]
+    },
+    {
+      "id": "tokyo-30",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "over200",
+      "preferredCategories": ["shop", "food", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-uobei-shibuya",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-ameyoko",
+        "google:mock-nakamise",
+        "google:mock-skytree",
+        "google:mock-omoide-yokocho",
+        "google:mock-yoyogi-park",
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-afuri-harajuku",
+        "google:mock-fuunji",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-takeshita"
+      ]
+    },
+    {
+      "id": "tokyo-31",
+      "style": "normal",
+      "companion": "kids",
+      "budget": "over200",
+      "preferredCategories": ["onsen", "shop"],
+      "visitedPlaceIds": [
+        "google:mock-ameyoko",
+        "google:mock-meiji-jingu",
+        "google:mock-ginza-six",
+        "google:mock-nakamise",
+        "google:mock-sensoji",
+        "google:mock-takeshita",
+        "google:mock-uobei-shibuya",
+        "google:mock-omoide-yokocho",
+        "google:mock-spa-laqua"
+      ]
+    },
+    {
+      "id": "tokyo-32",
+      "style": "packed",
+      "companion": "kids",
+      "budget": "50to100",
+      "preferredCategories": ["shop", "cafe", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-ueno-park",
+        "google:mock-ginza-six",
+        "google:mock-yoyogi-park",
+        "google:mock-fuglen",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-takeshita",
+        "google:mock-daikokuya",
+        "google:mock-nakamise",
+        "google:mock-shibuya-sky",
+        "google:mock-ameyoko"
+      ]
+    },
+    {
+      "id": "tokyo-33",
+      "style": "normal",
+      "companion": "solo",
+      "budget": "50to100",
+      "preferredCategories": ["night", "food"],
+      "visitedPlaceIds": [
+        "google:mock-skytree",
+        "google:mock-tokyo-tower",
+        "google:mock-afuri-harajuku",
+        "google:mock-yoyogi-park",
+        "google:mock-tocho",
+        "google:mock-sushizanmai-tsukiji",
+        "google:mock-ichiran-shibuya",
+        "google:mock-meiji-jingu"
+      ]
+    },
+    {
+      "id": "tokyo-34",
+      "style": "relaxed",
+      "companion": "friends",
+      "budget": "100to200",
+      "preferredCategories": ["onsen", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-skytree",
+        "google:mock-tokyo-tower",
+        "google:mock-shinjuku-gyoen",
+        "google:mock-yoyogi-park",
+        "google:mock-fuglen",
+        "google:mock-spa-laqua"
+      ]
+    },
+    {
+      "id": "tokyo-35",
+      "style": "normal",
+      "companion": "friends",
+      "budget": "over200",
+      "preferredCategories": ["shop", "cafe", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-afuri-harajuku",
+        "google:mock-fuglen",
+        "google:mock-ueno-park",
+        "google:mock-ameyoko",
+        "google:mock-takeshita",
+        "google:mock-nakamise",
+        "google:mock-skytree"
+      ]
+    },
+    {
+      "id": "tokyo-36",
+      "style": "packed",
+      "companion": "friends",
+      "budget": "50to100",
+      "preferredCategories": ["food", "night", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-shibuya-sky",
+        "google:mock-takeshita",
+        "google:mock-skytree",
+        "google:mock-omoide-yokocho",
+        "google:mock-uobei-shibuya",
+        "google:mock-fuunji",
+        "google:mock-meiji-jingu",
+        "google:mock-tokyo-tower",
+        "google:mock-ginza-six",
+        "google:mock-teamlab-planets",
+        "google:mock-ueno-park"
+      ]
+    },
+    {
+      "id": "tokyo-37",
+      "style": "packed",
+      "companion": "solo",
+      "budget": "over200",
+      "preferredCategories": ["night", "onsen"],
+      "visitedPlaceIds": [
+        "google:mock-omoide-yokocho",
+        "google:mock-spa-laqua",
+        "google:mock-skytree",
+        "google:mock-afuri-harajuku",
+        "google:mock-tokyo-tower",
+        "google:mock-ichiran-shibuya",
+        "google:mock-tocho",
+        "google:mock-shibuya-sky",
+        "google:mock-fuglen",
+        "google:mock-ueno-park",
+        "google:mock-shinjuku-gyoen"
+      ]
+    },
+    {
+      "id": "tokyo-38",
+      "style": "relaxed",
+      "companion": "kids",
+      "budget": "50to100",
+      "preferredCategories": ["shop", "nature"],
+      "visitedPlaceIds": [
+        "google:mock-shinjuku-gyoen",
+        "google:mock-ginza-six",
+        "google:mock-takeshita",
+        "google:mock-yoyogi-park",
+        "google:mock-tsukiji"
+      ]
+    },
+    {
+      "id": "tokyo-39",
+      "style": "relaxed",
+      "companion": "kids",
+      "budget": "over200",
+      "preferredCategories": ["sight", "onsen", "cafe"],
+      "visitedPlaceIds": [
+        "google:mock-bluebottle-kiyosumi",
+        "google:mock-spa-laqua",
+        "google:mock-tokyo-tower",
+        "google:mock-fuglen",
+        "google:mock-teamlab-planets",
+        "google:mock-shibuya-crossing",
+        "google:mock-sensoji"
+      ]
+    },
+    {
+      "id": "tokyo-40",
+      "style": "relaxed",
+      "companion": "friends",
+      "budget": "100to200",
+      "preferredCategories": ["night", "food"],
+      "visitedPlaceIds": [
+        "google:mock-meiji-jingu",
+        "google:mock-fuunji",
+        "google:mock-skytree",
+        "google:mock-gyukatsu-asakusa",
+        "google:mock-tsukiji",
+        "google:mock-spa-laqua"
+      ]
+    }
+  ]
+}
