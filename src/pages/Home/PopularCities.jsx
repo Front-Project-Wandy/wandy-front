@@ -1,13 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Card from '../../components/common/Card';
+import FlipCardFrame from '../../components/common/FlipCardFrame';
 import { isCityAvailable, POPULAR_CITIES } from './popularCityList';
 import StartTripConfirmModal from './StartTripConfirmModal';
 import { useStartTrip } from './useStartTrip';
 
 // 홈 "지금 떠나고 싶은 도시" (61). 누르면 그 나라·도시가 골라진 채로 마법사 STEP1이 열린다.
 // 데이터가 없는 도시는 흐리게 "준비 중"으로 보여 주고 누를 수 없다 (마법사 STEP 2·3과 같은 방식).
-// 이용 가능한 도시는 큰 사진으로, 준비 중인 도시는 작은 흑백 사진에 「준비 중」 표시로 구분한다.
+// 이용 가능한 도시는 큰 사진의 뒤집히는 카드로, 누르면 뒷면에 도시 소개와 [이 도시로 여행 만들기]가 나온다.
+// 준비 중인 도시는 작은 흑백 사진에 「준비 중」 표시로 구분하고 뒤집히지 않는다.
 export default function PopularCities() {
   const { t } = useTranslation();
   const { requestStart, isConfirmOpen, confirmStart, continueDraft, cancelStart } = useStartTrip();
@@ -16,7 +18,7 @@ export default function PopularCities() {
     <section aria-labelledby="popular-cities-title" className="flex flex-col gap-3">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="mb-3 text-caption font-bold tracking-widest text-primary">
+          <p className="mb-3 text-caption font-bold tracking-widest text-link">
             {t('home.editorial.citiesEyebrow')}
           </p>
           <h2 id="popular-cities-title" className="text-title font-bold lg:text-display">
@@ -38,54 +40,76 @@ export default function PopularCities() {
         ].map((item) => {
           const cityName = t(`common.city.${item.city}`);
           const isAvailable = isCityAvailable(item);
-          const content = (
-            <>
-              <div className="motion-card-frame relative overflow-hidden">
-                <img
-                  src={`/images/home/${item.city}.jpg`}
-                  alt={t(`home.editorial.${item.city}.alt`)}
-                  loading="lazy"
-                  className={`w-full object-cover motion-card-image ${isAvailable ? 'aspect-video' : 'aspect-3/2 grayscale-60'}`}
-                />
-                {isAvailable ? null : (
-                  <span className="absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 text-caption font-bold text-white">
-                    {t('home.cities.comingSoon')}
-                  </span>
-                )}
-              </div>
-              <div
-                className={`flex items-center justify-between gap-3 ${isAvailable ? 'p-5 sm:p-6' : 'p-4'}`}
+          const photo = (
+            <img
+              src={`/images/home/${item.city}.jpg`}
+              alt={t(`home.editorial.${item.city}.alt`)}
+              loading="lazy"
+              className={`w-full object-cover ${isAvailable ? 'size-full' : 'aspect-3/2 grayscale-60'}`}
+            />
+          );
+          const label = (
+            <div>
+              <span className="text-caption text-text/60">
+                {t(`common.country.${item.country}`)}
+              </span>
+              <span className="mt-1 block text-subtitle font-bold">{cityName}</span>
+            </div>
+          );
+
+          if (!isAvailable) {
+            return (
+              <li key={item.city}>
+                <Card aria-disabled="true" className="opacity-70">
+                  <div className="relative overflow-hidden">
+                    {photo}
+                    <span className="absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 text-caption font-bold text-white">
+                      {t('home.cities.comingSoon')}
+                    </span>
+                  </div>
+                  <div className="p-4">{label}</div>
+                </Card>
+              </li>
+            );
+          }
+
+          const front = (
+            <span className="flex size-full flex-col">
+              <span className="block min-h-0 flex-1 overflow-hidden">{photo}</span>
+              <span className="flex items-center justify-between gap-3 p-5 sm:p-6">
+                {label}
+                <span className="text-caption text-text/50">{t('home.cities.flipHint')}</span>
+              </span>
+            </span>
+          );
+          const back = (
+            <span className="flex size-full flex-col gap-3 bg-bg-soft p-5 sm:p-8">
+              {label}
+              <span className="text-subtitle font-bold whitespace-pre-line break-keep sm:text-title">
+                {t(`home.editorial.${item.city}.title`)}
+              </span>
+              <span className="text-body-sm leading-relaxed text-text/70 break-keep">
+                {t(`home.editorial.${item.city}.description`)}
+              </span>
+              <button
+                type="button"
+                aria-label={t('home.cities.startLabel', { city: cityName })}
+                onClick={() => requestStart({ country: item.country, city: item.city })}
+                className="mt-auto self-start rounded-xl bg-primary px-5 py-3 text-body font-bold text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
-                <div>
-                  <span className="text-caption text-text/60">
-                    {t(`common.country.${item.country}`)}
-                  </span>
-                  <span className="mt-1 block text-subtitle font-bold">{cityName}</span>
-                </div>
-                {isAvailable ? (
-                  <span aria-hidden="true" className="text-title text-primary">
-                    ↗
-                  </span>
-                ) : null}
-              </div>
-            </>
+                {t('home.editorial.cityAction')} <span aria-hidden="true">↗</span>
+              </button>
+            </span>
           );
 
           return (
-            <li key={item.city} className={isAvailable ? 'col-span-2' : ''}>
-              {isAvailable ? (
-                <Card
-                  className="group h-full"
-                  aria-label={t('home.cities.startLabel', { city: cityName })}
-                  onClick={() => requestStart({ country: item.country, city: item.city })}
-                >
-                  {content}
-                </Card>
-              ) : (
-                <Card aria-disabled="true" className="opacity-70">
-                  {content}
-                </Card>
-              )}
+            <li key={item.city} className="col-span-2">
+              <FlipCardFrame
+                front={front}
+                back={back}
+                ariaLabel={t('common.flipCard.label', { name: cityName })}
+                className="aspect-square sm:aspect-16/10"
+              />
             </li>
           );
         })}
