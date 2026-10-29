@@ -49,13 +49,13 @@ export const flightFromMock = (mock, link) => ({
 // 플랜 store(C) setFlight 모양 { flightNo, returnFlightNo, arriveAirport, arriveAt, departAt, link }으로 바꾼다.
 // 시각만 받았으니 날짜는 여행 첫날·마지막 날을 붙인다.
 // 목업에서 고른 항공편의 예약 링크는 고른 순간의 날짜·인원으로 만들어져서, 그 뒤 STEP1에서 날짜를 바꾸면 어긋난다.
-// 그래서 저장할 때 지금 날짜·인원으로 다시 만든다 (만들 수 없으면 원래 링크).
+// 그래서 저장할 때 지금 날짜·인원으로 다시 만든다 (만들 수 없으면 옛 날짜 링크를 남기지 않고 비운다).
 export function toPlanFlight(flight, trip) {
   if (!flight?.status || !flight.arriveTime || !flight.departTime) return null;
   const { startDate, endDate } = trip;
   const link =
     flight.status === 'searching'
-      ? (getFlightSearchLinks({ from: flight.departureAirport, ...trip })[0]?.href ?? flight.link)
+      ? (getFlightSearchLinks({ from: flight.departureAirport, ...trip })[0]?.href ?? null)
       : flight.link;
   return {
     flightNo: flight.flightNo.trim() || null,

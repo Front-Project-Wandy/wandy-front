@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { setPageTitle } from '../../components/common/setPageTitle';
@@ -32,21 +32,29 @@ const STEP_SCREENS = {
 // 와이어프레임에 사이트 헤더가 없어서 App.jsx 레이아웃 밖에 있고, 나가는 길로 로고만 둔다.
 export default function WizardPage() {
   const { t } = useTranslation();
-  const step = useWizardStore((state) => state.step);
+  const savedStep = useWizardStore((state) => state.step);
   const setStep = useWizardStore((state) => state.setStep);
+  // 「이어서 만들기」로 들어오면 저장된 단계부터 열려서 STEP1 검사를 다시 거치지 않는다.
+  // 그사이 출발일이 지났거나 기본 정보가 잘못됐으면 STEP1로 돌려보낸다 (STEP1은 그 에러를 바로 보여 준다).
+  // 처음 열 때 한 번만 보고(단계마다 보면 STEP1에서 고치는 도중에도 끌려간다), 첫 화면부터 STEP1을 그린다.
+  // effect에서만 옮기면 저장된 단계가 한 번 그려지는데, 잘못된 날짜(5자리 연도)면 그 단계의 DAY 계산이 오래 걸린다.
+  const [mustFixBasicInfo, setMustFixBasicInfo] = useState(() => {
+    const { step: openedStep, draft } = useWizardStore.getState();
+    return openedStep > 1 && hasBasicInfoErrors(draft);
+  });
+  const step = mustFixBasicInfo ? 1 : savedStep;
   const { step: current, key } = getStepInfo(step);
   const StepScreen = STEP_SCREENS[current];
   const heading = t('wizard.step.heading', { step: current, title: t(`wizard.step.${key}.title`) });
   const headingRef = useRef(null);
   useScrollToTop();
 
-  // 「이어서 만들기」로 들어오면 저장된 단계부터 열려서 STEP1 검사를 다시 거치지 않는다.
-  // 그사이 출발일이 지났거나 기본 정보가 잘못됐으면 STEP1로 돌려보낸다 (STEP1은 그 에러를 바로 보여 준다).
-  // 처음 열 때 한 번만 본다 — 단계마다 보면 STEP1에서 고치는 도중에도 끌려간다.
+  // 화면은 이미 STEP1을 그렸고, 저장된 단계도 STEP1로 맞춘 뒤 표시를 끈다 (이후에는 저장된 단계를 따른다).
   useEffect(() => {
-    const { step: savedStep, draft } = useWizardStore.getState();
-    if (savedStep > 1 && hasBasicInfoErrors(draft)) setStep(1);
-  }, [setStep]);
+    if (!mustFixBasicInfo) return;
+    setStep(1);
+    setMustFixBasicInfo(false);
+  }, [mustFixBasicInfo, setStep]);
 
   // 단계가 바뀌거나 다른 화면에서 들어오면 탭 제목을 바꾸고 포커스를 단계 제목으로 옮긴다 (90 접근성).
   // [다음]을 눌러도 포커스가 아래 버튼 자리에 남으면 화면 낭독기가 새 단계를 읽어 주지 않는다.

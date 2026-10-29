@@ -56,13 +56,14 @@ export const stayFromMock = (mock, link) => ({
 // 플랜 store(C) setStay 모양 { name, lat, lng, checkIn, checkOut, link }으로 바꾼다.
 // 시각만 받았으니 날짜는 여행 첫날(체크인)·마지막 날(체크아웃)을 붙인다.
 // 목업에서 고른 숙소의 예약 링크는 저장할 때 지금 날짜·인원으로 다시 만든다 (항공 toPlanFlight와 같은 이유).
+// 당일 여행처럼 링크를 만들 수 없으면 옛 날짜 링크를 남기지 않고 비운다.
 export function toPlanStay(stay, trip) {
   if (!stay?.status || !stay.name.trim() || stay.lat === null) return null;
   const { startDate, endDate } = trip;
   const searchName = findStayArea(trip.city, stay.area)?.searchName;
   const link =
     stay.status === 'searching'
-      ? (getStaySearchLinks({ searchName, ...trip })[0]?.href ?? stay.link)
+      ? (getStaySearchLinks({ searchName, ...trip })[0]?.href ?? null)
       : stay.link;
   return {
     name: stay.name.trim(),
