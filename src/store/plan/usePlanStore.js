@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { stripExpiredCoords } from '../../features/search/utils/coordsCache';
 import { moveItemInDays } from './moveItemInDays';
 import { buildTripCopy } from './planCopy';
 import { buildDays } from './planDays';
@@ -265,6 +266,16 @@ export const usePlanStore = create(
         trips: [],
       }),
       partialize: (state) => ({ trip: state.trip, trips: state.trips }),
+      // 구글 장소 좌표는 30일까지만 둘 수 있어서(약관), 저장소에서 불러올 때 만료된 좌표를 지운다.
+      // 지금 여는 여행과 보관함 모두 해당한다. 지운 좌표는 그 여행을 플래너에서 열 때 다시 받아 온다.
+      merge: (persisted, current) => ({
+        ...current,
+        trip: persisted?.trip ? stripExpiredCoords(persisted.trip) : current.trip,
+        trips: (persisted?.trips ?? current.trips).map((item) => stripExpiredCoords(item)),
+      }),
+      // merge는 불러온 값을 메모리에서만 바꾼다. 지운 좌표가 저장소에도 남지 않도록 복원 직후 한 번 저장한다.
+      // 복원 중에는 usePlanStore가 아직 없을 수 있어서, 콜백이 받는 state로 부른다.
+      onRehydrateStorage: () => (state) => state?.clearHistory(),
     },
   ),
 );

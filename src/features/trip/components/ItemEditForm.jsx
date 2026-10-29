@@ -37,7 +37,7 @@ export default function ItemEditForm({ item, onSave, onCancel }) {
     errors[field] ? t(errors[field], { min: MIN_STAY_MINUTES, max: MAX_STAY_MINUTES }) : undefined;
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="mt-3 space-y-3">
+    <form data-item-edit-form onSubmit={handleSubmit} noValidate className="mt-3 space-y-3">
       <TimeSelect
         label={t('planner.edit.startTime')}
         value={form.startTime}

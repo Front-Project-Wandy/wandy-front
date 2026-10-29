@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 // 복사·공유 동작과 결과 안내 (요구사항 #72).
 // 공유는 브라우저의 공유 시트(Web Share API)를 쓴다. 휴대폰에서는 카카오톡·LINE이 목록에 같이 나와서 SDK나 키가 필요 없다.
@@ -26,5 +26,8 @@ export function useShareActions({ title, text }) {
     }
   };
 
-  return { status, canShare, copy, share, resetStatus: () => setStatus(null) };
+  // 창이 열릴 때 effect에서 쓰므로 매번 새로 만들어지지 않게 한다
+  const resetStatus = useCallback(() => setStatus(null), []);
+
+  return { status, canShare, copy, share, resetStatus };
 }

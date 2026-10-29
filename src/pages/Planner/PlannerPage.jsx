@@ -23,6 +23,7 @@ import TripWeather from '../../features/trip/components/TripWeather';
 import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
 import ViewToggle from '../../features/trip/components/ViewToggle';
 import { useUndoShortcut } from '../../features/trip/hooks/useUndoShortcut';
+import { useRefreshExpiredCoords } from '../../features/search/hooks/useRefreshExpiredCoords';
 import { usePlanStore } from '../../store/plan/usePlanStore';
 
 // /trip/:id — 플래너 (P01). 지금은 DAY별 일정 목록(12), 장소 추가·삭제(13), 시간·메모 편집(17), 국가별 지도(6), 구간 교통(18), 항공 시간 경고(48), AI 빈 일정 채우기(55), 번호 마커·동선 선(14), 목록·마커 연동(15), 여러 여행 열기(36), 끌어서 순서 바꾸기(16), 되돌리기·다시 실행·여행 복제(71), 예상 총비용(57), 공항 → 숙소 이동(52), 타임라인 보기(80)까지.
@@ -114,6 +115,22 @@ export default function PlannerPage() {
       ),
     );
   };
+  // AI가 다시 짠 그 DAY의 일정으로 바꾼다 (79). 기존 장소를 빼고 새 장소를 넣는 것을 한 번에 묶어서 되돌리기 한 번에 원래대로 돌아간다.
+  // 새 장소가 하나도 없으면 기존 장소만 지워지지 않게 아무것도 하지 않는다.
+  const handleRegenerateDay = (dayIndex, days) => {
+    const generated = days.filter((day) => day.dayIndex === dayIndex);
+    if (!generated.some((day) => day.items.length > 0)) return;
+    batchChanges(() => {
+      usePlanStore
+        .getState()
+        .trip.days[dayIndex].items.forEach((item) => removeItem(dayIndex, item.id));
+      generated.forEach(({ items }) =>
+        items.forEach(({ place, startTime, stayMinutes }) =>
+          addItem(dayIndex, place, { startTime, stayMinutes }),
+        ),
+      );
+    });
+  };
   // 복제한 새 여행이 지금 여는 여행이 되므로, 그 여행의 플래너로 바로 간다
   const handleDuplicate = (values) => {
     const newId = duplicateTrip(trip.id, values);
@@ -123,6 +140,8 @@ export default function PlannerPage() {
   };
   // 여행이 정상으로 불러와졌을 때만 AI 채우기 버튼을 보여 준다
   const isTripReady = Boolean(trip) && trip.days.length > 0 && trip.id === id;
+  // 구글 장소 좌표가 30일이 되면 placeId로 다시 받아 온다 (약관)
+  useRefreshExpiredCoords(isTripReady ? trip : null);
   const createAction = <Button onClick={handleCreate}>{t('planner.empty.action')}</Button>;
 
   const renderBody = () => {
@@ -171,6 +190,7 @@ export default function PlannerPage() {
             <DayList
               days={trip.days}
               country={trip.country}
+              city={trip.city}
               transportMode={trip.transportMode}
               style={trip.style}
               flight={trip.flight}
@@ -181,6 +201,7 @@ export default function PlannerPage() {
               onRemoveItem={removeItem}
               onMoveItem={moveItem}
               onReorderDay={reorderDay}
+              onRegenerateDay={handleRegenerateDay}
             />
           ) : null}
           <MapView
