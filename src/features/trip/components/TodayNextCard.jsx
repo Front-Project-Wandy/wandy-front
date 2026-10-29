@@ -13,6 +13,8 @@ export default function TodayNextCard({ item, minutesUntil, country, transportMo
   const { t } = useTranslation();
   const name = useItemName(item);
   const { status, position, request } = useCurrentPosition();
+  // 좌표가 없는 일정(투어 상품, 좌표를 다시 받는 중인 구글 장소)은 거리·길찾기를 만들 수 없어서 숨긴다
+  const hasCoords = Number.isFinite(item.lat) && Number.isFinite(item.lng);
 
   const handleDirections = () => {
     const url = buildDirectionsUrl({
@@ -59,19 +61,21 @@ export default function TodayNextCard({ item, minutesUntil, country, transportMo
       <p className="text-body-sm">
         {item.startTime} {renderUntil() ? `· ${renderUntil()}` : ''}
       </p>
-      {renderPosition() ? (
+      {hasCoords && renderPosition() ? (
         <p className="text-body-sm text-text/70" aria-live="polite">
           {renderPosition()}
         </p>
       ) : null}
-      <div className="flex flex-wrap gap-2 pt-1">
-        <Button variant="secondary" size="sm" loading={status === 'loading'} onClick={request}>
-          {t('planner.today.locate')}
-        </Button>
-        <Button size="sm" onClick={handleDirections}>
-          {t('planner.today.directions')}
-        </Button>
-      </div>
+      {hasCoords ? (
+        <div className="flex flex-wrap gap-2 pt-1">
+          <Button variant="secondary" size="sm" loading={status === 'loading'} onClick={request}>
+            {t('planner.today.locate')}
+          </Button>
+          <Button size="sm" onClick={handleDirections}>
+            {t('planner.today.directions')}
+          </Button>
+        </div>
+      ) : null}
     </section>
   );
 }
