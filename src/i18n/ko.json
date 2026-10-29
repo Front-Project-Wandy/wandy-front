@@ -521,7 +521,32 @@
     "view": {
       "label": "일정 보기 방식",
       "list": "목록",
-      "timeline": "타임라인"
+      "timeline": "타임라인",
+      "today": "오늘"
+    },
+    "today": {
+      "notInRange": "오늘은 여행 기간이 아니에요. 보고 싶은 날을 골라 그날을 오늘처럼 볼 수 있어요.",
+      "pickDay": "볼 날짜 고르기",
+      "dayLabel": "DAY {{number}}",
+      "dayHeading": "오늘은 DAY {{number}} ({{date}})",
+      "empty": "이 날은 일정이 없어요",
+      "allDone": "오늘 일정을 모두 다녀왔어요",
+      "next": "다음 일정",
+      "until": "{{duration}} 뒤 시작",
+      "untilNow": "지금 시작할 시간이에요",
+      "overdue": "시작 시각이 {{duration}} 지났어요",
+      "locate": "내 위치 확인",
+      "locating": "내 위치를 확인하는 중…",
+      "directions": "길찾기",
+      "distance": "내 위치에서 직선 {{distance}} · {{mode}} 약 {{duration}}",
+      "distanceOnly": "내 위치에서 직선 {{distance}}",
+      "position": {
+        "denied": "위치 권한이 꺼져 있어요. 길찾기는 지도 앱이 현재 위치를 써서 열어요.",
+        "unsupported": "이 브라우저는 위치 확인을 지원하지 않아요.",
+        "error": "내 위치를 확인하지 못했어요. 다시 눌러 보세요."
+      },
+      "visited": "다녀옴",
+      "visitedLabel": "{{name}} 다녀옴 표시"
     },
     "timeline": {
       "hint": "타임라인에서는 일정을 보기만 해요. 장소 추가·편집·순서 바꾸기는 목록 보기에서 해 주세요.",
