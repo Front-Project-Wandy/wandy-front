@@ -142,7 +142,7 @@ export default function DaySection({
           </ol>
         </SortableContext>
       )}
-      <DayProductSuggestions country={country} city={city} items={day.items} />
+      <DayProductSuggestions country={country} city={city} items={day.items} dayIndex={dayIndex} />
       {isOptimizing ? (
         <OptimizeDayDialog
           open
