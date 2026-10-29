@@ -4,6 +4,7 @@ import BasicInfoFields from '../BasicInfoFields';
 import { fitSpotsToDays } from '../spots/spotList';
 import { getTripDays } from '../tripDays';
 import TripStyleFields from '../TripStyleFields';
+import { syncCompanionPeople } from '../tripStyleOptions';
 import { clearFieldErrors, validateBasicInfo } from '../validateBasicInfo';
 import WizardNav from '../WizardNav';
 
@@ -16,9 +17,14 @@ const DESTINATION_DATA_RESET = { flight: null, stay: null, spots: [] };
 export default function Step1BasicInfo({ onNext }) {
   const draft = useWizardStore((state) => state.draft);
   const updateDraft = useWizardStore((state) => state.updateDraft);
-  const [errors, setErrors] = useState({});
+  // 날짜까지 채워진 초안으로 들어오면(이어서 만들기에서 돌려보낸 경우 등) 문제를 바로 보여 준다.
+  // 날짜가 비어 있으면 아직 입력 중이라 [다음]을 누를 때까지 에러를 띄우지 않는다.
+  const [errors, setErrors] = useState(() =>
+    draft.startDate && draft.endDate ? validateBasicInfo(draft) : {},
+  );
 
-  const handleChange = (patch) => {
+  const handleChange = (changed) => {
+    const patch = syncCompanionPeople(changed, draft);
     const isDestinationChanged =
       ('country' in patch && patch.country !== draft.country) ||
       ('city' in patch && patch.city !== draft.city);
@@ -45,8 +51,8 @@ export default function Step1BasicInfo({ onNext }) {
   return (
     <div className="flex flex-col gap-5">
       <BasicInfoFields values={draft} errors={errors} onChange={handleChange} />
-      {/* 여행지와 상관없는 값이라 handleChange(여행지 초기화·에러 지우기)를 거치지 않는다. */}
-      <TripStyleFields values={draft} onChange={updateDraft} />
+      {/* 「혼자」를 고르면 인원도 1로 바뀌어서, 인원 에러 지우기까지 같은 handleChange를 거친다. */}
+      <TripStyleFields values={draft} onChange={handleChange} />
       <WizardNav onNext={handleNext} />
     </div>
   );

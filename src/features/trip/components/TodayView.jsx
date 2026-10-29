@@ -18,7 +18,8 @@ export default function TodayView({ tripId, days, country, transportMode }) {
   const [pickedIndex, setPickedIndex] = useState(null);
 
   const todayIndex = getTodayDayIndex(days, toLocalDateString(now));
-  const dayIndex = pickedIndex ?? (todayIndex >= 0 ? todayIndex : 0);
+  // 오늘이 여행 기간이면 늘 오늘 DAY를 따른다. 전날 밤에 골라 둔 DAY가 자정 뒤에 남아 엉뚱한 날을 오늘로 보이지 않게 한다.
+  const dayIndex = todayIndex >= 0 ? todayIndex : (pickedIndex ?? 0);
   const day = days[dayIndex];
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
   const { nextItem, minutesUntil } = pickNextItem({ items: day.items, visitedIds, nowMinutes });

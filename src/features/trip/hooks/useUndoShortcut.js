@@ -5,10 +5,12 @@ const isEditable = (element) =>
   element instanceof HTMLElement &&
   (element.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName));
 
-// 장소를 끄는 중(DragPreview가 보이는 동안)이나 창(dialog)이 열려 있을 때는 일정이 뒤에서 바뀌면 안 된다
+// 장소를 끄는 중(DragPreview가 보이는 동안)이나 창(dialog)이 열려 있을 때는 일정이 뒤에서 바뀌면 안 된다.
+// 장소 편집 폼이 열려 있을 때도 같다: 폼은 열 때의 값을 들고 있어서, 되돌린 뒤 저장하면 옛 값으로 덮어쓴다.
 const isBusy = () =>
   document.querySelector('[data-drag-preview]') !== null ||
-  document.querySelector('dialog[open]') !== null;
+  document.querySelector('dialog[open]') !== null ||
+  document.querySelector('[data-item-edit-form]') !== null;
 
 // Ctrl/Cmd+Z는 되돌리기, Shift+Ctrl/Cmd+Z와 Ctrl+Y는 다시 실행 (71).
 export function useUndoShortcut({ onUndo, onRedo, enabled = true }) {

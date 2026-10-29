@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import SkipLink from './SkipLink';
 import { useRouteFocus } from './useRouteFocus';
+import { useScrollToTop } from './useScrollToTop';
 import { useTrackRecentView } from './useTrackRecentView';
 
 // 헤더가 있는 화면들의 공통 틀. App.jsx에서 이 레이아웃 아래에 둔 경로는
@@ -11,6 +12,7 @@ export default function AppLayout() {
   useTrackRecentView();
   // 화면이 바뀌면 탭 제목을 바꾸고 포커스를 본문으로 옮긴다 (90 접근성).
   useRouteFocus();
+  useScrollToTop();
 
   return (
     <>
