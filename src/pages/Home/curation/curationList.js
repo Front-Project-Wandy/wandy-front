@@ -20,9 +20,18 @@ export function getCurationItems(month = new Date().getMonth() + 1) {
   ];
 }
 
+// 관리 화면(85)용: 계절 4개를 모두 포함한 전체 목록.
+export function getAllCurationItems() {
+  return [
+    ...curations.seasons.map((season) => ({ ...season, type: 'season' })),
+    ...curations.themes.map((theme) => ({ ...theme, type: 'theme' })),
+  ];
+}
+
 // 도시 장소 전체에서 테마 카테고리에 맞는 것만 앞에서부터 고른다.
-export function pickThemePlaces(places, categories) {
+// 관리자가 숨긴 장소(hiddenIds)는 자르기 전에 빼서 다음 장소가 빈자리를 채운다.
+export function pickThemePlaces(places, categories, hiddenIds = [], limit = CURATION_PLACE_LIMIT) {
   return places
-    .filter((place) => categories.includes(place.category))
-    .slice(0, CURATION_PLACE_LIMIT);
+    .filter((place) => categories.includes(place.category) && !hiddenIds.includes(place.id))
+    .slice(0, limit);
 }
