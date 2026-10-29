@@ -9,6 +9,7 @@ const ROUTE_TITLES = [
   { path: '/', key: 'home' },
   { path: '/places', key: 'places' },
   { path: '/place/:id', key: 'place' },
+  { path: '/community', key: 'community' },
   { path: '/products', key: 'products' },
   { path: '/login', key: 'login' },
   { path: '/signup', key: 'signup' },

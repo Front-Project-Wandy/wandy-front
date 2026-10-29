@@ -8,6 +8,7 @@
       "home": "Wandy",
       "places": "장소 탐색",
       "place": "장소 상세",
+      "community": "일정 둘러보기",
       "products": "투어·상품",
       "login": "로그인",
       "signup": "회원가입",
@@ -68,9 +69,44 @@
       "nav": {
         "start": "여행 시작",
         "explore": "장소 탐색",
+        "community": "일정 둘러보기",
         "products": "투어·상품",
         "my": "내 여행"
       }
+    }
+  },
+  "community": {
+    "page": {
+      "eyebrow": "TRAVELERS' PLANS",
+      "title": "다른 여행자의 일정 둘러보기",
+      "description": "마음에 드는 일정을 골라 날짜만 정하면 내 여행으로 바로 가져올 수 있어요."
+    },
+    "filter": {
+      "all": "전체",
+      "group": {
+        "city": "도시",
+        "length": "일정",
+        "style": "스타일"
+      },
+      "length": {
+        "short": "1박 2일 이하",
+        "long": "2박 3일 이상"
+      }
+    },
+    "list": {
+      "count": "일정 {{count}}개",
+      "empty": {
+        "title": "조건에 맞는 일정이 없어요",
+        "description": "필터를 바꾸거나 전체 일정을 다시 봐 주세요.",
+        "reset": "필터 초기화"
+      }
+    },
+    "card": {
+      "nightsDays": "{{nights}}박 {{days}}일",
+      "placeCount": "장소 {{count}}곳"
+    },
+    "like": {
+      "label": "좋아요"
     }
   },
   "home": {
