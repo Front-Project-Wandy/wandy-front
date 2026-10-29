@@ -4,7 +4,7 @@
 import { rankSimilarTravelerPlaces } from '../features/search/utils/rankSimilarTravelerPlaces';
 import travelers from '../mocks/travelers.json';
 import { mockRequest } from './api/mockRequest';
-import { getCityPlaces } from './placeService';
+import { getCityPlaces, withSamePlaceIds } from './placeService';
 
 // 비슷한 성향 여행자들이 많이 간 장소 (102).
 // { country, city, profile, likedPlaceIds, excludePlaceIds }
@@ -18,14 +18,20 @@ export async function getSimilarTravelerPlaces({
   excludePlaceIds = [],
 }) {
   const places = await getCityPlaces({ country, city });
+  // 담은 곳·좋았던 곳이 검색 결과(네이버)면 여행자 기록(장소 데이터 id)과 id가 달라서 같은 장소의 id까지 넓힌다.
+  const [excluded, liked] = await Promise.all([
+    withSamePlaceIds(excludePlaceIds, places),
+    withSamePlaceIds(likedPlaceIds, places),
+  ]);
+  const placesById = new Map(places.map((place) => [place.id, place]));
   return mockRequest(() => {
     const result = rankSimilarTravelerPlaces({
       profile,
       travelers: travelers[city] ?? [],
-      likedPlaceIds,
-      excludePlaceIds,
+      // 다른 도시에서 좋았던 곳은 이 도시 여행자와 겹칠 수 없어서, 넘기면 취향을 아는 것처럼 보이게만 한다
+      likedPlaceIds: liked.filter((id) => placesById.has(id)),
+      excludePlaceIds: excluded,
     });
-    const placesById = new Map(places.map((place) => [place.id, place]));
     return {
       mode: result.mode,
       neighborCount: result.neighborCount,

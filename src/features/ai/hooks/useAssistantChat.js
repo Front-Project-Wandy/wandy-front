@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { chatWithAssistant } from '../../../services/aiService';
-import { getCityPlaces, getPlace } from '../../../services/placeService';
+import { getCityPlaces, getPlace, withSamePlaceIds } from '../../../services/placeService';
 import { usePlanStore } from '../../../store/plan/usePlanStore';
 import { summarizeTripCost } from '../../budget/utils/summarizeTripCost';
 import { applyAssistantActions } from '../utils/applyAssistantActions';
@@ -45,8 +45,19 @@ export function useAssistantChat(trip) {
         candidates,
         cost: summarizeTripCost(trip),
       });
-      const raw = await chatWithAssistant({ history, context });
-      const { actions, droppedCount } = validateAssistantActions(raw.actions, { trip, candidates });
+      const [raw, plannedPlaceIds] = await Promise.all([
+        chatWithAssistant({ history, context }),
+        // 이미 넣은 장소를 다른 id(네이버 ↔ TourAPI)로 다시 넣자고 해도 막을 수 있게 같은 장소의 후보 id까지 넓힌다
+        withSamePlaceIds(
+          trip.days.flatMap((day) => day.items.map((item) => item.placeId)),
+          candidates,
+        ),
+      ]);
+      const { actions, droppedCount } = validateAssistantActions(raw.actions, {
+        trip,
+        candidates,
+        plannedPlaceIds,
+      });
       return { reply: raw.reply, actions, droppedCount, source: raw.source };
     },
     onSuccess: (result) => {
@@ -75,7 +86,10 @@ export function useAssistantChat(trip) {
     if (!trimmed || mutation.isPending) return;
     const next = [...messages, { id: createId(), role: 'user', text: trimmed }];
     setMessages(next);
-    request(next.slice(-MAX_HISTORY).map(({ role, text: body }) => ({ role, text: body })));
+    const recent = next.slice(-MAX_HISTORY);
+    // 대화는 사용자 말로 시작해야 해서(Gemini가 비서 답으로 시작하는 기록을 받지 않을 수 있다) 앞이 비서 답이면 뺀다
+    const history = recent[0]?.role === 'user' ? recent : recent.slice(1);
+    request(history.map(({ role, text: body }) => ({ role, text: body })));
   };
 
   const retry = () => {

@@ -32,18 +32,35 @@ const toStayMinutes = (value) => {
   return Math.min(MAX_STAY_MINUTES, Math.max(MIN_STAY_MINUTES, minutes));
 };
 
-// 이름이 같은 곳을 먼저 찾고, 없으면 한쪽이 다른 쪽을 품는 이름("센소지" ↔ "센소지 (아사쿠사)")을 찾는다
+// 괄호 속 설명("센소지 (아사쿠사)"의 "(아사쿠사)")을 뺀 장소 이름
+const coreName = (name) =>
+  normalizeName(typeof name === 'string' ? name.replace(/[(（][^)）]*[)）]/g, '') : '');
+
+// 일부만 맞는 이름을 받는 기준. 짧은 말("공원"·"시장"·"도쿄")이나 지역 이름("아사쿠사" → 아사쿠사 규카츠)이
+// 아무 장소에나 붙지 않게, 3글자 이상이고 장소 이름의 대부분(60% 이상)을 덮을 때만 받는다.
+const MIN_PARTIAL_NAME_LENGTH = 3;
+const MIN_PARTIAL_NAME_COVERAGE = 0.6;
+
+const isPartialMatch = (target, name) => {
+  if (target.includes(name)) return name.length >= MIN_PARTIAL_NAME_LENGTH;
+  return (
+    name.includes(target) &&
+    target.length >= MIN_PARTIAL_NAME_LENGTH &&
+    target.length / name.length >= MIN_PARTIAL_NAME_COVERAGE
+  );
+};
+
+// 이름이 같은 곳(괄호 설명은 빼고)을 먼저 찾고, 없으면 거의 같은 이름("센소지 절" → 센소지)을 찾는다.
+// 거의 같은 후보가 여럿이면 어느 곳인지 알 수 없어서 고르지 않는다.
 const findCandidate = (candidates, placeName) => {
   const target = normalizeName(placeName);
   if (!target) return null;
-  return (
-    candidates.find((place) => normalizeName(place.name) === target) ??
-    candidates.find((place) => {
-      const name = normalizeName(place.name);
-      return name.includes(target) || target.includes(name);
-    }) ??
-    null
+  const exact = candidates.find(
+    (place) => normalizeName(place.name) === target || coreName(place.name) === target,
   );
+  if (exact) return exact;
+  const partial = candidates.filter((place) => isPartialMatch(target, coreName(place.name)));
+  return partial.length === 1 ? partial[0] : null;
 };
 
 const toDayIndex = (trip, day) => {
@@ -88,10 +105,15 @@ const validateOne = (raw, { trip, candidates, plannedPlaceIds }) => {
   return null;
 };
 
-export const validateAssistantActions = (rawActions, { trip, candidates }) => {
+// plannedPlaceIds: 이미 일정에 있는 장소 id (같은 장소의 다른 출처 id까지, placeService.withSamePlaceIds).
+//   없으면 일정의 placeId만 본다.
+export const validateAssistantActions = (
+  rawActions,
+  { trip, candidates, plannedPlaceIds: planned },
+) => {
   const list = Array.isArray(rawActions) ? rawActions : [];
   const plannedPlaceIds = new Set(
-    trip.days.flatMap((day) => day.items.map((item) => item.placeId)),
+    planned ?? trip.days.flatMap((day) => day.items.map((item) => item.placeId)),
   );
   const touchedItemIds = new Set();
   const actions = [];
