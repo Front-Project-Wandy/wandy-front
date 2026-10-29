@@ -9,6 +9,7 @@
       "places": "장소 탐색",
       "place": "장소 상세",
       "community": "일정 둘러보기",
+      "communityTrip": "공개 일정",
       "products": "투어·상품",
       "login": "로그인",
       "signup": "회원가입",
@@ -107,6 +108,19 @@
     },
     "like": {
       "label": "좋아요"
+    },
+    "detail": {
+      "back": "일정 목록으로",
+      "day": "DAY {{day}}",
+      "meta": "{{author}} · {{companion}} {{people}}명 · {{style}}",
+      "stay": "{{duration}} 머무름",
+      "loadingName": "장소 정보를 불러오는 중",
+      "loading": "일정의 장소를 불러오는 중이에요",
+      "error": "장소 정보를 불러오지 못했어요.",
+      "notFound": {
+        "title": "일정을 찾을 수 없어요",
+        "description": "삭제되었거나 주소가 잘못된 일정이에요."
+      }
     }
   },
   "home": {

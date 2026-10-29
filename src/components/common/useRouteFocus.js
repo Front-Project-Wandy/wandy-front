@@ -10,6 +10,7 @@ const ROUTE_TITLES = [
   { path: '/places', key: 'places' },
   { path: '/place/:id', key: 'place' },
   { path: '/community', key: 'community' },
+  { path: '/community/:id', key: 'communityTrip' },
   { path: '/products', key: 'products' },
   { path: '/login', key: 'login' },
   { path: '/signup', key: 'signup' },
