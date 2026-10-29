@@ -5,6 +5,7 @@ import Button from '../../components/common/Button';
 import EmptyState from '../../components/common/EmptyState';
 import Loading from '../../components/common/Loading';
 import AiFillButton from '../../features/ai/components/AiFillButton';
+import ExpenseLog from '../../features/budget/components/ExpenseLog';
 import TripCostSummary from '../../features/budget/components/TripCostSummary';
 import MapView from '../../features/map/components/MapView';
 import AirportLeg from '../../features/transport/components/AirportLeg';
@@ -14,7 +15,9 @@ import DayList from '../../features/trip/components/DayList';
 import DuplicateTripDialog from '../../features/trip/components/DuplicateTripDialog';
 import PrintableTrip from '../../features/trip/components/PrintableTrip';
 import ShareTripDialog from '../../features/trip/components/ShareTripDialog';
+import TodayView from '../../features/trip/components/TodayView';
 import TimelineView from '../../features/trip/components/TimelineView';
+import TripPrepPanel from '../../features/trip/components/TripPrepPanel';
 import TripWeather from '../../features/trip/components/TripWeather';
 import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
 import ViewToggle from '../../features/trip/components/ViewToggle';
@@ -144,6 +147,15 @@ export default function PlannerPage() {
       <>
         {/* grid-cols-1: 열을 정하지 않으면 모바일에서 칸이 긴 장소 이름의 너비까지 늘어나 화면이 가로로 넘친다 */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
+          {viewMode === 'today' ? (
+            <TodayView
+              key={trip.id}
+              tripId={trip.id}
+              days={trip.days}
+              country={trip.country}
+              transportMode={trip.transportMode}
+            />
+          ) : null}
           {viewMode === 'timeline' ? (
             <TimelineView
               days={trip.days}
@@ -153,7 +165,8 @@ export default function PlannerPage() {
               selectedItemId={activeItemId}
               onSelectItem={handleToggleItem}
             />
-          ) : (
+          ) : null}
+          {viewMode === 'list' ? (
             <DayList
               days={trip.days}
               country={trip.country}
@@ -168,7 +181,7 @@ export default function PlannerPage() {
               onMoveItem={moveItem}
               onReorderDay={reorderDay}
             />
-          )}
+          ) : null}
           <MapView
             country={trip.country}
             city={trip.city}
@@ -216,9 +229,11 @@ export default function PlannerPage() {
           ) : null}
         </div>
         {isTripReady ? <TripCostSummary trip={trip} /> : null}
+        {isTripReady ? <ExpenseLog key={trip.id} trip={trip} /> : null}
         {isTripReady ? <TransitPassAdvice trip={trip} /> : null}
         {isTripReady ? <TripWeather trip={trip} /> : null}
         {isTripReady ? <AirportLeg trip={trip} /> : null}
+        {isTripReady ? <TripPrepPanel trip={trip} /> : null}
         {isTripReady ? <ViewToggle value={viewMode} onChange={setViewMode} /> : null}
         {renderBody()}
         {isTripReady ? (

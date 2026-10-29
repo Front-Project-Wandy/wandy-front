@@ -521,7 +521,32 @@
     "view": {
       "label": "일정 보기 방식",
       "list": "목록",
-      "timeline": "타임라인"
+      "timeline": "타임라인",
+      "today": "오늘"
+    },
+    "today": {
+      "notInRange": "오늘은 여행 기간이 아니에요. 보고 싶은 날을 골라 그날을 오늘처럼 볼 수 있어요.",
+      "pickDay": "볼 날짜 고르기",
+      "dayLabel": "DAY {{number}}",
+      "dayHeading": "오늘은 DAY {{number}} ({{date}})",
+      "empty": "이 날은 일정이 없어요",
+      "allDone": "오늘 일정을 모두 다녀왔어요",
+      "next": "다음 일정",
+      "until": "{{duration}} 뒤 시작",
+      "untilNow": "지금 시작할 시간이에요",
+      "overdue": "시작 시각이 {{duration}} 지났어요",
+      "locate": "내 위치 확인",
+      "locating": "내 위치를 확인하는 중…",
+      "directions": "길찾기",
+      "distance": "내 위치에서 직선 {{distance}} · {{mode}} 약 {{duration}}",
+      "distanceOnly": "내 위치에서 직선 {{distance}}",
+      "position": {
+        "denied": "위치 권한이 꺼져 있어요. 길찾기는 지도 앱이 현재 위치를 써서 열어요.",
+        "unsupported": "이 브라우저는 위치 확인을 지원하지 않아요.",
+        "error": "내 위치를 확인하지 못했어요. 다시 눌러 보세요."
+      },
+      "visited": "다녀옴",
+      "visitedLabel": "{{name}} 다녀옴 표시"
     },
     "timeline": {
       "hint": "타임라인에서는 일정을 보기만 해요. 장소 추가·편집·순서 바꾸기는 목록 보기에서 해 주세요.",
@@ -615,6 +640,37 @@
       "noteCar": "렌터카는 유류비(연비 {{kmPerLiter}}km/L 기준)와 고속도로 구간 통행료 추정이에요. 렌터카 대여료는 포함하지 않아요.",
       "noteRate": "환율은 고정값(1엔 = {{rate}}원)이에요."
     },
+    "prep": {
+      "title": "여행 준비",
+      "tab": {
+        "packing": "준비물",
+        "entry": "입국 안내",
+        "holiday": "공휴일·행사",
+        "phrase": "회화"
+      },
+      "phrase": {
+        "empty": "국내 여행이라 회화 카드가 없어요",
+        "groupLabel": "상황 고르기",
+        "showLabel": "크게 보기: {{text}}",
+        "hint": "문장을 누르면 크게 보여 줄 수 있어요. 발음은 한글로 어림한 것이에요."
+      },
+      "entry": {
+        "empty": "국내 여행이라 따로 입국 절차가 없어요",
+        "note": "{{date}}에 확인한 내용이에요. 규정은 바뀔 수 있어서 출발 전에 공식 사이트에서 다시 확인하세요."
+      },
+      "holiday": {
+        "empty": "여행 기간에 겹치는 공휴일·행사가 없어요",
+        "holiday": "공휴일",
+        "event": "행사",
+        "note": "{{date}}에 확인한 날짜예요(2026~2027년). 임시공휴일 등으로 바뀔 수 있어요."
+      },
+      "packing": {
+        "title": "준비물 체크리스트",
+        "progress": "{{total}}개 중 {{checked}}개 챙김",
+        "clear": "전체 해제",
+        "empty": "이 나라의 준비물 목록이 아직 없어요"
+      }
+    },
     "gap": {
       "title": "빈 시간대 추천",
       "loading": "빈 시간에 갈 만한 곳을 찾는 중…",
@@ -624,6 +680,32 @@
       "add": "추가",
       "addLabel": "빈 시간에 추가: {{name}}",
       "note": "머무는 시간은 1시간으로 어림했고, 이동 시간은 추정이에요."
+    },
+    "expense": {
+      "title": "지출 기록",
+      "date": "날짜",
+      "dayOption": "DAY {{number}} ({{date}})",
+      "category": {
+        "label": "지출 분류",
+        "meals": "식비",
+        "transport": "교통",
+        "entry": "입장료",
+        "shopping": "쇼핑",
+        "lodging": "숙박",
+        "other": "기타"
+      },
+      "amount": "금액 ({{currency}})",
+      "amountError": "금액은 1 이상의 숫자로 적어 주세요",
+      "memo": "메모 (선택)",
+      "add": "지출 추가",
+      "empty": "아직 기록한 지출이 없어요",
+      "total": "총 지출 {{amount}}",
+      "compare": "예상 {{estimated}} · 교통·입장료·식비 지출 {{spent}} →",
+      "remaining": "{{amount}} 남았어요",
+      "over": "{{amount}} 더 썼어요",
+      "remove": "삭제",
+      "removeLabel": "지출 삭제: {{label}} {{amount}}",
+      "note": "이 기기에만 저장돼요. 예상 비용에는 쇼핑·숙박이 없어서 교통·입장료·식비만 견줘요."
     },
     "airportLeg": {
       "title": "도착 공항에서 숙소까지",
@@ -635,6 +717,14 @@
         "NRT": "나리타공항",
         "HND": "하네다공항"
       }
+    },
+    "local": {
+      "button": "현지어",
+      "buttonLabel": "현지어로 보기: {{name}}",
+      "title": "{{name}} (현지어)",
+      "hint": "택시 기사님께 이 화면을 보여 주세요",
+      "loading": "현지어 주소를 불러오는 중…",
+      "error": "현지어 주소를 불러오지 못했어요"
     },
     "optimize": {
       "button": "동선 최적화",
@@ -927,7 +1017,17 @@
   },
   "login": {
     "page": {
-      "title": "로그인"
+      "title": "로그인",
+      "description": "아이디와 비밀번호를 입력해 주세요"
+    },
+    "form": {
+      "idLabel": "아이디",
+      "idPlaceholder": "아이디를 입력하세요",
+      "idError": "아이디를 입력해 주세요",
+      "passwordLabel": "비밀번호",
+      "passwordPlaceholder": "비밀번호를 입력하세요",
+      "passwordError": "비밀번호를 입력해 주세요",
+      "submit": "로그인"
     }
   },
   "my": {

@@ -1,0 +1,65 @@
+{
+  "JP": [
+    {
+      "id": "documents",
+      "title": "서류·결제",
+      "items": [
+        { "id": "passport", "label": "여권 (유효기간 6개월 이상 남았는지 확인)" },
+        { "id": "tickets", "label": "항공권·숙소 예약 확인서" },
+        { "id": "card", "label": "해외 결제 되는 카드" },
+        { "id": "yen", "label": "엔화 현금 (소액 가게·자판기용)" },
+        { "id": "coinPurse", "label": "동전지갑" }
+      ]
+    },
+    {
+      "id": "electronics",
+      "title": "전자기기",
+      "items": [
+        { "id": "network", "label": "유심·eSIM·포켓와이파이" },
+        { "id": "charger", "label": "충전기·케이블" },
+        { "id": "powerBank", "label": "보조배터리 (기내 휴대만 가능)" },
+        { "id": "plugAdapter", "label": "일본용 플러그 어댑터 (11자 납작 2핀)" }
+      ]
+    },
+    {
+      "id": "daily",
+      "title": "생활용품",
+      "items": [
+        { "id": "medicine", "label": "상비약 (감기·소화제·진통제)" },
+        { "id": "umbrella", "label": "접이식 우산" },
+        { "id": "shoes", "label": "많이 걸어도 편한 신발" },
+        { "id": "ecoBag", "label": "에코백 (쇼핑·비닐봉지 대용)" },
+        { "id": "handTowel", "label": "손수건 (일본은 화장실에 휴지만 있는 곳이 많아요)" }
+      ]
+    }
+  ],
+  "KR": [
+    {
+      "id": "documents",
+      "title": "신분증·결제",
+      "items": [
+        { "id": "idCard", "label": "신분증 (여권 또는 주민등록증)" },
+        { "id": "tickets", "label": "교통편·숙소 예약 확인서" },
+        { "id": "card", "label": "카드·모바일 결제 수단" },
+        { "id": "transitCard", "label": "교통카드 (티머니 등)" }
+      ]
+    },
+    {
+      "id": "electronics",
+      "title": "전자기기",
+      "items": [
+        { "id": "charger", "label": "충전기·케이블" },
+        { "id": "powerBank", "label": "보조배터리" }
+      ]
+    },
+    {
+      "id": "daily",
+      "title": "생활용품",
+      "items": [
+        { "id": "medicine", "label": "상비약 (감기·소화제·진통제)" },
+        { "id": "umbrella", "label": "우산" },
+        { "id": "shoes", "label": "많이 걸어도 편한 신발" }
+      ]
+    }
+  ]
+}
