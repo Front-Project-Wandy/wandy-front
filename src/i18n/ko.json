@@ -937,8 +937,7 @@
       "passwordLabel": "비밀번호",
       "passwordPlaceholder": "비밀번호를 입력하세요",
       "passwordError": "비밀번호를 입력해 주세요",
-      "submit": "로그인",
-      "demoNotice": "시연용 화면이에요. 실제 로그인은 서버가 연결되는 2단계에서 붙일 예정이에요."
+      "submit": "로그인"
     }
   },
   "my": {
