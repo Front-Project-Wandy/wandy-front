@@ -38,7 +38,7 @@ export default function UpcomingTripCard() {
           {/* point 색은 작은 배지에만 쓴다. point 글자는 연한 배경에서 대비가 부족해서(약 2.6:1)
               배경을 point로 칠하고 글자는 진한 ink로 둔다(약 5.7:1). 흰 글자는 primary 위에서만 쓰는 규칙.
               text는 다크모드에서 밝아져 point 위에서 흐려지므로 테마와 상관없이 진한 ink를 쓴다. */}
-          <span className="shrink-0 rounded-full bg-point px-3 py-1 text-body-sm font-bold text-ink">
+          <span className="shrink-0 rounded-full bg-apricot px-3 py-1 text-body-sm font-bold text-ink">
             {badge}
           </span>
           <div className="flex min-w-0 flex-col gap-0.5">
