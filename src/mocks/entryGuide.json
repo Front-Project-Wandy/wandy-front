@@ -42,7 +42,11 @@
     "links": [
       { "id": "vjw", "label": "Visit Japan Web (공식)", "url": "https://vjw-lp.digital.go.jp/ko/" },
       { "id": "jpCustoms", "label": "일본 세관", "url": "https://www.customs.go.jp/korean/" },
-      { "id": "krCustoms", "label": "한국 관세청 여행자 통관", "url": "https://www.customs.go.kr/" },
+      {
+        "id": "krCustoms",
+        "label": "한국 관세청 여행자 통관",
+        "url": "https://www.customs.go.kr/"
+      },
       { "id": "safety", "label": "외교부 해외안전여행", "url": "https://www.0404.go.kr/" }
     ]
   },

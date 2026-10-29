@@ -4,10 +4,11 @@ import TabBar from '../../../components/common/TabBar';
 import EntryGuide from './EntryGuide';
 import HolidayList from './HolidayList';
 import PackingChecklist from './PackingChecklist';
+import PhraseCards from './PhraseCards';
 
-const TAB_KEYS = ['packing', 'entry', 'holiday'];
+const TAB_KEYS = ['packing', 'entry', 'holiday', 'phrase'];
 
-// 플래너 위쪽의 접이식 「여행 준비」 (요구사항 #92): 준비물 · 입국 안내 · 공휴일·행사. 회화 카드가 이어서 들어온다.
+// 플래너 위쪽의 접이식 「여행 준비」 (요구사항 #92): 준비물 · 입국 안내 · 공휴일·행사 · 회화 카드.
 export default function TripPrepPanel({ trip }) {
   const { t } = useTranslation();
   const [activeKey, setActiveKey] = useState('packing');
@@ -16,6 +17,7 @@ export default function TripPrepPanel({ trip }) {
   const renderTab = () => {
     if (activeKey === 'entry') return <EntryGuide country={trip.country} />;
     if (activeKey === 'holiday') return <HolidayList trip={trip} />;
+    if (activeKey === 'phrase') return <PhraseCards country={trip.country} />;
     return <PackingChecklist key={trip.id} tripId={trip.id} country={trip.country} />;
   };
 
