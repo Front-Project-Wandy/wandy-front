@@ -10,6 +10,7 @@ import GoogleAttribution from '../../features/search/components/GoogleAttributio
 import CopyTripModal from './CopyTripModal';
 import LikeButton from './LikeButton';
 import PlaceReviewModal from './PlaceReviewModal';
+import TripCover from './TripCover';
 import PublicTripDayList from './PublicTripDayList';
 import { findPublicTrip, getTripNights } from './publicTripUtils';
 import { usePublicTripPlaces } from './usePublicTripPlaces';
@@ -67,26 +68,31 @@ export default function PublicTripDetailPage() {
         <Link to="/community" className={`${BACK_LINK_CLASS} self-start`}>
           <span aria-hidden="true">←</span> {t('community.detail.back')}
         </Link>
-        <p className="text-caption font-bold tracking-widest text-primary">
-          {t(`common.city.${trip.city}`)} ·{' '}
-          {t('community.card.nightsDays', { nights, days: nights + 1 })}
-        </p>
-        <h1 className="text-title font-bold break-keep lg:text-display">{trip.title}</h1>
-        <p className="max-w-2xl text-body text-text/80">{trip.summary}</p>
-        <p className="text-body-sm text-text/60">
-          {t('community.detail.meta', {
-            author: trip.author,
-            companion: t(`wizard.style.companion.${trip.companion}`),
-            people: trip.people,
-            style: t(`wizard.style.style.${trip.style}.title`),
-          })}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <LikeButton trip={trip} />
-          {/* 장소를 다 불러오기 전에 복사하면 빠진 장소가 생겨서, 다 불러온 뒤에 누를 수 있다. */}
-          <Button disabled={isPending || isError} onClick={() => setIsCopyOpen(true)}>
-            {t('community.copy.open')}
-          </Button>
+        <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-10">
+          <div className="flex flex-col gap-4">
+            <p className="text-caption font-bold tracking-widest text-primary">
+              {t(`common.city.${trip.city}`)} ·{' '}
+              {t('community.card.nightsDays', { nights, days: nights + 1 })}
+            </p>
+            <h1 className="text-title font-bold break-keep lg:text-display">{trip.title}</h1>
+            <p className="max-w-2xl text-body text-text/80">{trip.summary}</p>
+            <p className="text-body-sm text-text/60">
+              {t('community.detail.meta', {
+                author: trip.author,
+                companion: t(`wizard.style.companion.${trip.companion}`),
+                people: trip.people,
+                style: t(`wizard.style.style.${trip.style}.title`),
+              })}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <LikeButton trip={trip} />
+              {/* 장소를 다 불러오기 전에 복사하면 빠진 장소가 생겨서, 다 불러온 뒤에 누를 수 있다. */}
+              <Button disabled={isPending || isError} onClick={() => setIsCopyOpen(true)}>
+                {t('community.copy.open')}
+              </Button>
+            </div>
+          </div>
+          <TripCover trip={trip} />
         </div>
       </div>
       <div className="grid gap-8 lg:grid-cols-2 lg:items-start">

@@ -1,6 +1,7 @@
 [
   {
     "id": "pt-seoul-palace",
+    "coverPlaceId": "tour:126508",
     "author": "궁궐산책러",
     "title": "서울 궁궐·한옥 골목 2박 3일",
     "summary": "궁궐 두 곳과 북촌·익선동 골목을 천천히 걷고, 마지막 날은 남산에서 마무리해요.",
@@ -91,6 +92,7 @@
   },
   {
     "id": "pt-seoul-seongsu",
+    "coverPlaceId": "naver:서울숲_1270374000_375444000",
     "author": "카페투어중",
     "title": "성수·잠실 꽉 채운 1박 2일",
     "summary": "성수 카페와 한강 야경, 다음 날은 잠실 전망대까지 알차게 돌아요.",
@@ -165,6 +167,7 @@
   },
   {
     "id": "pt-seoul-kids",
+    "coverPlaceId": "tour:900003",
     "author": "주말엔아이랑",
     "title": "아이와 함께 서울 3박 4일",
     "summary": "하루에 두세 곳만 넣고, 박물관·찜질방·공원처럼 아이가 지루하지 않은 곳 위주로 짰어요.",
@@ -255,6 +258,7 @@
   },
   {
     "id": "pt-tokyo-first",
+    "coverPlaceId": "google:mock-sensoji",
     "author": "도쿄첫여행",
     "title": "도쿄 처음이라면 2박 3일",
     "summary": "아사쿠사·하라주쿠·시부야를 하루씩 묶어서 이동을 줄였어요. 처음 가는 분께 추천해요.",
@@ -329,6 +333,7 @@
   },
   {
     "id": "pt-tokyo-food",
+    "coverPlaceId": "google:mock-tsukiji",
     "author": "먹으러여행감",
     "title": "도쿄 먹방 1박 2일",
     "summary": "스시·츠케멘·덴푸라·라멘까지, 관광은 줄이고 먹는 데 집중한 일정이에요.",
@@ -400,6 +405,7 @@
   },
   {
     "id": "pt-tokyo-slow",
+    "coverPlaceId": "google:mock-shinjuku-gyoen",
     "author": "혼자느긋하게",
     "title": "공원과 온천, 느긋한 도쿄 3박 4일",
     "summary": "혼자 가는 여행이라 하루 서너 곳만. 공원 산책과 온천으로 쉬어 가는 일정이에요.",

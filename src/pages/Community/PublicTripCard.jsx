@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useCommunityStore } from '../../store/community/useCommunityStore';
-import { getLikeCount, getTripNights, getTripPlaceCount } from './publicTripUtils';
+import { getLikeCount, getTripCoverSrc, getTripNights, getTripPlaceCount } from './publicTripUtils';
 
 // 공개 일정 카드 (105). 카드 전체가 상세로 가는 링크다.
 // 좋아요는 상세에서 누르고, 카드에는 숫자와 내가 눌렀는지만 보여 준다 (링크 안에 버튼을 넣을 수 없어서).
-// 사진은 장소 사진 대신 도시 사진을 쓴다 (구글 장소 사진은 지도 밖에서 쓸 수 없는 약관).
+// 사진은 대표 장소의 Wikimedia 사진이고(출처는 목록 아래 TripPhotoCredits), 없으면 도시 사진이다.
 export default function PublicTripCard({ trip }) {
   const { t } = useTranslation();
   const isLiked = useCommunityStore((state) => state.likedTripIds.includes(trip.id));
@@ -18,7 +18,7 @@ export default function PublicTripCard({ trip }) {
     >
       <div className="relative">
         <img
-          src={`/images/home/${trip.city}.jpg`}
+          src={getTripCoverSrc(trip)}
           alt=""
           loading="lazy"
           className="aspect-video w-full object-cover motion-card-image"

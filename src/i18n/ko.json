@@ -127,8 +127,10 @@
     "like": {
       "label": "좋아요"
     },
+    "photoCredits": "일정 사진 출처",
     "detail": {
       "back": "일정 목록으로",
+      "photoBy": "사진",
       "day": "DAY {{day}}",
       "meta": "{{author}} · {{companion}} {{people}}명 · {{style}}",
       "stay": "{{duration}} 머무름",

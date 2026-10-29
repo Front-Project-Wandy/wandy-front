@@ -7,6 +7,7 @@ import { TRAVEL_STYLES } from '../Wizard/tripStyleOptions';
 import MyActivity from './MyActivity';
 import PublicTripCard from './PublicTripCard';
 import PublicTripFilters from './PublicTripFilters';
+import TripPhotoCredits from './TripPhotoCredits';
 import {
   COMMUNITY_CITIES,
   filterPublicTrips,
@@ -87,6 +88,7 @@ export default function CommunityPage() {
                 ))}
               </ul>
             )}
+            <TripPhotoCredits trips={trips} />
           </section>
         </>
       )}
