@@ -1060,6 +1060,15 @@
       },
       "none": "근처에 없어요",
       "distance": "{{value}}m"
+    },
+    "wandyReviews": {
+      "title": "Wandy 여행자 평점",
+      "description": "Google·네이버 평점과 따로, Wandy 여행자가 남긴 별점과 후기예요",
+      "count": "후기 {{count}}개",
+      "empty": "아직 Wandy 여행자 평점이 없어요",
+      "open": "후기 보기·쓰기",
+      "writeFirst": "첫 후기 쓰기",
+      "recentLabel": "최근 후기"
     }
   },
   "places": {
@@ -1085,6 +1094,23 @@
     "list": {
       "more": "더보기",
       "moreCount": "{{shown}}/{{total}}"
+    },
+    "mapView": {
+      "label": "장소 지도",
+      "toggleLabel": "보기 방식",
+      "view": {
+        "list": "목록",
+        "map": "지도"
+      },
+      "searchArea": "이 지역에서 검색",
+      "areaApplied": "지도 범위로 좁힘",
+      "clearArea": "범위 풀기",
+      "clearAreaLabel": "지도 범위로 좁힌 결과 풀기",
+      "selected": "지도에서 고른 장소",
+      "emptyArea": {
+        "title": "이 지역에는 결과가 없어요",
+        "description": "지도를 옮겨 다시 검색하거나 범위를 풀어 보세요"
+      }
     }
   },
   "product": {
@@ -1126,6 +1152,7 @@
     "card": {
       "rating": "평점 {{rating}}점, 후기 {{count}}개",
       "rank": "{{rank}}위",
+      "pinned": "추천",
       "detail": "상품 자세히 보기",
       "duration": "소요 {{duration}}"
     },
@@ -1156,7 +1183,28 @@
       "subtitle": "{{city}}에서 같이 즐기기 좋은 상품이에요"
     },
     "daySection": {
-      "title": "이 날과 어울리는 투어"
+      "title": "이 날과 어울리는 투어",
+      "add": "이 날에 넣기",
+      "addLabel": "{{name}}을(를) DAY {{number}}에 넣기",
+      "added": "넣었어요"
+    },
+    "addToTrip": {
+      "button": "일정에 넣기",
+      "title": "일정에 넣기",
+      "tripLabel": "여행",
+      "dayLabel": "날짜",
+      "untitled": "{{city}} 여행",
+      "dates": "{{start}} ~ {{end}}",
+      "day": "DAY {{number}} · {{date}}",
+      "submit": "DAY {{number}}에 넣기",
+      "duplicate": "이 날에 이미 들어 있어요",
+      "done": "「{{trip}}」 DAY {{number}}에 넣었어요",
+      "goToTrip": "일정 보러 가기",
+      "emptyTitle": "다가오는 {{city}} 여행이 없어요",
+      "emptyDescription": "{{city}} 여행을 만들면 이 상품을 일정에 넣을 수 있어요",
+      "create": "여행 만들기",
+      "viewProduct": "상품",
+      "viewProductLabel": "{{name}} 상품 보기"
     }
   },
   "login": {
@@ -1326,6 +1374,31 @@
       "emptyTitle": "아직 찜한 장소가 없어요",
       "emptyDescription": "장소 카드의 ♡를 눌러 가고 싶은 곳을 모아 보세요",
       "explore": "장소 탐색하러 가기"
+    },
+    "withdraw": {
+      "title": "회원 탈퇴",
+      "description": "탈퇴하면 이 기기에 저장된 내 기록이 모두 지워지고 되돌릴 수 없어요.",
+      "open": "회원 탈퇴하기",
+      "modalTitle": "정말 탈퇴할까요?",
+      "listIntro": "이 기기에서 아래 기록이 모두 지워지고 로그아웃돼요.",
+      "items": {
+        "trips": "내 여행과 만들던 여행(임시 저장)",
+        "tripRecords": "여행별 다녀옴 체크·준비물 체크·지출 기록",
+        "favorites": "찜한 장소",
+        "ratings": "다녀온 곳 평가",
+        "preferences": "여행 취향",
+        "community": "내가 쓴 장소 후기·공개 일정 좋아요",
+        "recent": "최근 본 장소·상품",
+        "account": "로그인 정보"
+      },
+      "kept": "화면 테마, 인트로를 본 기록, 관리자 상품 설정은 내 기록이 아닌 기기 설정이라 남겨 둬요.",
+      "confirm": "위 내용을 확인했어요",
+      "cancel": "취소",
+      "submit": "탈퇴하기",
+      "error": "기록을 지우지 못했어요. 잠시 뒤 다시 시도해 주세요.",
+      "doneTitle": "탈퇴가 끝났어요",
+      "done": "이 기기에 남은 내 기록을 모두 지웠어요. 그동안 원디와 함께해 주셔서 고마워요.",
+      "home": "홈으로"
     }
   },
   "favorite": {
@@ -1587,6 +1660,67 @@
     "mealTime": {
       "lunch": "점심시간이에요. 근처 맛집에서 식사해 보세요",
       "dinner": "저녁시간이에요. 근처 맛집에서 식사해 보세요"
+    }
+  },
+  "admin": {
+    "page": {
+      "eyebrow": "ADMIN",
+      "title": "상품·추천 목록 관리",
+      "localNote": "지금은 서버가 없어서 설정이 이 기기(이 브라우저)에만 저장돼요. 다른 기기·다른 사용자에게는 반영되지 않아요."
+    },
+    "gate": {
+      "title": "관리자만 볼 수 있는 화면이에요",
+      "description": "로그인한 뒤 다시 들어와 주세요.",
+      "login": "로그인하러 가기"
+    },
+    "tab": {
+      "label": "관리할 목록",
+      "products": "투어 상품",
+      "curation": "추천 장소"
+    },
+    "filter": {
+      "city": "도시"
+    },
+    "table": {
+      "title": "상품명",
+      "city": "도시",
+      "category": "종류",
+      "price": "가격",
+      "rating": "평점",
+      "actions": "설정"
+    },
+    "product": {
+      "count": "{{count}}개 중 {{hidden}}개 숨김",
+      "hide": "숨김",
+      "pin": "추천 고정",
+      "hideLabel": "{{title}} 숨기기",
+      "pinLabel": "{{title}} 추천 고정"
+    },
+    "pinned": {
+      "title": "추천 고정 순서",
+      "description": "고정한 상품은 상품 목록과 홈 상품 줄 맨 앞에 이 순서대로 나와요.",
+      "empty": "고정한 상품이 없어요. 아래 표에서 [추천 고정]을 눌러 주세요.",
+      "up": "{{title}} 위로 옮기기",
+      "down": "{{title}} 아래로 옮기기",
+      "remove": "{{title}} 고정 풀기"
+    },
+    "curation": {
+      "label": "홈 추천 테마",
+      "seasonHint": "{{city}} 시즌 추천은 정해 둔 장소라, 숨기면 홈에 보이는 장소가 그만큼 줄어요.",
+      "themeHint": "{{city}} 테마 추천은 앞에서부터 4곳이 홈에 나오고, 숨긴 자리는 다음 장소가 채워요.",
+      "season": {
+        "spring": "봄 시즌",
+        "summer": "여름 시즌",
+        "autumn": "가을 시즌",
+        "winter": "겨울 시즌"
+      }
+    },
+    "reset": {
+      "action": "초기화",
+      "title": "관리 설정을 초기화할까요?",
+      "description": "숨김·추천 고정·추천 장소 숨김이 모두 지워지고 처음 목록으로 돌아가요. 되돌릴 수 없어요.",
+      "cancel": "취소",
+      "confirm": "초기화"
     }
   }
 }

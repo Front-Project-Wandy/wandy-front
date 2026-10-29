@@ -1,15 +1,20 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Button from '../../../components/common/Button';
 import EmptyState from '../../../components/common/EmptyState';
 import ErrorState from '../../../components/common/ErrorState';
 import Loading from '../../../components/common/Loading';
 import { useProduct } from '../hooks/useProducts';
 import { formatPrice } from '../utils/formatPrice';
+import AddToTripModal from './AddToTripModal';
 import ProductPhotoCredit from './ProductPhotoCredit';
 
 // 상품 상세 + 외부 예약 링크 (64). 예약·결제는 우리 서비스에서 하지 않는다.
+// [일정에 넣기]로 내 여행의 DAY에 상품을 넣는다 (84). 예약 링크가 주된 행동이라 그 아래 보조 버튼으로 둔다.
 export default function ProductDetail({ id }) {
   const { t } = useTranslation();
   const { data: product, isPending, isError, error, refetch } = useProduct(id);
+  const [isAdding, setIsAdding] = useState(false);
 
   if (isPending) return <Loading />;
   if (isError && error.message === 'PRODUCT_NOT_FOUND')
@@ -86,7 +91,13 @@ export default function ProductDetail({ id }) {
           </a>
           <p className="text-center text-caption text-text/70">{t('product.detail.notice')}</p>
         </div>
+        <Button variant="secondary" className="w-full" onClick={() => setIsAdding(true)}>
+          {t('product.addToTrip.button')}
+        </Button>
       </div>
+      {isAdding ? (
+        <AddToTripModal open onClose={() => setIsAdding(false)} product={product} />
+      ) : null}
     </article>
   );
 }

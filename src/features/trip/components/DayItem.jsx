@@ -1,6 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import Button from '../../../components/common/Button';
+import { getItemProductId } from '../../product/utils/productPlanItem';
 import OpeningHoursWarning from '../../search/components/OpeningHoursWarning';
 import { useItemName } from '../hooks/useItemName';
 import DragHandle from './DragHandle';
@@ -38,6 +40,8 @@ export default function DayItem({
   // 폼이 닫히면 편집 버튼이 새로 그려져서, 키보드 포커스를 그 버튼으로 돌려줘야 한다
   const shouldRestoreFocus = useRef(false);
   const name = useItemName(item);
+  // 상품 상세의 [일정에 넣기]·DAY 추천으로 넣은 투어 상품이면 상품 id (84). 예약하러 상품 상세로 돌아갈 수 있게 한다.
+  const productId = getItemProductId(item);
 
   useEffect(() => {
     if (isEditing || !shouldRestoreFocus.current) return;
@@ -106,6 +110,15 @@ export default function DayItem({
               >
                 {t('planner.local.button')}
               </Button>
+            ) : null}
+            {productId ? (
+              <Link
+                to={`/products?id=${encodeURIComponent(productId)}`}
+                aria-label={t('product.addToTrip.viewProductLabel', { name })}
+                className="inline-flex h-11 items-center justify-center rounded-xl px-4 text-body font-bold text-text transition-colors hover:bg-text/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                {t('product.addToTrip.viewProduct')}
+              </Link>
             ) : null}
             <Button
               ref={editButtonRef}
