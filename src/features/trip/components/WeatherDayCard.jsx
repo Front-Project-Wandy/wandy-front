@@ -28,7 +28,7 @@ export default function WeatherDayCard({ number, forecast }) {
             {t('planner.weather.rain', { percent: forecast.rainChance ?? 0 })}
           </p>
           {isRainAlert(forecast.rainChance) ? (
-            <p className="mt-1 inline-block rounded-full border border-point px-2 py-0.5 text-caption font-bold">
+            <p className="mt-1 inline-block rounded-full bg-apricot-soft px-2 py-0.5 text-caption font-bold text-apricot-ink">
               {t('planner.weather.umbrella')}
             </p>
           ) : null}

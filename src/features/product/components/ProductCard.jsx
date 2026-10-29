@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import FlipCardFrame from '../../../components/common/FlipCardFrame';
 import { formatPrice } from '../utils/formatPrice';
 import ProductCategoryIcon from './ProductCategoryIcon';
 
@@ -7,77 +7,105 @@ import ProductCategoryIcon from './ProductCategoryIcon';
 // 같은 색만 이어지면 구분이 안 되기 때문이다. 바탕은 투명도를 낮춰서 다크모드에서도 어둡게 깔린다.
 const FALLBACK_CLASS = {
   tour: 'bg-brand/15 text-primary',
-  ticket: 'bg-point/15 text-point',
+  ticket: 'bg-apricot-soft text-apricot-ink',
   pass: 'bg-primary/10 text-link',
   activity: 'bg-day-2/15 text-day-2',
   snap: 'bg-day-3/15 text-day-3',
 };
 
-// 상품 카드 — 목록(63)과 홈 섹션(62)·장소 상세에서 같이 쓴다. 테두리 상자 대신 둥근 사진 위에 글자를 둔다.
+// 상품 카드 — 목록(63)과 홈 섹션(62)·장소 상세에서 같이 쓴다. 누르면 뒤집혀 뒷면에 소개·소요 시간과
+// [상품 자세히 보기]가 나온다 (상세로 가는 건 뒷면 버튼).
 // rank를 넘기면 사진 왼쪽 위에 「1위」 같은 순위 배지를 단다 (목록의 평점 상위).
-export default function ProductCard({ product, onSelect, rank = null }) {
+// draggable={false}: 가로로 넘기는 목록(홈·장소 상세)에서는 끌어서 뒤집기가 목록 스크롤과 부딪혀서 끈다.
+// sizeClass: 카드 높이(비율). 좁은 2열 그리드는 글자 자리가 모자라서 더 길쭉하게 쓴다.
+export default function ProductCard({
+  product,
+  onSelect,
+  rank = null,
+  draggable = true,
+  sizeClass = 'aspect-3/4',
+}) {
   const { t } = useTranslation();
   const categoryLabel = t(`product.category.${product.category}`);
   const reviewCount = product.reviewCount.toLocaleString('ko-KR');
-  // 사진이 늦게 오면 등장 연출이 끝난 뒤 빈 틀에 툭 튀어나오므로, 불러온 뒤에 부드럽게 보이게 한다.
-  // 오류가 나도 보이게 해서 영영 숨겨지는 일이 없게 하고, 이미 받아 둔 사진은 ref에서 바로 잡는다.
-  const [imageReady, setImageReady] = useState(false);
+  const price = t(`product.price.${product.currency}`, { value: formatPrice(product.price) });
+  const rating = (
+    <span className="text-caption text-text/70">
+      <span aria-hidden="true">
+        <span className="text-gold">★</span> {product.rating} ({reviewCount})
+      </span>
+      <span className="sr-only">
+        {t('product.card.rating', { rating: product.rating, count: reviewCount })}
+      </span>
+    </span>
+  );
 
-  return (
-    <button
-      type="button"
-      onClick={() => onSelect(product)}
-      className="group flex h-full w-full flex-col rounded-2xl text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-    >
-      <span className="motion-card-frame relative block aspect-4/3 w-full overflow-hidden rounded-2xl bg-bg-soft">
+  const front = (
+    <span className="flex size-full flex-col">
+      <span className="relative block min-h-0 flex-1 overflow-hidden bg-bg-soft">
         {product.imageUrl ? (
-          <img
-            ref={(el) => {
-              if (el?.complete) setImageReady(true);
-            }}
-            src={product.imageUrl}
-            alt=""
-            className="size-full object-cover motion-card-image"
-            data-ready={imageReady}
-            onLoad={() => setImageReady(true)}
-            onError={() => setImageReady(true)}
-            loading="lazy"
-          />
+          <img src={product.imageUrl} alt="" loading="lazy" className="size-full object-cover" />
         ) : (
           <span
             aria-hidden="true"
-            className={`flex size-full flex-col items-center justify-center gap-2 motion-card-image ${FALLBACK_CLASS[product.category] ?? 'text-primary'}`}
+            className={`flex size-full flex-col items-center justify-center gap-2 ${FALLBACK_CLASS[product.category] ?? 'text-primary'}`}
           >
             <ProductCategoryIcon category={product.category} size={40} />
             <span className="text-body-sm font-bold text-text/70">{categoryLabel}</span>
           </span>
         )}
         {rank ? (
-          <span className="absolute top-3 left-3 rounded-full bg-background px-2.5 py-1 text-caption font-bold text-link">
+          <span className="absolute top-3 left-3 rounded-full bg-apricot px-2.5 py-1 text-caption font-bold text-ink">
             {t('product.card.rank', { rank })}
           </span>
         ) : null}
       </span>
-      <span className="flex flex-1 flex-col gap-1 px-1 pt-3">
-        <span className="text-caption text-text/60">
+      <span className="flex flex-col gap-1 px-3 pt-2.5 pb-3">
+        <span className="truncate text-caption text-text/60">
           {t(`common.city.${product.city}`)} · {categoryLabel}
         </span>
         <span className="line-clamp-2 text-body font-bold break-keep">{product.title}</span>
-        <span className="line-clamp-1 text-body-sm text-text/70">{product.summary}</span>
-        <span className="mt-auto flex flex-wrap items-baseline justify-between gap-x-2 pt-2">
-          <span className="text-body font-bold">
-            {t(`product.price.${product.currency}`, { value: formatPrice(product.price) })}
-          </span>
-          <span className="text-caption text-text/70">
-            <span aria-hidden="true">
-              <span className="text-point">★</span> {product.rating} ({reviewCount})
-            </span>
-            <span className="sr-only">
-              {t('product.card.rating', { rating: product.rating, count: reviewCount })}
-            </span>
-          </span>
+        <span className="flex flex-wrap items-baseline justify-between gap-x-2">
+          <span className="text-body font-bold">{price}</span>
+          {rating}
         </span>
       </span>
-    </button>
+    </span>
+  );
+
+  const back = (
+    <span className="flex size-full flex-col gap-2 bg-bg-soft p-3 sm:p-4">
+      <span className="text-caption text-text/60">
+        {t(`common.city.${product.city}`)} · {categoryLabel}
+      </span>
+      <span className="line-clamp-2 text-body font-bold break-keep">{product.title}</span>
+      <span className="line-clamp-4 text-body-sm text-text/70 break-keep">
+        {product.description ?? product.summary}
+      </span>
+      <span className="flex flex-wrap items-center gap-x-2 text-caption text-text/70">
+        {product.duration ? (
+          <span>{t('product.card.duration', { duration: product.duration })}</span>
+        ) : null}
+        {rating}
+      </span>
+      <span className="text-body font-bold">{price}</span>
+      <button
+        type="button"
+        onClick={() => onSelect(product)}
+        className="mt-auto rounded-xl bg-primary px-3 py-2.5 text-body font-bold text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        {t('product.card.detail')}
+      </button>
+    </span>
+  );
+
+  return (
+    <FlipCardFrame
+      front={front}
+      back={back}
+      ariaLabel={t('common.flipCard.label', { name: product.title })}
+      draggable={draggable}
+      className={sizeClass}
+    />
   );
 }

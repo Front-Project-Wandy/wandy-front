@@ -3,6 +3,9 @@ import Chip from '../../../components/common/Chip';
 import { PLACE_CATEGORIES } from '../place';
 import CategoryIcon from './CategoryIcon';
 
+// 고르지 않은 칸은 살구·연금빛을 번갈아 깔아, 하늘색(고른 칸) 하나만 반복되지 않게 한다 (분할보색 톤).
+const WARM_TONES = ['bg-apricot-soft text-apricot-ink', 'bg-gold-soft text-gold-ink'];
+
 const CHIP_VALUES = [null, ...PLACE_CATEGORIES];
 
 // 카테고리 필터 (8). null = 전체. 하나만 고를 수 있다.
@@ -22,7 +25,7 @@ export default function CategoryChips({ value, onChange, variant = 'chip' }) {
         aria-label={t('search.category.label')}
         className="-mx-4 flex gap-1 overflow-x-auto px-3 py-1 [scrollbar-width:none] sm:mx-0 sm:justify-between sm:px-0"
       >
-        {CHIP_VALUES.map((category) => {
+        {CHIP_VALUES.map((category, index) => {
           const selected = value === category;
           return (
             <button
@@ -35,7 +38,9 @@ export default function CategoryChips({ value, onChange, variant = 'chip' }) {
               {/* brand 위에는 흰 글자를 쓰지 않는 규칙이라 고른 칸의 아이콘은 테마와 상관없이 진한 ink다. */}
               <span
                 className={`grid size-14 place-items-center rounded-full transition-colors sm:size-16 ${
-                  selected ? 'bg-brand text-ink' : 'bg-bg-soft text-primary group-hover:bg-brand/20'
+                  selected
+                    ? 'bg-brand text-ink'
+                    : `${WARM_TONES[index % WARM_TONES.length]} group-hover:bg-brand/20`
                 }`}
               >
                 <CategoryIcon category={category} size={26} />

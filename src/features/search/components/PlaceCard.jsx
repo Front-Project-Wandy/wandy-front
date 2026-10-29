@@ -50,7 +50,7 @@ export default function PlaceCard({ place, onSelect, distance = null, imageUrl =
                 {categoryLabel}
               </span>
               {place.rating !== null ? (
-                <span className="text-point">
+                <span className="text-gold-ink">
                   <span aria-hidden="true">★ {place.rating}</span>
                   <span className="sr-only">
                     {t('search.card.rating', { rating: place.rating })}

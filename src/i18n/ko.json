@@ -28,6 +28,10 @@
       "close": "닫기",
       "back": "뒤로"
     },
+    "flipCard": {
+      "label": "{{name}}, 눌러서 뒤집기",
+      "hint": "눌러서 자세히 보기"
+    },
     "time": {
       "hour": "시",
       "minute": "분",
@@ -260,7 +264,20 @@
     "cities": {
       "title": "지금 떠나고 싶은 도시",
       "comingSoon": "준비 중",
-      "startLabel": "{{city}} 여행 시작하기"
+      "startLabel": "{{city}} 여행 시작하기",
+      "flipHint": "눌러서 도시 소개 보기"
+    },
+    "carousel": {
+      "label": "서울·도쿄 여행 사진",
+      "open": "{{name}} 보러 가기",
+      "counter": "{{current}} / {{total}}",
+      "credits": "배너 사진 출처",
+      "cropNote": "Wikimedia Commons·Unsplash 사진을 줄이고 잘라서 표시했습니다.",
+      "fallback": "움직임 줄이기가 켜져 있거나 3D를 쓸 수 없어 사진 한 장으로 보여 드려요.",
+      "previous": "이전 사진",
+      "next": "다음 사진",
+      "slides": "사진 고르기",
+      "goTo": "{{number}}번째 사진 보기"
     },
     "confirm": {
       "title": "작성 중인 여행이 있어요",
@@ -1061,7 +1078,9 @@
       }
     },
     "card": {
-      "rank": "{{rank}}위"
+      "rank": "{{rank}}위",
+      "detail": "장소 상세 보기",
+      "hours": "영업시간"
     },
     "list": {
       "more": "더보기",
@@ -1106,7 +1125,9 @@
     },
     "card": {
       "rating": "평점 {{rating}}점, 후기 {{count}}개",
-      "rank": "{{rank}}위"
+      "rank": "{{rank}}위",
+      "detail": "상품 자세히 보기",
+      "duration": "소요 {{duration}}"
     },
     "price": {
       "KRW": "{{value}}원",

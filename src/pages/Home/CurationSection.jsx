@@ -55,7 +55,7 @@ export default function CurationSection() {
   return (
     <section aria-labelledby="curation-title" className="flex flex-col gap-5">
       <div className="mb-2">
-        <p className="mb-3 text-caption font-bold tracking-widest text-primary">
+        <p className="mb-3 text-caption font-bold tracking-widest text-link">
           {t('home.editorial.curationEyebrow')}
         </p>
         <h2 id="curation-title" className="text-title font-bold lg:text-display">

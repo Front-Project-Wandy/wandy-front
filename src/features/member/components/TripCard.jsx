@@ -20,7 +20,7 @@ export default function TripCard({ trip, status, today, onSelect }) {
     if (status === 'upcoming')
       return {
         label: t('my.trips.dday', { count: getDaysUntil(trip.startDate, today) }),
-        className: 'text-point',
+        className: 'text-apricot-ink',
       };
     if (status === 'ongoing') return { label: t('my.trips.ongoing'), className: 'text-link' };
     return null;
