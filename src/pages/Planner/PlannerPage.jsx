@@ -17,6 +17,7 @@ import PrintableTrip from '../../features/trip/components/PrintableTrip';
 import ShareTripDialog from '../../features/trip/components/ShareTripDialog';
 import TodayView from '../../features/trip/components/TodayView';
 import TimelineView from '../../features/trip/components/TimelineView';
+import TripPrepPanel from '../../features/trip/components/TripPrepPanel';
 import TripWeather from '../../features/trip/components/TripWeather';
 import UndoRedoBar from '../../features/trip/components/UndoRedoBar';
 import ViewToggle from '../../features/trip/components/ViewToggle';
@@ -232,6 +233,7 @@ export default function PlannerPage() {
         {isTripReady ? <TransitPassAdvice trip={trip} /> : null}
         {isTripReady ? <TripWeather trip={trip} /> : null}
         {isTripReady ? <AirportLeg trip={trip} /> : null}
+        {isTripReady ? <TripPrepPanel trip={trip} /> : null}
         {isTripReady ? <ViewToggle value={viewMode} onChange={setViewMode} /> : null}
         {renderBody()}
         {isTripReady ? (
