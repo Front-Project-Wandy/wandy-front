@@ -30,6 +30,7 @@ export default function PlaceProductSection({ place, className = '' }) {
           <li key={product.id} className="w-64 shrink-0 snap-start lg:w-auto">
             <ProductCard
               product={product}
+              draggable={false}
               onSelect={(item) => navigate(`/products?id=${encodeURIComponent(item.id)}`)}
             />
           </li>
