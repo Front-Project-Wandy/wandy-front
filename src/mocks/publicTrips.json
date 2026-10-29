@@ -1,0 +1,472 @@
+[
+  {
+    "id": "pt-seoul-palace",
+    "author": "궁궐산책러",
+    "title": "서울 궁궐·한옥 골목 2박 3일",
+    "summary": "궁궐 두 곳과 북촌·익선동 골목을 천천히 걷고, 마지막 날은 남산에서 마무리해요.",
+    "country": "KR",
+    "city": "seoul",
+    "style": "relaxed",
+    "companion": "couple",
+    "people": 2,
+    "categories": ["sight", "food", "cafe"],
+    "likes": 128,
+    "createdAt": "2026-10-12",
+    "days": [
+      [
+        {
+          "placeId": "tour:126508",
+          "startTime": "10:00",
+          "stayMinutes": 120,
+          "memo": "한복 입으면 입장 무료"
+        },
+        {
+          "placeId": "naver:토속촌 삼계탕_1269711000_375781000",
+          "startTime": "12:30",
+          "stayMinutes": 60,
+          "memo": "점심 줄이 길어서 12시 전 도착 추천"
+        },
+        {
+          "placeId": "naver:북촌한옥마을_1269831000_375826000",
+          "startTime": "14:00",
+          "stayMinutes": 90,
+          "memo": "주민이 사는 곳이라 조용히"
+        },
+        {
+          "placeId": "naver:어니언 안국_1269862000_375772000",
+          "startTime": "16:00",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:인사동 쌈지길_1269853000_375743000",
+          "startTime": "17:30",
+          "stayMinutes": 60,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "tour:900001",
+          "startTime": "10:00",
+          "stayMinutes": 120,
+          "memo": "후원은 예약 필수"
+        },
+        { "placeId": "tour:900009", "startTime": "12:30", "stayMinutes": 60, "memo": "" },
+        {
+          "placeId": "tour:900007",
+          "startTime": "14:00",
+          "stayMinutes": 90,
+          "memo": "빈대떡·육회 추천"
+        },
+        {
+          "placeId": "naver:청계천_1269784000_375690000",
+          "startTime": "16:00",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:을지로 노가리골목_1269921000_375662000",
+          "startTime": "19:00",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "tour:900002",
+          "startTime": "10:00",
+          "stayMinutes": 90,
+          "memo": "11시 수문장 교대식"
+        },
+        {
+          "placeId": "naver:명동교자 본점_1269856000_375626000",
+          "startTime": "12:00",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        { "placeId": "tour:900004", "startTime": "14:00", "stayMinutes": 120, "memo": "" }
+      ]
+    ]
+  },
+  {
+    "id": "pt-seoul-seongsu",
+    "author": "카페투어중",
+    "title": "성수·잠실 꽉 채운 1박 2일",
+    "summary": "성수 카페와 한강 야경, 다음 날은 잠실 전망대까지 알차게 돌아요.",
+    "country": "KR",
+    "city": "seoul",
+    "style": "packed",
+    "companion": "friends",
+    "people": 3,
+    "categories": ["cafe", "shop", "night"],
+    "likes": 86,
+    "createdAt": "2026-10-18",
+    "days": [
+      [
+        {
+          "placeId": "naver:서울숲_1270374000_375444000",
+          "startTime": "10:00",
+          "stayMinutes": 90,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:어니언 성수_1270581000_375447000",
+          "startTime": "11:45",
+          "stayMinutes": 60,
+          "memo": "팡도르 꼭 먹기"
+        },
+        {
+          "placeId": "naver:소문난성수감자탕_1270560000_375430000",
+          "startTime": "13:00",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:더현대 서울_1269284000_375259000",
+          "startTime": "15:00",
+          "stayMinutes": 120,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:반포한강공원 달빛무지개분수_1269958000_375101000",
+          "startTime": "19:30",
+          "stayMinutes": 60,
+          "memo": "분수 시간 확인하고 가기"
+        }
+      ],
+      [
+        {
+          "placeId": "naver:석촌호수_1271031000_375097000",
+          "startTime": "10:00",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:롯데월드타워 서울스카이_1271025000_375126000",
+          "startTime": "11:30",
+          "stayMinutes": 90,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:동대문디자인플라자_1270092000_375665000",
+          "startTime": "14:00",
+          "stayMinutes": 90,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:명동거리_1269850000_375636000",
+          "startTime": "16:00",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ]
+    ]
+  },
+  {
+    "id": "pt-seoul-kids",
+    "author": "주말엔아이랑",
+    "title": "아이와 함께 서울 3박 4일",
+    "summary": "하루에 두세 곳만 넣고, 박물관·찜질방·공원처럼 아이가 지루하지 않은 곳 위주로 짰어요.",
+    "country": "KR",
+    "city": "seoul",
+    "style": "relaxed",
+    "companion": "kids",
+    "people": 3,
+    "categories": ["sight", "nature", "onsen"],
+    "likes": 54,
+    "createdAt": "2026-10-05",
+    "days": [
+      [
+        {
+          "placeId": "tour:900003",
+          "startTime": "10:30",
+          "stayMinutes": 150,
+          "memo": "어린이박물관은 회차 예약"
+        },
+        {
+          "placeId": "naver:드래곤힐스파_1269645000_375297000",
+          "startTime": "14:00",
+          "stayMinutes": 150,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "naver:남산돈까스_1269835000_375565000",
+          "startTime": "11:30",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "tour:900004",
+          "startTime": "13:00",
+          "stayMinutes": 120,
+          "memo": "케이블카 타면 아이가 좋아해요"
+        },
+        {
+          "placeId": "naver:명동거리_1269850000_375636000",
+          "startTime": "16:00",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "naver:서울숲_1270374000_375444000",
+          "startTime": "10:00",
+          "stayMinutes": 120,
+          "memo": "꽃사슴 먹이 주기"
+        },
+        {
+          "placeId": "naver:롯데월드타워 서울스카이_1271025000_375126000",
+          "startTime": "14:00",
+          "stayMinutes": 120,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:석촌호수_1271031000_375097000",
+          "startTime": "16:30",
+          "stayMinutes": 60,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "naver:경의선숲길 연남동 구간_1269246000_375622000",
+          "startTime": "10:00",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:툭툭누들타이_1269255000_375627000",
+          "startTime": "11:30",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "naver:홍대 걷고싶은거리_1269236000_375563000",
+          "startTime": "13:00",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ]
+    ]
+  },
+  {
+    "id": "pt-tokyo-first",
+    "author": "도쿄첫여행",
+    "title": "도쿄 처음이라면 2박 3일",
+    "summary": "아사쿠사·하라주쿠·시부야를 하루씩 묶어서 이동을 줄였어요. 처음 가는 분께 추천해요.",
+    "country": "JP",
+    "city": "tokyo",
+    "style": "normal",
+    "companion": "friends",
+    "people": 3,
+    "categories": ["sight", "food", "night"],
+    "likes": 214,
+    "createdAt": "2026-10-20",
+    "days": [
+      [
+        {
+          "placeId": "google:mock-sensoji",
+          "startTime": "10:00",
+          "stayMinutes": 90,
+          "memo": "아침 일찍 가야 덜 붐벼요"
+        },
+        { "placeId": "google:mock-nakamise", "startTime": "11:30", "stayMinutes": 45, "memo": "" },
+        {
+          "placeId": "google:mock-gyukatsu-asakusa",
+          "startTime": "12:30",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        { "placeId": "google:mock-skytree", "startTime": "14:30", "stayMinutes": 120, "memo": "" },
+        {
+          "placeId": "google:mock-omoide-yokocho",
+          "startTime": "19:00",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "google:mock-meiji-jingu",
+          "startTime": "09:30",
+          "stayMinutes": 90,
+          "memo": ""
+        },
+        { "placeId": "google:mock-takeshita", "startTime": "11:30", "stayMinutes": 60, "memo": "" },
+        {
+          "placeId": "google:mock-afuri-harajuku",
+          "startTime": "12:45",
+          "stayMinutes": 60,
+          "memo": "유자 시오 라멘"
+        },
+        {
+          "placeId": "google:mock-shibuya-crossing",
+          "startTime": "15:00",
+          "stayMinutes": 30,
+          "memo": ""
+        },
+        {
+          "placeId": "google:mock-shibuya-sky",
+          "startTime": "17:00",
+          "stayMinutes": 90,
+          "memo": "해 질 녘 시간대는 미리 예매"
+        }
+      ],
+      [
+        { "placeId": "google:mock-tsukiji", "startTime": "09:00", "stayMinutes": 90, "memo": "" },
+        {
+          "placeId": "google:mock-teamlab-planets",
+          "startTime": "11:30",
+          "stayMinutes": 120,
+          "memo": "물에 들어가니 반바지 추천"
+        }
+      ]
+    ]
+  },
+  {
+    "id": "pt-tokyo-food",
+    "author": "먹으러여행감",
+    "title": "도쿄 먹방 1박 2일",
+    "summary": "스시·츠케멘·덴푸라·라멘까지, 관광은 줄이고 먹는 데 집중한 일정이에요.",
+    "country": "JP",
+    "city": "tokyo",
+    "style": "packed",
+    "companion": "couple",
+    "people": 2,
+    "categories": ["food", "cafe", "shop"],
+    "likes": 162,
+    "createdAt": "2026-10-15",
+    "days": [
+      [
+        {
+          "placeId": "google:mock-sushizanmai-tsukiji",
+          "startTime": "09:00",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "google:mock-tsukiji",
+          "startTime": "10:15",
+          "stayMinutes": 60,
+          "memo": "계란말이 꼬치"
+        },
+        { "placeId": "google:mock-ginza-six", "startTime": "12:00", "stayMinutes": 90, "memo": "" },
+        {
+          "placeId": "google:mock-fuunji",
+          "startTime": "14:00",
+          "stayMinutes": 45,
+          "memo": "브레이크 타임 전에 도착"
+        },
+        {
+          "placeId": "google:mock-tocho",
+          "startTime": "16:00",
+          "stayMinutes": 60,
+          "memo": "무료 전망대"
+        },
+        {
+          "placeId": "google:mock-omoide-yokocho",
+          "startTime": "18:30",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "google:mock-bluebottle-kiyosumi",
+          "startTime": "09:30",
+          "stayMinutes": 45,
+          "memo": ""
+        },
+        { "placeId": "google:mock-daikokuya", "startTime": "11:30", "stayMinutes": 60, "memo": "" },
+        { "placeId": "google:mock-ameyoko", "startTime": "13:30", "stayMinutes": 90, "memo": "" },
+        {
+          "placeId": "google:mock-mihashi",
+          "startTime": "15:15",
+          "stayMinutes": 45,
+          "memo": "안미츠"
+        },
+        {
+          "placeId": "google:mock-ichiran-shibuya",
+          "startTime": "18:00",
+          "stayMinutes": 60,
+          "memo": ""
+        }
+      ]
+    ]
+  },
+  {
+    "id": "pt-tokyo-slow",
+    "author": "혼자느긋하게",
+    "title": "공원과 온천, 느긋한 도쿄 3박 4일",
+    "summary": "혼자 가는 여행이라 하루 서너 곳만. 공원 산책과 온천으로 쉬어 가는 일정이에요.",
+    "country": "JP",
+    "city": "tokyo",
+    "style": "relaxed",
+    "companion": "solo",
+    "people": 1,
+    "categories": ["nature", "onsen", "cafe"],
+    "likes": 97,
+    "createdAt": "2026-10-09",
+    "days": [
+      [
+        {
+          "placeId": "google:mock-shinjuku-gyoen",
+          "startTime": "11:00",
+          "stayMinutes": 120,
+          "memo": ""
+        },
+        { "placeId": "google:mock-fuunji", "startTime": "13:30", "stayMinutes": 60, "memo": "" },
+        { "placeId": "google:mock-tocho", "startTime": "16:00", "stayMinutes": 60, "memo": "" }
+      ],
+      [
+        {
+          "placeId": "google:mock-ueno-park",
+          "startTime": "10:00",
+          "stayMinutes": 120,
+          "memo": ""
+        },
+        { "placeId": "google:mock-mihashi", "startTime": "12:30", "stayMinutes": 45, "memo": "" },
+        { "placeId": "google:mock-ameyoko", "startTime": "13:30", "stayMinutes": 60, "memo": "" },
+        {
+          "placeId": "google:mock-spa-laqua",
+          "startTime": "16:00",
+          "stayMinutes": 180,
+          "memo": "타월 대여 포함 요금"
+        }
+      ],
+      [
+        {
+          "placeId": "google:mock-yoyogi-park",
+          "startTime": "10:00",
+          "stayMinutes": 90,
+          "memo": ""
+        },
+        { "placeId": "google:mock-fuglen", "startTime": "11:45", "stayMinutes": 60, "memo": "" },
+        {
+          "placeId": "google:mock-meiji-jingu",
+          "startTime": "13:30",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ],
+      [
+        {
+          "placeId": "google:mock-bluebottle-kiyosumi",
+          "startTime": "09:30",
+          "stayMinutes": 60,
+          "memo": ""
+        },
+        {
+          "placeId": "google:mock-tokyo-tower",
+          "startTime": "11:30",
+          "stayMinutes": 90,
+          "memo": ""
+        }
+      ]
+    ]
+  }
+]

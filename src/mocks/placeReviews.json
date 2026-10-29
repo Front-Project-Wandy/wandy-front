@@ -1,0 +1,178 @@
+[
+  {
+    "id": "rv-001",
+    "placeId": "tour:126508",
+    "author": "궁궐산책러",
+    "rating": 5,
+    "text": "근정전 앞에서 보는 북악산이 정말 멋있어요. 오전에 가면 사람도 적어요.",
+    "createdAt": "2026-10-11"
+  },
+  {
+    "id": "rv-002",
+    "placeId": "tour:126508",
+    "author": "서울토박이",
+    "rating": 4,
+    "text": "넓어서 두 시간은 잡아야 해요. 편한 신발 필수.",
+    "createdAt": "2026-09-28"
+  },
+  {
+    "id": "rv-003",
+    "placeId": "tour:900001",
+    "author": "궁궐산책러",
+    "rating": 5,
+    "text": "후원 투어는 꼭 예약하세요. 가을 단풍이 최고예요.",
+    "createdAt": "2026-10-12"
+  },
+  {
+    "id": "rv-004",
+    "placeId": "naver:북촌한옥마을_1269831000_375826000",
+    "author": "카페투어중",
+    "rating": 4,
+    "text": "골목마다 사진 찍기 좋아요. 언덕이 꽤 있어요.",
+    "createdAt": "2026-10-02"
+  },
+  {
+    "id": "rv-005",
+    "placeId": "naver:토속촌 삼계탕_1269711000_375781000",
+    "author": "먹으러여행감",
+    "rating": 4,
+    "text": "국물이 진하고 양이 많아요. 웨이팅은 각오하세요.",
+    "createdAt": "2026-09-30"
+  },
+  {
+    "id": "rv-006",
+    "placeId": "tour:900007",
+    "author": "먹으러여행감",
+    "rating": 5,
+    "text": "빈대떡과 마약김밥 조합 추천해요. 현금도 챙기세요.",
+    "createdAt": "2026-10-08"
+  },
+  {
+    "id": "rv-007",
+    "placeId": "tour:900004",
+    "author": "주말엔아이랑",
+    "rating": 4,
+    "text": "케이블카 줄이 길어서 저녁 전에 가는 게 좋아요.",
+    "createdAt": "2026-10-04"
+  },
+  {
+    "id": "rv-008",
+    "placeId": "tour:900004",
+    "author": "혼자느긋하게",
+    "rating": 5,
+    "text": "야경이 정말 예뻐요. 해 질 무렵 올라가 보세요.",
+    "createdAt": "2026-09-21"
+  },
+  {
+    "id": "rv-009",
+    "placeId": "naver:서울숲_1270374000_375444000",
+    "author": "주말엔아이랑",
+    "rating": 5,
+    "text": "아이랑 꽃사슴 보러 가기 좋아요. 돗자리 챙기세요.",
+    "createdAt": "2026-10-05"
+  },
+  {
+    "id": "rv-010",
+    "placeId": "naver:어니언 성수_1270581000_375447000",
+    "author": "카페투어중",
+    "rating": 4,
+    "text": "건물 분위기가 독특해요. 주말엔 자리 잡기 어려워요.",
+    "createdAt": "2026-10-17"
+  },
+  {
+    "id": "rv-011",
+    "placeId": "naver:롯데월드타워 서울스카이_1271025000_375126000",
+    "author": "카페투어중",
+    "rating": 4,
+    "text": "유리 바닥이 짜릿해요. 맑은 날 가야 멀리까지 보여요.",
+    "createdAt": "2026-10-18"
+  },
+  {
+    "id": "rv-012",
+    "placeId": "tour:900003",
+    "author": "주말엔아이랑",
+    "rating": 5,
+    "text": "무료인데 볼거리가 정말 많아요. 하루가 모자라요.",
+    "createdAt": "2026-10-03"
+  },
+  {
+    "id": "rv-013",
+    "placeId": "google:mock-sensoji",
+    "author": "도쿄첫여행",
+    "rating": 5,
+    "text": "아침 8시쯤 가면 한적하게 사진 찍을 수 있어요.",
+    "createdAt": "2026-10-19"
+  },
+  {
+    "id": "rv-014",
+    "placeId": "google:mock-sensoji",
+    "author": "먹으러여행감",
+    "rating": 4,
+    "text": "나카미세도리 간식 먹으면서 걷기 좋아요.",
+    "createdAt": "2026-10-01"
+  },
+  {
+    "id": "rv-015",
+    "placeId": "google:mock-skytree",
+    "author": "도쿄첫여행",
+    "rating": 4,
+    "text": "전망대는 미리 예매하면 줄을 덜 서요.",
+    "createdAt": "2026-10-19"
+  },
+  {
+    "id": "rv-016",
+    "placeId": "google:mock-shibuya-sky",
+    "author": "도쿄첫여행",
+    "rating": 5,
+    "text": "노을 시간대가 최고예요. 그 시간 표는 빨리 매진돼요.",
+    "createdAt": "2026-10-20"
+  },
+  {
+    "id": "rv-017",
+    "placeId": "google:mock-tsukiji",
+    "author": "먹으러여행감",
+    "rating": 5,
+    "text": "아침 일찍 가서 계란말이랑 참치 꼬치 먹어 보세요.",
+    "createdAt": "2026-10-14"
+  },
+  {
+    "id": "rv-018",
+    "placeId": "google:mock-fuunji",
+    "author": "먹으러여행감",
+    "rating": 5,
+    "text": "츠케멘 국물이 진해요. 대기 30분은 기본.",
+    "createdAt": "2026-10-14"
+  },
+  {
+    "id": "rv-019",
+    "placeId": "google:mock-teamlab-planets",
+    "author": "도쿄첫여행",
+    "rating": 4,
+    "text": "물에 발을 담그는 구간이 있어서 반바지가 편해요.",
+    "createdAt": "2026-10-21"
+  },
+  {
+    "id": "rv-020",
+    "placeId": "google:mock-spa-laqua",
+    "author": "혼자느긋하게",
+    "rating": 5,
+    "text": "도심 한가운데서 온천이라니. 피로가 싹 풀려요.",
+    "createdAt": "2026-10-08"
+  },
+  {
+    "id": "rv-021",
+    "placeId": "google:mock-shinjuku-gyoen",
+    "author": "혼자느긋하게",
+    "rating": 5,
+    "text": "입장료가 있어서 조용해요. 책 한 권 들고 가기 좋아요.",
+    "createdAt": "2026-10-07"
+  },
+  {
+    "id": "rv-022",
+    "placeId": "google:mock-meiji-jingu",
+    "author": "도쿄첫여행",
+    "rating": 4,
+    "text": "숲길이 시원하고 하라주쿠랑 가까워서 묶어 가기 좋아요.",
+    "createdAt": "2026-10-20"
+  }
+]
