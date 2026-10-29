@@ -1,0 +1,5 @@
+{
+  "kakao": { "id": "kakao:mock-1001", "name": "카카오 여행자" },
+  "naver": { "id": "naver:mock-2001", "name": "네이버 여행자" },
+  "google": { "id": "google:mock-3001", "name": "구글 여행자" }
+}
