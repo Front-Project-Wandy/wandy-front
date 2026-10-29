@@ -273,6 +273,9 @@ export const usePlanStore = create(
         trip: persisted?.trip ? stripExpiredCoords(persisted.trip) : current.trip,
         trips: (persisted?.trips ?? current.trips).map((item) => stripExpiredCoords(item)),
       }),
+      // merge는 불러온 값을 메모리에서만 바꾼다. 지운 좌표가 저장소에도 남지 않도록 복원 직후 한 번 저장한다.
+      // 복원 중에는 usePlanStore가 아직 없을 수 있어서, 콜백이 받는 state로 부른다.
+      onRehydrateStorage: () => (state) => state?.clearHistory(),
     },
   ),
 );

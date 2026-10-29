@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from '../../../components/common/Button';
 import Modal from '../../../components/common/Modal';
@@ -20,7 +20,11 @@ export default function ShareTripDialog({ open, onClose, trip, onPrint }) {
     text,
   });
 
-  // 이 창은 닫아도 그려져 있어서 안내 글자가 남는다. 닫거나 인쇄로 넘어갈 때 지운다.
+  // 이 창은 닫아도 그려져 있어서 안내 글자가 남는다. 닫거나 인쇄로 넘어갈 때, 그리고 열 때 지운다.
+  // 열 때도 지우는 것은 복사가 창을 닫은 뒤에 끝나 안내가 다시 생기는 경우를 막으려는 것이다.
+  useEffect(() => {
+    if (open) resetStatus();
+  }, [open, resetStatus]);
   const handleClose = () => {
     resetStatus();
     onClose();

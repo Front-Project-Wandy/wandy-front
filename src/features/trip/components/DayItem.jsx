@@ -148,7 +148,13 @@ export default function DayItem({
         ) : null}
       </div>
       {isEditing ? (
-        <ItemEditForm item={item} onSave={handleSave} onCancel={handleCloseEdit} />
+        // 폼은 열 때의 값을 들고 있어서, 되돌리기·다시 실행으로 이 장소의 값이 바뀌면 새로 그려 옛 값으로 덮어쓰지 않게 한다.
+        <ItemEditForm
+          key={`${item.startTime}|${item.stayMinutes}|${item.memo}`}
+          item={item}
+          onSave={handleSave}
+          onCancel={handleCloseEdit}
+        />
       ) : null}
       {item.source === 'google' ? (
         <LocalNameDialog
