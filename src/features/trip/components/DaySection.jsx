@@ -64,7 +64,8 @@ export default function DaySection({
             style={style}
           />
         </div>
-        <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+        {/* shrink-0만 두면 버튼 셋이 한 줄 폭(360px 화면에서 375px)을 고집해 가로로 넘친다. max-w-full로 줄 폭에 묶어 버튼끼리 줄바꿈되게 한다 */}
+        <div className="flex max-w-full shrink-0 flex-wrap items-center justify-end gap-2">
           {canOptimizeRoute(day.items) ? (
             <Button
               variant="ghost"
